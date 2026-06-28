@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Phloi Letter: Systems for service businesses, in your inbox</title>
+<meta name="description" content="Short, practical emails on using AI, ads, and automation to grow a service business with less admin. No fluff, no spam. Unsubscribe anytime." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0b'/%3E%3Ctext x='16' y='23' font-family='Arial,Helvetica,sans-serif' font-size='21' font-weight='700' fill='%23b9ff4a' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="The Phloi Letter" />
+<meta property="og:description" content="Short, practical emails on AI, ads, and automation for service businesses. No fluff." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #0a0a0b;
+    --bg-2:      #121214;
+    --bg-3:      #1a1a1d;
+    --ink:       #f1efe8;
+    --ink-soft:  #8d8c86;
+    --ink-faint: #56554f;
+    --line:      rgba(241,239,232,.12);
+    --line-soft: rgba(241,239,232,.06);
+    --accent:    #b9ff4a;
+    --accent-dim:#9fe23a;
+    --accent-ink:#0a0a0b;
+    --max: 1280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-weight: 450;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Film grain overlay */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: .035; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; width: 100%; }
+  @media (max-width: 600px){ .wrap { padding: 0 20px; } }
+
+  .label {
+    font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .accent { color: var(--accent); }
+
+  /* ---------------- NAV ---------------- */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  }
+  header.nav.scrolled {
+    background: rgba(10,10,11,.72); backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .wordmark {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px;
+    letter-spacing: -.02em; display: inline-flex; align-items: baseline; gap: 2px;
+  }
+  .wordmark .dot { color: var(--accent); }
+  .wordmark .ai { font-family:'Inter',sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink-soft); transform: translateY(-6px); }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-right a.navlink { font-family:'Inter',sans-serif; font-size: 12.5px; letter-spacing: .06em; color: var(--ink-soft); transition: color .2s ease; }
+  .nav-right a.navlink:hover { color: var(--ink); }
+
+  .btn {
+    font-family:'Inter',sans-serif; font-size: 12.5px; letter-spacing: .04em;
+    display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+    padding: 12px 20px; border-radius: 2px; border: 1px solid var(--line);
+    color: var(--ink); background: transparent; transition: all .2s ease;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn .arr { transition: transform .25s ease; }
+  .btn:hover .arr { transform: translate(3px,-3px); }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+  .btn-solid:hover { background: var(--accent-dim); border-color: var(--accent-dim); color: var(--accent-ink); }
+  .btn-solid:hover .arr { transform: translate(3px,-3px); }
+
+  /* ---------------- MAIN ---------------- */
+  main { position: relative; z-index: 2; flex: 1; display: flex; align-items: center; padding: 150px 0 90px; }
+  @media (max-width: 760px){ main { padding: 116px 0 64px; } }
+
+  .news-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+  @media (max-width: 940px){ .news-grid { grid-template-columns: 1fr; gap: 44px; } }
+
+  .news-copy { display: flex; flex-direction: column; gap: 26px; max-width: 600px; }
+  .news-copy .eyebrow { color: var(--accent); }
+  h1.display {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: clamp(40px, 5.4vw, 72px); line-height: 1.0; letter-spacing: -.04em;
+    text-wrap: balance;
+  }
+  h1.display .ac { color: var(--accent); }
+  h1.display .it { font-style: italic; font-weight: 400; }
+  .news-lead { font-size: clamp(16px, 2vw, 19px); color: var(--ink); max-width: 48ch; line-height: 1.6; }
+  .news-lead b { font-weight: 600; }
+
+  /* bullets */
+  .news-points { display: flex; flex-direction: column; margin-top: 4px; }
+  .np {
+    display: grid; grid-template-columns: 28px 1fr; gap: 14px; padding: 18px 0; border-top: 1px solid var(--line); align-items: start;
+  }
+  .np:last-child { border-bottom: 1px solid var(--line); }
+  .np .np-i { color: var(--accent); font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: 15px; }
+  .np p { color: var(--ink-soft); font-size: 15px; }
+  .np p b { color: var(--ink); font-weight: 600; }
+
+  /* ---------------- FORM CARD ---------------- */
+  .form-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; padding: 38px; }
+  @media (max-width: 600px){ .form-card { padding: 26px; } }
+  .form-card .form-title { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.02em; line-height: 1.1; margin: 14px 0 10px; }
+  .form-card .form-title .ac { color: var(--accent); }
+  .form-card .form-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 28px; max-width: 40ch; }
+
+  form .field { margin-bottom: 22px; }
+  form label { display: block; font-family:'Inter',sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+  form label .opt { color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
+  form input {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--line);
+    padding: 12px 0; font-family: 'Inter', sans-serif; font-size: 16px; color: var(--ink);
+    transition: border-color .25s ease;
+  }
+  form input::placeholder { color: var(--ink-faint); }
+  form input:focus { outline: none; border-bottom-color: var(--accent); }
+  form .submit { margin-top: 14px; width: 100%; justify-content: space-between; padding: 18px 22px; font-size: 13px; }
+  .form-error { color: #ff7a6b; font-size: 13px; margin-top: 14px; min-height: 1px; display: none; }
+  .form-error.show { display: block; }
+  .submit.loading { opacity: .65; pointer-events: none; }
+  .form-fine { font-family:'Inter',sans-serif; font-size: 11.5px; color: var(--ink-faint); margin-top: 18px; letter-spacing: .03em; line-height: 1.6; }
+  .form-alt { font-size: 12.5px; color: var(--ink-soft); margin-top: 18px; text-align: center; }
+  .form-alt a { color: var(--accent); }
+  .form-alt a:hover { text-decoration: underline; }
+
+  /* success state */
+  .form-success { display: none; text-align: center; padding: 16px 4px; }
+  .form-success.show { display: block; }
+  .form-success .tick { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 28px; margin: 4px auto 22px; font-family:'Space Grotesk',sans-serif; font-weight: 700; }
+  .form-success h3 { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -.02em; margin-bottom: 10px; }
+  .form-success p { color: var(--ink-soft); font-size: 15px; max-width: 34ch; margin: 0 auto; }
+  .is-sent .form-body { display: none; }
+
+  /* ---------------- FOOTER ---------------- */
+  footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 40px 0; }
+  .foot-bot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .foot-bot span, .foot-bot a { font-family:'Inter',sans-serif; font-size: 12px; color: var(--ink-faint); letter-spacing: .04em; }
+  .foot-bot a:hover { color: var(--accent); }
+  .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="wordmark">phloi<span class="dot">.</span><span class="ai">/ai</span></a>
+    <nav class="nav-right">
+      <a class="navlink" href="/#services">[ services ]</a>
+      <a class="btn btn-solid" href="/#inquiry">Work with us <span class="arr">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <div class="wrap">
+    <div class="news-grid">
+
+      <!-- left: copy -->
+      <div class="news-copy">
+        <span class="label eyebrow">The Phloi Letter</span>
+        <h1 class="display">Grow your business <span class="ac">from your inbox.</span></h1>
+        <p class="news-lead">
+          Short, practical emails on using <b>AI, paid ads, and automation</b> to pull in more leads and kill the admin, written for service business owners who'd rather run their business than read a textbook.
+        </p>
+
+        <div class="news-points">
+          <div class="np"><span class="np-i">01</span><p><b>One idea at a time.</b> Real tactics you can use that week. No 2,000 word essays.</p></div>
+          <div class="np"><span class="np-i">02</span><p><b>From the field.</b> What's actually working in our own service business, Dript, not theory off a course.</p></div>
+          <div class="np"><span class="np-i">03</span><p><b>Zero spam.</b> A couple of emails a month, tops. Unsubscribe in one click whenever you like.</p></div>
+        </div>
+      </div>
+
+      <!-- right: form -->
+      <div class="form-card" id="signup">
+        <div class="form-body">
+          <span class="label" style="color:var(--accent)">Free, every fortnight</span>
+          <h3 class="form-title">Get the next one <span class="ac">in your inbox</span>.</h3>
+          <p class="form-sub">Drop your details below and you'll get the next letter when it goes out. That's it.</p>
+
+          <!-- Submits to a Netlify Function that adds the subscriber to beehiiv -->
+          <form id="newsletterForm" novalidate>
+            <p style="display:none" aria-hidden="true"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+            <div class="field">
+              <label>First name</label>
+              <input type="text" name="name" required placeholder="First name's fine" />
+            </div>
+            <div class="field">
+              <label>Email address</label>
+              <input type="email" name="email" required placeholder="you@yourbusiness.com" />
+            </div>
+            <button class="btn btn-solid submit" type="submit" id="subBtn">Subscribe <span class="arr">↗</span></button>
+            <p class="form-error" id="formError" role="alert"></p>
+          </form>
+          <p class="form-fine">No spam, ever. We'll only email you the letter, and you can unsubscribe anytime.</p>
+          <p class="form-alt">Prefer to just talk? <a href="/#inquiry">Start a conversation ↗</a></p>
+        </div>
+
+        <!-- success -->
+        <div class="form-success" id="formSuccess">
+          <div class="tick">✓</div>
+          <h3>You're in.</h3>
+          <p>Thanks for subscribing. Keep an eye on your inbox, the next Phloi Letter is on its way.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-bot">
+      <span>© <span id="yr"></span> Phloi AI · AI, Ads &amp; Systems</span>
+      <nav class="foot-links">
+        <a href="/">Home ↗</a>
+        <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="mailto:phoenix@driptexteriorcleaning.com.au">Email ↗</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // sticky nav bg
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 30); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Submit to the beehiiv function, keep the subscriber on the page, show thank-you state
+  var form = document.getElementById('newsletterForm');
+  var card = document.getElementById('signup');
+  var success = document.getElementById('formSuccess');
+  var btn = document.getElementById('subBtn');
+  var errEl = document.getElementById('formError');
+
+  function showError(msg){
+    errEl.textContent = msg;
+    errEl.classList.add('show');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errEl.classList.remove('show');
+
+    // honeypot: real users never fill this
+    if (form.elements['bot-field'] && form.elements['bot-field'].value) return;
+
+    var name = form.elements['name'].value.trim();
+    var email = form.elements['email'].value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.firstChild.textContent = 'Subscribing… ';
+
+    fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email })
+    }).then(function(res){
+      if (res.ok) {
+        card.classList.add('is-sent');
+        success.classList.add('show');
+      } else {
+        return res.json().then(function(d){
+          throw new Error((d && d.error) || 'Something went wrong.');
+        });
+      }
+    }).catch(function(err){
+      btn.classList.remove('loading');
+      btn.firstChild.textContent = 'Subscribe ';
+      showError(err.message || 'Could not subscribe right now. Please try again.');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phloi AI: Systems that make service businesses run themselves</title>
+<meta name="description" content="We build AI, paid ads, and automated systems for service businesses. More leads, less admin, operations that run without living in your head." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0b'/%3E%3Ctext x='16' y='23' font-family='Arial,Helvetica,sans-serif' font-size='21' font-weight='700' fill='%23b9ff4a' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="Phloi AI: Systems that make service businesses run themselves" />
+<meta property="og:description" content="We build the AI, ads, and systems that make service businesses run and grow. More leads, less busywork." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #0a0a0b;
+    --bg-2:      #121214;
+    --bg-3:      #1a1a1d;
+    --ink:       #f1efe8;
+    --ink-soft:  #8d8c86;
+    --ink-faint: #56554f;
+    --line:      rgba(241,239,232,.12);
+    --line-soft: rgba(241,239,232,.06);
+    --accent:    #b9ff4a;
+    --accent-dim:#9fe23a;
+    --accent-ink:#0a0a0b;
+    --max: 1280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-weight: 450;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Film grain overlay */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: .035; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 600px){ .wrap { padding: 0 20px; } }
+
+  .mono { font-family: 'Inter', sans-serif; }
+  .label {
+    font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .accent { color: var(--accent); }
+
+  /* ---------------- NAV ---------------- */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  }
+  header.nav.scrolled {
+    background: rgba(10,10,11,.72); backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .wordmark {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px;
+    letter-spacing: -.02em; display: inline-flex; align-items: baseline; gap: 2px;
+  }
+  .wordmark .dot { color: var(--accent); }
+  .wordmark .ai { font-family:'Inter',sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink-soft); transform: translateY(-6px); }
+  .nav-right { display: flex; align-items: center; gap: 34px; }
+  .nav-right a.navlink { font-family:'Inter',sans-serif; font-size: 12.5px; letter-spacing: .06em; color: var(--ink-soft); transition: color .2s ease; }
+  .nav-right a.navlink:hover { color: var(--ink); }
+  .nav-toggle { display: none; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 2px; width: 40px; height: 40px; font-size: 20px; line-height: 1; cursor: pointer; align-items: center; justify-content: center; }
+  @media (max-width: 760px){
+    .nav-toggle { display: inline-flex; }
+    .nav-right {
+      position: fixed; top: 76px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(10,10,11,.97); backdrop-filter: saturate(160%) blur(14px);
+      padding: 0 24px; max-height: 0; overflow: hidden;
+      border-bottom: 1px solid transparent; transition: max-height .32s ease, padding .32s ease;
+    }
+    .nav-right.open { max-height: 420px; padding: 12px 24px 22px; border-bottom: 1px solid var(--line); }
+    .nav-right a.navlink { display: block; padding: 15px 0; font-size: 15px; border-bottom: 1px solid var(--line-soft); }
+    .nav-right .btn-solid { justify-content: center; margin-top: 14px; }
+  }
+
+  .btn {
+    font-family:'Inter',sans-serif; font-size: 12.5px; letter-spacing: .04em;
+    display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+    padding: 12px 20px; border-radius: 2px; border: 1px solid var(--line);
+    color: var(--ink); background: transparent; transition: all .2s ease;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn .arr { transition: transform .25s ease; }
+  .btn:hover .arr { transform: translate(3px,-3px); }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+  .btn-solid:hover { background: var(--accent-dim); border-color: var(--accent-dim); color: var(--accent-ink); }
+  .btn-solid:hover .arr { transform: translate(3px,-3px); }
+
+  /* ---------------- HERO ---------------- */
+  .hero { position: relative; padding: 150px 0 96px; z-index: 2; }
+  @media (max-width: 760px){ .hero { padding: 116px 0 64px; } }
+  @media (max-width: 480px){ .hero { padding: 104px 0 52px; } }
+  .hero-wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+  @media (max-width: 940px){ .hero-wrap { grid-template-columns: 1fr; gap: 44px; } }
+  .hero-copy { display: flex; flex-direction: column; gap: 26px; max-width: 600px; }
+  .hero-copy .hero-punch { margin-top: 0; }
+  .hero-copy .hero-lead { max-width: none; font-size: 17px; line-height: 1.6; }
+  /* desktop-only line breaks in the hero lead — reflow naturally on phones */
+  @media (max-width: 600px){ .d-br { display: none; } .hero-copy .hero-lead { font-size: 16px; max-width: 42ch; } }
+  .hero-copy .credit { max-width: 50ch; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 38px; }
+  .hero-top .meta-r { text-align: right; max-width: 30ch; }
+  @media(max-width:760px){ .hero-top .meta-r { text-align: left; } }
+
+  h1.display {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: clamp(40px, 5.4vw, 78px); line-height: 1.0; letter-spacing: -.04em;
+    text-wrap: balance;
+  }
+  h1.display .it { font-style: italic; font-weight: 400; font-family: 'Space Grotesk', sans-serif; }
+  h1.display .ac { color: var(--accent); }
+  .hero-punch { font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: clamp(15px, 2vw, 22px); letter-spacing: -.02em; margin-top: 28px; color: var(--ink-soft); white-space: nowrap; }
+  @media (max-width: 600px){ .hero-punch { white-space: normal; } }
+  .hero-punch .ac { color: var(--accent); }
+
+  .hero-foot {
+    margin-top: 52px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start;
+    padding-top: 38px; border-top: 1px solid var(--line);
+  }
+  @media (max-width: 820px){ .hero-foot { grid-template-columns: 1fr; gap: 30px; } }
+  .hero-lead { font-size: clamp(17px, 2vw, 21px); color: var(--ink); max-width: 46ch; line-height: 1.5; }
+  .hero-lead b { font-weight: 600; }
+  .hero-side { display: flex; flex-direction: column; gap: 18px; }
+  .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .credit { font-family:'Inter',sans-serif; font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; letter-spacing: .01em; }
+  .credit b { color: var(--ink); font-weight: 700; }
+
+  /* index row */
+  .index-row { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
+  .index-row .ix { display: flex; flex-direction: column; gap: 4px; }
+  .index-row .ix .n { font-family:'Inter',sans-serif; font-size: 12px; color: var(--accent); letter-spacing: .1em; }
+  .index-row .ix .t { font-size: 14.5px; color: var(--ink-soft); }
+
+  /* hero two-column with form */
+  .hero-grid { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; padding-top: 40px; border-top: 1px solid var(--line); }
+  @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; gap: 40px; align-items: start; } }
+  .hero-left { display: flex; flex-direction: column; justify-content: space-between; gap: 44px; }
+  .hl-top { display: flex; flex-direction: column; gap: 22px; }
+  .hero-left .hero-lead { max-width: 44ch; }
+  .hero-left .index-row { margin-top: 0; border-top: 1px solid var(--line); padding-top: 30px; }
+
+  .form-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; padding: 34px; }
+  @media (max-width: 600px){ .form-card { padding: 24px; } }
+  .form-card .form-title { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(22px, 3vw, 28px); letter-spacing: -.02em; line-height: 1.1; margin: 14px 0 10px; }
+  .form-card .form-title .ac { color: var(--accent); }
+  .form-card .form-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 26px; max-width: 40ch; }
+
+  /* ---------------- MARQUEE ---------------- */
+  .marquee { position: relative; z-index: 2; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; overflow: hidden; background: var(--bg-2); }
+  .marquee-track { display: flex; gap: 0; width: max-content; animation: scroll 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-track span {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 3vw, 34px); font-weight: 500;
+    letter-spacing: -.02em; color: var(--ink); padding: 0 28px; white-space: nowrap; display: inline-flex; align-items: center; gap: 28px;
+  }
+  .marquee-track span::after { content: "✳"; color: var(--accent); font-size: .6em; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------------- SECTION SHELL ---------------- */
+  section.block { position: relative; z-index: 2; padding: 110px 0; }
+  @media (max-width: 760px){ section.block { padding: 72px 0; } }
+  @media (max-width: 480px){ section.block { padding: 58px 0; } }
+  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 64px; flex-wrap: wrap; }
+  @media (max-width: 760px){ .sec-head { margin-bottom: 40px; } }
+  .sec-head .sn { font-family:'Inter',sans-serif; font-size: 13px; color: var(--accent); letter-spacing: .1em; }
+  .sec-head h2 { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(30px, 5vw, 58px); letter-spacing: -.03em; line-height: 1; }
+  .sec-head .sh-sub { flex: 0 0 100%; max-width: 62ch; margin-top: 22px; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
+
+  /* ---------------- SERVICES (editorial list) ---------------- */
+  .svc-list { border-top: 1px solid var(--line); }
+  .svc {
+    display: grid; grid-template-columns: 90px 1fr 1.3fr auto; gap: 28px; align-items: center;
+    padding: 34px 8px; border-bottom: 1px solid var(--line); position: relative; transition: padding .3s ease, background .3s ease;
+  }
+  .svc::after { content:""; position:absolute; left:0; bottom:-1px; height:1px; width:0; background: var(--accent); transition: width .45s cubic-bezier(.22,1,.36,1); }
+  .svc:hover::after { width: 100%; }
+  .svc:hover { padding-left: 22px; }
+  .svc .svc-n { font-family:'Inter',sans-serif; font-size: 13px; color: var(--ink-faint); letter-spacing: .1em; }
+  .svc h3 { font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.02em; transition: color .25s ease; }
+  .svc:hover h3 { color: var(--accent); }
+  .svc p { color: var(--ink-soft); font-size: 16px; max-width: 48ch; }
+  .svc .svc-arr { font-family:'Inter',sans-serif; color: var(--ink-faint); font-size: 22px; transition: transform .3s ease, color .25s ease; }
+  .svc:hover .svc-arr { color: var(--accent); transform: translate(4px,-4px); }
+  @media (max-width: 880px){
+    .svc { grid-template-columns: 44px 1fr; gap: 6px 16px; row-gap: 10px; align-items: start; }
+    .svc .svc-arr { display: none; }
+    .svc p { grid-column: 2; }
+  }
+
+  /* ---------------- APPROACH ---------------- */
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 880px){ .approach-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .approach-state { font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: clamp(24px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -.025em; }
+  .approach-state .ac { color: var(--accent); }
+  .approach-points { display: flex; flex-direction: column; }
+  .ap {
+    display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 26px 0; border-top: 1px solid var(--line);
+  }
+  .ap:last-child { border-bottom: 1px solid var(--line); }
+  .ap .ap-n { font-family:'Inter',sans-serif; font-size: 13px; color: var(--accent); letter-spacing: .08em; padding-top: 4px; }
+  .ap h4 { font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: 20px; letter-spacing: -.01em; margin-bottom: 8px; }
+  .ap p { color: var(--ink-soft); font-size: 15.5px; }
+
+  /* ---------------- FOUNDER ---------------- */
+  .founder-card { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); padding: 52px; }
+  @media (max-width: 700px){ .founder-card { grid-template-columns: 1fr; gap: 26px; padding: 32px; } }
+  .founder-mark { width: 88px; height: 88px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-family:'Space Grotesk',sans-serif; font-weight: 700; font-size: 38px; }
+  .founder-quote { font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: clamp(19px, 2.4vw, 27px); line-height: 1.35; letter-spacing: -.02em; color: var(--ink); }
+  .founder-quote b { color: var(--accent); font-weight: 500; }
+  .founder-meta { margin-top: 22px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .fn-name { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: 16px; }
+  .fn-role { font-size: 12.5px; color: var(--ink-soft); letter-spacing: .06em; text-transform: uppercase; }
+  .fn-role::before { content: "/ "; color: var(--ink-faint); }
+
+  /* ---------------- PROCESS ---------------- */
+  .proc { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; }
+  @media (max-width: 980px){ .proc { grid-template-columns: repeat(2,1fr); gap: 48px 40px; } }
+  @media (max-width: 560px){ .proc { grid-template-columns: 1fr; gap: 40px; } }
+  .pstep { position: relative; padding-top: 28px; border-top: 1px solid var(--line); }
+  .pstep .pn { font-family:'Space Grotesk',sans-serif; font-size: 15px; font-weight: 600; color: var(--accent); letter-spacing: .04em; }
+  .pstep h4 { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: 20px; letter-spacing: -.01em; margin: 18px 0 12px; }
+  .pstep p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.6; }
+
+  /* ---------------- FAQ ---------------- */
+  .faq { border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 30px 8px;
+    display: grid; grid-template-columns: 60px 1fr 30px; gap: 18px; align-items: center;
+    font-family:'Space Grotesk',sans-serif; font-weight: 500; font-size: clamp(18px,2.3vw,25px); letter-spacing: -.01em;
+    transition: padding .3s ease, color .25s ease;
+  }
+  .faq summary:hover { padding-left: 20px; color: var(--accent); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .qn { font-family:'Inter',sans-serif; font-size: 13px; color: var(--ink-faint); font-weight: 400; letter-spacing: .08em; }
+  .faq summary .plus { justify-self: end; font-family:'Inter',sans-serif; font-size: 24px; color: var(--accent); font-weight: 400; transition: transform .3s ease; }
+  .faq details[open] summary { color: var(--accent); }
+  .faq details[open] summary .plus { transform: rotate(45deg); }
+  .faq .ans { padding: 0 8px 32px 78px; color: var(--ink-soft); font-size: 16.5px; max-width: 70ch; }
+  @media (max-width: 600px){ .faq summary { grid-template-columns: 30px 1fr 24px; gap: 12px; } .faq .ans { padding-left: 8px; } }
+
+  /* ---------------- CONTACT ---------------- */
+  .contact { background: var(--bg-2); border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  @media (max-width: 880px){ .contact-grid { grid-template-columns: 1fr; gap: 44px; } }
+  .contact h2 { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(34px,5.5vw,68px); letter-spacing: -.035em; line-height: .98; }
+  .contact h2 .ac { color: var(--accent); }
+  .contact .csub { color: var(--ink-soft); font-size: 17px; margin-top: 24px; max-width: 42ch; }
+  .contact .cmeta { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .contact .cmeta a, .contact .cmeta span { font-family:'Inter',sans-serif; font-size: 13px; color: var(--ink-soft); letter-spacing: .04em; display: inline-flex; align-items: center; gap: 10px; }
+  .contact .cmeta a:hover { color: var(--accent); }
+  .contact .cmeta .k { color: var(--ink-faint); width: 70px; display: inline-block; }
+  .cta-final { text-align: center; max-width: 60ch; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+  .cta-final h2 { margin-top: 18px; }
+  .cta-final .csub { margin-left: auto; margin-right: auto; }
+  .cta-final .cta-btn { margin: 34px 0 4px; }
+  .cta-final .cmeta { flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 12px 30px; margin-top: 40px; }
+  .cta-final .cmeta .k { width: auto; margin-right: 4px; }
+
+  form .field { margin-bottom: 22px; }
+  form label { display: block; font-family:'Inter',sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+  form label .opt { color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
+  form input, form textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--line);
+    padding: 12px 0; font-family: 'Inter', sans-serif; font-size: 16px; color: var(--ink);
+    transition: border-color .25s ease;
+  }
+  form input::placeholder, form textarea::placeholder { color: var(--ink-faint); }
+  form input:focus, form textarea:focus { outline: none; border-bottom-color: var(--accent); }
+  form textarea { resize: vertical; min-height: 70px; }
+  form .submit {
+    margin-top: 14px; width: 100%; justify-content: space-between; padding: 18px 22px; font-size: 13px;
+  }
+  .form-fine { font-family:'Inter',sans-serif; font-size: 11.5px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .03em; }
+  .form-alt { font-size: 12.5px; color: var(--ink-soft); margin-top: 18px; text-align: center; }
+  .form-alt a { color: var(--accent); }
+  .form-alt a:hover { text-decoration: underline; }
+
+  /* ---------------- FOOTER ---------------- */
+  footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 70px 0 44px; }
+  .foot-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 56px; }
+  .foot-big { font-family:'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(40px, 8vw, 96px); letter-spacing: -.04em; line-height: .9; }
+  .foot-big .dot { color: var(--accent); }
+  .foot-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+  @media (max-width: 700px){ .foot-links { align-items: flex-start; } }
+  .foot-links a { font-family:'Inter',sans-serif; font-size: 13px; letter-spacing: .04em; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; transition: color .2s ease; }
+  .foot-links a:hover { color: var(--accent); }
+  .foot-bot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--line-soft); }
+  .foot-bot span { font-family:'Inter',sans-serif; font-size: 12px; color: var(--ink-faint); letter-spacing: .04em; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="wordmark">phloi<span class="dot">.</span><span class="ai">/ai</span></a>
+    <nav class="nav-right">
+      <a class="navlink" href="#services">[ services ]</a>
+      <a class="navlink" href="#approach">[ approach ]</a>
+      <a class="navlink" href="#process">[ process ]</a>
+      <a class="navlink" href="#faq">[ faq ]</a>
+      <a class="navlink" href="/newsletter">[ newsletter ]</a>
+      <a class="btn btn-solid" href="#inquiry">Start a conversation <span class="arr">↗</span></a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">≡</button>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-wrap">
+      <div class="hero-copy">
+        <h1 class="display">We make service businesses <span class="ac">more profitable.</span></h1>
+        <p class="hero-punch">Not just more revenue. <span class="ac">More profit that's actually yours.</span></p>
+        <p class="hero-lead">
+          We build the machinery behind a growing service business:<br class="d-br" />
+          <b>ads that bring in real leads</b>, <b>AI that handles the admin</b>,<br class="d-br" />
+          and <b>systems that keep it all running</b>, so you're not glued to your phone.
+        </p>
+      </div>
+
+      <div class="hero-form" id="inquiry">
+        <div class="form-card">
+          <span class="label" style="color:var(--accent)">Start here, it's free</span>
+          <h3 class="form-title">Struggling to grow? Let's find your <span class="ac">biggest bottleneck</span>.</h3>
+          <p class="form-sub">Tell us where things feel stuck and we'll pinpoint the bottleneck holding you back, plus the fastest way to clear it. No pressure.</p>
+          <!-- Netlify Forms: submissions appear in your Netlify dashboard + emailed to you -->
+          <form name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="phloi-inquiry" />
+            <p style="display:none"><label>Leave this empty: <input name="bot-field" /></label></p>
+            <div class="field">
+              <label>What's your name?</label>
+              <input type="text" name="name" required placeholder="First name's fine" />
+            </div>
+            <div class="field">
+              <label>Best email to reach you?</label>
+              <input type="email" name="email" required placeholder="you@yourbusiness.com" />
+            </div>
+            <div class="field">
+              <label>What does your business do?</label>
+              <input type="text" name="business" required placeholder="e.g. cleaning, plumbing, coaching" />
+            </div>
+            <div class="field">
+              <label>What's slowing you down right now?</label>
+              <textarea name="message" rows="2" required placeholder="e.g. not enough leads, too much admin…"></textarea>
+            </div>
+            <button class="btn btn-solid submit" type="submit">Send it over <span class="arr">↗</span></button>
+            <p class="form-alt">Prefer email? <a href="mailto:phoenix@driptexteriorcleaning.com.au">phoenix@driptexteriorcleaning.com.au</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
+    <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sn">(01)</span>
+      <h2>What we do</h2>
+    </div>
+
+    <div class="svc-list">
+      <a class="svc reveal" href="#inquiry">
+        <span class="svc-n">01</span>
+        <h3>Paid Ads</h3>
+        <p>Meta ads that bring in buyers, not just clicks, plus tracking so you see exactly what's working.</p>
+        <span class="svc-arr">↗</span>
+      </a>
+      <a class="svc reveal" href="#inquiry">
+        <span class="svc-n">02</span>
+        <h3>AI Automation</h3>
+        <p>AI that replies to leads in seconds, chases follow-ups, filters time-wasters, and quietly handles the admin you hate.</p>
+        <span class="svc-arr">↗</span>
+      </a>
+      <a class="svc reveal" href="#inquiry">
+        <span class="svc-n">03</span>
+        <h3>Systems &amp; Ops</h3>
+        <p>The plumbing: your CRM, dashboards and workflows all in sync, so the day-to-day runs without living in your head.</p>
+        <span class="svc-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="block" id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sn">(02)</span>
+      <h2>Why it works</h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-state reveal">
+        Off-the-shelf tools make you bend your business to fit them. <span class="ac">We do it the other way round</span>, built around how your business actually works, plugged into what you already use.
+      </div>
+      <div class="approach-points reveal">
+        <div class="ap">
+          <span class="ap-n">A</span>
+          <div>
+            <h4>Built around you</h4>
+            <p>Around your workflow, your services, your customers. It fits because it was made for you, not bought off a shelf.</p>
+          </div>
+        </div>
+        <div class="ap">
+          <span class="ap-n">B</span>
+          <div>
+            <h4>Everything talks to each other</h4>
+            <p>Ads, CRM, calendar and follow-ups stay in sync. No copy-pasting between tabs, no leads slipping through the cracks.</p>
+          </div>
+        </div>
+        <div class="ap">
+          <span class="ap-n">C</span>
+          <div>
+            <h4>Grows with you</h4>
+            <p>Whether it's 10 leads a week or 200, the system handles it. When things take off, that's more money, not more chaos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="block" id="founder">
+  <div class="wrap">
+    <div class="founder-card reveal">
+      <div class="founder-mark">P</div>
+      <div class="founder-body">
+        <p class="founder-quote">We run our own service business, <b>Dript Exterior Cleaning</b>, and grew it with the exact systems we build for you. So you're not getting theory from a course, you're getting what already works in the real world.</p>
+        <div class="founder-meta">
+          <span class="fn-name">Phoenix</span>
+          <span class="fn-role">Founder, Phloi AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sn">(03)</span>
+      <h2>How we'd work</h2>
+    </div>
+    <div class="proc">
+      <div class="pstep reveal"><span class="pn">01</span><h4>We have a chat</h4><p>A quick, free call about your business and where things are leaking: leads, time or money. Zero pressure.</p></div>
+      <div class="pstep reveal"><span class="pn">02</span><h4>We dig into it</h4><p>We look at how things run day-to-day and find the bottlenecks that ads, AI and automation can fix fastest.</p></div>
+      <div class="pstep reveal"><span class="pn">03</span><h4>You get a plan</h4><p>A straight-talking roadmap: what we'd build, the order we'd do it in, and what it should get you. No jargon.</p></div>
+      <div class="pstep reveal"><span class="pn">04</span><h4>We build it</h4><p>We set it up and wire it into the tools you already use, and we test it in the real world, not on a slide.</p></div>
+      <div class="pstep reveal"><span class="pn">05</span><h4>We stick around</h4><p>Everything's running, you've got your time back, and we're still here to fine-tune it and help you scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sn">(04)</span>
+      <h2>Questions</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary><span class="qn">Q1</span><span>So what would you actually set up for me?</span><span class="plus">+</span></summary>
+        <div class="ans">It depends on your bottleneck. Usually a mix of paid ads, AI to handle and follow up with leads, a CRM to stay organised, and automations to tie it all together. We figure out the right combo on the call.</div>
+      </details>
+      <details>
+        <summary><span class="qn">Q2</span><span>I'm not techy at all. Is that a problem?</span><span class="plus">+</span></summary>
+        <div class="ans">Not even slightly. That's why we exist. We handle the tech so you can get on with running your business. We set it up, hand it over working, and show you the ropes.</div>
+      </details>
+      <details>
+        <summary><span class="qn">Q3</span><span>How quickly can you get started?</span><span class="plus">+</span></summary>
+        <div class="ans">Pretty fast. There's no drawn-out onboarding. We have a chat, agree on what to build, and we get cracking.</div>
+      </details>
+      <details>
+        <summary><span class="qn">Q4</span><span>Is the first call really free?</span><span class="plus">+</span></summary>
+        <div class="ans">Yep, genuinely. Just a relaxed chat to spot where you're losing leads or time. If we can help, we'll tell you how. If we can't, we'll say so.</div>
+      </details>
+      <details>
+        <summary><span class="qn">Q5</span><span>How much does it cost?</span><span class="plus">+</span></summary>
+        <div class="ans">It depends on what you need built. We'll scope it on the free call and give you a straight number before anything starts. No surprises, no lock-in.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="block contact" id="contact">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <span class="label" style="color:var(--accent)">(05) Get in touch</span>
+      <h2>Fancy <span class="ac">growing your business?</span></h2>
+      <p class="csub">Let's have a quick chat and find the fastest win in your business: more leads, less busywork, fewer things stuck in your head.</p>
+      <a class="btn btn-solid cta-btn" href="#inquiry">Start a conversation <span class="arr">↗</span></a>
+      <div class="cmeta">
+        <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener"><span class="k">IG</span> @phoenixx_builds ↗</a>
+        <a href="mailto:phoenix@driptexteriorcleaning.com.au"><span class="k">Email</span> phoenix@driptexteriorcleaning.com.au</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-big">phloi<span class="dot">.</span></div>
+      <nav class="foot-links">
+        <a href="#inquiry">Start a conversation ↗</a>
+        <a href="/newsletter">The Phloi Letter ↗</a>
+        <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="https://linktr.ee/phoenixbuilds" target="_blank" rel="noopener">Links ↗</a>
+        <a href="mailto:phoenix@driptexteriorcleaning.com.au">Email ↗</a>
+      </nav>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr"></span> Phloi AI · AI, Ads &amp; Systems</span>
+      <span>Built to make service businesses more profitable.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // sticky nav bg
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 30); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // mobile menu
+  var navToggle = document.getElementById('navToggle');
+  var navRight = document.querySelector('.nav-right');
+  navToggle.addEventListener('click', function(){
+    var open = navRight.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.textContent = open ? '×' : '≡';
+  });
+  navRight.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navRight.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '≡';
+    });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>

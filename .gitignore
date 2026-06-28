@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Netlify local link state + build artifacts
+.netlify/
+
+# Secrets / env
+.env
+.env.*
+
+# OS junk
+.DS_Store
+Thumbs.db
