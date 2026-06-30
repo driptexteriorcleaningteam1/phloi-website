@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Service Business Stack — Phloi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #0a0a0b;
+    --bg-2:      #121214;
+    --ink:       #f1efe8;
+    --ink-soft:  #9b9a93;
+    --ink-faint: #6a6962;
+    --line:      rgba(241,239,232,.12);
+    --accent:    #b9ff4a;
+    --accent-ink:#0a0a0b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  @page { size: A4; margin: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-weight: 450;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--bg);
+    padding: 22mm 20mm;
+    position: relative;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* tool pages: each group is its own full-bleed page with consistent top spacing */
+  .content {
+    width: 210mm; min-height: 297mm; background: var(--bg);
+    padding: 16mm 20mm; position: relative; page-break-after: always;
+  }
+  h2.cat { break-after: avoid; page-break-after: avoid; }
+  .tool { break-inside: avoid; page-break-inside: avoid; }
+  .closer { page-break-before: always; }
+
+  .accent { color: var(--accent); }
+  .label {
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  /* ---- COVER ---- */
+  .cover { display: flex; flex-direction: column; justify-content: space-between; }
+  .cover-top { display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -.02em; }
+  .wordmark .dot { color: var(--accent); }
+  .cover-mid { margin-top: auto; }
+  .cover h1 {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: 50px; line-height: 1.02; letter-spacing: -.03em; margin: 18px 0 22px;
+  }
+  .cover h1 .it { font-style: italic; font-weight: 400; }
+  .cover .lead { font-size: 16px; color: var(--ink-soft); max-width: 52ch; line-height: 1.6; }
+  .cover .rule { height: 1px; background: var(--line); margin: 30px 0; }
+  .cover .meta { font-size: 13px; color: var(--ink-faint); }
+  .cover .badge {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 7px 13px; border-radius: 2px;
+  }
+
+  /* ---- CONTENT ---- */
+  .intro { font-size: 15px; color: var(--ink-soft); max-width: 60ch; line-height: 1.65; margin-bottom: 6mm; }
+  .intro b { color: var(--ink); font-weight: 600; }
+
+  h2.cat {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    margin: 9mm 0 4mm; padding-bottom: 3mm; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  h2.cat:first-of-type { margin-top: 2mm; }
+  h2.cat .n { color: var(--ink-faint); font-size: 12px; }
+
+  .tool { display: grid; grid-template-columns: 46mm 1fr; gap: 8mm; padding: 4mm 0; border-bottom: 1px solid rgba(241,239,232,.05); break-inside: avoid; }
+  .tool:last-child { border-bottom: none; }
+  .tool .name { display: flex; align-items: flex-start; gap: 11px; }
+  .tool .name .ico { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 7px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 0 1px rgba(241,239,232,.08); }
+  .tool .name .ico img { width: 20px; height: 20px; object-fit: contain; display: block; }
+  .tool .name .nm { display: flex; flex-direction: column; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -.01em; padding-top: 1px; }
+  .tool .name .tag { font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-top: 4px; }
+  .tool .desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .tool .desc b { color: var(--ink); font-weight: 600; }
+  .tool .desc a.try { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+  /* ---- CLOSER ---- */
+  .closer { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
+  .closer .cta.top { margin: 0 0 16mm; }
+  .closer h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 34px; letter-spacing: -.02em; line-height: 1.1; margin: 16px 0 18px; max-width: 18ch; }
+  .closer h2 .ac { color: var(--accent); }
+  .closer p { font-size: 15px; color: var(--ink-soft); max-width: 52ch; line-height: 1.65; margin-bottom: 12px; }
+  .closer .cta { margin-top: 18px; display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 14px; padding: 14px 22px; border-radius: 2px; text-decoration: none; }
+  .closer .signoff { margin-top: 34px; font-size: 13px; color: var(--ink-faint); }
+  .closer .signoff b { color: var(--ink); }
+
+  .foot { position: absolute; bottom: 12mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-faint); letter-spacing: .04em; }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="page cover">
+  <div class="cover-top">
+    <span class="wordmark">phloi<span class="dot">.</span></span>
+    <span class="label">The Phloi Letter</span>
+  </div>
+
+  <div class="cover-mid">
+    <span class="badge">The Stack · 2026</span>
+    <h1>The exact stack<br />behind our <span style="color:var(--accent)">7 figure</span><br /><span class="it">exterior cleaning<br />company.</span></h1>
+    <p class="lead">Every app we use to <b>win leads, run the jobs and kill the admin</b>. What each one does, and why we actually pay for it.</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<!-- ===== TOOLS · PAGE 1 (leads, quoting, money) ===== -->
+<section class="content">
+  <h2 class="cat"><span class="n">01</span> Getting and tracking leads</h2>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/ghl.png" alt="" /></span><span class="nm">GoHighLevel<span class="tag">CRM · The hub</span></span></div>
+    <div class="desc">Honestly, this is the one that <b>holds the whole thing together</b>. Every lead, chat, pipeline and follow up lives in one spot, so nobody ever gets forgotten. If you only fix one thing this year, make it a proper CRM. <a class="try" href="https://www.gohighlevel.com/?fp_ref=dript-exterior-cleaning78" target="_blank" rel="noopener">Start a free trial →</a></div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/meta.png" alt="" /></span><span class="nm">Meta Ads<span class="tag">Paid leads</span></span></div>
+    <div class="desc">This is where <b>most of our work comes from</b>. Landing page form ads bring in the good ones, and the real trick is just being quick. Reply the second a lead lands, before they go cold on you.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/gbp.png" alt="" /></span><span class="nm">Google Business Profile<span class="tag">Free leads · Reviews</span></span></div>
+    <div class="desc">Think of it as your <b>free shopfront on Google and Maps</b>. Cheapest marketing going, you just have to actually ask for the reviews.</div>
+  </div>
+
+  <h2 class="cat"><span class="n">02</span> Quoting, jobs and scheduling</h2>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/quotd.png" alt="" /></span><span class="nm">Quotd<span class="tag">AI quoting · done for you</span></span></div>
+    <div class="desc">The <b>AI quoting system</b> we use to get quotes out fast, priced the same every time and looking sharp. No more losing jobs because the quote took you three days. They build and run the whole setup for you. <a class="try" href="https://quotd.com.au" target="_blank" rel="noopener">Get it for your business →</a></div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/servicem8.png" alt="" /></span><span class="nm">ServiceM8<span class="tag">Job management</span></span></div>
+    <div class="desc">This is what turns a lead into <b>an actual booked job</b>. Quoting, scheduling, sending the crew out, job cards, site notes and invoices, all from your phone. Made for the people out doing the work. <a class="try" href="https://www.servicem8.com" target="_blank" rel="noopener">Start a free trial →</a></div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/safetyculture.png" alt="" /></span><span class="nm">SafetyCulture<span class="tag">Checklists · Forms</span></span></div>
+    <div class="desc">Quick safety checks and forms the crew fills in on their phone before they start. Keeps every job to the same standard and <b>keeps you covered</b>, no clipboards in sight. Great for grabbing before and afters too.</div>
+  </div>
+
+  <h2 class="cat"><span class="n">03</span> Money</h2>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/xero.png" alt="" /></span><span class="nm">Xero<span class="tag">Accounting</span></span></div>
+    <div class="desc"><b>Your books, sorted</b>, without the shoebox of receipts. Reconciliation, GST and all the numbers your accountant keeps asking for. Job invoices land in here on their own. Set it up early and tax time stops being scary. <a class="try" href="https://www.xero.com/au/signup/" target="_blank" rel="noopener">Start a free trial →</a></div>
+  </div>
+
+</section>
+
+<!-- ===== TOOLS · PAGE 2 (knowledge, automation) ===== -->
+<section class="content">
+  <h2 class="cat"><span class="n">04</span> Knowledge and team</h2>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/notion.png" alt="" /></span><span class="nm">Notion<span class="tag">Single source of truth</span></span></div>
+    <div class="desc">One tidy home for every SOP, price guide, checklist and team page. When someone new starts, <b>it's all written down</b> instead of trapped in your head. This is the thing that lets the business run when you're not there.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/sheets.png" alt="" /></span><span class="nm">Google Sheets<span class="tag">Tracking</span></span></div>
+    <div class="desc">Never underestimate a good spreadsheet. We still lean on it for <b>quick tracking and our weekly numbers</b>, and it quietly feeds the live dashboard our Claude Code automations run off.</div>
+  </div>
+
+  <h2 class="cat"><span class="n">05</span> The automation layer</h2>
+  <p class="intro" style="margin-bottom:4mm;">This is where it gets fun. A lot of the boring stuff already runs itself inside <b>GoHighLevel</b>: instant replies, follow ups, review requests. The tools below are the custom bits we bolted on for the jobs a CRM can't quite do. Don't stress about all of it on day one.</p>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/claude.png" alt="" /></span><span class="nm">Claude Code<span class="tag">The build tool</span></span></div>
+    <div class="desc">The AI that <b>builds and runs our custom automations</b>, just by us telling it what we want in plain English: lead alerts, win back sequences, daily ops check ins. The difference between renting software and having it built around how you actually work.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/railway.png" alt="" /></span><span class="nm">Railway<span class="tag">Hosting · Always on</span></span></div>
+    <div class="desc">Where all our automations quietly live and run around the clock, including the ones on a timer, like our daily ops summary.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/github.png" alt="" /></span><span class="nm">GitHub<span class="tag">Code storage</span></span></div>
+    <div class="desc">A safe home for all the automation code, with a full history so we can never really break anything for good.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/resend.png" alt="" /></span><span class="nm">Resend<span class="tag">Automated email</span></span></div>
+    <div class="desc">Quietly sends the emails our automations fire off, like job reports and team alerts, and it just works every time.</div>
+  </div>
+  <div class="tool">
+    <div class="name"><span class="ico"><img src="icons/netlify.png" alt="" /></span><span class="nm">Netlify<span class="tag">Web hosting</span></span></div>
+    <div class="desc">Hosts the little internal tools our team uses every day, plus our public sites and landing pages.</div>
+  </div>
+
+</section>
+
+<!-- ===== CLOSER ===== -->
+<section class="page closer">
+  <span class="label accent">Where to start</span>
+  <h2>Don't buy all of it. <span class="ac">Buy in this order.</span></h2>
+  <p><b style="color:var(--ink)">1.</b> A real CRM (GoHighLevel) so no lead is ever lost.<br />
+     <b style="color:var(--ink)">2.</b> Job and money tools (ServiceM8, Xero) so the work runs clean.<br />
+     <b style="color:var(--ink)">3.</b> A reviews habit (Google Business Profile) on autopilot.<br />
+     <b style="color:var(--ink)">4.</b> Then, and only then, the automation layer to kill the admin.</p>
+  <p>Get those four right and you'll be running a calmer, more profitable business than plenty of outfits twice your size.</p>
+
+  <a class="cta" href="https://phloi.com/#inquiry" target="_blank" rel="noopener">Want this built for your business? Fill out the form →</a>
+
+  <div class="foot">
+    <span>phloi.com</span>
+    <span>© 2026 Phloi</span>
+  </div>
+</section>
+
+</body>
+</html>

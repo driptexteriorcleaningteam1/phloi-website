@@ -105,7 +105,11 @@
   @media (max-width: 760px){ main { padding: 116px 0 64px; } }
 
   .news-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
-  @media (max-width: 940px){ .news-grid { grid-template-columns: 1fr; gap: 44px; } }
+  @media (max-width: 940px){
+    .news-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-card { order: 1; }   /* form first when stacked (phone/tablet) */
+    .news-copy { order: 2; }
+  }
 
   .news-copy { display: flex; flex-direction: column; gap: 26px; max-width: 600px; }
   .news-copy .eyebrow { color: var(--accent); }
@@ -208,9 +212,9 @@
       <!-- right: form -->
       <div class="form-card" id="signup">
         <div class="form-body">
-          <span class="label" style="color:var(--accent)">Free, every fortnight</span>
-          <h3 class="form-title">Get the next one <span class="ac">in your inbox</span>.</h3>
-          <p class="form-sub">Drop your details below and you'll get the next letter when it goes out. That's it.</p>
+          <span class="label" style="color:var(--accent)">Free guide + the letter</span>
+          <h3 class="form-title">Get <span class="ac">The Dript Tech Stack</span>, free.</h3>
+          <p class="form-sub">Drop your details and I'll send you the guide right away, plus the Phloi Letter when the next one goes out.</p>
 
           <!-- Submits to a Netlify Function that adds the subscriber to beehiiv -->
           <form id="newsletterForm" novalidate>
@@ -226,15 +230,15 @@
             <button class="btn btn-solid submit" type="submit" id="subBtn">Subscribe <span class="arr">↗</span></button>
             <p class="form-error" id="formError" role="alert"></p>
           </form>
-          <p class="form-fine">No spam, ever. We'll only email you the letter, and you can unsubscribe anytime.</p>
-          <p class="form-alt">Prefer to just talk? <a href="/#inquiry">Start a conversation ↗</a></p>
+          <p class="form-fine">No spam, ever. You'll get the guide plus the Phloi Letter, and you can unsubscribe anytime.</p>
         </div>
 
         <!-- success -->
         <div class="form-success" id="formSuccess">
           <div class="tick">✓</div>
-          <h3>You're in.</h3>
-          <p>Thanks for subscribing. Keep an eye on your inbox, the next Phloi Letter is on its way.</p>
+          <h3 id="successTitle">You're in.</h3>
+          <p id="successMsg">Your guide is ready. Download it now below, and a copy is on its way to your inbox too.</p>
+          <a class="btn btn-solid" id="dlBtn" href="dript-tech-stack.pdf" download target="_blank" rel="noopener" style="margin-top:22px; width:100%; justify-content:space-between; padding:18px 22px; font-size:13px;">Download The Dript Tech Stack <span class="arr">↗</span></a>
         </div>
       </div>
 
@@ -298,14 +302,20 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email })
     }).then(function(res){
-      if (res.ok) {
+      return res.json().catch(function(){ return {}; }).then(function(d){
+        if (!res.ok) {
+          throw new Error((d && d.error) || 'Something went wrong.');
+        }
+        if (d.alreadySubscribed) {
+          // Already on the list: don't pretend it's a fresh signup, but still let them grab the guide.
+          var t = document.getElementById('successTitle');
+          var m = document.getElementById('successMsg');
+          if (t) t.textContent = "You're already on the list";
+          if (m) m.textContent = "Looks like you've already subscribed, so we didn't add you again. Here's your guide:";
+        }
         card.classList.add('is-sent');
         success.classList.add('show');
-      } else {
-        return res.json().then(function(d){
-          throw new Error((d && d.error) || 'Something went wrong.');
-        });
-      }
+      });
     }).catch(function(err){
       btn.classList.remove('loading');
       btn.firstChild.textContent = 'Subscribe ';

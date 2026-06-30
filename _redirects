@@ -1,0 +1,6 @@
+# Old PDF path -> new name, so any existing links keep working
+/phloi-stack.pdf       /dript-tech-stack.pdf   301!
+
+# Hide internal/source files from public view (forced, overrides the static files)
+/guide-src.html        /   301!
+/netlify/*             /   301!
