@@ -23,20 +23,33 @@ exports.handler = async (event) => {
   // Parse body (supports JSON or form-encoded)
   let name = '';
   let email = '';
+  let botField = '';
   try {
     const ct = event.headers['content-type'] || event.headers['Content-Type'] || '';
     if (ct.includes('application/json')) {
       const b = JSON.parse(event.body || '{}');
       name = (b.name || '').trim();
       email = (b.email || '').trim();
+      botField = (b['bot-field'] || '').trim();
     } else {
       const params = new URLSearchParams(event.body || '');
       name = (params.get('name') || '').trim();
       email = (params.get('email') || '').trim();
+      botField = (params.get('bot-field') || '').trim();
     }
   } catch (e) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Bad request' }) };
   }
+
+  // Server-side honeypot: real users never fill bot-field. Bots that POST
+  // straight to the function (bypassing the browser check) get a fake success
+  // so they stop retrying, but nothing is subscribed.
+  if (botField) {
+    return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+  }
+
+  // Cap name length before it becomes a beehiiv custom field.
+  if (name.length > 100) name = name.slice(0, 100);
 
   // Basic email sanity check
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
