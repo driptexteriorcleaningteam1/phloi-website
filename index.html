@@ -299,26 +299,40 @@
     .reveal{opacity:1;transform:none;transition:none}
     *{scroll-behavior:auto}
   }
-  /* ---------- Needs picker (interactive) ---------- */
-  .needs{padding-top:clamp(34px,5vw,60px);padding-bottom:clamp(48px,7vw,90px)}
-  .needs-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.03;font-size:clamp(1.7rem,4.4vw,2.9rem);margin:12px 0 0;text-wrap:balance;max-width:18ch}
-  .needs-sub{color:var(--ink-2);margin:14px 0 0;max-width:50ch;font-size:clamp(.98rem,1.5vw,1.1rem)}
-  .needs-picker{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(22px,3.5vw,36px) 0 0}
-  .need-opt{font-family:var(--font-display);font-weight:500;font-size:clamp(14.5px,1.6vw,16.5px);letter-spacing:-.01em;padding:15px 22px;border-radius:100px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1;display:inline-flex;align-items:center;gap:11px;transition:transform .18s ease,border-color .2s ease,background .2s ease,color .2s ease}
-  .need-opt::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--line);flex:0 0 auto;transition:background .2s ease,box-shadow .2s ease}
-  .need-opt:hover{transform:translateY(-2px);border-color:var(--ink)}
+  /* ---------- Interactive hero picker (focal) ---------- */
+  .hero--pick{padding:clamp(40px,6.5vw,92px) 0 clamp(52px,7vw,100px)}
+  .pick-lede{max-width:60ch}
+  .hero--pick .pick-q{max-width:none;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px)}
+  .pick-lede .eyebrow{margin-bottom:clamp(18px,2.6vw,28px)}
+  .pick-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.045em;line-height:.96;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px);text-wrap:balance}
+  .pick-sub{max-width:58ch;font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--ink-2);margin:0 0 clamp(30px,4.5vw,54px);line-height:1.5}
+  .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,16px);max-width:920px}
+  .need-opt{display:flex;align-items:center;gap:16px;text-align:left;padding:clamp(20px,2.5vw,30px) clamp(20px,2.3vw,28px);border-radius:var(--radius);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1.15;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+  .need-opt .no-k{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--ink-3);flex:0 0 auto}
+  .need-opt .no-t{font-family:var(--font-display);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.4rem);letter-spacing:-.02em;flex:1 1 auto}
+  .need-opt .no-arw{font-family:var(--font-mono);font-size:20px;color:var(--ink-3);flex:0 0 auto;transition:transform .25s ease,color .2s ease}
+  .need-opt:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:0 22px 44px -28px rgba(15,15,13,.55)}
+  .need-opt:hover .no-arw{transform:translate(3px,-3px);color:var(--ink)}
   .need-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .need-opt[aria-pressed="true"]::before{background:var(--accent);box-shadow:0 0 0 4px rgba(185,255,74,.28)}
-  .needs-result{margin-top:clamp(20px,3vw,30px)}
+  .need-opt[aria-pressed="true"] .no-k{color:var(--accent)}
+  .need-opt[aria-pressed="true"] .no-arw{color:var(--accent);transform:translate(3px,-3px)}
+  .need-opt[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+  .needs-result{margin-top:clamp(16px,2.2vw,24px);max-width:920px}
   .needs-result[hidden]{display:none}
-  .nr-inner{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:clamp(22px,3.4vw,38px);display:flex;flex-direction:column;gap:13px;animation:nr-in .45s cubic-bezier(.22,1,.36,1)}
-  @keyframes nr-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  .nr-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-  .nr-title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.02em;margin:0}
-  .nr-desc{color:var(--ink-2);max-width:58ch;margin:0;font-size:clamp(1rem,1.5vw,1.12rem)}
-  .nr-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .nr-inner{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:clamp(24px,3.4vw,42px);display:flex;flex-direction:column;gap:14px;animation:nr-in .45s cubic-bezier(.22,1,.36,1)}
+  @keyframes nr-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .nr-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .nr-title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.6rem);letter-spacing:-.025em;margin:0;color:var(--paper)}
+  .nr-desc{color:rgba(245,242,234,.74);max-width:60ch;margin:0;font-size:clamp(1.02rem,1.5vw,1.18rem)}
+  .nr-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .nr-inner .btn--ghost{color:var(--paper);border-color:rgba(245,242,234,.34)}
+  .nr-inner .btn--ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .pick-skip{margin-top:clamp(26px,4vw,44px);font-family:var(--font-mono);font-size:14px;letter-spacing:.02em;color:var(--ink-3)}
+  .pick-skip a{color:var(--ink);border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+  .pick-skip a:hover{color:var(--accent-deep)}
   .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
   @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
+  @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
 </style>
 </head>
 <body>
@@ -345,42 +359,34 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero">
+  <!-- HERO — interactive needs picker (the focal moment) -->
+  <section class="hero hero--pick" id="start">
     <div class="wrap">
-      <div class="kicker reveal"><span class="eyebrow"><span class="dot"></span>Phloi — AI, Ads &amp; Systems</span></div>
-      <h1 class="reveal">We make service businesses <mark class="hl">more profitable</mark>.</h1>
-      <p class="subline reveal">Not just more revenue. More <span class="under">profit</span> that's actually yours.</p>
-      <p class="lead reveal">We build the machinery behind a growing service business: ads that bring in real leads, AI that handles the admin, and systems that keep it all running — so you're not glued to your phone.</p>
-      <div class="hero-actions reveal">
-        <a class="btn btn--accent" href="#inquiry">Start a conversation <span class="arw" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="#services">See what we do <span class="arw" aria-hidden="true">↓</span></a>
+      <div class="pick-lede reveal">
+        <span class="eyebrow"><span class="dot"></span>Phloi — AI, Ads &amp; Systems</span>
+        <h1 class="pick-q">What's <span class="under">slowing you down</span>?</h1>
+        <p class="pick-sub">We build the ads, AI and systems that fix it — so you keep <mark class="hl">more profit that's actually yours</mark>. Tap what's closest and we'll point you straight to the answer.</p>
       </div>
-      <div class="hero-meta reveal">
-        <div class="mi"><span class="k">Leads</span><span class="v">Ads that bring buyers</span></div>
-        <div class="mi"><span class="k">Admin</span><span class="v">AI that handles it</span></div>
-        <div class="mi"><span class="k">Ops</span><span class="v">Systems that scale</span></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- NEEDS PICKER (interactive) -->
-  <section id="start" class="needs">
-    <div class="wrap">
-      <div class="reveal">
-        <span class="eyebrow eyebrow--num"><b>→</b> Start here</span>
-        <h2 class="needs-q">What's slowing you down <span class="under">right now?</span></h2>
-        <p class="needs-sub">Tap what's closest. We'll point you to the fix — and tee up your message so you're one step from a chat.</p>
+      <div class="need-grid reveal" role="group" aria-label="What's slowing you down?">
+        <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
+          <span class="no-k">01</span><span class="no-t">Not enough leads</span><span class="no-arw" aria-hidden="true">↗</span>
+        </button>
+        <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
+          <span class="no-k">02</span><span class="no-t">Buried in admin &amp; follow-ups</span><span class="no-arw" aria-hidden="true">↗</span>
+        </button>
+        <button type="button" class="need-opt" data-need="ops" aria-pressed="false">
+          <span class="no-k">03</span><span class="no-t">Ops are a mess</span><span class="no-arw" aria-hidden="true">↗</span>
+        </button>
+        <button type="button" class="need-opt" data-need="unsure" aria-pressed="false">
+          <span class="no-k">04</span><span class="no-t">Honestly, not sure</span><span class="no-arw" aria-hidden="true">↗</span>
+        </button>
       </div>
-      <div class="needs-picker reveal" role="group" aria-label="What's slowing you down?">
-        <button type="button" class="need-opt" data-need="leads" aria-pressed="false">Not enough leads</button>
-        <button type="button" class="need-opt" data-need="admin" aria-pressed="false">Buried in admin &amp; follow-ups</button>
-        <button type="button" class="need-opt" data-need="ops" aria-pressed="false">Ops are a mess</button>
-        <button type="button" class="need-opt" data-need="unsure" aria-pressed="false">Honestly, not sure</button>
-      </div>
+
       <div class="needs-result" id="needs-result" hidden aria-live="polite">
         <div class="nr-inner">
           <span class="nr-label">Sounds like you need</span>
-          <h3 class="nr-title" id="nr-title"></h3>
+          <h2 class="nr-title" id="nr-title"></h2>
           <p class="nr-desc" id="nr-desc"></p>
           <div class="nr-actions">
             <a class="btn btn--accent" id="nr-cta" href="#inquiry">Get this sorted <span class="arw" aria-hidden="true">→</span></a>
@@ -388,6 +394,8 @@
           </div>
         </div>
       </div>
+
+      <p class="pick-skip reveal">Rather just talk? <a href="#inquiry">Start a conversation <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
