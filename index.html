@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phloi — AI, Ads & Systems for service businesses</title>
-<meta name="description" content="Phloi builds the machinery behind growing service businesses: paid ads that bring in real leads, AI that handles the admin, and systems that keep it all running. Start a conversation.">
-<meta property="og:title" content="Phloi — AI, Ads & Systems for service businesses">
-<meta property="og:description" content="We build the machinery behind a growing service business: ads that bring in real leads, AI that handles the admin, and systems that keep it all running.">
+<title>Phloi — Marketing, Sales & AI for service businesses</title>
+<meta name="description" content="Phloi builds the marketing, sales and AI that get service businesses more leads, more booked jobs, and less admin. Start a conversation.">
+<meta property="og:title" content="Phloi — Marketing, Sales & AI for service businesses">
+<meta property="og:description" content="We build the marketing, sales and AI that get service businesses more leads, more booked jobs, and less admin.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://phloi.com/">
 <meta name="twitter:card" content="summary">
@@ -154,7 +154,7 @@
   .rule{height:1px;background:var(--line);border:0;margin:0}
 
   /* ---------- Cards ---------- */
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
   .card{
     position:relative;display:flex;flex-direction:column;
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -307,6 +307,7 @@
   .pick-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.045em;line-height:.96;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px);text-wrap:balance}
   .pick-sub{max-width:58ch;font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--ink-2);margin:0 0 clamp(30px,4.5vw,54px);line-height:1.5}
   .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,16px);max-width:920px}
+  .need-opt--wide{grid-column:1 / -1}
   .need-opt{display:flex;align-items:center;gap:16px;text-align:left;padding:clamp(20px,2.5vw,30px) clamp(20px,2.3vw,28px);border-radius:var(--radius);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1.15;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
   .need-opt .no-k{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--ink-3);flex:0 0 auto}
   .need-opt .no-t{font-family:var(--font-display);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.4rem);letter-spacing:-.02em;flex:1 1 auto}
@@ -363,9 +364,9 @@
   <section class="hero hero--pick" id="start">
     <div class="wrap">
       <div class="pick-lede reveal">
-        <span class="eyebrow"><span class="dot"></span>Phloi — AI, Ads &amp; Systems</span>
+        <span class="eyebrow"><span class="dot"></span>Phloi — Marketing, Sales &amp; AI</span>
         <h1 class="pick-q">What's <span class="under">slowing you down</span>?</h1>
-        <p class="pick-sub">We build the ads, AI and systems that fix it — so you keep <mark class="hl">more profit that's actually yours</mark>. Tap what's closest and we'll point you straight to the answer.</p>
+        <p class="pick-sub">We build the marketing, sales and AI that fix it — so you keep <mark class="hl">more profit that's actually yours</mark>. Tap what's closest and we'll point you straight to the answer.</p>
       </div>
 
       <div class="need-grid reveal" role="group" aria-label="What's slowing you down?">
@@ -375,11 +376,8 @@
         <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
           <span class="no-k">02</span><span class="no-t">Buried in admin &amp; follow-ups</span><span class="no-arw" aria-hidden="true">↗</span>
         </button>
-        <button type="button" class="need-opt" data-need="ops" aria-pressed="false">
-          <span class="no-k">03</span><span class="no-t">Ops are a mess</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-        <button type="button" class="need-opt" data-need="unsure" aria-pressed="false">
-          <span class="no-k">04</span><span class="no-t">Honestly, not sure</span><span class="no-arw" aria-hidden="true">↗</span>
+        <button type="button" class="need-opt need-opt--wide" data-need="unsure" aria-pressed="false">
+          <span class="no-k">03</span><span class="no-t">Honestly, not sure</span><span class="no-arw" aria-hidden="true">↗</span>
         </button>
       </div>
 
@@ -421,9 +419,9 @@
       <div class="cards">
         <a class="card reveal" href="#inquiry">
           <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Paid Ads</h3>
-          <p>Meta ads that bring in buyers, not just clicks — plus tracking so you see exactly what's working.</p>
-          <span class="tag">Lead generation <span class="chip">Meta · Tracking</span></span>
+          <h3>Marketing + Sales</h3>
+          <p>Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs — not just clicks.</p>
+          <span class="tag">Leads → booked work <span class="chip">Ads · Follow-up · Closing</span></span>
         </a>
 
         <a class="card reveal" href="#inquiry">
@@ -431,13 +429,6 @@
           <h3>AI Automation</h3>
           <p>AI that replies to leads in seconds, chases follow-ups, filters time-wasters, and quietly handles the admin you hate.</p>
           <span class="tag">Speed to lead <span class="chip">Replies · Follow-ups</span></span>
-        </a>
-
-        <a class="card reveal" href="#inquiry">
-          <div class="c-top"><span class="c-num">03</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Systems &amp; Ops</h3>
-          <p>The plumbing: your CRM, dashboards and workflows all in sync, so the day-to-day runs without living in your head.</p>
-          <span class="tag">The plumbing <span class="chip">CRM · Dashboards</span></span>
         </a>
       </div>
     </div>
@@ -466,7 +457,7 @@
         <div class="point reveal">
           <span class="p-mark">B</span>
           <h4>Everything talks to each other</h4>
-          <p>Ads, AI, CRM and dashboards wired together, so nothing falls through the cracks and you're not copying data between tabs.</p>
+          <p>Your marketing, sales, AI and follow-ups wired together, so nothing falls through the cracks and you're not copying data between tabs.</p>
         </div>
         <div class="point reveal">
           <span class="p-mark">C</span>
@@ -545,7 +536,7 @@
       <div class="faq-list">
         <details class="faq reveal">
           <summary>So what would you actually set up for me? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Depends on where you're stuck. Usually some mix of paid ads to bring leads in, an AI setup that replies and follows up for you, and the systems that tie it together — your CRM, dashboards and workflows. We start with the one that moves the needle fastest.</div>
+          <div class="answer">Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest.</div>
         </details>
         <details class="faq reveal">
           <summary>I'm not techy — is that a problem? <span class="plus" aria-hidden="true"></span></summary>
@@ -635,7 +626,7 @@
       <a href="mailto:phoenix@driptexteriorcleaning.com.au">Email <span class="arw" aria-hidden="true">↗</span></a>
     </div>
     <div class="foot-bottom">
-      <span>&copy; <span id="year">2026</span> Phloi — AI, Ads &amp; Systems</span>
+      <span>&copy; <span id="year">2026</span> Phloi — Marketing, Sales &amp; AI</span>
       <span>Built around how your business actually works.</span>
     </div>
   </div>
@@ -701,9 +692,8 @@
   /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
   (function(){
     var map={
-      leads:{t:'Paid Ads',d:"Meta ads that bring in real buyers, not just clicks, with tracking so you see exactly what's working.",card:0,more:'#services',msg:"Not enough leads coming in, I need more of the right people reaching out."},
+      leads:{t:'Marketing + Sales',d:"Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs, not just clicks.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
       admin:{t:'AI Automation',d:"AI that replies to leads in seconds, chases every follow-up, and quietly clears the admin you hate.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."},
-      ops:{t:'Systems & Ops',d:"Your CRM, dashboards and workflows all in sync, so the day-to-day runs without living in your head.",card:2,more:'#services',msg:"My operations are disorganised, too much of it lives in my head."},
       unsure:{t:'A quick, free chat',d:"No stress. We'll look at your business together and find the fastest win, wherever it is.",card:-1,more:'#approach',msg:"Not sure where my biggest bottleneck is, keen to figure it out with you."}
     };
     var opts=document.querySelectorAll('.need-opt');
