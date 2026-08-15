@@ -299,6 +299,26 @@
     .reveal{opacity:1;transform:none;transition:none}
     *{scroll-behavior:auto}
   }
+  /* ---------- Needs picker (interactive) ---------- */
+  .needs{padding-top:clamp(34px,5vw,60px);padding-bottom:clamp(48px,7vw,90px)}
+  .needs-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.03;font-size:clamp(1.7rem,4.4vw,2.9rem);margin:12px 0 0;text-wrap:balance;max-width:18ch}
+  .needs-sub{color:var(--ink-2);margin:14px 0 0;max-width:50ch;font-size:clamp(.98rem,1.5vw,1.1rem)}
+  .needs-picker{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(22px,3.5vw,36px) 0 0}
+  .need-opt{font-family:var(--font-display);font-weight:500;font-size:clamp(14.5px,1.6vw,16.5px);letter-spacing:-.01em;padding:15px 22px;border-radius:100px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1;display:inline-flex;align-items:center;gap:11px;transition:transform .18s ease,border-color .2s ease,background .2s ease,color .2s ease}
+  .need-opt::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--line);flex:0 0 auto;transition:background .2s ease,box-shadow .2s ease}
+  .need-opt:hover{transform:translateY(-2px);border-color:var(--ink)}
+  .need-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .need-opt[aria-pressed="true"]::before{background:var(--accent);box-shadow:0 0 0 4px rgba(185,255,74,.28)}
+  .needs-result{margin-top:clamp(20px,3vw,30px)}
+  .needs-result[hidden]{display:none}
+  .nr-inner{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:clamp(22px,3.4vw,38px);display:flex;flex-direction:column;gap:13px;animation:nr-in .45s cubic-bezier(.22,1,.36,1)}
+  @keyframes nr-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .nr-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .nr-title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.02em;margin:0}
+  .nr-desc{color:var(--ink-2);max-width:58ch;margin:0;font-size:clamp(1rem,1.5vw,1.12rem)}
+  .nr-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
+  @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
 </style>
 </head>
 <body>
@@ -339,6 +359,34 @@
         <div class="mi"><span class="k">Leads</span><span class="v">Ads that bring buyers</span></div>
         <div class="mi"><span class="k">Admin</span><span class="v">AI that handles it</span></div>
         <div class="mi"><span class="k">Ops</span><span class="v">Systems that scale</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEEDS PICKER (interactive) -->
+  <section id="start" class="needs">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow eyebrow--num"><b>→</b> Start here</span>
+        <h2 class="needs-q">What's slowing you down <span class="under">right now?</span></h2>
+        <p class="needs-sub">Tap what's closest. We'll point you to the fix — and tee up your message so you're one step from a chat.</p>
+      </div>
+      <div class="needs-picker reveal" role="group" aria-label="What's slowing you down?">
+        <button type="button" class="need-opt" data-need="leads" aria-pressed="false">Not enough leads</button>
+        <button type="button" class="need-opt" data-need="admin" aria-pressed="false">Buried in admin &amp; follow-ups</button>
+        <button type="button" class="need-opt" data-need="ops" aria-pressed="false">Ops are a mess</button>
+        <button type="button" class="need-opt" data-need="unsure" aria-pressed="false">Honestly, not sure</button>
+      </div>
+      <div class="needs-result" id="needs-result" hidden aria-live="polite">
+        <div class="nr-inner">
+          <span class="nr-label">Sounds like you need</span>
+          <h3 class="nr-title" id="nr-title"></h3>
+          <p class="nr-desc" id="nr-desc"></p>
+          <div class="nr-actions">
+            <a class="btn btn--accent" id="nr-cta" href="#inquiry">Get this sorted <span class="arw" aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" id="nr-more" href="#services">See how it works <span class="arw" aria-hidden="true">↓</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -638,6 +686,35 @@
       }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
       items.forEach(function(el){ io.observe(el); });
     }
+  })();
+</script>
+
+<script>
+  /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
+  (function(){
+    var map={
+      leads:{t:'Paid Ads',d:"Meta ads that bring in real buyers, not just clicks, with tracking so you see exactly what's working.",card:0,more:'#services',msg:"Not enough leads coming in, I need more of the right people reaching out."},
+      admin:{t:'AI Automation',d:"AI that replies to leads in seconds, chases every follow-up, and quietly clears the admin you hate.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."},
+      ops:{t:'Systems & Ops',d:"Your CRM, dashboards and workflows all in sync, so the day-to-day runs without living in your head.",card:2,more:'#services',msg:"My operations are disorganised, too much of it lives in my head."},
+      unsure:{t:'A quick, free chat',d:"No stress. We'll look at your business together and find the fastest win, wherever it is.",card:-1,more:'#approach',msg:"Not sure where my biggest bottleneck is, keen to figure it out with you."}
+    };
+    var opts=document.querySelectorAll('.need-opt');
+    var result=document.getElementById('needs-result');
+    if(!opts.length||!result)return;
+    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elMore=document.getElementById('nr-more');
+    var cards=document.querySelectorAll('#services .card');
+    function pick(need){
+      var m=map[need];if(!m)return;
+      opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
+      elT.textContent=m.t;elD.textContent=m.d;if(elMore)elMore.setAttribute('href',m.more);
+      result.hidden=false;
+      var msg=document.getElementById('f-message');
+      if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m.msg;msg.dataset.auto='1';}
+      cards.forEach(function(c,i){c.classList.toggle('is-match',i===m.card);});
+    }
+    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
+    var cta=document.getElementById('nr-cta');
+    if(cta)cta.addEventListener('click',function(){var n=document.getElementById('f-name');setTimeout(function(){if(n)n.focus();},450);});
   })();
 </script>
 
