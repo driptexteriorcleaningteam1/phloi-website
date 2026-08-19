@@ -1,0 +1,5 @@
+# Static site: no build step. Publish the repo root, bundle the Netlify function.
+[build]
+  publish = "."
+  command = ""
+  functions = "netlify/functions"
