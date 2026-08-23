@@ -4,21 +4,20 @@
 <script>document.documentElement.className+=" js";</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phloi — Marketing, Sales & AI for service businesses</title>
-<meta name="description" content="Phloi builds the Marketing, Sales and AI that get service businesses more leads, more booked jobs, and less admin. Get in touch.">
-<meta property="og:title" content="Phloi — Marketing, Sales & AI for service businesses">
-<meta property="og:description" content="We build the Marketing, Sales and AI that get service businesses more leads, more booked jobs, and less admin.">
+<title>Operations Dashboard — Phloi</title>
+<meta name="description" content="A custom operations dashboard for service businesses. Jobs, quotes, leads, crew and numbers in one place, built around how you already work. Book a call.">
+<meta property="og:title" content="Operations Dashboard — Phloi">
+<meta property="og:description" content="Jobs, quotes, leads, crew and numbers in one place, built around how you already work.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://phloi.com/">
+<meta property="og:url" content="https://phloi.com/dashboard">
 <meta property="og:site_name" content="Phloi">
 <meta property="og:locale" content="en_AU">
 <meta property="og:image" content="https://phloi.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Phloi — Marketing, Sales and AI for service businesses">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://phloi.com/og-image.png">
-<link rel="canonical" href="https://phloi.com/">
+<link rel="canonical" href="https://phloi.com/dashboard">
 <meta name="theme-color" content="#f5f2ea">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b9ff4a'/%3E%3Ctext x='50' y='73' font-size='66' font-family='Arial,Helvetica,sans-serif' font-weight='700' text-anchor='middle' fill='%230f0f0d'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -344,81 +343,128 @@
   @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
   @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
 </style>
+<style>
+  /* ---------- Dashboard page ---------- */
+  .lp-nav{position:sticky;top:0;z-index:50;background:rgba(245,242,234,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
+  .lp-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
+  .lp-mark{font-family:var(--font-display);font-weight:700;font-size:1.32rem;letter-spacing:-.02em}
+  .lp-mark .tick{color:var(--accent-deep)}
+  .lp-hero{padding:clamp(40px,7vw,96px) 0 clamp(30px,4vw,56px)}
+  .lp-hero h1{font-family:var(--font-display);font-weight:700;letter-spacing:-.035em;line-height:1.02;
+    font-size:clamp(2.6rem,6.6vw,5rem);margin:0 0 clamp(16px,2.2vw,24px);max-width:17ch}
+  .lp-lede{font-size:clamp(1.06rem,1.7vw,1.28rem);color:var(--ink-2);max-width:56ch;margin:0 0 clamp(24px,3vw,34px)}
+  .lp-cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .hl{background:linear-gradient(transparent 62%,var(--accent) 62%);padding:0 .06em}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,18px)}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.5vw,18px)}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.4vw,30px)}
+  .tile h3{font-family:var(--font-display);font-size:1.12rem;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+  .tile p{margin:0;color:var(--ink-2);font-size:.97rem;line-height:1.6}
+  .tile .ix{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-3);display:block;margin-bottom:12px}
+  .steps{counter-reset:s;display:grid;gap:2px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--line-2)}
+  .step{background:var(--card);padding:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.4vw,28px);align-items:start}
+  .step b{font-family:var(--font-mono);font-size:.8rem;color:var(--accent-deep);padding-top:3px}
+  .step h3{font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin:0 0 6px}
+  .step p{margin:0;color:var(--ink-2);font-size:.97rem}
+  .price-box{background:var(--ink);color:var(--paper);border-radius:calc(var(--radius) + 4px);padding:clamp(26px,4vw,52px)}
+  .price-box .eyebrow{color:var(--accent)}
+  .price-fig{font-family:var(--font-display);font-weight:700;letter-spacing:-.035em;line-height:1;
+    font-size:clamp(2.4rem,5.4vw,3.9rem);margin:6px 0 4px}
+  .price-sub{color:rgba(245,242,234,.66);font-size:1rem;margin:0 0 26px}
+  .price-list{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:11px}
+  .price-list li{padding-left:26px;position:relative;color:rgba(245,242,234,.9);font-size:.98rem}
+  .price-list li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+  .price-note{color:rgba(245,242,234,.55);font-size:.87rem;margin:22px 0 0;line-height:1.6}
+  .proof{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,3.4vw,44px)}
+  .proof-quote{font-family:var(--font-display);font-size:clamp(1.2rem,2.3vw,1.72rem);font-weight:500;
+    line-height:1.36;letter-spacing:-.02em;margin:0 0 22px;max-width:46ch}
+  .proof-meta{display:flex;align-items:center;gap:12px}
+  .proof-dot{width:38px;height:38px;border-radius:11px;background:var(--accent);display:grid;place-items:center;
+    font-family:var(--font-display);font-weight:700;color:var(--ink);flex:none}
+  .proof-meta span{font-size:.93rem;color:var(--ink-2)}
+  .lp-form{display:grid;gap:14px;max-width:560px}
+  .lp-form label{display:block;font-size:.82rem;font-family:var(--font-mono);color:var(--ink-3);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em}
+  .lp-form input,.lp-form textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;font-family:var(--font-body);font-size:1rem;color:var(--ink)}
+  .lp-form textarea{min-height:118px;resize:vertical}
+  .lp-form input:focus,.lp-form textarea:focus{outline:2.5px solid var(--ink);outline-offset:2px;border-color:transparent}
+  @media(max-width:900px){
+    .grid-3,.grid-2{grid-template-columns:1fr}
+    .step{grid-template-columns:1fr;gap:10px}
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": "https://phloi.com/#org",
-      "name": "Phloi",
-      "url": "https://phloi.com/",
-      "logo": "https://phloi.com/og-image.png",
-      "image": "https://phloi.com/og-image.png",
-      "description": "Phloi builds the marketing, sales and AI systems that get service businesses more leads, more booked jobs and less admin.",
-      "email": "contact@phloi.com",
+      "@type": "Service",
+      "@id": "https://phloi.com/dashboard#service",
+      "name": "Custom Operations Dashboard Build",
+      "serviceType": "Custom business software development",
+      "description": "A custom operations dashboard for service businesses: jobs, quotes, leads, crew and reporting in one place, connected to the tools the business already uses.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Phloi",
+        "url": "https://phloi.com/"
+      },
       "areaServed": "AU",
-      "founder": {
-        "@type": "Person",
-        "name": "Phoenix"
-      },
-      "sameAs": [
-        "https://www.instagram.com/phoenixx_builds/",
-        "https://linktr.ee/phoenixbuilds"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://phloi.com/#site",
-      "url": "https://phloi.com/",
-      "name": "Phloi",
-      "publisher": {
-        "@id": "https://phloi.com/#org"
-      },
-      "inLanguage": "en-AU"
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "6500",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "AUD",
+          "minPrice": "6500",
+          "valueAddedTaxIncluded": false
+        },
+        "availability": "https://schema.org/InStock",
+        "url": "https://phloi.com/dashboard"
+      }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://phloi.com/#faq",
+      "@id": "https://phloi.com/dashboard#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "So what would you actually set up for me?",
+          "name": "Do I have to change the tools I already use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest."
+            "text": "No. That's the whole point. The dashboard sits on top of what you already run and pulls it together. If a tool is genuinely holding you back we'll say so, but we're not going to make you migrate for the sake of it."
           }
         },
         {
           "@type": "Question",
-          "name": "I'm not techy — is that a problem?",
+          "name": "What if I already have a CRM?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not at all. That's kind of the point. We build it, we set it up, and we hand you something simple to use. You won't be wiring up software or reading documentation — that's our job, not yours."
+            "text": "Good — we'll connect to it. The dashboard isn't a replacement for your CRM, it's the layer that makes your CRM, your job data and your numbers agree with each other."
           }
         },
         {
           "@type": "Question",
-          "name": "How quickly can you start?",
+          "name": "How long until it's actually live?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually within a week or two of our first chat. The initial call and bottleneck audit can happen this week — building starts once we both know exactly what we're fixing."
+            "text": "Usually three to six weeks from the scope being signed off, depending on how many systems are involved. You'll be using parts of it well before the whole thing is finished."
           }
         },
         {
           "@type": "Question",
-          "name": "Is the first call really free?",
+          "name": "What happens after it's built?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, genuinely. No pitch deck, no pressure. We look at your business, find the biggest bottleneck, and tell you the fastest way to clear it. If we're a fit, great. If not, you still walk away with something useful."
+            "text": "We host it, support it and keep it running. Integrations break when other companies change their APIs — that's covered. Small changes are included; anything big gets quoted first."
           }
         },
         {
           "@type": "Question",
-          "name": "How much does it cost?",
+          "name": "What if I'm not technical?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on what you actually need — we don't do one-size-fits-all packages. Once we've found your bottleneck we'll give you a clear, honest number with no surprises. Most clients spend less than the revenue they were quietly leaking."
+            "text": "Then you're exactly who this is for. You won't be configuring anything or reading documentation. You get something you open and use, and we handle everything behind it."
           }
         }
       ]
@@ -429,229 +475,194 @@
 </head>
 <body>
 
-<header class="site-header" id="top">
+<nav class="lp-nav">
   <div class="wrap">
-    <nav class="nav" aria-label="Primary">
-      <a class="wordmark" href="#top" aria-label="Phloi home">Phloi<span class="tick">.</span></a>
-      <div class="nav-menu" id="nav-menu">
-        <a class="navlink" href="#services">What we do</a>
-        <a class="navlink" href="#approach">Why Us</a>
-        <a class="navlink" href="#faq">FAQ</a>
-        <a class="navlink" href="/newsletter">Newsletter</a>
-        <a class="btn btn--accent nav-cta" href="#inquiry">Get in touch <span class="arw" aria-hidden="true">→</span></a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
+    <a class="lp-mark" href="/">Phloi<span class="tick">.</span></a>
+    <a class="btn btn--accent" href="#talk">Book a call <span aria-hidden="true">→</span></a>
   </div>
-</header>
+</nav>
 
 <main>
 
   <!-- HERO -->
-  <!-- HERO — interactive needs picker (the focal moment) -->
-  <section class="hero hero--pick" id="start">
+  <section class="lp-hero">
     <div class="wrap">
-      <div class="pick-lede reveal">
-        <span class="eyebrow"><span class="dot"></span>Phloi — Marketing, Sales &amp; AI</span>
-        <h1 class="pick-q">Why Isn't Your Business <span class="under">Growing</span>?</h1>
+      <span class="eyebrow reveal"><i class="dot" aria-hidden="true"></i> Phloi — Operations Dashboard</span>
+      <h1 class="reveal">Your whole business on <span class="hl">one screen</span>.</h1>
+      <p class="lp-lede reveal">Jobs, quotes, leads, crew and the numbers that actually matter — in one place, built around how you already work. Not another tool you log into twice and forget.</p>
+      <div class="lp-cta-row reveal">
+        <a class="btn btn--accent" href="#talk">Book a call <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="#inside">See what's inside <span aria-hidden="true">↓</span></a>
       </div>
-
-      <div class="need-grid reveal" role="group" aria-label="What's slowing your business down?">
-        <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
-          <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-        <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
-          <span class="no-k">02</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-        <button type="button" class="need-opt need-opt--wide" data-need="unsure" aria-pressed="false">
-          <span class="no-k">03</span><span class="no-t">I don't know but I'm not growing</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-      </div>
-
-      <div class="needs-result" id="needs-result" hidden aria-live="polite">
-        <div class="nr-inner">
-          <span class="nr-label">Sounds like you need</span>
-          <h2 class="nr-title" id="nr-title"></h2>
-          <p class="nr-desc" id="nr-desc"></p>
-          <div class="nr-actions">
-            <a class="btn btn--accent" id="nr-cta" href="#inquiry">Get this sorted <span class="arw" aria-hidden="true">→</span></a>
-            <a class="btn btn--ghost" id="nr-more" href="#services">See how it works <span class="arw" aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-      </div>    </div>
+    </div>
   </section>
 
-  <!-- AUDIENCE MARQUEE -->
-  <div class="marquee" aria-label="Who we work with">
-    <div class="marquee__track" aria-hidden="true">
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
-    </div>
-  </div>
-
-  <!-- 01 SERVICES -->
-  <section id="services" class="band">
+  <!-- PROBLEM -->
+  <section class="band">
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <span class="eyebrow eyebrow--num"><b>01</b> — What we do</span>
-          <h2>Two Pieces for Growth</h2>
+          <span class="eyebrow eyebrow--num"><b>01</b> — The problem</span>
+          <h2>You're running your business across eight tabs.</h2>
         </div>
       </div>
-
-      <div class="cards">
-        <a class="card reveal" href="#inquiry">
-          <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Marketing + Sales</h3>
-          <p>Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs — not just clicks.</p>
-        </a>
-
-        <a class="card reveal" href="#inquiry">
-          <div class="c-top"><span class="c-num">02</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>AI Automation</h3>
-          <p>Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.</p>
-        </a>
+      <div class="grid-3">
+        <div class="tile reveal">
+          <span class="ix">01</span>
+          <h3>The numbers live in three places</h3>
+          <p>Your CRM says one thing, your accounting says another, and the real answer is somewhere in your head. So you guess, or you spend Sunday working it out.</p>
+        </div>
+        <div class="tile reveal">
+          <span class="ix">02</span>
+          <h3>Reports get written at 9pm</h3>
+          <p>By you. From memory. Long after you should have been off the clock — and they're the first thing to slip when you get busy.</p>
+        </div>
+        <div class="tile reveal">
+          <span class="ix">03</span>
+          <h3>Leads go cold in the gap</h3>
+          <p>Between an enquiry landing and someone actually chasing it. Nobody decided to drop it. It just fell down the list.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <hr class="rule">
-
-  <!-- 02 APPROACH -->
-  <section id="approach" class="band">
+  <!-- WHAT'S INSIDE -->
+  <section id="inside" class="band">
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <span class="eyebrow eyebrow--num"><b>02</b> — Why it works</span>
-          <h2>Built around you,<br>not the software.</h2>
+          <span class="eyebrow eyebrow--num"><b>02</b> — What's inside</span>
+          <h2>One screen, built for how service businesses actually run.</h2>
         </div>
       </div>
-
-      <p class="approach-statement reveal">Off-the-shelf tools make you bend your business to fit them. We do it the <span class="under">other way round</span> — built around how your business actually works, plugged into what you already use.</p>
-
-      <div class="points">
-        <div class="point reveal">
-          <span class="p-mark">A</span>
-          <h4>Built around you</h4>
-          <p>We shape the setup around how you already work, not the other way round. Your process stays yours — it just runs smoother.</p>
-        </div>
-        <div class="point reveal">
-          <span class="p-mark">B</span>
-          <h4>Everything talks to each other</h4>
-          <p>Your marketing, sales, AI and follow-ups wired together, so nothing falls through the cracks and you're not copying data between tabs.</p>
-        </div>
-        <div class="point reveal">
-          <span class="p-mark">C</span>
-          <h4>Grows with you</h4>
-          <p>What we build holds up when you get busier. More leads and more jobs shouldn't mean more chaos.</p>
-        </div>
+      <div class="grid-2">
+        <div class="tile reveal"><h3>Jobs and pipeline</h3><p>Every job from enquiry to paid, in one view. What's booked, what's unscheduled, what's quietly stalled.</p></div>
+        <div class="tile reveal"><h3>Quoting</h3><p>Build a quote in a couple of minutes with your real pricing and margins baked in, so nothing goes out underpriced.</p></div>
+        <div class="tile reveal"><h3>Crew</h3><p>Who's on what, what they've finished, what needs checking. Your team sees their own jobs without seeing your books.</p></div>
+        <div class="tile reveal"><h3>Reports that write themselves</h3><p>End-of-day and client reports generated from the work that actually happened, not from you remembering it later.</p></div>
+        <div class="tile reveal"><h3>Follow-up that doesn't forget</h3><p>Enquiries answered fast, follow-ups chased on schedule, and your CRM kept clean without you tidying it.</p></div>
+        <div class="tile reveal"><h3>Where your money comes from</h3><p>Ad spend, lead source and channel revenue side by side, so you stop funding the campaigns that don't book jobs.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- FOUNDER -->
-  <section class="founder">
-    <div class="wrap">
-      <span class="eyebrow reveal"><span class="dot"></span>About Us</span>
-      <blockquote class="reveal"><span class="qm" aria-hidden="true">“</span>We run our own service business, Dript Exterior Cleaning, and grew it with the exact systems we build for you. So you're not getting theory from a course — you're getting what already works in the real world.</blockquote>
-      <div class="attr reveal">
-        <span class="badge" aria-hidden="true">P</span>
-        <span><b>Phoenix</b> — Founder, Phloi</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <!-- 04 FAQ -->
-  <section id="faq" class="band">
+  <!-- PROOF -->
+  <section class="band">
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <span class="eyebrow eyebrow--num"><b>03</b> — Straight answers</span>
-          <h2>Questions,<br>answered honestly.</h2>
+          <span class="eyebrow eyebrow--num"><b>03</b> — Proof</span>
+          <h2>We run this ourselves, every day.</h2>
         </div>
       </div>
+      <div class="proof reveal">
+        <p class="proof-quote">“This isn't a demo we built to sell you something. It's the dashboard we run Dript Exterior Cleaning on — jobs, quoting, crew, reporting and follow-up. We built it because we needed it, and we've been fixing it in the real world ever since.”</p>
+        <div class="proof-meta">
+          <span class="proof-dot" aria-hidden="true">P</span>
+          <span>Phoenix — Founder, Phloi &amp; Dript Exterior Cleaning</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- HOW -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow eyebrow--num"><b>04</b> — How it works</span>
+          <h2>Four steps, no surprises.</h2>
+        </div>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><b>01</b><div><h3>A call</h3><p>We map what you actually do day to day, and where it's leaking time or money. Free, and useful even if you never hire us.</p></div></div>
+        <div class="step"><b>02</b><div><h3>A fixed scope and a fixed number</h3><p>You get exactly what's being built and what it costs, in writing, before anyone starts. No hourly drift.</p></div></div>
+        <div class="step"><b>03</b><div><h3>The build</h3><p>Usually three to six weeks. You see it working as it comes together, not at the end.</p></div></div>
+        <div class="step"><b>04</b><div><h3>Live, and looked after</h3><p>Hosting, support and changes handled. When a tool you rely on changes its API, that's our problem to fix, not yours.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow eyebrow--num"><b>05</b> — What it costs</span>
+          <h2>Priced on scope, not on hours.</h2>
+        </div>
+      </div>
+      <div class="price-box reveal">
+        <span class="eyebrow">Custom dashboard build</span>
+        <!-- PRICING: change these two numbers here and nowhere else. -->
+        <p class="price-fig">From $6,500</p>
+        <p class="price-sub">one-off build, then $450/month</p>
+        <ul class="price-list">
+          <li>Scoped and quoted before anything is built</li>
+          <li>Connected to the tools you already use</li>
+          <li>Hosting, support and changes included monthly</li>
+          <li>Your data stays yours, exportable at any time</li>
+        </ul>
+        <a class="btn btn--accent" href="#talk">Book a call <span aria-hidden="true">→</span></a>
+        <p class="price-note">The final number depends on how many systems have to talk to each other. Most builds land between $6,500 and $15,000 — you'll know exactly where yours sits before you commit to anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow eyebrow--num"><b>06</b> — Straight answers</span>
+          <h2>Questions, answered honestly.</h2>
+        </div>
+      </div>
       <div class="faq-list">
         <details class="faq reveal">
-          <summary>So what would you actually set up for me? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest.</div>
+          <summary>Do I have to change the tools I already use? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">No. That's the whole point. The dashboard sits on top of what you already run and pulls it together. If a tool is genuinely holding you back we'll say so, but we're not going to make you migrate for the sake of it.</div>
         </details>
         <details class="faq reveal">
-          <summary>I'm not techy — is that a problem? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Not at all. That's kind of the point. We build it, we set it up, and we hand you something simple to use. You won't be wiring up software or reading documentation — that's our job, not yours.</div>
+          <summary>What if I already have a CRM? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Good — we'll connect to it. The dashboard isn't a replacement for your CRM, it's the layer that makes your CRM, your job data and your numbers agree with each other.</div>
         </details>
         <details class="faq reveal">
-          <summary>How quickly can you start? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Usually within a week or two of our first chat. The initial call and bottleneck audit can happen this week — building starts once we both know exactly what we're fixing.</div>
+          <summary>How long until it's actually live? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Usually three to six weeks from the scope being signed off, depending on how many systems are involved. You'll be using parts of it well before the whole thing is finished.</div>
         </details>
         <details class="faq reveal">
-          <summary>Is the first call really free? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Yes, genuinely. No pitch deck, no pressure. We look at your business, find the biggest bottleneck, and tell you the fastest way to clear it. If we're a fit, great. If not, you still walk away with something useful.</div>
+          <summary>What happens after it's built? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">We host it, support it and keep it running. Integrations break when other companies change their APIs — that's covered. Small changes are included; anything big gets quoted first.</div>
         </details>
         <details class="faq reveal">
-          <summary>How much does it cost? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">It depends on what you actually need — we don't do one-size-fits-all packages. Once we've found your bottleneck we'll give you a clear, honest number with no surprises. Most clients spend less than the revenue they were quietly leaking.</div>
+          <summary>What if I'm not technical? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Then you're exactly who this is for. You won't be configuring anything or reading documentation. You get something you open and use, and we handle everything behind it.</div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- INQUIRY -->
-  <section id="inquiry" class="band inquiry">
+  <!-- CTA / FORM -->
+  <section id="talk" class="band">
     <div class="wrap">
-      <div class="inquiry-grid">
-        <div class="reveal">
-          <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
-          <h2>Struggling to grow? Let's find your <span class="under">biggest bottleneck</span>.</h2>
-          <p class="sub">Tell us where things feel stuck and we'll pinpoint the bottleneck holding you back, plus the fastest way to clear it. No pressure.</p>
-          <p class="alt">Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow eyebrow--num"><b>07</b> — Let's talk</span>
+          <h2>Tell us how you run things now.</h2>
+          <p class="lp-lede">We'll show you what your dashboard would actually look like and what it'd cost. No pitch deck, no pressure. Prefer email? <a href="mailto:contact@phloi.com" style="text-decoration:underline">contact@phloi.com</a></p>
         </div>
-
-        <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="phloi-inquiry">
-          <p hidden>
-            <label>Don't fill this out if you're human: <input name="bot-field"></label>
-          </p>
-
-          <div class="field">
-            <label for="f-name">Name <span class="req">*</span></label>
-            <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
-          </div>
-          <div class="field">
-            <label for="f-email">Email <span class="req">*</span></label>
-            <input id="f-email" type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="f-business">Your business <span class="req">*</span></label>
-            <input id="f-business" type="text" name="business" required placeholder="e.g. cleaning, plumbing, coaching">
-          </div>
-          <div class="field">
-            <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
-            <textarea id="f-message" name="message" required placeholder="what's slowing your business down"></textarea>
-          </div>
-          <button class="btn btn--accent" type="submit">Send it over <span class="arw" aria-hidden="true">→</span></button>
-        </form>
       </div>
-    </div>
-  </section>
-
-  <!-- 05 FINAL CTA -->
-  <section class="band final">
-    <div class="wrap">
-      <span class="eyebrow eyebrow--num reveal"><b>04</b> — Last thing</span>
-      <h2 class="reveal">Ready to grow your business?</h2>
-      <div class="cta-row reveal">
-        <a class="btn btn--accent" href="#inquiry">Get in touch <span class="arw" aria-hidden="true">→</span></a>
-        <span class="eyebrow">It starts with one honest chat.</span>
-      </div>
-      <div class="contacts reveal">
-        <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span> @phoenixx_builds</a>
-        <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span> contact@phloi.com</a>
-      </div>
+      <form class="lp-form reveal" name="phloi-dashboard" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="phloi-dashboard">
+        <input type="hidden" name="enquiry-type" value="Operations dashboard">
+        <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+        <div><label for="d-name">Name *</label><input id="d-name" name="name" type="text" required autocomplete="name"></div>
+        <div><label for="d-email">Email *</label><input id="d-email" name="email" type="email" required autocomplete="email"></div>
+        <div><label for="d-business">Your business *</label><input id="d-business" name="business" type="text" required autocomplete="organization"></div>
+        <div><label for="d-tools">What do you run on now? *</label><textarea id="d-tools" name="message" required placeholder="The tools you use, and the part that's most painful right now."></textarea></div>
+        <div><button class="btn btn--accent" type="submit">Send it over <span aria-hidden="true">→</span></button></div>
+      </form>
     </div>
   </section>
 
@@ -661,11 +672,10 @@
   <div class="wrap">
     <p class="foot-mark reveal">Phloi<span class="tick">.</span></p>
     <div class="foot-links">
-      <a href="#inquiry">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
-      <a href="/dashboard">Operations Dashboard <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="/">Home <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="#talk">Book a call <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/newsletter">The Phloi Letter <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
-      <a href="https://linktr.ee/phoenixbuilds" target="_blank" rel="noopener">Links <span class="arw" aria-hidden="true">↗</span></a>
       <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span></a>
     </div>
     <div class="foot-bottom">
@@ -677,8 +687,7 @@
 
 <script>
   (function(){
-    // Fail-safe: .reveal starts at opacity:0, so if anything below throws before
-    // the observer is attached the whole page would render blank. This reveals
+    // Same fail-safe as the home page: .reveal starts hidden, so reveal
     // everything unless the observer confirms it took over.
     var revealReady = false;
     setTimeout(function(){
@@ -686,42 +695,9 @@
       document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
     }, 1200);
 
-    // Copyright year
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    // Mobile menu
-    var toggle = document.getElementById('nav-toggle');
-    var menu = document.getElementById('nav-menu');
-    if (toggle && menu){
-      toggle.addEventListener('click', function(){
-        var open = document.body.classList.toggle('nav-open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      menu.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click', function(){
-          document.body.classList.remove('nav-open');
-          toggle.setAttribute('aria-expanded','false');
-        });
-      });
-      document.addEventListener('keydown', function(e){
-        if (e.key === 'Escape' && document.body.classList.contains('nav-open')){
-          document.body.classList.remove('nav-open');
-          toggle.setAttribute('aria-expanded','false');
-        }
-      });
-    }
-
-    // Sticky header background on scroll
-    var header = document.querySelector('.site-header');
-    var onScroll = function(){
-      if (window.scrollY > 12) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, {passive:true});
-
-    // Scroll reveal
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var items = document.querySelectorAll('.reveal');
     if (reduce || !('IntersectionObserver' in window)){
@@ -730,10 +706,7 @@
     } else {
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
-          if (entry.isIntersecting){
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
+          if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
         });
       }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
       items.forEach(function(el){ io.observe(el); });
@@ -741,34 +714,5 @@
     }
   })();
 </script>
-
-<script>
-  /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
-  (function(){
-    var map={
-      leads:{t:'Marketing + Sales',d:"Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs, not just clicks.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
-      admin:{t:'AI Automation',d:"Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."},
-      unsure:{t:'A quick, free chat',d:"No stress. We'll look at your business together and find the fastest win, wherever it is.",card:-1,more:'#approach',msg:"Not sure where my biggest bottleneck is, keen to figure it out with you."}
-    };
-    var opts=document.querySelectorAll('.need-opt');
-    var result=document.getElementById('needs-result');
-    if(!opts.length||!result)return;
-    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elMore=document.getElementById('nr-more');
-    var cards=document.querySelectorAll('#services .card');
-    function pick(need){
-      var m=map[need];if(!m)return;
-      opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
-      elT.textContent=m.t;elD.textContent=m.d;if(elMore)elMore.setAttribute('href',m.more);
-      result.hidden=false;
-      var msg=document.getElementById('f-message');
-      if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m.msg;msg.dataset.auto='1';}
-      cards.forEach(function(c,i){c.classList.toggle('is-match',i===m.card);});
-    }
-    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
-    var cta=document.getElementById('nr-cta');
-    if(cta)cta.addEventListener('click',function(){var n=document.getElementById('f-name');setTimeout(function(){if(n)n.focus();},450);});
-  })();
-</script>
-
 </body>
 </html>
