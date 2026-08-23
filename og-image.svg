@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Source for og-image.png. Palette matches index.html: paper, ink, accent. -->
+  <rect width="1200" height="630" fill="#f5f2ea"/>
+  <rect x="80" y="70" width="76" height="76" rx="19" fill="#b9ff4a"/>
+  <text x="118" y="126" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="50" font-weight="700" fill="#0f0f0d" text-anchor="middle">P</text>
+  <text x="176" y="126" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="48" font-weight="700" fill="#0f0f0d" letter-spacing="-1">Phloi</text>
+  <text x="80" y="330" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="82" font-weight="700" fill="#0f0f0d" letter-spacing="-2.5">Marketing, Sales &amp; AI</text>
+  <text x="80" y="424" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="82" font-weight="700" fill="#55514a" letter-spacing="-2.5">for service businesses</text>
+  <rect x="80" y="492" width="1040" height="1.6" fill="#0f0f0d" opacity="0.16"/>
+  <text x="80" y="556" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="29" font-weight="500" fill="#55514a">More leads. More booked jobs. Less admin.</text>
+  <text x="1120" y="556" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="29" font-weight="700" fill="#0f0f0d" text-anchor="end">phloi.com</text>
+</svg>

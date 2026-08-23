@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Source file for the tech-stack PDF, redirected away in _redirects.
+Disallow: /guide-src.html
+
+Sitemap: https://phloi.com/sitemap.xml

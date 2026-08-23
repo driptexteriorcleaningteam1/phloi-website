@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>document.documentElement.className+=" js";</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phloi — Marketing, Sales & AI for service businesses</title>
@@ -9,7 +10,15 @@
 <meta property="og:description" content="We build the Marketing, Sales and AI that get service businesses more leads, more booked jobs, and less admin.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://phloi.com/">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="Phloi">
+<meta property="og:locale" content="en_AU">
+<meta property="og:image" content="https://phloi.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Phloi — Marketing, Sales and AI for service businesses">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://phloi.com/og-image.png">
+<link rel="canonical" href="https://phloi.com/">
 <meta name="theme-color" content="#f5f2ea">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b9ff4a'/%3E%3Ctext x='50' y='73' font-size='66' font-family='Arial,Helvetica,sans-serif' font-weight='700' text-anchor='middle' fill='%230f0f0d'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -259,8 +268,8 @@
   .foot-bottom{margin-top:40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;color:#8f8c82}
 
   /* ---------- Reveal ---------- */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1;transform:none}
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
 
   /* ---------- Responsive ---------- */
   @media(max-width:980px){
@@ -296,7 +305,7 @@
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .marquee__track{animation:none}
-    .reveal{opacity:1;transform:none;transition:none}
+    .js .reveal{opacity:1;transform:none;transition:none}
     *{scroll-behavior:auto}
   }
   /* ---------- Interactive hero picker (focal) ---------- */
@@ -335,6 +344,88 @@
   @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
   @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://phloi.com/#org",
+      "name": "Phloi",
+      "url": "https://phloi.com/",
+      "logo": "https://phloi.com/og-image.png",
+      "image": "https://phloi.com/og-image.png",
+      "description": "Phloi builds the marketing, sales and AI systems that get service businesses more leads, more booked jobs and less admin.",
+      "email": "contact@phloi.com",
+      "areaServed": "AU",
+      "founder": {
+        "@type": "Person",
+        "name": "Phoenix"
+      },
+      "sameAs": [
+        "https://www.instagram.com/phoenixx_builds/",
+        "https://linktr.ee/phoenixbuilds"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://phloi.com/#site",
+      "url": "https://phloi.com/",
+      "name": "Phloi",
+      "publisher": {
+        "@id": "https://phloi.com/#org"
+      },
+      "inLanguage": "en-AU"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://phloi.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "So what would you actually set up for me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I'm not techy — is that a problem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not at all. That's kind of the point. We build it, we set it up, and we hand you something simple to use. You won't be wiring up software or reading documentation — that's our job, not yours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly can you start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually within a week or two of our first chat. The initial call and bottleneck audit can happen this week — building starts once we both know exactly what we're fixing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the first call really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, genuinely. No pitch deck, no pressure. We look at your business, find the biggest bottleneck, and tell you the fastest way to clear it. If we're a fit, great. If not, you still walk away with something useful."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on what you actually need — we don't do one-size-fits-all packages. Once we've found your bottleneck we'll give you a clear, honest number with no surprises. Most clients spend less than the revenue they were quietly leaking."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -585,6 +676,15 @@
 
 <script>
   (function(){
+    // Fail-safe: .reveal starts at opacity:0, so if anything below throws before
+    // the observer is attached the whole page would render blank. This reveals
+    // everything unless the observer confirms it took over.
+    var revealReady = false;
+    setTimeout(function(){
+      if (revealReady) return;
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    }, 1200);
+
     // Copyright year
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
@@ -625,6 +725,7 @@
     var items = document.querySelectorAll('.reveal');
     if (reduce || !('IntersectionObserver' in window)){
       items.forEach(function(el){ el.classList.add('in'); });
+      revealReady = true;
     } else {
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
@@ -635,6 +736,7 @@
         });
       }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
       items.forEach(function(el){ io.observe(el); });
+      revealReady = true;
     }
   })();
 </script>
