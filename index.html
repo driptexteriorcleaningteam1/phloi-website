@@ -383,42 +383,66 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "So what would you actually set up for me?",
+          "name": "What would you actually build for me?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest."
+            "text": "Whatever's costing you the most money right now. If enquiries are thin, that's the marketing side — ads and campaigns that put you in front of people who actually buy. If enquiries come in but go cold, that's the sales and AI side — instant replies, follow-ups that actually happen, quotes that get chased. Most businesses have one of those bleeding badly. We fix that one first, then build out the rest once it's paying for itself."
           }
         },
         {
           "@type": "Question",
-          "name": "I'm not techy — is that a problem?",
+          "name": "Do you only work with trades?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not at all. That's kind of the point. We build it, we set it up, and we hand you something simple to use. You won't be wiring up software or reading documentation — that's our job, not yours."
+            "text": "No. We work with any business where the job starts with an enquiry and ends with a booking — trades, cleaning, health and beauty, coaches, consultants, agencies, professional services. Different industries, same problem: good leads going quiet because nobody got back to them fast enough."
           }
         },
         {
           "@type": "Question",
-          "name": "How quickly can you start?",
+          "name": "Do I have to change the software I already use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually within a week or two of our first chat. The initial call and bottleneck audit can happen this week — building starts once we both know exactly what we're fixing."
+            "text": "No. We build around what you've got — your phone number, your inbox, your calendar, your job management software. If something you're using is genuinely holding you back we'll tell you, but you won't be relearning your own business on new tools. And you don't need to be technical: we build it, we set it up, and we hand you something you can actually use."
           }
         },
         {
           "@type": "Question",
-          "name": "Is the first call really free?",
+          "name": "Won't the AI sound like a robot?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, genuinely. No pitch deck, no pressure. We look at your business, find the biggest bottleneck, and tell you the fastest way to clear it. If we're a fit, great. If not, you still walk away with something useful."
+            "text": "Not the way we set it up. It replies in your words, with your prices and your rules — not a generic chatbot script. It handles the repetitive part: answering, qualifying, booking, chasing the follow-up. Anything it's unsure about comes straight to you with the full conversation attached. You can read every message it sends, and change how it responds whenever you like."
           }
         },
         {
           "@type": "Question",
-          "name": "How much does it cost?",
+          "name": "What do you need from me?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on what you actually need — we don't do one-size-fits-all packages. Once we've found your bottleneck we'll give you a clear, honest number with no surprises. Most clients spend less than the revenue they were quietly leaking."
+            "text": "An hour or two at the start, so we understand how you quote, price and follow up. After that we build, and you review everything before it goes near a customer. The whole point is that this takes work off your plate — if you're spending more time on it than you were before, we've built the wrong thing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast does this happen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The first call and the bottleneck audit can happen this week. Building usually starts within a week or two after that, and we get the first piece live before we move on to the next one. You'll have something working and earning early, instead of waiting months for everything to land at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends what we build. Clearing one bottleneck costs a lot less than a full marketing, sales and AI setup, and we're not going to throw a number at you before we know which one you need. What we will do is give you a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens on the first call?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About half an hour, no pitch deck. You tell us where things feel stuck, we work out what's actually causing it, and we tell you what we'd fix first. If we're not the right people for the job, we'll say so on the call rather than sell you something that won't work. It's free either way, and you'll leave knowing what's holding you back whether you hire us or not."
           }
         }
       ]
@@ -448,6 +472,45 @@
 </header>
 
 <main>
+
+  <!-- INQUIRY -->
+  <section id="inquiry" class="band inquiry">
+    <div class="wrap">
+      <div class="inquiry-grid">
+        <div class="reveal">
+          <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
+          <h2>Struggling to grow? Let's find your <span class="under">biggest bottleneck</span>.</h2>
+          <p class="sub">Tell us where things feel stuck and we'll pinpoint the bottleneck holding you back, plus the fastest way to clear it. No pressure.</p>
+          <p class="alt">Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+        </div>
+
+        <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="phloi-inquiry">
+          <p hidden>
+            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+          </p>
+
+          <div class="field">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span class="req">*</span></label>
+            <input id="f-email" type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="f-business">Your business <span class="req">*</span></label>
+            <input id="f-business" type="text" name="business" required placeholder="e.g. cleaning, plumbing, coaching">
+          </div>
+          <div class="field">
+            <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
+            <textarea id="f-message" name="message" required placeholder="what's slowing your business down"></textarea>
+          </div>
+          <button class="btn btn--accent" type="submit">Send it over <span class="arw" aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <!-- HERO -->
   <!-- HERO — interactive needs picker (the focal moment) -->
@@ -577,64 +640,37 @@
 
       <div class="faq-list">
         <details class="faq reveal">
-          <summary>So what would you actually set up for me? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Depends on where you're stuck. Usually some mix of marketing and sales to bring leads in and turn them into booked jobs, plus an AI setup that replies and follows up for you. We start with the one that moves the needle fastest.</div>
+          <summary>What would you actually build for me? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Whatever's costing you the most money right now. If enquiries are thin, that's the marketing side — ads and campaigns that put you in front of people who actually buy. If enquiries come in but go cold, that's the sales and AI side — instant replies, follow-ups that actually happen, quotes that get chased. Most businesses have one of those bleeding badly. We fix that one first, then build out the rest once it's paying for itself.</div>
         </details>
         <details class="faq reveal">
-          <summary>I'm not techy — is that a problem? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Not at all. That's kind of the point. We build it, we set it up, and we hand you something simple to use. You won't be wiring up software or reading documentation — that's our job, not yours.</div>
+          <summary>Do you only work with trades? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">No. We work with any business where the job starts with an enquiry and ends with a booking — trades, cleaning, health and beauty, coaches, consultants, agencies, professional services. Different industries, same problem: good leads going quiet because nobody got back to them fast enough.</div>
         </details>
         <details class="faq reveal">
-          <summary>How quickly can you start? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Usually within a week or two of our first chat. The initial call and bottleneck audit can happen this week — building starts once we both know exactly what we're fixing.</div>
+          <summary>Do I have to change the software I already use? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">No. We build around what you've got — your phone number, your inbox, your calendar, your job management software. If something you're using is genuinely holding you back we'll tell you, but you won't be relearning your own business on new tools. And you don't need to be technical: we build it, we set it up, and we hand you something you can actually use.</div>
         </details>
         <details class="faq reveal">
-          <summary>Is the first call really free? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Yes, genuinely. No pitch deck, no pressure. We look at your business, find the biggest bottleneck, and tell you the fastest way to clear it. If we're a fit, great. If not, you still walk away with something useful.</div>
+          <summary>Won't the AI sound like a robot? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Not the way we set it up. It replies in your words, with your prices and your rules — not a generic chatbot script. It handles the repetitive part: answering, qualifying, booking, chasing the follow-up. Anything it's unsure about comes straight to you with the full conversation attached. You can read every message it sends, and change how it responds whenever you like.</div>
         </details>
         <details class="faq reveal">
-          <summary>How much does it cost? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">It depends on what you actually need — we don't do one-size-fits-all packages. Once we've found your bottleneck we'll give you a clear, honest number with no surprises. Most clients spend less than the revenue they were quietly leaking.</div>
+          <summary>What do you need from me? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">An hour or two at the start, so we understand how you quote, price and follow up. After that we build, and you review everything before it goes near a customer. The whole point is that this takes work off your plate — if you're spending more time on it than you were before, we've built the wrong thing.</div>
         </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- INQUIRY -->
-  <section id="inquiry" class="band inquiry">
-    <div class="wrap">
-      <div class="inquiry-grid">
-        <div class="reveal">
-          <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
-          <h2>Struggling to grow? Let's find your <span class="under">biggest bottleneck</span>.</h2>
-          <p class="sub">Tell us where things feel stuck and we'll pinpoint the bottleneck holding you back, plus the fastest way to clear it. No pressure.</p>
-          <p class="alt">Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
-        </div>
-
-        <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="phloi-inquiry">
-          <p hidden>
-            <label>Don't fill this out if you're human: <input name="bot-field"></label>
-          </p>
-
-          <div class="field">
-            <label for="f-name">Name <span class="req">*</span></label>
-            <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
-          </div>
-          <div class="field">
-            <label for="f-email">Email <span class="req">*</span></label>
-            <input id="f-email" type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="f-business">Your business <span class="req">*</span></label>
-            <input id="f-business" type="text" name="business" required placeholder="e.g. cleaning, plumbing, coaching">
-          </div>
-          <div class="field">
-            <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
-            <textarea id="f-message" name="message" required placeholder="what's slowing your business down"></textarea>
-          </div>
-          <button class="btn btn--accent" type="submit">Send it over <span class="arw" aria-hidden="true">→</span></button>
-        </form>
+        <details class="faq reveal">
+          <summary>How fast does this happen? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">The first call and the bottleneck audit can happen this week. Building usually starts within a week or two after that, and we get the first piece live before we move on to the next one. You'll have something working and earning early, instead of waiting months for everything to land at once.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What does it cost? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">It depends what we build. Clearing one bottleneck costs a lot less than a full marketing, sales and AI setup, and we're not going to throw a number at you before we know which one you need. What we will do is give you a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What happens on the first call? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">About half an hour, no pitch deck. You tell us where things feel stuck, we work out what's actually causing it, and we tell you what we'd fix first. If we're not the right people for the job, we'll say so on the call rather than sell you something that won't work. It's free either way, and you'll leave knowing what's holding you back whether you hire us or not.</div>
+        </details>
       </div>
     </div>
   </section>
