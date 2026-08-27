@@ -316,7 +316,6 @@
   .pick-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.045em;line-height:.96;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px);text-wrap:balance}
   .pick-sub{max-width:52ch;font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--ink-2);margin:0 0 clamp(22px,3vw,36px);line-height:1.5}
   .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,16px);max-width:920px}
-  .need-opt--wide{grid-column:1 / -1}
   .need-opt{display:flex;align-items:center;gap:16px;text-align:left;padding:clamp(20px,2.5vw,30px) clamp(20px,2.3vw,28px);border-radius:var(--radius);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1.15;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
   .need-opt .no-k{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--ink-3);flex:0 0 auto}
   .need-opt .no-t{font-family:var(--font-display);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.4rem);letter-spacing:-.02em;flex:1 1 auto}
@@ -527,9 +526,6 @@
         </button>
         <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
           <span class="no-k">02</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-        <button type="button" class="need-opt need-opt--wide" data-need="unsure" aria-pressed="false">
-          <span class="no-k">03</span><span class="no-t">I don't know but I'm not growing</span><span class="no-arw" aria-hidden="true">↗</span>
         </button>
       </div>
 
@@ -783,8 +779,7 @@
   (function(){
     var map={
       leads:{t:'Marketing + Sales',d:"Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs, not just clicks.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
-      admin:{t:'AI Automation',d:"Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."},
-      unsure:{t:'A quick, free chat',d:"No stress. We'll look at your business together and find the fastest win, wherever it is.",card:-1,more:'#approach',msg:"Not sure where my biggest bottleneck is, keen to figure it out with you."}
+      admin:{t:'AI Automation',d:"Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."}
     };
     var opts=document.querySelectorAll('.need-opt');
     var result=document.getElementById('needs-result');
