@@ -550,22 +550,22 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <span class="eyebrow eyebrow--num"><b>01</b> — What we do</span>
-          <h2>Two Pieces for Growth</h2>
+          <span class="eyebrow eyebrow--num"><b>01</b> — How we work</span>
+          <h2>Two Ways to Work With Us</h2>
         </div>
       </div>
 
       <div class="cards">
         <a class="card reveal" href="#inquiry">
           <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Marketing + Sales</h3>
-          <p>Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs — not just clicks.</p>
+          <h3>Done with you</h3>
+          <p>We build it alongside you and hand over the keys. You see how everything works, you run it day to day, and we stay on call when you need us.</p>
         </a>
 
         <a class="card reveal" href="#inquiry">
           <div class="c-top"><span class="c-num">02</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>AI Automation</h3>
-          <p>Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.</p>
+          <h3>Done for you</h3>
+          <p>We build and run the whole thing — the ads, the follow-up, the AI — and you just watch the enquiries turn into booked jobs.</p>
         </a>
       </div>
     </div>
@@ -780,7 +780,6 @@
     var result=document.getElementById('needs-result');
     if(!opts.length||!result)return;
     var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elMore=document.getElementById('nr-more');
-    var cards=document.querySelectorAll('#services .card');
     function pick(need){
       var m=map[need];if(!m)return;
       opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
@@ -788,7 +787,6 @@
       result.hidden=false;
       var msg=document.getElementById('f-message');
       if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m.msg;msg.dataset.auto='1';}
-      cards.forEach(function(c,i){c.classList.toggle('is-match',i===m.card);});
     }
     opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
     var cta=document.getElementById('nr-cta');
