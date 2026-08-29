@@ -229,8 +229,8 @@
   /* ---------- Inquiry ---------- */
   .inquiry{background:var(--paper-2)}
   .inquiry-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(34px,5vw,72px);align-items:start}
-  .inquiry h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px}
-  .inquiry h2 .under{background-size:100% .26em}
+  .inquiry h1,.inquiry h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px}
+  .inquiry h1 .under,.inquiry h2 .under{background-size:100% .26em}
   .inquiry .sub{color:var(--ink-2);font-size:16.5px;margin:0 0 26px;max-width:44ch}
   .inquiry .alt{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2);border-top:1px solid var(--line);padding-top:22px;margin-top:6px}
   .inquiry .alt a{border-bottom:2px solid var(--accent)}
@@ -336,6 +336,16 @@
   .nr-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
   .nr-inner .btn--ghost{color:var(--paper);border-color:rgba(245,242,234,.34)}
   .nr-inner .btn--ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  /* Needs picker inside the inquiry column: stack the options, shrink the panel. */
+  .inquiry .need-grid{grid-template-columns:1fr;max-width:none;margin-top:clamp(18px,2.4vw,26px)}
+  .inquiry .need-opt{padding:16px 18px}
+  .inquiry .need-opt .no-t{font-size:clamp(1rem,1.5vw,1.15rem)}
+  .inquiry .needs-result{max-width:none}
+  .inquiry .nr-inner{padding:clamp(20px,2.6vw,30px);gap:10px}
+  .inquiry .nr-title{font-size:clamp(1.3rem,2.4vw,1.8rem)}
+  .inquiry .nr-desc{font-size:15.5px}
+  .nr-more-link{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--accent);align-self:flex-start;border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+  .nr-more-link:hover{color:var(--accent-2)}
   .pick-skip{margin-top:clamp(26px,4vw,44px);font-family:var(--font-mono);font-size:14px;letter-spacing:.02em;color:var(--ink-3)}
   .pick-skip a{color:var(--ink);border-bottom:1.5px solid var(--accent);padding-bottom:1px}
   .pick-skip a:hover{color:var(--accent-deep)}
@@ -478,9 +488,26 @@
       <div class="inquiry-grid">
         <div class="reveal">
           <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
-          <h2>Struggling to grow? Let's find your <span class="under">biggest bottleneck</span>.</h2>
-          <p class="sub">Tell us where things feel stuck and we'll pinpoint the bottleneck holding you back, plus the fastest way to clear it. No pressure.</p>
-          <p class="alt">Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+          <h1>Struggling to grow your service business? Let's come up with a solution with <span class="under">AI &amp; Ads</span></h1>
+          <p class="sub">We build the Marketing, Sales and AI systems that get service businesses more leads, more booked jobs and less admin.</p>
+
+          <div class="need-grid" role="group" aria-label="What's slowing your business down?">
+            <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
+              <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
+            <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
+              <span class="no-k">02</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
+          </div>
+
+          <div class="needs-result" id="needs-result" hidden aria-live="polite">
+            <div class="nr-inner">
+              <span class="nr-label">Sounds like you need</span>
+              <h3 class="nr-title" id="nr-title"></h3>
+              <p class="nr-desc" id="nr-desc"></p>
+              <a class="nr-more-link" id="nr-more" href="#services">See how it works ↓</a>
+            </div>
+          </div>
         </div>
 
         <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -509,37 +536,6 @@
         </form>
       </div>
     </div>
-  </section>
-
-  <!-- HERO -->
-  <!-- HERO — interactive needs picker (the focal moment) -->
-  <section class="hero hero--pick" id="start">
-    <div class="wrap">
-      <div class="pick-lede reveal">
-        <span class="eyebrow"><span class="dot"></span>Phloi — Marketing, Sales &amp; AI</span>
-        <h1 class="pick-q">Why Isn't Your Business <span class="under">Growing</span>?</h1>
-      </div>
-
-      <div class="need-grid reveal" role="group" aria-label="What's slowing your business down?">
-        <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
-          <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-        <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
-          <span class="no-k">02</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-arw" aria-hidden="true">↗</span>
-        </button>
-      </div>
-
-      <div class="needs-result" id="needs-result" hidden aria-live="polite">
-        <div class="nr-inner">
-          <span class="nr-label">Sounds like you need</span>
-          <h2 class="nr-title" id="nr-title"></h2>
-          <p class="nr-desc" id="nr-desc"></p>
-          <div class="nr-actions">
-            <a class="btn btn--accent" id="nr-cta" href="#inquiry">Get this sorted <span class="arw" aria-hidden="true">→</span></a>
-            <a class="btn btn--ghost" id="nr-more" href="#services">See how it works <span class="arw" aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-      </div>    </div>
   </section>
 
   <!-- AUDIENCE MARQUEE -->
@@ -778,8 +774,8 @@
   /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
   (function(){
     var map={
-      leads:{t:'Marketing + Sales',d:"Ads and campaigns that bring in real buyers, plus the follow-up and sales flow that turns them into booked jobs, not just clicks.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
-      admin:{t:'AI Automation',d:"Answers every enquiry in seconds, at 9pm or while you're up a ladder. Chases the follow-ups you forget, filters the tyre-kickers, and keeps the admin moving without you touching it.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."}
+      leads:{t:'Marketing + Sales',d:"First move: ads that bring in real buyers and a follow-up flow that books them, so the pipeline fills itself.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
+      admin:{t:'AI Automation',d:"First move: AI answering every enquiry in seconds and chasing the follow-ups, so the admin stops eating your week.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."}
     };
     var opts=document.querySelectorAll('.need-opt');
     var result=document.getElementById('needs-result');
