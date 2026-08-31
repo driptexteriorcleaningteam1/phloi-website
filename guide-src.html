@@ -6,35 +6,43 @@
 <title>The Service Business Stack — Phloi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
+  /* Palette mirrors phloi.com (light paper build) */
   :root {
-    --bg:        #0a0a0b;
-    --bg-2:      #121214;
-    --ink:       #f1efe8;
-    --ink-soft:  #9b9a93;
-    --ink-faint: #6a6962;
-    --line:      rgba(241,239,232,.12);
-    --accent:    #b9ff4a;
-    --accent-ink:#0a0a0b;
+    --paper:       #f5f2ea;
+    --paper-2:     #efe9db;
+    --card:        #fffdf7;
+    --ink:         #0f0f0d;
+    --ink-2:       #55514a;
+    --ink-3:       #8b887e;
+    --line:        rgba(15,15,13,.14);
+    --line-2:      rgba(15,15,13,.07);
+    --accent:      #b9ff4a;
+    --accent-2:    #c9ff72;
+    --accent-deep: #4f6f0a;
+    --font-display:'Space Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-body:   'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    --font-mono:   'Space Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   @page { size: A4; margin: 0; }
 
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
+    font-family: var(--font-body);
+    background: var(--paper);
     color: var(--ink);
     line-height: 1.55;
-    font-weight: 450;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   .page {
     width: 210mm;
     min-height: 297mm;
-    background: var(--bg);
+    background: var(--paper);
     padding: 22mm 20mm;
     position: relative;
     page-break-after: always;
@@ -43,73 +51,94 @@
 
   /* tool pages: each group is its own full-bleed page with consistent top spacing */
   .content {
-    width: 210mm; min-height: 297mm; background: var(--bg);
-    padding: 16mm 20mm; position: relative; page-break-after: always;
+    width: 210mm; min-height: 297mm; background: var(--paper);
+    padding: 14mm 20mm; position: relative; page-break-after: always;
   }
   h2.cat { break-after: avoid; page-break-after: avoid; }
   .tool { break-inside: avoid; page-break-inside: avoid; }
   .closer { page-break-before: always; }
 
-  .accent { color: var(--accent); }
+  /* Micro type, same as the site eyebrow */
   .label {
-    font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+  .label.accent { color: var(--accent-deep); }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .eyebrow .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(185,255,74,.28); }
+
+  /* Lime underline highlight, same as .under on the site */
+  .under {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% .32em;
+    padding: 0 .02em;
   }
 
   /* ---- COVER ---- */
   .cover { display: flex; flex-direction: column; justify-content: space-between; }
   .cover-top { display: flex; align-items: center; justify-content: space-between; }
-  .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -.02em; }
-  .wordmark .dot { color: var(--accent); }
+  .wordmark { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -.04em; color: var(--ink); }
+  .wordmark .tick { color: var(--accent-deep); }
   .cover-mid { margin-top: auto; }
   .cover h1 {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
-    font-size: 50px; line-height: 1.02; letter-spacing: -.03em; margin: 18px 0 22px;
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 50px; line-height: 1.02; letter-spacing: -.03em; margin: 18px 0 22px; color: var(--ink);
   }
   .cover h1 .it { font-style: italic; font-weight: 400; }
-  .cover .lead { font-size: 16px; color: var(--ink-soft); max-width: 52ch; line-height: 1.6; }
+  .cover .lead { font-size: 16px; color: var(--ink-2); max-width: 52ch; line-height: 1.6; }
+  .cover .lead b { color: var(--ink); font-weight: 600; }
   .cover .rule { height: 1px; background: var(--line); margin: 30px 0; }
-  .cover .meta { font-size: 13px; color: var(--ink-faint); }
-  .cover .badge {
-    display: inline-block; background: var(--accent); color: var(--accent-ink);
-    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-    padding: 7px 13px; border-radius: 2px;
-  }
+  .cover .meta { font-size: 13px; color: var(--ink-3); }
 
   /* ---- CONTENT ---- */
-  .intro { font-size: 15px; color: var(--ink-soft); max-width: 60ch; line-height: 1.65; margin-bottom: 6mm; }
+  .intro { font-size: 15px; color: var(--ink-2); max-width: 60ch; line-height: 1.65; margin-bottom: 6mm; }
   .intro b { color: var(--ink); font-weight: 600; }
 
   h2.cat {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    font-family: var(--font-display); font-weight: 600; font-size: 13px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
     margin: 9mm 0 4mm; padding-bottom: 3mm; border-bottom: 1px solid var(--line);
     display: flex; align-items: baseline; gap: 10px;
   }
   h2.cat:first-of-type { margin-top: 2mm; }
-  h2.cat .n { color: var(--ink-faint); font-size: 12px; }
+  h2.cat .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent-deep); font-size: 12px; letter-spacing: .1em; }
 
-  .tool { display: grid; grid-template-columns: 46mm 1fr; gap: 8mm; padding: 4mm 0; border-bottom: 1px solid rgba(241,239,232,.05); break-inside: avoid; }
+  .tool { display: grid; grid-template-columns: 46mm 1fr; gap: 8mm; padding: 4mm 0; border-bottom: 1px solid var(--line-2); break-inside: avoid; }
   .tool:last-child { border-bottom: none; }
   .tool .name { display: flex; align-items: flex-start; gap: 11px; }
-  .tool .name .ico { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 7px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 0 1px rgba(241,239,232,.08); }
+  .tool .name .ico { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px; background: #fff; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .tool .name .ico img { width: 20px; height: 20px; object-fit: contain; display: block; }
-  .tool .name .nm { display: flex; flex-direction: column; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -.01em; padding-top: 1px; }
-  .tool .name .tag { font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-top: 4px; }
-  .tool .desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .tool .name .nm { display: flex; flex-direction: column; font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; padding-top: 1px; color: var(--ink); }
+  .tool .name .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 400; margin-top: 4px; }
+  .tool .desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
   .tool .desc b { color: var(--ink); font-weight: 600; }
-  .tool .desc a.try { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .tool .desc a.try { color: var(--accent-deep); font-weight: 600; text-decoration: none; white-space: nowrap; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
 
   /* ---- CLOSER ---- */
   .closer { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
-  .closer .cta.top { margin: 0 0 16mm; }
-  .closer h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 34px; letter-spacing: -.02em; line-height: 1.1; margin: 16px 0 18px; max-width: 18ch; }
-  .closer h2 .ac { color: var(--accent); }
-  .closer p { font-size: 15px; color: var(--ink-soft); max-width: 52ch; line-height: 1.65; margin-bottom: 12px; }
-  .closer .cta { margin-top: 18px; display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 14px; padding: 14px 22px; border-radius: 2px; text-decoration: none; }
-  .closer .signoff { margin-top: 34px; font-size: 13px; color: var(--ink-faint); }
+  .closer h2 { font-family: var(--font-display); font-weight: 600; font-size: 34px; letter-spacing: -.02em; line-height: 1.1; margin: 16px 0 18px; max-width: 18ch; color: var(--ink); }
+  .closer h2 .ac {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat; background-position: 0 88%; background-size: 100% .3em; padding: 0 .02em;
+  }
+  .closer p { font-size: 15px; color: var(--ink-2); max-width: 52ch; line-height: 1.65; margin-bottom: 12px; }
+  .closer p b { color: var(--ink); }
+  .closer .cta {
+    margin-top: 18px; display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: -.01em;
+    background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink);
+    padding: 14px 22px; border-radius: 100px; text-decoration: none; line-height: 1;
+  }
+  .closer .signoff { margin-top: 34px; font-size: 13px; color: var(--ink-3); }
   .closer .signoff b { color: var(--ink); }
 
-  .foot { position: absolute; bottom: 12mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-faint); letter-spacing: .04em; }
+  .foot { position: absolute; bottom: 12mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: .06em; }
 </style>
 </head>
 <body>
@@ -117,13 +146,13 @@
 <!-- ===== COVER ===== -->
 <section class="page cover">
   <div class="cover-top">
-    <span class="wordmark">phloi<span class="dot">.</span></span>
+    <span class="wordmark">Phloi<span class="tick">.</span></span>
     <span class="label">The Phloi Letter</span>
   </div>
 
   <div class="cover-mid">
-    <span class="badge">The Stack · 2026</span>
-    <h1>The exact stack<br />behind our <span style="color:var(--accent)">7 figure</span><br /><span class="it">exterior cleaning<br />company.</span></h1>
+    <span class="eyebrow"><span class="dot"></span>The Stack · 2026</span>
+    <h1>The exact stack<br />behind our <span class="under">7 figure</span><br /><span class="it">exterior cleaning<br />company.</span></h1>
     <p class="lead">Every app we use to <b>win leads, run the jobs and kill the admin</b>. What each one does, and why we actually pay for it.</p>
     <div class="rule"></div>
   </div>
@@ -208,10 +237,10 @@
 <section class="page closer">
   <span class="label accent">Where to start</span>
   <h2>Don't buy all of it. <span class="ac">Buy in this order.</span></h2>
-  <p><b style="color:var(--ink)">1.</b> A real CRM (GoHighLevel) so no lead is ever lost.<br />
-     <b style="color:var(--ink)">2.</b> Job and money tools (ServiceM8, Xero) so the work runs clean.<br />
-     <b style="color:var(--ink)">3.</b> A reviews habit (Google Business Profile) on autopilot.<br />
-     <b style="color:var(--ink)">4.</b> Then, and only then, the automation layer to kill the admin.</p>
+  <p><b>1.</b> A real CRM (GoHighLevel) so no lead is ever lost.<br />
+     <b>2.</b> Job and money tools (ServiceM8, Xero) so the work runs clean.<br />
+     <b>3.</b> A reviews habit (Google Business Profile) on autopilot.<br />
+     <b>4.</b> Then, and only then, the automation layer to kill the admin.</p>
   <p>Get those four right and you'll be running a calmer, more profitable business than plenty of outfits twice your size.</p>
 
   <a class="cta" href="https://phloi.com/#inquiry" target="_blank" rel="noopener">Want this built for your business? Fill out the form →</a>
