@@ -352,6 +352,32 @@
   .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
   @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
   @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
+  /* Inquiry picker: two groups (Marketing / AI), multi-select, tick order = priority */
+  .need-lede{color:var(--ink-2);font-size:16.5px;line-height:1.5;max-width:46ch;margin:14px 0 0}
+  .need-groups{display:grid;gap:clamp(16px,2vw,22px);margin-top:clamp(18px,2.4vw,26px)}
+  .need-group .ng-label{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .inquiry .need-groups .need-grid{margin-top:0;gap:10px}
+  .need-opt .no-tick{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink-3);flex:0 0 auto;position:relative;transition:background .2s ease,border-color .2s ease}
+  .need-opt .no-tick::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid var(--ink);border-width:0 2px 2px 0;transform:rotate(45deg);opacity:0;transition:opacity .15s ease}
+  .need-opt:hover .no-tick{border-color:var(--ink)}
+  .need-opt[aria-pressed="true"] .no-tick{background:var(--accent);border-color:var(--accent)}
+  .need-opt[aria-pressed="true"] .no-tick::after{opacity:1}
+  .nr-then{margin:0;font-family:var(--font-mono);font-size:13px;letter-spacing:.02em;line-height:1.5;color:rgba(245,242,234,.74)}
+  .nr-then[hidden]{display:none}
+  @media(max-width:640px){
+    .inquiry h1{font-size:clamp(1.7rem,7.5vw,2.2rem);margin:12px 0 12px}
+    .need-lede{font-size:15px}
+    .need-groups{gap:16px;margin-top:18px}
+    .inquiry .need-opt{padding:12px 14px;gap:12px;min-height:50px}
+    .inquiry .need-opt:hover{transform:none;box-shadow:none}
+    .inquiry .need-opt .no-t{font-size:15px;line-height:1.25}
+    .inquiry .nr-inner{padding:18px;gap:8px}
+    .inquiry .nr-title{font-size:1.25rem}
+    .inquiry .nr-desc{font-size:15px}
+    form.phloi{padding:18px 16px;border-radius:18px}
+    .field{margin-bottom:14px}
+    .field textarea{min-height:110px}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -490,20 +516,45 @@
           <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
           <h1>Struggling to grow your service business? Let's find <span class="under">a solution</span></h1>
 
-          <div class="need-grid" role="group" aria-label="What's slowing your business down?">
-            <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
-              <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-arw" aria-hidden="true">↗</span>
-            </button>
-            <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
-              <span class="no-k">02</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-arw" aria-hidden="true">↗</span>
-            </button>
+          <p class="need-lede">Tick everything that applies, worst one first. Most businesses have one bleeding badly and a couple more behind it.</p>
+
+          <div class="need-groups" role="group" aria-label="What's slowing your business down? Tick everything that applies.">
+            <div class="need-group">
+              <span class="ng-label">Marketing</span>
+              <div class="need-grid">
+                <button type="button" class="need-opt" data-need="leads" data-side="marketing" aria-pressed="false">
+                  <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="need-opt" data-need="wom" data-side="marketing" aria-pressed="false">
+                  <span class="no-k">02</span><span class="no-t">Word of mouth is the only thing bringing work in</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="need-opt" data-need="ads" data-side="marketing" aria-pressed="false">
+                  <span class="no-k">03</span><span class="no-t">Ads running, but not turning into jobs</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div class="need-group">
+              <span class="ng-label">AI &amp; automation</span>
+              <div class="need-grid">
+                <button type="button" class="need-opt" data-need="cold" data-side="ai" aria-pressed="false">
+                  <span class="no-k">04</span><span class="no-t">Enquiries come in but go cold</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="need-opt" data-need="quotes" data-side="ai" aria-pressed="false">
+                  <span class="no-k">05</span><span class="no-t">Quotes go out and never get chased</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="need-opt" data-need="admin" data-side="ai" aria-pressed="false">
+                  <span class="no-k">06</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-tick" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="needs-result" id="needs-result" hidden aria-live="polite">
             <div class="nr-inner">
-              <span class="nr-label">Sounds like you need</span>
+              <span class="nr-label">Where we'd start</span>
               <h3 class="nr-title" id="nr-title"></h3>
               <p class="nr-desc" id="nr-desc"></p>
+              <p class="nr-then" id="nr-then" hidden></p>
               <a class="nr-more-link" id="nr-more" href="#services">See how it works ↓</a>
             </div>
           </div>
@@ -511,21 +562,16 @@
 
         <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="phloi-inquiry">
+          <!-- Filled by the needs picker: which side to pitch (Marketing / AI / both, in the order they ticked) and the ticked list -->
+          <input type="hidden" name="pitch" id="f-pitch" value="">
+          <input type="hidden" name="needs" id="f-needs" value="">
           <p hidden>
             <label>Don't fill this out if you're human: <input name="bot-field"></label>
           </p>
 
           <div class="field">
-            <label for="f-name">Name <span class="req">*</span></label>
-            <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
-          </div>
-          <div class="field">
             <label for="f-email">Email <span class="req">*</span></label>
             <input id="f-email" type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="f-business">Your business name <span class="req">*</span></label>
-            <input id="f-business" type="text" name="business" required placeholder="e.g. Dript Exterior Cleaning">
           </div>
           <div class="field">
             <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
@@ -770,27 +816,57 @@
 </script>
 
 <script>
-  /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
+  /* Needs picker: multi-select, split Marketing vs AI. Tick order = priority.
+     The first tick decides "where we'd start"; every tick lands in the form as
+     hidden fields (pitch = which side(s) to pitch, needs = the ordered list) and
+     pre-fills the message. */
   (function(){
+    var sideName={marketing:'Marketing',ai:'AI'};
     var map={
-      leads:{t:'Marketing + Sales',d:"First move: ads that bring in real buyers and a follow-up flow that books them, so the pipeline fills itself.",card:0,more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
-      admin:{t:'AI Automation',d:"First move: AI answering every enquiry in seconds and chasing the follow-ups, so the admin stops eating your week.",card:1,more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."}
+      leads:{side:'marketing',label:'Not enough leads/Sales',p:'not enough leads',t:'Marketing + Sales',d:"First move: ads that bring in real buyers and a follow-up flow that books them, so the pipeline fills itself."},
+      wom:{side:'marketing',label:'Word of mouth is the only thing bringing work in',p:'relying on word of mouth for all my work',t:'Marketing + Sales',d:"First move: a lead source you control. Ads and campaigns that put you in front of people who actually buy, so referrals become the bonus, not the plan."},
+      ads:{side:'marketing',label:'Ads running, but not turning into jobs',p:'ads that are not turning into jobs',t:'Marketing + Sales',d:"First move: fix the campaign and the follow-up together, so the right people see the ad and every click gets answered and booked."},
+      cold:{side:'ai',label:'Enquiries come in but go cold',p:'enquiries going cold',t:'AI Automation',d:"First move: AI replying to every enquiry in seconds and following up until it books, so warm leads stop dying in the inbox."},
+      quotes:{side:'ai',label:'Quotes go out and never get chased',p:'quotes never getting chased',t:'AI Automation',d:"First move: every quote chased automatically until it is a yes or a no, so nothing sits unanswered."},
+      admin:{side:'ai',label:'Buried in admin & low leverage tasks',p:'buried in admin',t:'AI Automation',d:"First move: AI answering every enquiry in seconds and chasing the follow-ups, so the admin stops eating your week."}
     };
     var opts=document.querySelectorAll('.need-opt');
     var result=document.getElementById('needs-result');
     if(!opts.length||!result)return;
-    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elMore=document.getElementById('nr-more');
-    function pick(need){
-      var m=map[need];if(!m)return;
-      opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
-      elT.textContent=m.t;elD.textContent=m.d;if(elMore)elMore.setAttribute('href',m.more);
+    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elThen=document.getElementById('nr-then');
+    var msg=document.getElementById('f-message'),fPitch=document.getElementById('f-pitch'),fNeeds=document.getElementById('f-needs');
+    var order=[];
+    function render(){
+      opts.forEach(function(o){o.setAttribute('aria-pressed',order.indexOf(o.dataset.need)>-1?'true':'false');});
+      if(!order.length){
+        result.hidden=true;
+        if(fPitch)fPitch.value='';if(fNeeds)fNeeds.value='';
+        if(msg&&msg.dataset.auto==='1'){msg.value='';}
+        return;
+      }
+      var first=map[order[0]],rest=order.slice(1);
+      elT.textContent=first.t;elD.textContent=first.d;
+      if(elThen){
+        elThen.textContent=rest.length?'Then: '+rest.map(function(k){return map[k].label;}).join(', '):'';
+        elThen.hidden=!rest.length;
+      }
       result.hidden=false;
-      var msg=document.getElementById('f-message');
-      if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m.msg;msg.dataset.auto='1';}
+      var sides=[];
+      order.forEach(function(k){var s=map[k].side;if(sides.indexOf(s)<0)sides.push(s);});
+      if(fPitch)fPitch.value=sides.map(function(s){return sideName[s];}).join(' + ');
+      if(fNeeds)fNeeds.value=order.map(function(k,i){return (i+1)+'. '+sideName[map[k].side]+': '+map[k].label;}).join(' | ');
+      if(msg&&(!msg.value||msg.dataset.auto==='1')){
+        msg.value='Biggest problem right now: '+first.p+'.'+(rest.length?' Also: '+rest.map(function(k){return map[k].p;}).join(', ')+'.':'');
+        msg.dataset.auto='1';
+      }
     }
-    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
-    var cta=document.getElementById('nr-cta');
-    if(cta)cta.addEventListener('click',function(){var n=document.getElementById('f-name');setTimeout(function(){if(n)n.focus();},450);});
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      var k=o.dataset.need;if(!map[k])return;
+      var i=order.indexOf(k);if(i>-1)order.splice(i,1);else order.push(k);
+      render();
+    });});
+    // Once they type in the message themselves, stop overwriting it.
+    if(msg)msg.addEventListener('input',function(e){if(e.isTrusted)msg.dataset.auto='0';});
   })();
 </script>
 
