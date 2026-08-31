@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <script>document.documentElement.className+=" js";</script>
 <meta charset="UTF-8">
@@ -18,6 +18,8 @@
 <meta property="og:image:alt" content="Phloi — Marketing, Sales and AI for service businesses">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://phloi.com/og-image.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <link rel="canonical" href="https://phloi.com/">
 <meta name="theme-color" content="#f5f2ea">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b9ff4a'/%3E%3Ctext x='50' y='73' font-size='66' font-family='Arial,Helvetica,sans-serif' font-weight='700' text-anchor='middle' fill='%230f0f0d'%3EP%3C/text%3E%3C/svg%3E">
@@ -31,7 +33,7 @@
     --card:#fffdf7;
     --ink:#0f0f0d;
     --ink-2:#55514a;
-    --ink-3:#8b887e;
+    --ink-3:#6a675e;
     --line:rgba(15,15,13,.14);
     --line-2:rgba(15,15,13,.07);
     --accent:#b9ff4a;
@@ -150,7 +152,7 @@
   .hero-meta .mi .v{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-.01em}
 
   /* ---------- Marquee ---------- */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);color:var(--paper);overflow:hidden;padding:16px 0}
+  .marquee{border-top:1px solid rgba(245,242,234,.18);border-bottom:1px solid var(--line);background:var(--ink);color:var(--paper);overflow:hidden;padding:16px 0}
   .marquee__track{display:flex;width:max-content;animation:marquee 34s linear infinite;will-change:transform}
   .marquee:hover .marquee__track{animation-play-state:paused}
   .marquee__track span{font-family:var(--font-display);font-weight:500;font-size:clamp(1rem,2vw,1.35rem);letter-spacing:-.01em;padding:0 26px;display:inline-flex;align-items:center;gap:26px;white-space:nowrap}
@@ -158,7 +160,7 @@
   @keyframes marquee{to{transform:translateX(-50%)}}
 
   /* ---------- Section shell ---------- */
-  section[id]{scroll-margin-top:88px}
+  section[id],form.phloi{scroll-margin-top:88px}
   .band{padding:clamp(64px,9vw,130px) 0}
   .rule{height:1px;background:var(--line);border:0;margin:0}
 
@@ -181,7 +183,8 @@
   .card h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;font-size:1.55rem;margin:34px 0 12px}
   .card p{color:var(--ink-2);font-size:15px;margin:0 0 auto}
   .card .tag{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep)}
-  .card .tag .chip{background:var(--paper-2);color:var(--ink-2);padding:5px 10px;border-radius:100px}
+  .card .tag{flex-wrap:wrap;row-gap:6px}
+  .card .tag .chip{background:var(--paper-2);color:var(--ink-2);padding:5px 10px;border-radius:100px;white-space:nowrap}
 
   /* ---------- Approach ---------- */
   .approach-statement{font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.14;font-size:clamp(1.5rem,3.6vw,2.6rem);max-width:20ch;margin:0}
@@ -251,7 +254,8 @@
 
   /* ---------- Final CTA ---------- */
   .final .eyebrow{color:var(--ink-2)}
-  .final h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.04em;line-height:.98;font-size:clamp(2.6rem,8vw,6rem);margin:20px 0 30px;max-width:14ch}
+  @media(min-width:981px){.inquiry h1{font-size:clamp(2.4rem,4.2vw,4rem)}}
+  .final h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.04em;line-height:.98;font-size:clamp(2.2rem,6vw,4.2rem);margin:20px 0 30px;max-width:14ch}
   .final .cta-row{display:flex;flex-wrap:wrap;gap:18px 34px;align-items:center}
   .final .contacts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
   .final .contacts a{display:inline-flex;align-items:center;gap:8px}
@@ -333,6 +337,9 @@
   .nr-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
   .nr-title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.6rem);letter-spacing:-.025em;margin:0;color:var(--paper)}
   .nr-desc{color:rgba(245,242,234,.74);max-width:60ch;margin:0;font-size:clamp(1.02rem,1.5vw,1.18rem)}
+  .founder blockquote a{border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+  .founder blockquote a:hover{color:var(--accent)}
+  .site-footer :focus-visible,.nr-inner :focus-visible,.founder :focus-visible{outline-color:var(--accent)}
   .nr-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
   .nr-inner .btn--ghost{color:var(--paper);border-color:rgba(245,242,234,.34)}
   .nr-inner .btn--ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
@@ -352,32 +359,6 @@
   .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
   @media(prefers-reduced-motion:reduce){.nr-inner{animation:none}}
   @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
-  /* Inquiry picker: two groups (Marketing / AI), multi-select, tick order = priority */
-  .need-lede{color:var(--ink-2);font-size:16.5px;line-height:1.5;max-width:46ch;margin:14px 0 0}
-  .need-groups{display:grid;gap:clamp(16px,2vw,22px);margin-top:clamp(18px,2.4vw,26px)}
-  .need-group .ng-label{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
-  .inquiry .need-groups .need-grid{margin-top:0;gap:10px}
-  .need-opt .no-tick{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink-3);flex:0 0 auto;position:relative;transition:background .2s ease,border-color .2s ease}
-  .need-opt .no-tick::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid var(--ink);border-width:0 2px 2px 0;transform:rotate(45deg);opacity:0;transition:opacity .15s ease}
-  .need-opt:hover .no-tick{border-color:var(--ink)}
-  .need-opt[aria-pressed="true"] .no-tick{background:var(--accent);border-color:var(--accent)}
-  .need-opt[aria-pressed="true"] .no-tick::after{opacity:1}
-  .nr-then{margin:0;font-family:var(--font-mono);font-size:13px;letter-spacing:.02em;line-height:1.5;color:rgba(245,242,234,.74)}
-  .nr-then[hidden]{display:none}
-  @media(max-width:640px){
-    .inquiry h1{font-size:clamp(1.7rem,7.5vw,2.2rem);margin:12px 0 12px}
-    .need-lede{font-size:15px}
-    .need-groups{gap:16px;margin-top:18px}
-    .inquiry .need-opt{padding:12px 14px;gap:12px;min-height:50px}
-    .inquiry .need-opt:hover{transform:none;box-shadow:none}
-    .inquiry .need-opt .no-t{font-size:15px;line-height:1.25}
-    .inquiry .nr-inner{padding:18px;gap:8px}
-    .inquiry .nr-title{font-size:1.25rem}
-    .inquiry .nr-desc{font-size:15px}
-    form.phloi{padding:18px 16px;border-radius:18px}
-    .field{margin-bottom:14px}
-    .field textarea{min-height:110px}
-  }
 </style>
 <script type="application/ld+json">
 {
@@ -461,7 +442,7 @@
           "name": "How fast does this happen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The first call and the bottleneck audit can happen this week. Building usually starts within a week or two after that, and we get the first piece live before we move on to the next one. You'll have something working and earning early, instead of waiting months for everything to land at once."
+            "text": "The first call can happen this week. We work out what's bleeding, and building usually starts within a week or two after that. We get the first piece live before we move on to the next one, so you have something working early instead of waiting months for everything to land at once."
           }
         },
         {
@@ -469,7 +450,7 @@
           "name": "What does it cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends what we build. Clearing one bottleneck costs a lot less than a full marketing, sales and AI setup, and we're not going to throw a number at you before we know which one you need. What we will do is give you a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices."
+            "text": "Straight answer: a custom operations dashboard starts from $6,500 one-off, then $450 a month, and the full breakdown is on the dashboard page. Clearing a single bottleneck, like AI instant replies plus follow-up chasing, costs a lot less than that. Either way you get a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices."
           }
         },
         {
@@ -494,10 +475,10 @@
       <a class="wordmark" href="#top" aria-label="Phloi home">Phloi<span class="tick">.</span></a>
       <div class="nav-menu" id="nav-menu">
         <a class="navlink" href="#services">What we do</a>
-        <a class="navlink" href="#approach">Why Us</a>
+        <a class="navlink" href="#approach">Why us</a>
         <a class="navlink" href="#faq">FAQ</a>
         <a class="navlink" href="/newsletter">Newsletter</a>
-        <a class="btn btn--accent nav-cta" href="#inquiry">Get in touch <span class="arw" aria-hidden="true">→</span></a>
+        <a class="btn btn--accent nav-cta" href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
       </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
@@ -516,72 +497,66 @@
           <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
           <h1>Struggling to grow your service business? Let's find <span class="under">a solution</span></h1>
 
-          <p class="need-lede">Tick everything that applies, worst one first. Most businesses have one bleeding badly and a couple more behind it.</p>
-
-          <div class="need-groups" role="group" aria-label="What's slowing your business down? Tick everything that applies.">
-            <div class="need-group">
-              <span class="ng-label">Marketing</span>
-              <div class="need-grid">
-                <button type="button" class="need-opt" data-need="leads" data-side="marketing" aria-pressed="false">
-                  <span class="no-k">01</span><span class="no-t">Not enough leads/Sales</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="need-opt" data-need="wom" data-side="marketing" aria-pressed="false">
-                  <span class="no-k">02</span><span class="no-t">Word of mouth is the only thing bringing work in</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="need-opt" data-need="ads" data-side="marketing" aria-pressed="false">
-                  <span class="no-k">03</span><span class="no-t">Ads running, but not turning into jobs</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-            <div class="need-group">
-              <span class="ng-label">AI &amp; automation</span>
-              <div class="need-grid">
-                <button type="button" class="need-opt" data-need="cold" data-side="ai" aria-pressed="false">
-                  <span class="no-k">04</span><span class="no-t">Enquiries come in but go cold</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="need-opt" data-need="quotes" data-side="ai" aria-pressed="false">
-                  <span class="no-k">05</span><span class="no-t">Quotes go out and never get chased</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="need-opt" data-need="admin" data-side="ai" aria-pressed="false">
-                  <span class="no-k">06</span><span class="no-t">Buried in admin &amp; low leverage tasks</span><span class="no-tick" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
+          <div class="need-grid" role="group" aria-label="What's slowing your business down?">
+            <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
+              <span class="no-k">01</span><span class="no-t">Not enough leads or sales</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
+            <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
+              <span class="no-k">02</span><span class="no-t">Buried in admin and follow-ups</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
           </div>
 
           <div class="needs-result" id="needs-result" hidden aria-live="polite">
             <div class="nr-inner">
-              <span class="nr-label">Where we'd start</span>
+              <span class="nr-label">Sounds like you need</span>
               <h3 class="nr-title" id="nr-title"></h3>
               <p class="nr-desc" id="nr-desc"></p>
-              <p class="nr-then" id="nr-then" hidden></p>
-              <a class="nr-more-link" id="nr-more" href="#services">See how it works ↓</a>
+              <div class="nr-actions"><a class="btn btn--accent" id="nr-cta" href="#inquiry-form">Tell us more <span class="arw" aria-hidden="true">→</span></a><a class="btn btn--ghost" id="nr-more" href="#services">See what we'd build</a></div>
             </div>
           </div>
         </div>
 
-        <form class="phloi reveal" name="phloi-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form class="phloi reveal" id="inquiry-form" name="phloi-inquiry" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="phloi-inquiry">
-          <!-- Filled by the needs picker: which side to pitch (Marketing / AI / both, in the order they ticked) and the ticked list -->
-          <input type="hidden" name="pitch" id="f-pitch" value="">
-          <input type="hidden" name="needs" id="f-needs" value="">
           <p hidden>
             <label>Don't fill this out if you're human: <input name="bot-field"></label>
           </p>
 
           <div class="field">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
+          </div>
+          <div class="field">
             <label for="f-email">Email <span class="req">*</span></label>
             <input id="f-email" type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email">
           </div>
           <div class="field">
+            <label for="f-business">Your business name <span class="req">*</span></label>
+            <input id="f-business" type="text" name="business" required placeholder="e.g. Dript Exterior Cleaning">
+          </div>
+          <div class="field">
             <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
-            <textarea id="f-message" name="message" required placeholder="Explain more here"></textarea>
+            <textarea id="f-message" name="message" required placeholder="e.g. We get enquiries but half go quiet before we even quote"></textarea>
           </div>
           <button class="btn btn--accent" type="submit">Send it over <span class="arw" aria-hidden="true">→</span></button>
+          <p class="alt" style="border:0;padding-top:14px;margin-top:0">Phoenix reads every one and replies himself. Then a free half hour call, then a fixed price in writing.</p>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- FOUNDER / proof band -->
+  <section class="founder">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="dot"></span>Who's behind this</span>
+      <blockquote class="reveal"><span class="qm" aria-hidden="true">“</span>I run <a href="https://driptexteriorcleaning.com.au" target="_blank" rel="noopener">Dript Exterior Cleaning</a> in Brisbane, a 7-figure service business. Everything Phloi sells runs there first: the Meta ads, the AI that answers and chases quotes, the automated job reports, the dashboard. If it doesn't hold up on my own jobs, I don't sell it.</blockquote>
+      <div class="attr reveal">
+        <span class="badge" aria-hidden="true">P</span>
+        <span><b>Phoenix</b> — Founder, Phloi</span>
+      </div>
+    </div>
+  </section>
+
 
   <!-- AUDIENCE MARQUEE -->
   <div class="marquee" aria-label="Who we work with">
@@ -596,22 +571,30 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div>
-          <span class="eyebrow eyebrow--num"><b>01</b> — How we work</span>
-          <h2>Two Ways to Work With Us</h2>
+          <span class="eyebrow eyebrow--num"><b>01</b> — What we do</span>
+          <h2>What we build, and two ways to get it.</h2>
         </div>
       </div>
 
+      <div class="points" style="margin-top:0;margin-bottom:clamp(30px,4vw,48px)">
+        <div class="point reveal"><span class="p-mark">A</span><h4>Marketing</h4><p>Meta lead ads built for you, run by us or by you: the campaign, the creative and the form people fill in, aimed at buyers in your area, not tyre kickers.</p></div>
+        <div class="point reveal"><span class="p-mark">B</span><h4>Sales</h4><p>Your CRM and pipeline wired into the job software you already use, so every enquiry has a next step and unanswered quotes get chased automatically.</p></div>
+        <div class="point reveal"><span class="p-mark">C</span><h4>AI</h4><p>Instant replies to every enquiry in your words and with your prices, plus job reports and the admin around each job written for you. Anything it is unsure about comes to you with the full conversation.</p></div>
+      </div>
+
       <div class="cards">
-        <a class="card reveal" href="#inquiry">
+        <a class="card reveal" href="#inquiry-form">
           <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
           <h3>Done with you</h3>
-          <p>We build it alongside you and hand over the keys. You see how everything works, you run it day to day, and we stay on call when you need us.</p>
+          <p>We build the ads, the AI and the follow-up alongside you, then hand over the keys. You run it day to day, and we stay on call when you need us.</p>
+          <span class="tag">Best if <span class="chip">run it yourself</span></span>
         </a>
 
-        <a class="card reveal" href="#inquiry">
+        <a class="card reveal" href="#inquiry-form">
           <div class="c-top"><span class="c-num">02</span><span class="c-arw" aria-hidden="true">↗</span></div>
           <h3>Done for you</h3>
-          <p>We build and run the whole thing — the ads, the follow-up, the AI — and you just watch the enquiries turn into booked jobs.</p>
+          <p>We build and run the whole thing: the ads, the follow-up, the AI. You watch enquiries turn into booked jobs.</p>
+          <span class="tag">Best if <span class="chip">never touch it</span></span>
         </a>
       </div>
     </div>
@@ -634,7 +617,7 @@
       <div class="points">
         <div class="point reveal">
           <span class="p-mark">A</span>
-          <h4>Built around you</h4>
+          <h4>Plugged into what you already use</h4>
           <p>We shape the setup around how you already work, not the other way round. Your process stays yours — it just runs smoother.</p>
         </div>
         <div class="point reveal">
@@ -647,18 +630,6 @@
           <h4>Grows with you</h4>
           <p>What we build holds up when you get busier. More leads and more jobs shouldn't mean more chaos.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOUNDER -->
-  <section class="founder">
-    <div class="wrap">
-      <span class="eyebrow reveal"><span class="dot"></span>About Us</span>
-      <blockquote class="reveal"><span class="qm" aria-hidden="true">“</span>We run our own service business, Dript Exterior Cleaning, and grew it with the exact systems we build for you. So you're not getting theory from a course — you're getting what already works in the real world.</blockquote>
-      <div class="attr reveal">
-        <span class="badge" aria-hidden="true">P</span>
-        <span><b>Phoenix</b> — Founder, Phloi</span>
       </div>
     </div>
   </section>
@@ -698,11 +669,11 @@
         </details>
         <details class="faq reveal">
           <summary>How fast does this happen? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">The first call and the bottleneck audit can happen this week. Building usually starts within a week or two after that, and we get the first piece live before we move on to the next one. You'll have something working and earning early, instead of waiting months for everything to land at once.</div>
+          <div class="answer">The first call can happen this week. We work out what's bleeding, and building usually starts within a week or two after that. We get the first piece live before we move on to the next one, so you have something working early instead of waiting months for everything to land at once.</div>
         </details>
         <details class="faq reveal">
           <summary>What does it cost? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">It depends what we build. Clearing one bottleneck costs a lot less than a full marketing, sales and AI setup, and we're not going to throw a number at you before we know which one you need. What we will do is give you a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices.</div>
+          <div class="answer">Straight answer: a custom operations dashboard starts from $6,500 one-off, then $450 a month, and the full breakdown is on <a href="/dashboard">the dashboard page</a>. Clearing a single bottleneck, like AI instant replies plus follow-up chasing, costs a lot less than that. Either way you get a fixed price in writing after the first call, so you know exactly what you're spending before anything starts. No retainer creep, no surprise invoices.</div>
         </details>
         <details class="faq reveal">
           <summary>What happens on the first call? <span class="plus" aria-hidden="true"></span></summary>
@@ -716,10 +687,10 @@
   <section class="band final">
     <div class="wrap">
       <span class="eyebrow eyebrow--num reveal"><b>04</b> — Last thing</span>
-      <h2 class="reveal">Ready to grow your business?</h2>
+      <h2 class="reveal">Tell us what's stuck.</h2>
       <div class="cta-row reveal">
-        <a class="btn btn--accent" href="#inquiry">Get in touch <span class="arw" aria-hidden="true">→</span></a>
-        <span class="eyebrow">It starts with one honest chat.</span>
+        <a class="btn btn--accent" href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
+        <span class="eyebrow">Half an hour, no pitch deck. Free.</span>
       </div>
       <div class="contacts reveal">
         <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span> @phoenixx_builds</a>
@@ -734,7 +705,7 @@
   <div class="wrap">
     <p class="foot-mark reveal">Phloi<span class="tick">.</span></p>
     <div class="foot-links">
-      <a href="#inquiry">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/dashboard">Operations Dashboard <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/newsletter">The Phloi Letter <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
@@ -816,57 +787,28 @@
 </script>
 
 <script>
-  /* Needs picker: multi-select, split Marketing vs AI. Tick order = priority.
-     The first tick decides "where we'd start"; every tick lands in the form as
-     hidden fields (pitch = which side(s) to pitch, needs = the ordered list) and
-     pre-fills the message. */
+  /* Needs picker: match the customer's bottleneck to the right service + pre-fill the form */
   (function(){
-    var sideName={marketing:'Marketing',ai:'AI'};
     var map={
-      leads:{side:'marketing',label:'Not enough leads/Sales',p:'not enough leads',t:'Marketing + Sales',d:"First move: ads that bring in real buyers and a follow-up flow that books them, so the pipeline fills itself."},
-      wom:{side:'marketing',label:'Word of mouth is the only thing bringing work in',p:'relying on word of mouth for all my work',t:'Marketing + Sales',d:"First move: a lead source you control. Ads and campaigns that put you in front of people who actually buy, so referrals become the bonus, not the plan."},
-      ads:{side:'marketing',label:'Ads running, but not turning into jobs',p:'ads that are not turning into jobs',t:'Marketing + Sales',d:"First move: fix the campaign and the follow-up together, so the right people see the ad and every click gets answered and booked."},
-      cold:{side:'ai',label:'Enquiries come in but go cold',p:'enquiries going cold',t:'AI Automation',d:"First move: AI replying to every enquiry in seconds and following up until it books, so warm leads stop dying in the inbox."},
-      quotes:{side:'ai',label:'Quotes go out and never get chased',p:'quotes never getting chased',t:'AI Automation',d:"First move: every quote chased automatically until it is a yes or a no, so nothing sits unanswered."},
-      admin:{side:'ai',label:'Buried in admin & low leverage tasks',p:'buried in admin',t:'AI Automation',d:"First move: AI answering every enquiry in seconds and chasing the follow-ups, so the admin stops eating your week."}
+      leads:{t:'Ads plus follow-up that books the job',d:"First move: ads that bring in real buyers and a follow-up flow that books them, so the pipeline fills itself.",more:'#services',msg:"Not winning enough work, I need more of the right leads and to close more of them."},
+      admin:{t:'AI that answers and chases for you',d:"First move: AI answering every enquiry in seconds and chasing the follow-ups, so the admin stops eating your week.",more:'#services',msg:"Buried in admin and follow-ups, leads are slipping through the cracks."}
     };
     var opts=document.querySelectorAll('.need-opt');
     var result=document.getElementById('needs-result');
     if(!opts.length||!result)return;
-    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elThen=document.getElementById('nr-then');
-    var msg=document.getElementById('f-message'),fPitch=document.getElementById('f-pitch'),fNeeds=document.getElementById('f-needs');
-    var order=[];
-    function render(){
-      opts.forEach(function(o){o.setAttribute('aria-pressed',order.indexOf(o.dataset.need)>-1?'true':'false');});
-      if(!order.length){
-        result.hidden=true;
-        if(fPitch)fPitch.value='';if(fNeeds)fNeeds.value='';
-        if(msg&&msg.dataset.auto==='1'){msg.value='';}
-        return;
-      }
-      var first=map[order[0]],rest=order.slice(1);
-      elT.textContent=first.t;elD.textContent=first.d;
-      if(elThen){
-        elThen.textContent=rest.length?'Then: '+rest.map(function(k){return map[k].label;}).join(', '):'';
-        elThen.hidden=!rest.length;
-      }
+    var elT=document.getElementById('nr-title'),elD=document.getElementById('nr-desc'),elMore=document.getElementById('nr-more');
+    function pick(need){
+      var m=map[need];if(!m)return;
+      opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
+      elT.textContent=m.t;elD.textContent=m.d;if(elMore)elMore.setAttribute('href',m.more);
       result.hidden=false;
-      var sides=[];
-      order.forEach(function(k){var s=map[k].side;if(sides.indexOf(s)<0)sides.push(s);});
-      if(fPitch)fPitch.value=sides.map(function(s){return sideName[s];}).join(' + ');
-      if(fNeeds)fNeeds.value=order.map(function(k,i){return (i+1)+'. '+sideName[map[k].side]+': '+map[k].label;}).join(' | ');
-      if(msg&&(!msg.value||msg.dataset.auto==='1')){
-        msg.value='Biggest problem right now: '+first.p+'.'+(rest.length?' Also: '+rest.map(function(k){return map[k].p;}).join(', ')+'.':'');
-        msg.dataset.auto='1';
-      }
+      result.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var msg=document.getElementById('f-message');
+      if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m.msg;msg.dataset.auto='1';}
     }
-    opts.forEach(function(o){o.addEventListener('click',function(){
-      var k=o.dataset.need;if(!map[k])return;
-      var i=order.indexOf(k);if(i>-1)order.splice(i,1);else order.push(k);
-      render();
-    });});
-    // Once they type in the message themselves, stop overwriting it.
-    if(msg)msg.addEventListener('input',function(e){if(e.isTrusted)msg.dataset.auto='0';});
+    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
+    var cta=document.getElementById('nr-cta');
+    if(cta)cta.addEventListener('click',function(){var n=document.getElementById('f-name');setTimeout(function(){if(n)n.focus();},450);});
   })();
 </script>
 

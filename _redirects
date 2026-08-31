@@ -4,3 +4,6 @@
 # Hide internal/source files from public view (forced, overrides the static files)
 /guide-src.html        /   301!
 /netlify/*             /   301!
+
+# Thank-you page after a form submission
+/thanks                /thanks.html            200
