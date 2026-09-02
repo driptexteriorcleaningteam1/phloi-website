@@ -196,14 +196,6 @@
   .point p{color:var(--ink-2);font-size:15px;margin:0}
 
   /* ---------- Founder ---------- */
-  .founder{background:var(--ink);color:var(--paper)}
-  .founder .wrap{padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(64px,8vw,110px)}
-  .founder .eyebrow{color:#b6b2a7}
-  .founder blockquote{margin:26px 0 0;font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.16;font-size:clamp(1.5rem,3.6vw,2.55rem);max-width:22ch;position:relative}
-  .founder blockquote .qm{color:var(--accent);font-family:var(--font-display);font-size:1.1em;line-height:0;position:relative;top:.12em;margin-right:.06em}
-  .founder .attr{margin-top:30px;display:flex;align-items:center;gap:14px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:#c8c4b9}
-  .founder .attr .badge{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:18px}
-  .founder .attr b{color:var(--paper);font-weight:600}
 
   /* ---------- Process ---------- */
   .steps{border-top:1px solid var(--line)}
@@ -330,9 +322,7 @@
   .need-opt[aria-pressed="true"] .no-k{color:var(--accent)}
   .need-opt[aria-pressed="true"] .no-arw{color:var(--accent);transform:translate(3px,-3px)}
   .need-opt[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
-  .founder blockquote a{border-bottom:1.5px solid var(--accent);padding-bottom:1px}
-  .founder blockquote a:hover{color:var(--accent)}
-  .site-footer :focus-visible,.founder :focus-visible{outline-color:var(--accent)}
+  .site-footer :focus-visible{outline-color:var(--accent)}
   /* Needs picker inside the inquiry column: stack the options. */
   .inquiry .need-grid{grid-template-columns:1fr;max-width:none;margin-top:clamp(18px,2.4vw,26px)}
   .inquiry .need-opt{padding:16px 18px}
@@ -518,19 +508,6 @@
       </div>
     </div>
   </section>
-
-  <!-- FOUNDER / proof band -->
-  <section class="founder">
-    <div class="wrap">
-      <span class="eyebrow reveal"><span class="dot"></span>Who's behind this</span>
-      <blockquote class="reveal"><span class="qm" aria-hidden="true">“</span>I run <a href="https://driptexteriorcleaning.com.au" target="_blank" rel="noopener">Dript Exterior Cleaning</a> in Brisbane, a 7-figure service business. Everything Phloi sells runs there first: the Meta ads, the AI that answers and chases quotes, the automated job reports, the dashboard. If it doesn't hold up on my own jobs, I don't sell it.</blockquote>
-      <div class="attr reveal">
-        <span class="badge" aria-hidden="true">P</span>
-        <span><b>Phoenix</b> — Founder, Phloi</span>
-      </div>
-    </div>
-  </section>
-
 
   <!-- AUDIENCE MARQUEE -->
   <div class="marquee" aria-label="Who we work with">
@@ -778,6 +755,5 @@
     opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
   })();
 </script>
-
 </body>
 </html>
