@@ -319,14 +319,29 @@
   .pick-lede .eyebrow{margin-bottom:clamp(12px,1.8vw,20px)}
   .pick-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.045em;line-height:.96;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px);text-wrap:balance}
   .pick-sub{max-width:52ch;font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--ink-2);margin:0 0 clamp(22px,3vw,36px);line-height:1.5}
+  .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,16px);max-width:920px}
+  .need-opt{display:flex;align-items:center;gap:16px;text-align:left;padding:clamp(20px,2.5vw,30px) clamp(20px,2.3vw,28px);border-radius:var(--radius);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1.15;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+  .need-opt .no-k{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--ink-3);flex:0 0 auto}
+  .need-opt .no-t{font-family:var(--font-display);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.4rem);letter-spacing:-.02em;flex:1 1 auto}
+  .need-opt .no-arw{font-family:var(--font-mono);font-size:20px;color:var(--ink-3);flex:0 0 auto;transition:transform .25s ease,color .2s ease}
+  .need-opt:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:0 22px 44px -28px rgba(15,15,13,.55)}
+  .need-opt:hover .no-arw{transform:translate(3px,-3px);color:var(--ink)}
+  .need-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .need-opt[aria-pressed="true"] .no-k{color:var(--accent)}
+  .need-opt[aria-pressed="true"] .no-arw{color:var(--accent);transform:translate(3px,-3px)}
+  .need-opt[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
   .founder blockquote a{border-bottom:1.5px solid var(--accent);padding-bottom:1px}
   .founder blockquote a:hover{color:var(--accent)}
   .site-footer :focus-visible,.founder :focus-visible{outline-color:var(--accent)}
+  /* Needs picker inside the inquiry column: stack the options. */
+  .inquiry .need-grid{grid-template-columns:1fr;max-width:none;margin-top:clamp(18px,2.4vw,26px)}
+  .inquiry .need-opt{padding:16px 18px}
+  .inquiry .need-opt .no-t{font-size:clamp(1rem,1.5vw,1.15rem)}
   .pick-skip{margin-top:clamp(26px,4vw,44px);font-family:var(--font-mono);font-size:14px;letter-spacing:.02em;color:var(--ink-3)}
   .pick-skip a{color:var(--ink);border-bottom:1.5px solid var(--accent);padding-bottom:1px}
   .pick-skip a:hover{color:var(--accent-deep)}
   .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
-  @media(max-width:640px){.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
+  @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
 </style>
 <script type="application/ld+json">
 {
@@ -464,6 +479,15 @@
         <div class="reveal">
           <span class="eyebrow eyebrow--num"><b>→</b> Let's talk</span>
           <h1>Struggling to grow your service business? Let's find <span class="under">a solution</span></h1>
+
+          <div class="need-grid" role="group" aria-label="What's slowing your business down?">
+            <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
+              <span class="no-k">01</span><span class="no-t">Not enough leads or sales</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
+            <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
+              <span class="no-k">02</span><span class="no-t">Buried in admin and follow-ups</span><span class="no-arw" aria-hidden="true">↗</span>
+            </button>
+          </div>
         </div>
 
         <form class="phloi reveal" id="inquiry-form" name="phloi-inquiry" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
@@ -733,6 +757,25 @@
       items.forEach(function(el){ io.observe(el); });
       revealReady = true;
     }
+  })();
+</script>
+
+<script>
+  /* Needs picker: highlight the customer's bottleneck and pre-fill the form */
+  (function(){
+    var map={
+      leads:"Not winning enough work, I need more of the right leads and to close more of them.",
+      admin:"Buried in admin and follow-ups, leads are slipping through the cracks."
+    };
+    var opts=document.querySelectorAll('.need-opt');
+    if(!opts.length)return;
+    function pick(need){
+      var m=map[need];if(!m)return;
+      opts.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.need===need?'true':'false');});
+      var msg=document.getElementById('f-message');
+      if(msg&&(!msg.value||msg.dataset.auto==='1')){msg.value=m;msg.dataset.auto='1';}
+    }
+    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
   })();
 </script>
 
