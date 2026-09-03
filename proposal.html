@@ -40,6 +40,7 @@
     color-scheme:dark;
   }
   *{box-sizing:border-box}
+  button,.btn,.bn,.pill,.opt,.tab,.fill{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:24px;-webkit-font-smoothing:antialiased}
   a{color:inherit}
   h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
@@ -180,17 +181,24 @@
 
   @media (max-width:720px){.cols{grid-template-columns:1fr;gap:28px}}
   @media (max-width:640px){
-    .bar-in{padding:8px 16px}
-    .doc{padding:0 16px 64px}
-    .step-card{padding:24px 0 32px}
-    .step-card:first-child{padding-top:20px}
-    .step-k h2{font-size:22px;line-height:28px}
-    .step-sub{margin-bottom:20px}
-    .bn-groups{grid-template-columns:1fr;gap:20px}
-    .ab-row{grid-template-columns:1fr}
-    .about input,.about textarea{font-size:16px}
+    .bar{position:static}
+    .bar-in{padding:8px 14px;gap:8px}
+    .bar-fields{gap:6px}
+    .bar-fields .btn{height:32px;font-size:12.5px;padding:0 10px}
+    .doc{padding:0 14px 56px}
+    .step-card{padding:22px 0 28px}
+    .step-card:first-child{padding-top:16px}
+    .step-k h2{font-size:20px;line-height:26px}
+    .step-sub{font-size:14px;line-height:22px;margin-bottom:18px}
+    .bn-groups{grid-template-columns:1fr;gap:18px}
+    .bn{min-height:48px}
+    .about{gap:18px}
+    .ab-row{grid-template-columns:1fr;gap:14px}
+    .about input{height:44px;font-size:16px}
+    .about textarea{font-size:16px;min-height:88px}
+    .pill{height:44px;font-size:14px}
     .pills[data-group="solution"]{grid-template-columns:1fr}
-    .pills[data-group="solution"] .pill{border-left:0;border-top:1px solid var(--line);text-align:left;padding:0 12px;white-space:normal;height:auto;min-height:calc(var(--ctl) - 2px);padding-top:8px;padding-bottom:8px}
+    .pills[data-group="solution"] .pill{border-left:0;border-top:1px solid var(--line);text-align:left;padding:10px 12px;white-space:normal;height:auto;min-height:44px}
     .pills[data-group="solution"] .pill:first-child{border-top:0}
     .pills[data-group="rev"],.pills[data-group="target"]{grid-template-columns:1fr 1fr}
     .pills[data-group="rev"] .pill,.pills[data-group="target"] .pill{border-left:0;border-top:1px solid var(--line);padding:0 8px}
@@ -198,16 +206,22 @@
     .pills[data-group="rev"] .pill:nth-child(2n),.pills[data-group="target"] .pill:nth-child(2n){border-left:1px solid var(--line)}
     .pills[data-group="rev"] .pill:last-child{grid-column:1 / -1;border-left:0}
     .pills[data-group="target"] .pill:last-child{grid-column:1 / -1;border-left:0}
-    .ab-send .btn{flex:1 1 auto}
+    .ab-send{gap:8px}
+    .ab-send .btn{flex:1 1 100%;height:48px;font-size:15px}
     .ab-note{text-align:left;flex-basis:100%;max-width:none}
-    .fix{grid-template-columns:1fr;gap:2px 0}
-    .rec{padding:16px 18px}
-    .rec .btn{width:100%}
-    .tab{margin-right:16px}
-    .p-title{font-size:28px;line-height:32px}
+    .ab-out{min-height:160px}
+    .fix{grid-template-columns:1fr;gap:2px 0;padding:12px 0}
+    .rec{padding:16px;gap:10px}
+    .rec .btn{width:100%;height:44px}
+    .tab{margin-right:16px;padding:12px 0}
+    .p-title{font-size:26px;line-height:32px}
+    .p-tag{font-size:16px;line-height:22px}
     .p-meta{flex-direction:column;gap:4px}
+    .fill{white-space:normal;overflow-wrap:anywhere}
     .opts{grid-template-columns:1fr}
-    .sign{grid-template-columns:1fr 1fr}
+    .opt{padding:16px}
+    .price-n{font-size:20px;line-height:24px}
+    .sign{grid-template-columns:1fr 1fr;gap:18px}
   }
 
   @media print{
@@ -305,7 +319,7 @@
       <div class="ab-send">
         <button class="btn" id="ab-send" type="submit">Send to Phoenix</button>
         <button class="btn btn--ghost" type="button" id="ab-copy">Copy answers</button>
-        <span class="ab-note" id="ab-note">Sends straight to Phoenix. Or copy the answers and text them to him instead.</span>
+        <span class="ab-note" id="ab-note"></span>
       </div>
       <textarea id="ab-out" class="ab-out" readonly hidden aria-label="Your answers"></textarea>
     </form>
