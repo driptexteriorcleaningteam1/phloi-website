@@ -25,20 +25,9 @@
     --r:4px; --ctl:40px;
     color-scheme:light;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#141412; --card:#1c1c19; --ink:#f1efe8; --ink-2:#b3afa5; --ink-3:#8a877d;
-      --line:rgba(241,239,232,.24); --line-2:rgba(241,239,232,.11);
-      --accent-deep:#c9ff72; --fill-bg:rgba(185,255,74,.22); --chosen-bg:rgba(185,255,74,.12);
-      color-scheme:dark;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#141412; --card:#1c1c19; --ink:#f1efe8; --ink-2:#b3afa5; --ink-3:#8a877d;
-    --line:rgba(241,239,232,.24); --line-2:rgba(241,239,232,.11);
-    --accent-deep:#c9ff72; --fill-bg:rgba(185,255,74,.22); --chosen-bg:rgba(185,255,74,.12);
-    color-scheme:dark;
-  }
+  /* One look everywhere, deliberately: the cream palette on every device and
+     theme setting, matching how the proposal is presented on desktop. */
+  :root[data-theme="dark"]{color-scheme:light}
   *{box-sizing:border-box}
   button,.btn,.bn,.pill,.opt,.tab,.fill{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:24px;-webkit-font-smoothing:antialiased}
