@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal · Phloi</title>
+<meta name="description" content="Tell us what is holding the business back and see the proposal that fits.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#f5f2ea">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+</head>
+<body>
+<style>
+  :root{
+    --paper:#f5f2ea; --card:#fffdf7; --ink:#0f0f0d; --ink-2:#55514a; --ink-3:#7d7a70;
+    --line:rgba(15,15,13,.22); --line-2:rgba(15,15,13,.1);
+    --accent:#b9ff4a; --accent-deep:#4f6f0a; --fill-bg:rgba(185,255,74,.45); --chosen-bg:rgba(185,255,74,.16);
+    --display:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    --r:4px; --ctl:40px;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#141412; --card:#1c1c19; --ink:#f1efe8; --ink-2:#b3afa5; --ink-3:#8a877d;
+      --line:rgba(241,239,232,.24); --line-2:rgba(241,239,232,.11);
+      --accent-deep:#c9ff72; --fill-bg:rgba(185,255,74,.22); --chosen-bg:rgba(185,255,74,.12);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#141412; --card:#1c1c19; --ink:#f1efe8; --ink-2:#b3afa5; --ink-3:#8a877d;
+    --line:rgba(241,239,232,.24); --line-2:rgba(241,239,232,.11);
+    --accent-deep:#c9ff72; --fill-bg:rgba(185,255,74,.22); --chosen-bg:rgba(185,255,74,.12);
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:24px;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  p,ul,ol{margin:0}
+  [hidden]{display:none!important}
+
+  /* one label style for metadata only */
+  .eyebrow,.p-sec h3,.sign-l,.when,.tab,.opt-pick,.rec .rec-l,.print-picks h3{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-2)}
+
+  /* toolbar */
+  .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:840px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.04em}
+  .wordmark b{color:var(--accent-deep)}
+  .bar-fields{display:flex;gap:6px;margin-left:auto;align-items:center}
+  .btn{font-family:var(--display);font-weight:600;font-size:13.5px;line-height:20px;height:36px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;white-space:nowrap}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#0f0f0d}
+  .btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn--ghost:hover{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn:focus-visible,.fill:focus-visible,.opt:focus-visible,.bn:focus-visible,.tab:focus-visible,.pill:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+
+  /* document frame: ruled sections on one left edge */
+  .doc{max-width:840px;margin:0 auto;padding:0 24px 96px;display:block}
+  .step-card{border-top:1px solid var(--line);padding:32px 0 40px}
+  .step-card:first-child{border-top:0;padding-top:28px}
+  .step-k{margin-bottom:4px}
+  .step-k h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.015em}
+  .step-sub{color:var(--ink-2);max-width:none;margin-bottom:24px}
+
+  /* 1 bottlenecks: two ruled checklists side by side */
+  .bn-groups{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+  .bn-group{min-width:0}
+  .bn-label{display:block;font-family:var(--body);font-weight:700;font-size:15px;line-height:24px;color:var(--ink);padding-bottom:8px;margin-bottom:2px;border-bottom:1px solid var(--ink)}
+  .bns{display:block}
+  .bn{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:10px 0;text-align:left;font:inherit;font-size:15px;line-height:20px;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line-2);border-radius:0;cursor:pointer;position:relative}
+  .bn:hover::before{border-color:var(--ink)}
+  .bn::before{content:"";flex:0 0 16px;width:16px;height:16px;border-radius:2px;border:1px solid var(--ink-3);background:var(--card)}
+  .bn[aria-pressed="true"]{font-weight:500}
+  .bn[aria-pressed="true"]::before{background:var(--ink);border-color:var(--ink)}
+  .bn[aria-pressed="true"]::after{content:"";position:absolute;left:5.5px;top:calc(50% - 6px);width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+  /* 2 about the business */
+  .about{display:flex;flex-direction:column;gap:20px}
+  .ab-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ab-f{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .ab-l{font-family:var(--body);font-weight:600;font-size:15px;line-height:24px;color:var(--ink)}
+  .about input,.about textarea{font:inherit;font-size:15px;line-height:22px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;width:100%;height:var(--ctl)}
+  .about textarea{height:auto;min-height:76px;resize:none}
+  .about input::placeholder,.about textarea::placeholder{color:var(--ink-3)}
+  .about input:focus,.about textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 2px var(--fill-bg)}
+  .pills{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .pills[data-group="solution"]{grid-template-columns:1fr 1fr}
+  .pills[data-group="rev"]{grid-template-columns:repeat(5,1fr)}
+  .pills[data-group="target"]{grid-template-columns:repeat(4,1fr) 1.6fr}
+  .pill{font:inherit;font-size:13.5px;line-height:20px;height:calc(var(--ctl) - 2px);padding:0 10px;color:var(--ink);background:transparent;border:0;border-left:1px solid var(--line);border-radius:0;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+  .pill:first-child{border-left:0}
+  .pill:hover{background:var(--chosen-bg)}
+  .pill[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .ab-send{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-top:1px solid var(--line-2);padding-top:16px;margin-top:4px}
+  .ab-note{flex:1 1 240px;margin-left:auto;text-align:right;font-size:13px;line-height:20px;color:var(--ink-3);max-width:46ch}
+  .ab-out{font-family:var(--mono);font-size:13px;line-height:20px;min-height:200px}
+  .print-picks #print-about{margin-top:10px}
+
+  /* 3 fixes */
+  .fixes{display:flex;flex-direction:column}
+  .fix{display:grid;grid-template-columns:minmax(180px,.8fr) 1.6fr;gap:4px 32px;padding:14px 0;border-top:1px solid var(--line-2)}
+  .fix:first-child{border-top:0;padding-top:0}
+  .fix .what{font-family:var(--display);font-weight:600;font-size:16px;line-height:24px}
+  .fix .how{color:var(--ink-2)}
+  .fix .what .worst,.match{display:inline;background:none;padding:0;border-radius:0;margin-left:8px;font-family:var(--mono);font-weight:700;font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);vertical-align:baseline;white-space:nowrap}
+  .fix .what .worst::before,.match::before{content:"\00B7  ";color:var(--ink-3)}
+  .rec{margin-top:28px;border:1px solid var(--ink);border-left:6px solid var(--accent);border-radius:0;padding:18px 22px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+  .rec .rec-l{color:var(--ink-3)}
+  .rec .rec-t{font-family:var(--display);font-weight:600;font-size:22px;line-height:28px;margin-top:2px}
+  .rec .rec-s{color:var(--ink-2);font-size:13.5px;line-height:20px;margin-top:4px;max-width:56ch}
+
+  /* 4 proposal */
+  .tabs{display:flex;gap:0;flex-wrap:wrap;margin-bottom:28px;border-bottom:1px solid var(--line)}
+  .tab{color:var(--ink-3);background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;padding:10px 0;margin:0 24px -1px 0;cursor:pointer}
+  .tab:hover{color:var(--ink)}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+  .tab .also{margin-left:6px;font-size:10px;color:var(--accent-deep)}
+  .proposal{display:none}
+  .proposal[data-active]{display:block}
+  .p-head{border-bottom:1px solid var(--ink);padding-bottom:22px;margin-bottom:28px}
+  .p-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .p-title{font-size:34px;line-height:40px;font-weight:600;letter-spacing:-.025em;margin-bottom:8px}
+  .p-tag{font-family:var(--display);font-weight:500;font-size:18px;line-height:24px;color:var(--ink);max-width:56ch;margin-bottom:12px}
+  .p-intro{max-width:62ch;color:var(--ink-2)}
+  .cols{display:grid;grid-template-columns:1.05fr .95fr;gap:40px}
+  .p-sec h3{color:var(--ink);font-weight:700;margin-bottom:12px}
+  .get{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+  .get li{padding-left:14px;position:relative;color:var(--ink-2)}
+  .get li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent-deep)}
+  .get b,.steps b{color:var(--ink);font-weight:600}
+  .match{display:none}
+  .get li.is-match .match{display:inline}
+  .steps{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+  .steps li{color:var(--ink-2);padding-left:26px;position:relative;counter-increment:s}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;font-family:var(--mono);font-size:11px;line-height:24px;color:var(--ink-3)}
+  .when{display:block;color:var(--accent-deep);margin-bottom:0}
+  .from-h{margin-top:24px}
+  .from{color:var(--ink-2)}
+  .choose{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .opt{text-align:left;font:inherit;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:var(--r);padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:12px;position:relative}
+  .opt:hover{border-color:var(--ink)}
+  .opt[aria-pressed="true"]{border-color:var(--ink);background:var(--chosen-bg)}
+  .opt-tick{width:18px;height:18px;border-radius:2px;border:1px solid var(--ink-3);position:absolute;top:20px;right:20px;background:var(--card)}
+  .opt[aria-pressed="true"] .opt-tick{background:var(--ink);border-color:var(--ink)}
+  .opt[aria-pressed="true"] .opt-tick::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:9px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .opt-head{display:flex;flex-direction:column;gap:2px;padding-right:30px}
+  .opt-name{font-family:var(--display);font-weight:600;font-size:16px;line-height:24px}
+  .opt-pick{color:var(--ink-3)}
+  .opt[aria-pressed="true"] .opt-pick{color:var(--accent-deep)}
+  .opt ul{padding-left:16px;display:flex;flex-direction:column;gap:4px;color:var(--ink-2);font-size:14px;line-height:20px}
+  .opt-price{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line-2);font-family:var(--body);font-weight:400;font-size:13px;line-height:20px}
+  .price-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .price-n{font-family:var(--display);font-weight:600;font-size:22px;line-height:28px;letter-spacing:-.02em;color:var(--ink)}
+  .price-l{color:var(--ink-2)}
+  .note{color:var(--ink-2);font-size:13.5px;line-height:20px;margin-top:16px;max-width:70ch}
+  .p-foot{margin-top:32px;padding-top:20px;border-top:1px solid var(--ink)}
+  .go{max-width:70ch;margin-bottom:20px}
+  .sign{display:grid;grid-template-columns:1.2fr 1fr .8fr 1.4fr;gap:24px}
+  .sign > div{display:flex;flex-direction:column;gap:20px}
+  .sign-line{display:block;height:22px;border-bottom:1px solid var(--ink);font-family:var(--display);font-weight:600}
+  .sign-line.chosen:not(:empty){height:auto;min-height:22px;padding-bottom:4px}
+  .sign-by{gap:8px;font-size:13px;line-height:20px}
+
+  .fill{background:var(--fill-bg);border-radius:2px;padding:0 4px;cursor:text;white-space:nowrap}
+  .fill.set{background:transparent;padding:0}
+  .fill:empty::before{content:attr(data-hint);color:var(--ink-3)}
+
+  .print-picks{display:none}
+
+  @media (prefers-reduced-motion:no-preference){.step-card{animation:in .2s ease}}
+  @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  @media (max-width:720px){.cols{grid-template-columns:1fr;gap:28px}}
+  @media (max-width:640px){
+    .bar-in{padding:8px 16px}
+    .doc{padding:0 16px 64px}
+    .step-card{padding:24px 0 32px}
+    .step-card:first-child{padding-top:20px}
+    .step-k h2{font-size:22px;line-height:28px}
+    .step-sub{margin-bottom:20px}
+    .bn-groups{grid-template-columns:1fr;gap:20px}
+    .ab-row{grid-template-columns:1fr}
+    .about input,.about textarea{font-size:16px}
+    .pills[data-group="solution"]{grid-template-columns:1fr}
+    .pills[data-group="solution"] .pill{border-left:0;border-top:1px solid var(--line);text-align:left;padding:0 12px;white-space:normal;height:auto;min-height:calc(var(--ctl) - 2px);padding-top:8px;padding-bottom:8px}
+    .pills[data-group="solution"] .pill:first-child{border-top:0}
+    .pills[data-group="rev"],.pills[data-group="target"]{grid-template-columns:1fr 1fr}
+    .pills[data-group="rev"] .pill,.pills[data-group="target"] .pill{border-left:0;border-top:1px solid var(--line);padding:0 8px}
+    .pills[data-group="rev"] .pill:nth-child(-n+2),.pills[data-group="target"] .pill:nth-child(-n+2){border-top:0}
+    .pills[data-group="rev"] .pill:nth-child(2n),.pills[data-group="target"] .pill:nth-child(2n){border-left:1px solid var(--line)}
+    .pills[data-group="rev"] .pill:last-child{grid-column:1 / -1;border-left:0}
+    .pills[data-group="target"] .pill:last-child{grid-column:1 / -1;border-left:0}
+    .ab-send .btn{flex:1 1 auto}
+    .ab-note{text-align:left;flex-basis:100%;max-width:none}
+    .fix{grid-template-columns:1fr;gap:2px 0}
+    .rec{padding:16px 18px}
+    .rec .btn{width:100%}
+    .tab{margin-right:16px}
+    .p-title{font-size:28px;line-height:32px}
+    .p-meta{flex-direction:column;gap:4px}
+    .opts{grid-template-columns:1fr}
+    .sign{grid-template-columns:1fr 1fr}
+  }
+
+  @media print{
+    @page{margin:16mm 18mm}
+    :root{--paper:#fff;--card:#fff;--ink:#0f0f0d;--ink-2:#3d3b36;--ink-3:#6f6c64;--line:#bbb;--line-2:#ddd;--accent-deep:#3f5a08;--fill-bg:transparent;--chosen-bg:#f1f8e0}
+    body{font-size:12px;line-height:18px}
+    .bar,#s1,#s-about,#s2,.tabs,.opt-pick,#s3 > .step-k,#s3 > .step-sub{display:none!important}
+    .doc{max-width:none;padding:0}
+    .step-card{border:0;padding:0;animation:none}
+    .print-picks{display:block;margin-bottom:22px;padding:12px 16px;border:1px solid var(--line)}
+    .print-picks[hidden]{display:none!important}
+    .print-picks ul{padding-left:16px;color:var(--ink-2)}
+    .fix,.opt,.rec,.p-foot,.print-picks,.get li,.steps li{break-inside:avoid;page-break-inside:avoid}
+    .p-head{break-after:avoid}
+    .sign-line{height:26px}
+    .opt,.opt-tick,.bn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a{text-decoration:none}
+  }
+</style>
+
+<div class="bar" role="toolbar" aria-label="Proposal controls">
+  <div class="bar-in">
+    <span class="wordmark">Phloi<b>.</b></span>
+    <div class="bar-fields">
+      <button class="btn btn--ghost" id="reset" type="button">Start over</button>
+      <button class="btn" id="print" type="button">Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="doc">
+
+  <section class="step-card" id="s1">
+    <div class="step-k"><h2>What specifically is holding you back?</h2></div>
+    <p class="step-sub">Tick everything that applies. Most businesses have one bleeding badly and a couple more as a lagging indicator.</p>
+    <div class="bn-groups" role="group" aria-label="Your bottlenecks. Tick everything that applies.">
+      <div class="bn-group">
+        <span class="bn-label">Marketing</span>
+        <div class="bns">
+          <button type="button" class="bn" data-bn="leads" aria-pressed="false">Not enough enquiries coming in</button>
+          <button type="button" class="bn" data-bn="wom" aria-pressed="false">Word of mouth is the only thing bringing work in</button>
+          <button type="button" class="bn" data-bn="ads" aria-pressed="false">Ads running, but not turning into jobs</button>
+          <button type="button" class="bn" data-bn="leaky" aria-pressed="false">I just think I have a leaky sales process</button>
+        </div>
+      </div>
+      <div class="bn-group">
+        <span class="bn-label">AI &amp; automation</span>
+        <div class="bns">
+          <button type="button" class="bn" data-bn="quotes" aria-pressed="false">Quotes go out and never get chased</button>
+          <button type="button" class="bn" data-bn="admin" aria-pressed="false">Buried in admin and follow up</button>
+          <button type="button" class="bn" data-bn="reports" aria-pressed="false">Paperwork and reports after every job</button>
+          <button type="button" class="bn" data-bn="numbers" aria-pressed="false">I cannot see my numbers in one place</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step-card" id="s-about">
+    <div class="step-k"><h2>A bit about the business</h2></div>
+    <p class="step-sub">Short answers are fine. This is what Phoenix reads before the call.</p>
+    <form class="about" id="proposal-form" name="phloi-proposal" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="phloi-proposal">
+      <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+      <input type="hidden" name="bottlenecks" id="h-bottlenecks">
+      <input type="hidden" name="wants" id="h-wants">
+      <input type="hidden" name="turnover" id="h-turnover">
+      <input type="hidden" name="target" id="h-target">
+      <input type="hidden" name="where-we-would-start" id="h-start">
+      <input type="hidden" name="option-chosen" id="h-option">
+      <div class="ab-row">
+        <label class="ab-f"><span class="ab-l">Your name</span><input id="ab-name" name="name" type="text" autocomplete="name" placeholder="First name"></label>
+        <label class="ab-f"><span class="ab-l">Business</span><input id="ab-business" name="business" type="text" autocomplete="organization" placeholder="Business name"></label>
+      </div>
+      <div class="ab-f">
+        <span class="ab-l">Do you want a done for you solution or done next to you solution?</span>
+        <div class="pills" data-group="solution" role="group" aria-label="Done for you or done next to you">
+          <button type="button" class="pill" data-v="Done For You (I build it for you)" aria-pressed="false">Done For You (I build it for you)</button><button type="button" class="pill" data-v="Done next to you (I teach you how to build it yourself)" aria-pressed="false">Done next to you (I teach you how to build it yourself)</button>
+        </div>
+      </div>
+      <div class="ab-f">
+        <span class="ab-l">Roughly what does the business turn over a month?</span>
+        <div class="pills" data-group="rev" role="group" aria-label="Monthly turnover">
+          <button type="button" class="pill" data-v="Under $20k" aria-pressed="false">Under $20k</button><button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button>
+        </div>
+      </div>
+      <div class="ab-f">
+        <span class="ab-l">Where do you want it to be in 3 months?</span>
+        <div class="pills" data-group="target" role="group" aria-label="Three month target">
+          <button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button><button type="button" class="pill" data-v="Same money, less of me in it" aria-pressed="false">Same money, less of me in it</button>
+        </div>
+      </div>
+      <label class="ab-f"><span class="ab-l">What are you actually trying to get to?</span><textarea id="ab-goals" name="goals" rows="3" placeholder="e.g. a second truck, weekends off, $40k months, someone else answering the phone"></textarea></label>
+      <label class="ab-f"><span class="ab-l">What have you tried already, and what happened?</span><textarea id="ab-tried" name="tried" rows="3" placeholder="e.g. ran Facebook ads for three months, hired an agency, bought a CRM nobody uses"></textarea></label>
+      <label class="ab-f"><span class="ab-l">If this works, what does success look like in 90 days?</span><textarea id="ab-success" name="success" rows="3" placeholder="e.g. 20 booked jobs a month from ads, every quote answered the same day, no admin after 6pm"></textarea></label>
+      <div class="ab-send">
+        <button class="btn" id="ab-send" type="submit">Send to Phoenix</button>
+        <button class="btn btn--ghost" type="button" id="ab-copy">Copy answers</button>
+        <span class="ab-note" id="ab-note">Sends straight to Phoenix. Or copy the answers and text them to him instead.</span>
+      </div>
+      <textarea id="ab-out" class="ab-out" readonly hidden aria-label="Your answers"></textarea>
+    </form>
+  </section>
+
+  <section class="step-card" id="s2" hidden>
+    <div class="step-k"><h2>What can be done about it</h2></div>
+    <p class="step-sub">For each thing you ticked, this is what would actually change. Nothing here replaces the tools you already use.</p>
+    <div class="fixes" id="fixes"></div>
+    <div class="rec" id="rec">
+      <div>
+        <div class="rec-l">Where we'd start</div>
+        <div class="rec-t" id="rec-t"></div>
+        <div class="rec-s" id="rec-s"></div>
+      </div>
+      <button class="btn" type="button" id="rec-go">See the proposal ↓</button>
+    </div>
+  </section>
+
+  <section class="step-card" id="s3" hidden>
+    <div class="step-k"><h2>The proposal</h2></div>
+    <p class="step-sub">The offer that fits what you picked is open. The others are a tap away if you want to compare.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="false" data-target="p-ms">Marketing + Sales<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-ai">AI Automation<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-db">Operations Dashboard<span class="also" hidden></span></button>
+    </div>
+    <div class="print-picks" id="print-picks" hidden>
+      <h3>What you told us is slowing you down, worst first</h3>
+      <ul id="print-picks-list"></ul>
+      <div id="print-about" hidden>
+        <h3>About the business</h3>
+        <ul id="print-about-list"></ul>
+      </div>
+    </div>
+    
+<article class="proposal" id="p-ms" data-offer="ms">
+  <header class="p-head">
+    <div class="p-meta">
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
+    </div>
+    <h2 class="p-title">Marketing + Sales</h2>
+    <p class="p-tag">Ads that reach people who buy, and the follow up that turns them into booked jobs.</p>
+    <p class="p-intro">The phone is quiet some weeks and flat out others, and when an enquiry lands it waits until you get a spare minute. We fix the spot where jobs are leaking first, then build out from there.</p>
+  </header>
+  <div class="cols">
+    <section class="p-sec">
+      <h3>What you get</h3>
+      <ul class="get"><li data-bn="leads wom ads"><b>Meta ads aimed at buyers</b> built from your real jobs and your area, not people having a scroll.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="leads wom ads"><b>Ad spend matched to booked jobs</b> so you see which ads paid for work, not clicks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="cold ads leaky"><b>First reply in seconds</b> to every web form, text or missed call, in your words with your prices.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes leaky"><b>Quotes chased automatically</b> on a schedule you agree to, so nothing goes cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>One morning screen</b> showing who needs a quote, a reply or a call back.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+    </section>
+    <section class="p-sec">
+      <h3>How it works</h3>
+      <ol class="steps"><li><span class="when">This week</span><b>Call and audit</b> we trace an enquiry from ad to booked job and find the leak.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b> in writing, with a suggested ad budget listed separately. Nothing starts until you say yes.</li><li><span class="when">Starts within 1 to 2 weeks</span><b>Build, first piece live early</b> you review every ad and message before a customer sees it.</li></ol>
+      <h3 class="from-h">From you</h3>
+      <p class="from">An hour or two at the start, access to the tools you already use, photos of real jobs, and a quick look at each ad and message before it goes live.</p>
+    </section>
+  </div>
+  <section class="p-sec choose">
+    <h3>Pick one</h3>
+    <div class="opts">
+      
+  <button type="button" class="opt" data-opt="with" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>We build it alongside you, then hand over the keys.</li><li>You own the ad account and the AI settings, and change them yourself.</li><li>We stay on call for fixes and changes.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting and on call support</span></span></span>
+  </button>
+      
+  <button type="button" class="opt" data-opt="for" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>We build it and run it: the ads, the follow up, the pipeline.</li><li>You see every ad and message, and give the yes on anything new.</li><li>Your ad budget stays the figure you set. We ask before it moves.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for us to run it</span></span></span>
+  </button>
+    </div>
+    <p class="note">Ad spend is separate, paid from your own Meta account, and stays yours to raise, lower or pause. No retainer creep, no surprise invoices.</p>
+  </section>
+  <footer class="p-foot">
+    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <div class="sign">
+      <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
+      <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
+      <div><span class="sign-l">Date</span><span class="sign-line"></span></div>
+      <div class="sign-by"><span class="sign-l">Prepared by</span><span>Phoenix, Phloi · <a href="mailto:contact@phloi.com">contact@phloi.com</a></span></div>
+    </div>
+  </footer>
+</article>
+
+<article class="proposal" id="p-ai" data-offer="ai">
+  <header class="p-head">
+    <div class="p-meta">
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
+    </div>
+    <h2 class="p-title">AI Automation</h2>
+    <p class="p-tag">Every enquiry answered in seconds. Every quote chased. Nothing forgotten.</p>
+    <p class="p-intro">You are on the tools all day, so enquiries wait until the evening and some have booked someone else by then. The AI takes the replying, chasing and admin, in your words, and hands you anything it is unsure about.</p>
+  </header>
+  <div class="cols">
+    <section class="p-sec">
+      <h3>What you get</h3>
+      <ul class="get"><li data-bn="cold"><b>First reply in seconds</b> to every web form, text or missed call, in your voice with your prices and rules.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes"><b>Quotes chased automatically</b> on a schedule you set, so chasing stops being tomorrow's job.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Past customers rebooked</b> with a personal message when they are due for their next job.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>CRM kept clean</b> names, numbers and stages kept right without you tidying it.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Anything unsure comes to you</b> with the full conversation attached. Every message is readable and changeable.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+    </section>
+    <section class="p-sec">
+      <h3>How it works</h3>
+      <ol class="steps"><li><span class="when">This week</span><b>Call and audit</b> we go through how you quote, price and follow up, and pick the piece bleeding worst.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b> in writing. Nothing goes near a customer until you have read it and said yes.</li><li><span class="when">Starts within 1 to 2 weeks</span><b>Build, first piece live early</b> usually the fast reply first, working on real enquiries before the next piece starts.</li></ol>
+      <h3 class="from-h">From you</h3>
+      <p class="from">An hour or two at the start, your real prices and rules, a few examples of messages you have sent, and someone to review the first replies.</p>
+    </section>
+  </div>
+  <section class="p-sec choose">
+    <h3>Pick one</h3>
+    <div class="opts">
+      
+  <button type="button" class="opt" data-opt="with" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>We build it with you and hand over the keys.</li><li>You change the wording, prices and chase schedule yourself.</li><li>We stay on call, and fix it if a tool changes its connection.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting, monitoring and changes</span></span></span>
+  </button>
+      
+  <button type="button" class="opt" data-opt="for" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>We build it and run it, and keep an eye on replies and chases.</li><li>You still sign off on anything new. We bring it to you.</li><li>If something breaks you hear it from us, not a customer.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for us to run it</span></span></span>
+  </button>
+    </div>
+    <p class="note">The written scope says which pieces go in the first build and the build price covers those. Anything added later is priced in writing first.</p>
+  </section>
+  <footer class="p-foot">
+    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <div class="sign">
+      <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
+      <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
+      <div><span class="sign-l">Date</span><span class="sign-line"></span></div>
+      <div class="sign-by"><span class="sign-l">Prepared by</span><span>Phoenix, Phloi · <a href="mailto:contact@phloi.com">contact@phloi.com</a></span></div>
+    </div>
+  </footer>
+</article>
+
+<article class="proposal" id="p-db" data-offer="db">
+  <header class="p-head">
+    <div class="p-meta">
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
+    </div>
+    <h2 class="p-title">Operations Dashboard</h2>
+    <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system Phoenix runs Dript Exterior Cleaning on.</p>
+    <p class="p-intro">Right now the picture of your business is spread across your job software, inbox, calendar and ad account, and none of them talk to each other. The dashboard sits on top of the tools you already use and pulls them into one view.</p>
+  </header>
+  <div class="cols">
+    <section class="p-sec">
+      <h3>What you get</h3>
+      <ul class="get"><li data-bn="numbers"><b>Jobs and pipeline in one view</b> every enquiry, quote and booked job, plus the daily list of who needs what.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Quoting with real margins</b> quote from your actual prices and see the margin before it goes out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Crew view</b> your team sees their jobs and notes, and nothing about the books.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="reports"><b>Reports that write themselves</b> end of day and photo before and after reports from the work actually done.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Follow up that doesn't forget</b> fast replies, quotes chased, past customers rebooked, CRM kept clean.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Where your money comes from</b> ad spend, lead source and revenue side by side.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+    </section>
+    <section class="p-sec">
+      <h3>How it works</h3>
+      <ol class="steps"><li><span class="when">This week</span><b>Working call and audit</b> we map what you do day to day and where it leaks time or money.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed number</b> in writing, before anyone starts.</li><li><span class="when">Usually 3 to 6 weeks</span><b>Build, live as it comes together</b> you use parts of it well before the whole thing is finished.</li></ol>
+      <h3 class="from-h">From you</h3>
+      <p class="from">An hour or two at the start, access to your job software, calendar, inbox and ad accounts, and a yes on each piece as it goes live.</p>
+    </section>
+  </div>
+  <section class="p-sec choose">
+    <h3>Pick one</h3>
+    <div class="opts">
+      
+  <button type="button" class="opt" data-opt="with" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>You are in every build review, and we walk your team through it.</li><li>You run it day to day and change wording, prices and schedules yourself.</li><li>Hosting, support and changes are on us. When a tool changes its connection, that is our problem.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month for hosting, support and changes</span></span></span>
+  </button>
+      
+  <button type="button" class="opt" data-opt="for" aria-pressed="false">
+    <span class="opt-tick" aria-hidden="true"></span>
+    <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <ul><li>Same build, then we run it: follow up, chase schedules, CRM.</li><li>You still sign off on anything new. We bring it to you.</li><li>Your job is to open it and see enquiries turning into booked jobs.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting, plus us running it</span></span></span>
+  </button>
+    </div>
+    <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. Your exact number comes in writing after the call. Your data stays yours, exportable at any time.</p>
+  </section>
+  <footer class="p-foot">
+    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <div class="sign">
+      <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
+      <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
+      <div><span class="sign-l">Date</span><span class="sign-line"></span></div>
+      <div class="sign-by"><span class="sign-l">Prepared by</span><span>Phoenix, Phloi · <a href="mailto:contact@phloi.com">contact@phloi.com</a></span></div>
+    </div>
+  </footer>
+</article>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var BN = [{"key":"leads","label":"Not enough enquiries coming in","fix":"Meta ads built from your real jobs and your area, aimed at people ready to book. Each enquiry is matched to whether it booked, so you only keep paying for the ads that bring work.","offers":{"ms":3}},{"key":"wom","label":"Word of mouth is the only thing bringing work in","fix":"A lead source you control. Ads built from your real jobs and your area, so referrals become the bonus, not the plan.","offers":{"ms":3}},{"key":"ads","label":"Ads running, but not turning into jobs","fix":"The campaign and the follow up fixed together. The right people see the ad, every click gets answered and chased, and spend is matched to booked jobs, not clicks.","offers":{"ms":3,"ai":1}},{"key":"leaky","label":"I just think I have a leaky sales process","fix":"We trace one enquiry from first contact to booked job and find where it drops. Usually it is the gap after the quote. That gets fixed first, with follow up that runs on its own.","offers":{"ms":3,"ai":2}},{"key":"cold","label":"Enquiries go cold before I get back to them","fix":"A reply within seconds to every web form, text or missed call, in your words, with your prices and your rules. Anything it is unsure about comes to you with the full thread.","offers":{"ai":3,"ms":2}},{"key":"quotes","label":"Quotes go out and never get chased","fix":"Unanswered quotes chased automatically on a schedule you set, so chasing stops being the job that gets pushed to tomorrow.","offers":{"ai":3,"ms":2}},{"key":"admin","label":"Buried in admin and follow up","fix":"The AI takes the replying, the chasing and the CRM tidying off your plate. Names, numbers and stages stay right without you touching them.","offers":{"ai":3,"db":1}},{"key":"rebook","label":"Past customers do not come back","fix":"A personal message to each past customer when they are due for their next job, written in your voice, asking if they want it booked in.","offers":{"ai":2,"db":1}},{"key":"reports","label":"Paperwork and reports after every job","fix":"End of day summaries and photo before and after reports written from the work that was actually done, not from memory at 9pm.","offers":{"db":3}},{"key":"numbers","label":"I cannot see my numbers in one place","fix":"Jobs, quotes, crew, follow up and money on one screen, pulled from the tools you already use. Ad spend sits next to the jobs it brought in.","offers":{"db":3}}];
+  var OFFER_NAMES = {"ms":"Marketing + Sales","ai":"AI Automation","db":"Operations Dashboard"};
+  var picked = {}, order = [];
+  var s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
+  var fixes = document.getElementById('fixes'), recT = document.getElementById('rec-t'), recS = document.getElementById('rec-s');
+  var tabs = document.querySelectorAll('.tab'), props = document.querySelectorAll('.proposal');
+  var esc = function(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); };
+
+  function showOffer(key){
+    tabs.forEach(function(x){ x.setAttribute('aria-selected', String(x.dataset.target === 'p-' + key)); });
+    props.forEach(function(p){ if (p.id === 'p-' + key) p.setAttribute('data-active',''); else p.removeAttribute('data-active'); });
+  }
+
+  function update(){
+    var keys = order.slice();
+    if (!keys.length){ s2.hidden = true; s3.hidden = true; document.getElementById('print-picks').hidden = !hasAbout(); return; }
+    // 02: one row per pick
+    fixes.innerHTML = keys.map(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0];
+      return '<div class="fix"><div class="what">' + esc(b.label) + (i === 0 && keys.length > 1 ? '<span class="worst">Worst one</span>' : '') + '</div><div class="how">' + esc(b.fix) + '</div></div>'; }).join('');
+    // recommendation: score offers by the picks
+    var score = { ms:0, ai:0, db:0 };
+    keys.forEach(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0]; var w = i === 0 ? 2 : 1; Object.keys(b.offers).forEach(function(o){ score[o] += b.offers[o] * w; }); });
+    var ranked = Object.keys(score).sort(function(a, b){ return score[b] - score[a]; });
+    var top = ranked[0], second = ranked[1];
+    var alsoWorth = score[second] > 0 && score[second] >= score[top] * 0.6 ? second : null;
+    recT.textContent = OFFER_NAMES[top];
+    var first = BN.filter(function(x){ return x.key === keys[0]; })[0];
+    recS.textContent = (alsoWorth
+      ? 'That covers most of what you ticked, and ' + OFFER_NAMES[alsoWorth] + ' picks up the rest. '
+      : 'That covers what you ticked. ')
+      + 'First piece: ' + first.label.toLowerCase() + '. Live before the next one starts.';
+    tabs.forEach(function(tb){ var a = tb.querySelector('.also'); var k = tb.dataset.target.slice(2);
+      a.hidden = !(k === top || k === alsoWorth); a.textContent = k === top ? 'fits' : 'also'; });
+    // mark matching lines inside every proposal
+    document.querySelectorAll('.get li').forEach(function(li){ li.classList.toggle('is-match', (li.dataset.bn || '').split(/\s+/).some(function(k){ return keys.indexOf(k) > -1; })); });
+    // printed summary
+    var pl = document.getElementById('print-picks-list'); pl.innerHTML = keys.map(function(k){ return '<li>' + esc(BN.filter(function(x){ return x.key === k; })[0].label) + '</li>'; }).join('');
+    document.getElementById('print-picks').hidden = false;
+    s2.hidden = false; s3.hidden = false;
+    showOffer(top);
+  }
+
+  document.querySelectorAll('.bn').forEach(function(b){ b.addEventListener('click', function(){
+    var k = b.dataset.bn, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); picked[k] = on;
+    var i = order.indexOf(k); if (on && i < 0) order.push(k); if (!on && i > -1) order.splice(i, 1); update();
+  }); });
+  document.getElementById('rec-go').addEventListener('click', function(){ s3.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  tabs.forEach(function(tb){ tb.addEventListener('click', function(){ showOffer(tb.dataset.target.slice(2)); }); });
+
+  // Done with you / Done for you: exclusive per proposal, written onto the sign-off line.
+  props.forEach(function(p){
+    var opts = p.querySelectorAll('.opt'), chosen = p.querySelector('[data-chosen]');
+    opts.forEach(function(o){ o.addEventListener('click', function(){
+      var on = o.getAttribute('aria-pressed') !== 'true';
+      opts.forEach(function(x){ x.setAttribute('aria-pressed', 'false'); x.querySelector('.opt-pick').textContent = x.querySelector('.opt-pick').dataset.off; });
+      o.setAttribute('aria-pressed', String(on)); o.querySelector('.opt-pick').textContent = on ? o.querySelector('.opt-pick').dataset.on : o.querySelector('.opt-pick').dataset.off;
+      chosen.textContent = on ? o.querySelector('.opt-name').textContent : '';
+    }); });
+  });
+
+  // Fills: one typed value fills every matching placeholder.
+  function fillAll(key, val, fallback){
+    document.querySelectorAll('.fill[data-fill="' + key + '"]').forEach(function(el){ el.textContent = val || fallback; el.classList.toggle('set', !!val); });
+  }
+  document.querySelectorAll('.fill').forEach(function(el){
+    el.addEventListener('focus', function(){ if (/^\[.*\]$/.test(el.textContent.trim())) { el.dataset.placeholder = el.textContent; el.textContent = ''; } });
+    el.addEventListener('blur', function(){ var v = el.textContent.trim(); if (!v) { el.textContent = el.dataset.placeholder || ''; el.classList.remove('set'); } else el.classList.add('set'); });
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
+    el.addEventListener('click', function(e){ e.stopPropagation(); });
+  });
+  var d = new Date(), m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  fillAll('date', d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear(), '[Date]');
+
+  // 02 About the business: answers, Send to Phoenix (prefilled email), copy fallback.
+  var about = { name: '', business: '', contact: '', solution: '', rev: '', target: '', goals: '', tried: '', success: '' };
+  var sendA = document.getElementById('ab-send'), outEl = document.getElementById('ab-out'), noteEl = document.getElementById('ab-note');
+  function bindText(id, key){ var el = document.getElementById(id); if (!el) return; el.addEventListener('input', function(){ about[key] = el.value.trim(); refreshAbout(); }); }
+  bindText('ab-name', 'name'); bindText('ab-business', 'business');
+  bindText('ab-goals', 'goals'); bindText('ab-tried', 'tried'); bindText('ab-success', 'success');
+  document.querySelectorAll('.pills').forEach(function(g){
+    var key = g.dataset.group, pills = g.querySelectorAll('.pill');
+    pills.forEach(function(p){ p.addEventListener('click', function(){
+      var on = p.getAttribute('aria-pressed') !== 'true';
+      pills.forEach(function(x){ x.setAttribute('aria-pressed', 'false'); });
+      p.setAttribute('aria-pressed', String(on)); about[key] = on ? p.dataset.v : ''; refreshAbout();
+    }); });
+  });
+  function hasAbout(){ return Object.keys(about).some(function(k){ return about[k]; }); }
+  function chosenOption(){ var el = document.querySelector('.proposal[data-active] [data-chosen]'); return el && el.textContent.trim() ? el.textContent.trim() : ''; }
+  function labelFor(k){ var b = BN.filter(function(x){ return x.key === k; })[0]; return b ? b.label : k; }
+  function summaryText(){
+    var L = [];
+    L.push('Proposal answers from ' + (about.name || '[name]') + (about.business ? ', ' + about.business : ''));
+    L.push('');
+    L.push('Slowing the business down (worst first):');
+    if (!order.length) L.push('- nothing ticked'); else order.forEach(function(k){ L.push('- ' + labelFor(k)); });
+    L.push('');
+    L.push('Wants: ' + (about.solution || '[not answered]'));
+    L.push('Turnover a month: ' + (about.rev || '[not answered]'));
+    L.push('Where they want it in 3 months: ' + (about.target || '[not answered]'));
+    L.push('Trying to get to: ' + (about.goals || '[not answered]'));
+    L.push('Tried already: ' + (about.tried || '[not answered]'));
+    L.push('Success in 90 days: ' + (about.success || '[not answered]'));
+    L.push('');
+    if (order.length) L.push('Where we would start: ' + recT.textContent);
+    if (chosenOption()) L.push('Option chosen: ' + chosenOption());
+    var dateEl = document.querySelector('.fill[data-fill="date"]');
+    L.push('Sent from the Phloi Proposal Pack' + (dateEl ? ', ' + dateEl.textContent : ''));
+    return L.join('\n');
+  }
+  function refreshAbout(){
+    var setH = function(id, v){ var el = document.getElementById(id); if (el) el.value = v; };
+    setH('h-bottlenecks', order.map(function(k){ return labelFor(k); }).join(' | '));
+    setH('h-wants', about.solution);
+    setH('h-turnover', about.rev);
+    setH('h-target', about.target);
+    setH('h-start', order.length ? recT.textContent : '');
+    setH('h-option', chosenOption());
+    if (outEl && !outEl.hidden) outEl.value = summaryText();
+    var pl = document.getElementById('print-about-list'), pa = document.getElementById('print-about');
+    if (pl && pa) {
+      var rows = [['Wants', about.solution], ['Turnover a month', about.rev], ['3 month target', about.target], ['Trying to get to', about.goals], ['Tried already', about.tried], ['Success in 90 days', about.success]].filter(function(r){ return r[1]; });
+      pl.innerHTML = rows.map(function(r){ return '<li><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</li>'; }).join('');
+      pa.hidden = !rows.length;
+      if (!order.length) document.getElementById('print-picks').hidden = !rows.length;
+    }
+  }
+  function resetAbout(){
+    document.querySelectorAll('.about input, .about textarea').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('.pill').forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
+    Object.keys(about).forEach(function(k){ about[k] = ''; });
+    if (outEl) outEl.hidden = true;
+    if (noteEl) noteEl.textContent = 'Send opens your email with the answers filled in. If it does not open, copy them and text or email them to Phoenix.';
+    refreshAbout();
+  }
+  function showOut(){ outEl.hidden = false; outEl.value = summaryText(); }
+  var formEl = document.getElementById('proposal-form');
+  if (formEl) formEl.addEventListener('submit', function(){ refreshAbout(); });
+  document.getElementById('ab-copy').addEventListener('click', function(){
+    refreshAbout(); showOut(); outEl.select();
+    var copiedMsg = 'Copied. Paste it into a text or email to Phoenix.';
+    var manualMsg = 'Select the box below, copy it, then text or email it to Phoenix.';
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(outEl.value).then(function(){ noteEl.textContent = copiedMsg; }, function(){ noteEl.textContent = ok ? copiedMsg : manualMsg; });
+    } else noteEl.textContent = ok ? copiedMsg : manualMsg;
+  });
+  refreshAbout();
+
+  document.getElementById('print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('reset').addEventListener('click', function(){
+    picked = {}; order = []; document.querySelectorAll('.bn').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); }); update(); resetAbout(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

@@ -7,3 +7,6 @@
 
 # Thank-you page after a form submission
 /thanks                /thanks.html            200
+
+# Interactive proposal page (form phloi-proposal -> /thanks)
+/proposal              /proposal.html          200
