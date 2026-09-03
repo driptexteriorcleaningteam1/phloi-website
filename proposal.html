@@ -37,7 +37,7 @@
   [hidden]{display:none!important}
 
   /* one label style for metadata only */
-  .eyebrow,.p-sec h3,.sign-l,.when,.tab,.opt-pick,.rec .rec-l,.print-picks h3{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-2)}
+  .eyebrow,.p-sec h3,.sign-l,.when,.tab,.opt-pick,.rec .rec-l,.print-picks h3,.na-l{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-2)}
 
   /* toolbar */
   .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
@@ -70,6 +70,7 @@
   .bn[aria-pressed="true"]{font-weight:500}
   .bn[aria-pressed="true"]::before{background:var(--ink);border-color:var(--ink)}
   .bn[aria-pressed="true"]::after{content:"";position:absolute;left:5.5px;top:calc(50% - 6px);width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .bn .rank{margin-left:auto;padding-left:10px;font-family:var(--mono);font-size:11px;line-height:16px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 
   /* 2 about the business */
   .about{display:flex;flex-direction:column;gap:20px}
@@ -93,10 +94,11 @@
   .ab-out{font-family:var(--mono);font-size:13px;line-height:20px;min-height:200px}
   .print-picks #print-about{margin-top:10px}
 
-  /* 3 fixes */
+  /* 3 fixes: ranked, worst first */
   .fixes{display:flex;flex-direction:column}
-  .fix{display:grid;grid-template-columns:minmax(180px,.8fr) 1.6fr;gap:4px 32px;padding:14px 0;border-top:1px solid var(--line-2)}
+  .fix{display:grid;grid-template-columns:22px minmax(160px,.75fr) 1.6fr;gap:4px 24px;padding:14px 0;border-top:1px solid var(--line-2)}
   .fix:first-child{border-top:0;padding-top:0}
+  .fix .n{font-family:var(--mono);font-size:11px;line-height:24px;color:var(--ink-3);font-variant-numeric:tabular-nums}
   .fix .what{font-family:var(--display);font-weight:600;font-size:16px;line-height:24px}
   .fix .how{color:var(--ink-2)}
   .fix .what .worst,.match{display:inline;background:none;padding:0;border-radius:0;margin-left:8px;font-family:var(--mono);font-weight:700;font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);vertical-align:baseline;white-space:nowrap}
@@ -117,22 +119,38 @@
   .p-head{border-bottom:1px solid var(--ink);padding-bottom:22px;margin-bottom:28px}
   .p-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
   .p-title{font-size:34px;line-height:40px;font-weight:600;letter-spacing:-.025em;margin-bottom:8px}
-  .p-tag{font-family:var(--display);font-weight:500;font-size:18px;line-height:24px;color:var(--ink);max-width:56ch;margin-bottom:12px}
-  .p-intro{max-width:62ch;color:var(--ink-2)}
+  .p-tag{font-family:var(--display);font-weight:500;font-size:18px;line-height:24px;color:var(--ink);max-width:56ch;margin-bottom:18px}
+
+  /* now -> after, in place of the intro paragraph */
+  .na{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .na > div{padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .na > div + div{border-left:1px solid var(--line)}
+  .na-l{color:var(--ink-3)}
+  .na-t{font-size:14.5px;line-height:21px;color:var(--ink-2)}
+  .na-after{background:var(--chosen-bg)}
+  .na-after .na-l{color:var(--accent-deep)}
+  .na-after .na-t{color:var(--ink);font-weight:500}
   .cols{display:grid;grid-template-columns:1.05fr .95fr;gap:40px}
   .p-sec h3{color:var(--ink);font-weight:700;margin-bottom:12px}
   .get{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
   .get li{padding-left:14px;position:relative;color:var(--ink-2)}
   .get li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent-deep)}
-  .get b,.steps b{color:var(--ink);font-weight:600}
+  .get b,.tl b{color:var(--ink);font-weight:600}
   .match{display:none}
   .get li.is-match .match{display:inline}
-  .steps{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:s}
-  .steps li{color:var(--ink-2);padding-left:26px;position:relative;counter-increment:s}
-  .steps li::before{content:counter(s);position:absolute;left:0;top:0;font-family:var(--mono);font-size:11px;line-height:24px;color:var(--ink-3)}
-  .when{display:block;color:var(--accent-deep);margin-bottom:0}
+  /* how it works: a rail, because it really is a sequence */
+  .tl{list-style:none;padding:0;margin:0;position:relative;display:flex;flex-direction:column;gap:16px}
+  .tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .tl li{position:relative;padding-left:26px}
+  .tl li::before{content:"";position:absolute;left:0;top:5px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:1px solid var(--ink-3);box-sizing:border-box}
+  .tl li:first-child::before{background:var(--accent);border-color:var(--accent-deep)}
+  .tl b{display:block;font-family:var(--display);font-size:15px;line-height:22px}
+  .tl .d{color:var(--ink-2);font-size:14px;line-height:20px}
+  .when{display:block;color:var(--accent-deep);margin-bottom:1px}
   .from-h{margin-top:24px}
-  .from{color:var(--ink-2)}
+  /* from you: chips, not a paragraph */
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:13px;line-height:20px;padding:3px 9px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);color:var(--ink-2)}
   .choose{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .opt{text-align:left;font:inherit;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:var(--r);padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:12px;position:relative}
@@ -148,7 +166,7 @@
   .opt ul{padding-left:16px;display:flex;flex-direction:column;gap:4px;color:var(--ink-2);font-size:14px;line-height:20px}
   .opt-price{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line-2);font-family:var(--body);font-weight:400;font-size:13px;line-height:20px}
   .price-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .price-n{font-family:var(--display);font-weight:600;font-size:22px;line-height:28px;letter-spacing:-.02em;color:var(--ink)}
+  .price-n{font-family:var(--display);font-weight:600;font-size:22px;line-height:28px;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
   .price-l{color:var(--ink-2)}
   .note{color:var(--ink-2);font-size:13.5px;line-height:20px;margin-top:16px;max-width:70ch}
   .p-foot{margin-top:32px;padding-top:20px;border-top:1px solid var(--ink)}
@@ -199,7 +217,10 @@
     .ab-send .btn{flex:1 1 100%;height:48px;font-size:15px}
     .ab-note{text-align:left;flex-basis:100%;max-width:none}
     .ab-out{min-height:160px}
-    .fix{grid-template-columns:1fr;gap:2px 0;padding:12px 0}
+    .fix{grid-template-columns:22px 1fr;gap:2px 12px;padding:12px 0}
+    .fix .how{grid-column:2}
+    .na{grid-template-columns:1fr}
+    .na > div + div{border-left:0;border-top:1px solid var(--line)}
     .rec{padding:16px;gap:10px}
     .rec .btn{width:100%;height:44px}
     .tab{margin-right:16px;padding:12px 0}
@@ -223,10 +244,10 @@
     .print-picks{display:block;margin-bottom:22px;padding:12px 16px;border:1px solid var(--line)}
     .print-picks[hidden]{display:none!important}
     .print-picks ul{padding-left:16px;color:var(--ink-2)}
-    .fix,.opt,.rec,.p-foot,.print-picks,.get li,.steps li{break-inside:avoid;page-break-inside:avoid}
+    .fix,.opt,.rec,.p-foot,.print-picks,.get li,.tl li,.na,.chips{break-inside:avoid;page-break-inside:avoid}
     .p-head{break-after:avoid}
     .sign-line{height:26px}
-    .opt,.opt-tick,.bn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .opt,.opt-tick,.bn,.na-after{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     a{text-decoration:none}
   }
 </style>
@@ -244,25 +265,25 @@
 <main class="doc">
 
   <section class="step-card" id="s1">
-    <div class="step-k"><h2>What specifically is holding you back?</h2></div>
-    <p class="step-sub">Tick everything that applies. Most businesses have one bleeding badly and a couple more as a lagging indicator.</p>
-    <div class="bn-groups" role="group" aria-label="Your bottlenecks. Tick everything that applies.">
+    <div class="step-k"><h2>What is holding you back?</h2></div>
+    <p class="step-sub">Tick everything that applies. Worst one first.</p>
+    <div class="bn-groups" role="group" aria-label="Your bottlenecks. Tick everything that applies, worst first.">
       <div class="bn-group">
         <span class="bn-label">Marketing</span>
         <div class="bns">
-          <button type="button" class="bn" data-bn="leads" aria-pressed="false">Not enough enquiries coming in</button>
-          <button type="button" class="bn" data-bn="wom" aria-pressed="false">Word of mouth is the only thing bringing work in</button>
-          <button type="button" class="bn" data-bn="ads" aria-pressed="false">Ads running, but not turning into jobs</button>
-          <button type="button" class="bn" data-bn="leaky" aria-pressed="false">I just think I have a leaky sales process</button>
+          <button type="button" class="bn" data-bn="leads" aria-pressed="false">Not enough enquiries<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="wom" aria-pressed="false">Word of mouth is the only thing working<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="ads" aria-pressed="false">Ads run, but no jobs<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="leaky" aria-pressed="false">Leaky sales process<span class="rank"></span></button>
         </div>
       </div>
       <div class="bn-group">
         <span class="bn-label">AI &amp; automation</span>
         <div class="bns">
-          <button type="button" class="bn" data-bn="quotes" aria-pressed="false">Quotes go out and never get chased</button>
-          <button type="button" class="bn" data-bn="admin" aria-pressed="false">Buried in admin and follow up</button>
-          <button type="button" class="bn" data-bn="reports" aria-pressed="false">Paperwork and reports after every job</button>
-          <button type="button" class="bn" data-bn="numbers" aria-pressed="false">I cannot see my numbers in one place</button>
+          <button type="button" class="bn" data-bn="quotes" aria-pressed="false">Quotes never get chased<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="admin" aria-pressed="false">Buried in admin<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="reports" aria-pressed="false">Paperwork after every job<span class="rank"></span></button>
+          <button type="button" class="bn" data-bn="numbers" aria-pressed="false">Numbers are not in one place<span class="rank"></span></button>
         </div>
       </div>
     </div>
@@ -270,7 +291,7 @@
 
   <section class="step-card" id="s-about">
     <div class="step-k"><h2>A bit about the business</h2></div>
-    <p class="step-sub">Short answers are fine. This is what Phoenix reads before the call.</p>
+    <p class="step-sub">Short answers are fine. This is what I read before the call.</p>
     <form class="about" id="proposal-form" name="phloi-proposal" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="phloi-proposal">
       <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
@@ -285,26 +306,26 @@
         <label class="ab-f"><span class="ab-l">Business</span><input id="ab-business" name="business" type="text" autocomplete="organization" placeholder="Business name"></label>
       </div>
       <div class="ab-f">
-        <span class="ab-l">Do you want a done for you solution or done next to you solution?</span>
-        <div class="pills" data-group="solution" role="group" aria-label="Done for you or done next to you">
-          <button type="button" class="pill" data-v="Done For You (I build it for you)" aria-pressed="false">Done For You (I build it for you)</button><button type="button" class="pill" data-v="Done next to you (I teach you how to build it yourself)" aria-pressed="false">Done next to you (I teach you how to build it yourself)</button>
+        <span class="ab-l">How do you want it built?</span>
+        <div class="pills" data-group="solution" role="group" aria-label="How you want it built">
+          <button type="button" class="pill" data-v="Done for you (I build it)" aria-pressed="false">Done for you</button><button type="button" class="pill" data-v="Done next to you (I teach you to build it)" aria-pressed="false">Done next to you</button>
         </div>
       </div>
       <div class="ab-f">
-        <span class="ab-l">Roughly what does the business turn over a month?</span>
+        <span class="ab-l">Monthly turnover</span>
         <div class="pills" data-group="rev" role="group" aria-label="Monthly turnover">
           <button type="button" class="pill" data-v="Under $20k" aria-pressed="false">Under $20k</button><button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button>
         </div>
       </div>
       <div class="ab-f">
-        <span class="ab-l">Where do you want it to be in 3 months?</span>
+        <span class="ab-l">Where you want it in 3 months</span>
         <div class="pills" data-group="target" role="group" aria-label="Three month target">
-          <button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button><button type="button" class="pill" data-v="Same money, less of me in it" aria-pressed="false">Same money, less of me in it</button>
+          <button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button><button type="button" class="pill" data-v="Same money, less of me in it" aria-pressed="false">Same money, less of me</button>
         </div>
       </div>
-      <label class="ab-f"><span class="ab-l">What are you actually trying to get to?</span><textarea id="ab-goals" name="goals" rows="3" placeholder="e.g. a second truck, weekends off, $40k months, someone else answering the phone"></textarea></label>
-      <label class="ab-f"><span class="ab-l">What have you tried already, and what happened?</span><textarea id="ab-tried" name="tried" rows="3" placeholder="e.g. ran Facebook ads for three months, hired an agency, bought a CRM nobody uses"></textarea></label>
-      <label class="ab-f"><span class="ab-l">If this works, what does success look like in 90 days?</span><textarea id="ab-success" name="success" rows="3" placeholder="e.g. 20 booked jobs a month from ads, every quote answered the same day, no admin after 6pm"></textarea></label>
+      <label class="ab-f"><span class="ab-l">What are you trying to get to?</span><textarea id="ab-goals" name="goals" rows="2" placeholder="A second truck. Weekends off. $40k months."></textarea></label>
+      <label class="ab-f"><span class="ab-l">Tried already, and what happened?</span><textarea id="ab-tried" name="tried" rows="2" placeholder="Facebook ads for three months. An agency. A CRM nobody uses."></textarea></label>
+      <label class="ab-f"><span class="ab-l">Success in 90 days looks like</span><textarea id="ab-success" name="success" rows="2" placeholder="20 booked jobs a month. Every quote answered same day."></textarea></label>
       <div class="ab-send">
         <button class="btn" id="ab-send" type="submit">Send to Phoenix</button>
         <button class="btn btn--ghost" type="button" id="ab-copy">Copy answers</button>
@@ -316,7 +337,7 @@
 
   <section class="step-card" id="s2" hidden>
     <div class="step-k"><h2>What can be done about it</h2></div>
-    <p class="step-sub">For each thing you ticked, this is what would actually change. Nothing here replaces the tools you already use.</p>
+    <p class="step-sub">Worst first. Nothing here replaces the tools you already use.</p>
     <div class="fixes" id="fixes"></div>
     <div class="rec" id="rec">
       <div>
@@ -330,12 +351,12 @@
 
   <section class="step-card" id="s3" hidden>
     <div class="step-k"><h2>The proposal</h2></div>
-    <p class="step-sub">The offer that fits what you picked is open. The others are a tap away if you want to compare.</p>
+    <p class="step-sub">The one that fits is open. The others are a tap away.</p>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" aria-selected="false" data-target="p-ms">Marketing + Sales<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-ai">AI Automation<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-db">Operations Dashboard<span class="also" hidden></span></button>
     </div>
     <div class="print-picks" id="print-picks" hidden>
-      <h3>What you told us is slowing you down, worst first</h3>
+      <h3>What is slowing you down, worst first</h3>
       <ul id="print-picks-list"></ul>
       <div id="print-about" hidden>
         <h3>About the business</h3>
@@ -350,19 +371,22 @@
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
     <h2 class="p-title">Marketing + Sales</h2>
-    <p class="p-tag">Ads that reach people who buy, and the follow up that turns them into booked jobs.</p>
-    <p class="p-intro">The phone is quiet some weeks and flat out others, and when an enquiry lands it waits until you get a spare minute. We fix the spot where jobs are leaking first, then build out from there.</p>
+    <p class="p-tag">Ads that reach people who buy, and the follow up that books them.</p>
+    <div class="na">
+      <div><span class="na-l">Now</span><span class="na-t">Quiet weeks, then flat out. Enquiries wait for a spare minute.</span></div>
+      <div class="na-after"><span class="na-l">After</span><span class="na-t">Ads aimed at buyers. Every enquiry answered and chased.</span></div>
+    </div>
   </header>
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="leads wom ads"><b>Meta ads aimed at buyers</b> built from your real jobs and your area, not people having a scroll.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="leads wom ads"><b>Ad spend matched to booked jobs</b> so you see which ads paid for work, not clicks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="cold ads leaky"><b>First reply in seconds</b> to every web form, text or missed call, in your words with your prices.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes leaky"><b>Quotes chased automatically</b> on a schedule you agree to, so nothing goes cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>One morning screen</b> showing who needs a quote, a reply or a call back.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="leads wom ads"><b>Meta ads aimed at buyers</b> built from your real jobs and your area.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="leads wom ads"><b>Spend matched to booked jobs</b> not clicks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="cold ads leaky"><b>First reply in seconds</b> to every form, text and missed call.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes leaky"><b>Quotes chased automatically</b> so nothing goes cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>One morning screen</b> who needs a quote, a reply or a call back.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="steps"><li><span class="when">This week</span><b>Call and audit</b> we trace an enquiry from ad to booked job and find the leak.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b> in writing, with a suggested ad budget listed separately. Nothing starts until you say yes.</li><li><span class="when">Starts within 1 to 2 weeks</span><b>Build, first piece live early</b> you review every ad and message before a customer sees it.</li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">We trace one enquiry from ad to booked job and find the leak.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b><span class="d">In writing, ad budget separate. Nothing starts until you say yes.</span></li><li><span class="when">1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">You see every ad and message before a customer does.</span></li></ol>
       <h3 class="from-h">From you</h3>
-      <p class="from">An hour or two at the start, access to the tools you already use, photos of real jobs, and a quick look at each ad and message before it goes live.</p>
+      <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Access to your tools</span><span class="chip">Photos of real jobs</span><span class="chip">A look before it goes live</span></div>
     </section>
   </div>
   <section class="p-sec choose">
@@ -372,21 +396,21 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it alongside you, then hand over the keys.</li><li>You own the ad account and the AI settings, and change them yourself.</li><li>We stay on call for fixes and changes.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting and on call support</span></span></span>
+    <ul><li>Built alongside you, then the keys are yours.</li><li>You own the ad account and the settings.</li><li>We stay on call for fixes.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting and support</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it and run it: the ads, the follow up, the pipeline.</li><li>You see every ad and message, and give the yes on anything new.</li><li>Your ad budget stays the figure you set. We ask before it moves.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for us to run it</span></span></span>
+    <ul><li>We build it and run it: ads, follow up, pipeline.</li><li>You sign off anything new.</li><li>Your ad budget stays the figure you set.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, we run it</span></span></span>
   </button>
     </div>
-    <p class="note">Ad spend is separate, paid from your own Meta account, and stays yours to raise, lower or pause. No retainer creep, no surprise invoices.</p>
+    <p class="note">Ad spend is separate, paid from your own Meta account, and stays yours to raise, lower or pause.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -404,18 +428,21 @@
     </div>
     <h2 class="p-title">AI Automation</h2>
     <p class="p-tag">Every enquiry answered in seconds. Every quote chased. Nothing forgotten.</p>
-    <p class="p-intro">You are on the tools all day, so enquiries wait until the evening and some have booked someone else by then. The AI takes the replying, chasing and admin, in your words, and hands you anything it is unsure about.</p>
+    <div class="na">
+      <div><span class="na-l">Now</span><span class="na-t">You are on the tools. Enquiries wait until the evening, and some have booked someone else.</span></div>
+      <div class="na-after"><span class="na-l">After</span><span class="na-t">Answered in seconds, chased on schedule, in your words.</span></div>
+    </div>
   </header>
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="cold"><b>First reply in seconds</b> to every web form, text or missed call, in your voice with your prices and rules.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes"><b>Quotes chased automatically</b> on a schedule you set, so chasing stops being tomorrow's job.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Past customers rebooked</b> with a personal message when they are due for their next job.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>CRM kept clean</b> names, numbers and stages kept right without you tidying it.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Anything unsure comes to you</b> with the full conversation attached. Every message is readable and changeable.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="cold"><b>First reply in seconds</b> in your voice, with your prices and rules.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes"><b>Quotes chased automatically</b> on a schedule you set.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Past customers rebooked</b> with a personal message when they are due.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>CRM kept clean</b> names, numbers and stages, without you tidying.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Anything unsure comes to you</b> with the full thread attached.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="steps"><li><span class="when">This week</span><b>Call and audit</b> we go through how you quote, price and follow up, and pick the piece bleeding worst.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b> in writing. Nothing goes near a customer until you have read it and said yes.</li><li><span class="when">Starts within 1 to 2 weeks</span><b>Build, first piece live early</b> usually the fast reply first, working on real enquiries before the next piece starts.</li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">How you quote, price and follow up. We pick the piece bleeding worst.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b><span class="d">Nothing goes near a customer until you have read it and said yes.</span></li><li><span class="when">1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">Usually the fast reply, working on real enquiries.</span></li></ol>
       <h3 class="from-h">From you</h3>
-      <p class="from">An hour or two at the start, your real prices and rules, a few examples of messages you have sent, and someone to review the first replies.</p>
+      <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Your prices and rules</span><span class="chip">A few example messages</span><span class="chip">Review the first replies</span></div>
     </section>
   </div>
   <section class="p-sec choose">
@@ -425,21 +452,21 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it with you and hand over the keys.</li><li>You change the wording, prices and chase schedule yourself.</li><li>We stay on call, and fix it if a tool changes its connection.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting, monitoring and changes</span></span></span>
+    <ul><li>Built with you, then the keys are yours.</li><li>You change the wording, prices and chase schedule.</li><li>We fix it if a tool changes its connection.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting and changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it and run it, and keep an eye on replies and chases.</li><li>You still sign off on anything new. We bring it to you.</li><li>If something breaks you hear it from us, not a customer.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for us to run it</span></span></span>
+    <ul><li>We build it and run it, and watch the replies.</li><li>You sign off anything new.</li><li>If something breaks you hear it from us, not a customer.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, we run it</span></span></span>
   </button>
     </div>
-    <p class="note">The written scope says which pieces go in the first build and the build price covers those. Anything added later is priced in writing first.</p>
+    <p class="note">The written scope lists what goes in the first build. Anything added later is priced in writing first.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -456,19 +483,22 @@
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
     <h2 class="p-title">Operations Dashboard</h2>
-    <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system Phoenix runs Dript Exterior Cleaning on.</p>
-    <p class="p-intro">Right now the picture of your business is spread across your job software, inbox, calendar and ad account, and none of them talk to each other. The dashboard sits on top of the tools you already use and pulls them into one view.</p>
+    <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system I run Dript on.</p>
+    <div class="na">
+      <div><span class="na-l">Now</span><span class="na-t">The picture is split across job software, inbox, calendar and ad account. None of them talk.</span></div>
+      <div class="na-after"><span class="na-l">After</span><span class="na-t">One screen, sitting on top of the tools you already use.</span></div>
+    </div>
   </header>
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="numbers"><b>Jobs and pipeline in one view</b> every enquiry, quote and booked job, plus the daily list of who needs what.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Quoting with real margins</b> quote from your actual prices and see the margin before it goes out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Crew view</b> your team sees their jobs and notes, and nothing about the books.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="reports"><b>Reports that write themselves</b> end of day and photo before and after reports from the work actually done.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Follow up that doesn't forget</b> fast replies, quotes chased, past customers rebooked, CRM kept clean.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Where your money comes from</b> ad spend, lead source and revenue side by side.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="numbers"><b>Jobs and pipeline in one view</b> plus the daily list of who needs what.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Quoting with real margins</b> see the margin before it goes out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Crew view</b> their jobs and notes, nothing about the books.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="reports"><b>Reports that write themselves</b> end of day, and before and after photos.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Follow up that does not forget</b> replies, chases and rebooks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Where your money comes from</b> ad spend beside the revenue it brought.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="steps"><li><span class="when">This week</span><b>Working call and audit</b> we map what you do day to day and where it leaks time or money.</li><li><span class="when">A few days later</span><b>Fixed scope, fixed number</b> in writing, before anyone starts.</li><li><span class="when">Usually 3 to 6 weeks</span><b>Build, live as it comes together</b> you use parts of it well before the whole thing is finished.</li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Working call and audit</b><span class="d">We map your day and where it leaks time or money.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed number</b><span class="d">In writing, before anyone starts.</span></li><li><span class="when">3 to 6 weeks</span><b>Build, live as it comes together</b><span class="d">You use parts of it well before the whole thing is finished.</span></li></ol>
       <h3 class="from-h">From you</h3>
-      <p class="from">An hour or two at the start, access to your job software, calendar, inbox and ad accounts, and a yes on each piece as it goes live.</p>
+      <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Access to your tools</span><span class="chip">A yes on each piece</span></div>
     </section>
   </div>
   <section class="p-sec choose">
@@ -478,21 +508,21 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>You are in every build review, and we walk your team through it.</li><li>You run it day to day and change wording, prices and schedules yourself.</li><li>Hosting, support and changes are on us. When a tool changes its connection, that is our problem.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month for hosting, support and changes</span></span></span>
+    <ul><li>You are in every review, and we train your team.</li><li>You run it and change it yourself.</li><li>Hosting, support and changes are on us.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month, hosting and changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>Same build, then we run it: follow up, chase schedules, CRM.</li><li>You still sign off on anything new. We bring it to you.</li><li>Your job is to open it and see enquiries turning into booked jobs.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month for hosting, plus us running it</span></span></span>
+    <ul><li>Same build, then we run it.</li><li>You sign off anything new.</li><li>You open it and watch jobs land.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting plus us running it</span></span></span>
   </button>
     </div>
-    <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. Your exact number comes in writing after the call. Your data stays yours, exportable at any time.</p>
+    <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. Your data stays yours, exportable any time.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">To go ahead, reply yes to this email or text Phoenix. The written scope and fixed price follow within a few days.</p>
+    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -507,7 +537,7 @@
 
 <script>
 (function(){
-  var BN = [{"key":"leads","label":"Not enough enquiries coming in","fix":"Meta ads built from your real jobs and your area, aimed at people ready to book. Each enquiry is matched to whether it booked, so you only keep paying for the ads that bring work.","offers":{"ms":3}},{"key":"wom","label":"Word of mouth is the only thing bringing work in","fix":"A lead source you control. Ads built from your real jobs and your area, so referrals become the bonus, not the plan.","offers":{"ms":3}},{"key":"ads","label":"Ads running, but not turning into jobs","fix":"The campaign and the follow up fixed together. The right people see the ad, every click gets answered and chased, and spend is matched to booked jobs, not clicks.","offers":{"ms":3,"ai":1}},{"key":"leaky","label":"I just think I have a leaky sales process","fix":"We trace one enquiry from first contact to booked job and find where it drops. Usually it is the gap after the quote. That gets fixed first, with follow up that runs on its own.","offers":{"ms":3,"ai":2}},{"key":"cold","label":"Enquiries go cold before I get back to them","fix":"A reply within seconds to every web form, text or missed call, in your words, with your prices and your rules. Anything it is unsure about comes to you with the full thread.","offers":{"ai":3,"ms":2}},{"key":"quotes","label":"Quotes go out and never get chased","fix":"Unanswered quotes chased automatically on a schedule you set, so chasing stops being the job that gets pushed to tomorrow.","offers":{"ai":3,"ms":2}},{"key":"admin","label":"Buried in admin and follow up","fix":"The AI takes the replying, the chasing and the CRM tidying off your plate. Names, numbers and stages stay right without you touching them.","offers":{"ai":3,"db":1}},{"key":"rebook","label":"Past customers do not come back","fix":"A personal message to each past customer when they are due for their next job, written in your voice, asking if they want it booked in.","offers":{"ai":2,"db":1}},{"key":"reports","label":"Paperwork and reports after every job","fix":"End of day summaries and photo before and after reports written from the work that was actually done, not from memory at 9pm.","offers":{"db":3}},{"key":"numbers","label":"I cannot see my numbers in one place","fix":"Jobs, quotes, crew, follow up and money on one screen, pulled from the tools you already use. Ad spend sits next to the jobs it brought in.","offers":{"db":3}}];
+  var BN = [{"key":"leads","label":"Not enough enquiries","fix":"Ads built from your real jobs and your area, aimed at people ready to book. Each enquiry is matched to whether it booked.","offers":{"ms":3}},{"key":"wom","label":"Word of mouth is the only thing working","fix":"A lead source you control, so referrals become the bonus, not the plan.","offers":{"ms":3}},{"key":"ads","label":"Ads run, but no jobs","fix":"Campaign and follow up fixed together. Every click gets answered and chased, and spend is matched to booked jobs.","offers":{"ms":3,"ai":1}},{"key":"leaky","label":"Leaky sales process","fix":"We trace one enquiry end to end and find where it drops. Usually the gap after the quote. That gets fixed first.","offers":{"ms":3,"ai":2}},{"key":"cold","label":"Enquiries go cold before I reply","fix":"A reply within seconds to every form, text and missed call, in your words with your prices.","offers":{"ai":3,"ms":2}},{"key":"quotes","label":"Quotes never get chased","fix":"Unanswered quotes chased on a schedule you set, so chasing stops being tomorrow's job.","offers":{"ai":3,"ms":2}},{"key":"admin","label":"Buried in admin","fix":"The replying, chasing and CRM tidying come off your plate. Names, numbers and stages stay right.","offers":{"ai":3,"db":1}},{"key":"rebook","label":"Past customers do not come back","fix":"A personal message to each past customer when they are due, asking if they want it booked in.","offers":{"ai":2,"db":1}},{"key":"reports","label":"Paperwork after every job","fix":"End of day summaries and before and after photo reports, written from the work actually done.","offers":{"db":3}},{"key":"numbers","label":"Numbers are not in one place","fix":"Jobs, quotes, crew, follow up and money on one screen, pulled from the tools you already use.","offers":{"db":3}}];
   var OFFER_NAMES = {"ms":"Marketing + Sales","ai":"AI Automation","db":"Operations Dashboard"};
   var picked = {}, order = [];
   var s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
@@ -520,12 +550,21 @@
     props.forEach(function(p){ if (p.id === 'p-' + key) p.setAttribute('data-active',''); else p.removeAttribute('data-active'); });
   }
 
+  // tick order is the priority, so show each pick's rank on its own button
+  function paintRanks(){
+    document.querySelectorAll('.bn').forEach(function(b){
+      var i = order.indexOf(b.dataset.bn), r = b.querySelector('.rank');
+      if (r) r.textContent = i > -1 ? (i + 1) : '';
+    });
+  }
+
   function update(){
     var keys = order.slice();
+    paintRanks();
     if (!keys.length){ s2.hidden = true; s3.hidden = true; document.getElementById('print-picks').hidden = !hasAbout(); return; }
     // 02: one row per pick
     fixes.innerHTML = keys.map(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0];
-      return '<div class="fix"><div class="what">' + esc(b.label) + (i === 0 && keys.length > 1 ? '<span class="worst">Worst one</span>' : '') + '</div><div class="how">' + esc(b.fix) + '</div></div>'; }).join('');
+      return '<div class="fix"><div class="n">' + (i + 1) + '</div><div class="what">' + esc(b.label) + (i === 0 && keys.length > 1 ? '<span class="worst">Worst</span>' : '') + '</div><div class="how">' + esc(b.fix) + '</div></div>'; }).join('');
     // recommendation: score offers by the picks
     var score = { ms:0, ai:0, db:0 };
     keys.forEach(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0]; var w = i === 0 ? 2 : 1; Object.keys(b.offers).forEach(function(o){ score[o] += b.offers[o] * w; }); });
@@ -535,9 +574,9 @@
     recT.textContent = OFFER_NAMES[top];
     var first = BN.filter(function(x){ return x.key === keys[0]; })[0];
     recS.textContent = (alsoWorth
-      ? 'That covers most of what you ticked, and ' + OFFER_NAMES[alsoWorth] + ' picks up the rest. '
-      : 'That covers what you ticked. ')
-      + 'First piece: ' + first.label.toLowerCase() + '. Live before the next one starts.';
+      ? 'Covers most of it. ' + OFFER_NAMES[alsoWorth] + ' picks up the rest. '
+      : 'Covers what you ticked. ')
+      + 'First: ' + first.label.toLowerCase() + '.';
     tabs.forEach(function(tb){ var a = tb.querySelector('.also'); var k = tb.dataset.target.slice(2);
       a.hidden = !(k === top || k === alsoWorth); a.textContent = k === top ? 'fits' : 'also'; });
     // mark matching lines inside every proposal
@@ -639,7 +678,7 @@
     document.querySelectorAll('.pill').forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
     Object.keys(about).forEach(function(k){ about[k] = ''; });
     if (outEl) outEl.hidden = true;
-    if (noteEl) noteEl.textContent = 'Send opens your email with the answers filled in. If it does not open, copy them and text or email them to Phoenix.';
+    if (noteEl) noteEl.textContent = '';
     refreshAbout();
   }
   function showOut(){ outEl.hidden = false; outEl.value = summaryText(); }
@@ -648,7 +687,7 @@
   document.getElementById('ab-copy').addEventListener('click', function(){
     refreshAbout(); showOut(); outEl.select();
     var copiedMsg = 'Copied. Paste it into a text or email to Phoenix.';
-    var manualMsg = 'Select the box below, copy it, then text or email it to Phoenix.';
+    var manualMsg = 'Select the box below, copy it, then send it to Phoenix.';
     var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(outEl.value).then(function(){ noteEl.textContent = copiedMsg; }, function(){ noteEl.textContent = ok ? copiedMsg : manualMsg; });
