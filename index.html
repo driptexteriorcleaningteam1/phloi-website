@@ -185,11 +185,14 @@
   .card .tag{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep)}
   .card .tag{flex-wrap:wrap;row-gap:6px}
   .card .tag .chip{background:var(--paper-2);color:var(--ink-2);padding:5px 10px;border-radius:100px;white-space:nowrap}
+  .card h3 mark.hl{padding:.04em .16em;border-radius:4px}
+  .card .c-lede{font-family:var(--font-body);font-weight:600;font-size:15.5px;line-height:1.4;color:var(--ink);margin:0 0 12px}
 
   /* ---------- Approach ---------- */
   .approach-statement{font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.14;font-size:clamp(1.5rem,3.6vw,2.6rem);max-width:20ch;margin:0}
   .approach-statement .under{background-size:100% .28em}
   .points{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(40px,5vw,64px)}
+  .points--2{grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,34px)}
   .point{border-top:1.5px solid var(--ink);padding-top:20px}
   .point .p-mark{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--accent-deep);display:block;margin-bottom:14px}
   .point h4{font-family:var(--font-display);font-weight:600;font-size:1.3rem;letter-spacing:-.02em;margin:0 0 10px}
@@ -527,25 +530,26 @@
         </div>
       </div>
 
-      <div class="points" style="margin-top:0;margin-bottom:clamp(30px,4vw,48px)">
-        <div class="point reveal"><span class="p-mark">A</span><h4>Marketing</h4><p>Meta lead ads built for you, run by us or by you: the campaign, the creative and the form people fill in, aimed at buyers in your area, not tyre kickers.</p></div>
-        <div class="point reveal"><span class="p-mark">B</span><h4>Sales</h4><p>Your CRM and pipeline wired into the job software you already use, so every enquiry has a next step and unanswered quotes get chased automatically.</p></div>
-        <div class="point reveal"><span class="p-mark">C</span><h4>AI</h4><p>Instant replies to every enquiry in your words and with your prices, plus job reports and the admin around each job written for you. Anything it is unsure about comes to you with the full conversation.</p></div>
+      <div class="points points--2" style="margin-top:0;margin-bottom:clamp(30px,4vw,48px)">
+        <div class="point reveal"><span class="p-mark">A</span><h4>Marketing &amp; Sales</h4><p>Meta lead ads aimed at buyers in your area, not tyre kickers: the campaign, the creative and the form people fill in. Then your CRM and pipeline wired into the job software you already use, so every enquiry has a next step and unanswered quotes get chased automatically.</p></div>
+        <div class="point reveal"><span class="p-mark">B</span><h4>AI</h4><p>Instant replies to every enquiry in your words and with your prices, plus job reports and the admin around each job written for you. Anything it is unsure about comes to you with the full conversation.</p></div>
       </div>
 
       <div class="cards">
         <a class="card reveal" href="#inquiry-form">
           <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Done with you</h3>
+          <h3>Done <mark class="hl">with</mark> you</h3>
+          <p class="c-lede">You run it. We build it beside you.</p>
           <p>We build the ads, the AI and the follow-up alongside you, then hand over the keys. You run it day to day, and we stay on call when you need us.</p>
-          <span class="tag">Best if <span class="chip">run it yourself</span></span>
+          <span class="tag">Best if <span class="chip">you want the keys</span></span>
         </a>
 
         <a class="card reveal" href="#inquiry-form">
           <div class="c-top"><span class="c-num">02</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Done for you</h3>
-          <p>We build and run the whole thing: the ads, the follow-up, the AI. You watch enquiries turn into booked jobs.</p>
-          <span class="tag">Best if <span class="chip">never touch it</span></span>
+          <h3>Done <mark class="hl">for</mark> you</h3>
+          <p class="c-lede">We run it. You take the booked jobs.</p>
+          <p>We build and run the whole thing: the ads, the follow-up, the AI. Nothing lands on your plate unless it genuinely needs you.</p>
+          <span class="tag">Best if <span class="chip">you never want to touch it</span></span>
         </a>
       </div>
     </div>
@@ -587,7 +591,7 @@
 
   <hr class="rule">
 
-  <!-- 04 FAQ -->
+  <!-- 03 FAQ -->
   <section id="faq" class="band">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -630,22 +634,6 @@
           <summary>What happens on the first call? <span class="plus" aria-hidden="true"></span></summary>
           <div class="answer">About half an hour, no pitch deck. You tell us where things feel stuck, we work out what's actually causing it, and we tell you what we'd fix first. If we're not the right people for the job, we'll say so on the call rather than sell you something that won't work. It's free either way, and you'll leave knowing what's holding you back whether you hire us or not.</div>
         </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 FINAL CTA -->
-  <section class="band final">
-    <div class="wrap">
-      <span class="eyebrow eyebrow--num reveal"><b>04</b> — Last thing</span>
-      <h2 class="reveal">Tell us what's stuck.</h2>
-      <div class="cta-row reveal">
-        <a class="btn btn--accent" href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
-        <span class="eyebrow">Half an hour, no pitch deck. Free.</span>
-      </div>
-      <div class="contacts reveal">
-        <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span> @phoenixx_builds</a>
-        <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span> contact@phloi.com</a>
       </div>
     </div>
   </section>
