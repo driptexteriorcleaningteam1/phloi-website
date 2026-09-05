@@ -181,27 +181,8 @@
   .chip{font-size:13px;line-height:20px;padding:3px 9px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);color:var(--ink-2)}
   /* example dashboard: drawn, not a screenshot, so it prints and never breaks */
   .preview{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
-  .mock{border:1px solid var(--ink);border-radius:var(--r);overflow:hidden;background:var(--card)}
-  .mock-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
-  .mock-mark{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:-.02em}
-  .mock-tabs{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-  .mock-tabs i{font-style:normal}
-  .mock-tabs i.on{color:var(--ink);border-bottom:2px solid var(--accent);padding-bottom:2px}
-  .mock-body{padding:14px;display:grid;gap:12px}
-  .mock-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  .mock-tile{border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;background:var(--paper);display:flex;flex-direction:column;gap:2px;min-width:0}
-  .mock-tile.is-lit{background:var(--chosen-bg);border-color:var(--accent-deep)}
-  .mt-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .mt-n{font-family:var(--display);font-weight:600;font-size:22px;line-height:28px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .mock-cols{display:grid;grid-template-columns:1.5fr 1fr;gap:10px}
-  .mock-panel{border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;background:var(--paper);min-width:0}
-  .mp-l{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
-  .mock-chart{display:flex;align-items:flex-end;gap:6px;height:74px}
-  .mock-chart i{flex:1;background:var(--line);border-radius:2px 2px 0 0}
-  .mock-chart i.on{background:var(--accent);box-shadow:inset 0 0 0 1px var(--accent-deep)}
-  .mock-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:20px;color:var(--ink-2)}
-  .mock-list li{display:flex;align-items:baseline;gap:8px}
-  .mock-list b{font-family:var(--display);font-size:16px;color:var(--ink);min-width:18px;font-variant-numeric:tabular-nums}
+  .mock{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:6px;overflow:hidden}
+  .mock img{display:block;width:100%;height:auto;border-radius:2px}
 
   .choose{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -282,10 +263,6 @@
     .p-tag{font-size:16px;line-height:22px}
     .p-meta{flex-direction:column;gap:4px}
     .fill{white-space:normal;overflow-wrap:anywhere}
-    .mock-tiles{grid-template-columns:1fr 1fr}
-    .mock-cols{grid-template-columns:1fr}
-    .mt-n{font-size:19px;line-height:24px}
-    .mock-chart{height:60px}
     .opts{grid-template-columns:1fr}
     .opt{padding:16px}
     .price-n{font-size:20px;line-height:24px}
@@ -305,7 +282,7 @@
     .fix,.opt,.rec,.p-foot,.print-picks,.get li,.tl li,.na,.chips,.mock,.preview{break-inside:avoid;page-break-inside:avoid}
     .p-head{break-after:avoid}
     .sign-line{height:26px}
-    .opt,.opt-tick,.bn,.na-after,.mock,.mock-tile,.mock-chart i,.mock-tabs i.on{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .opt,.opt-tick,.bn,.na-after,.mock{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     a{text-decoration:none}
   }
 </style>
@@ -547,37 +524,11 @@
 
   <section class="p-sec preview">
     <h3>What it looks like</h3>
-    <div class="mock" role="img" aria-label="Example dashboard: a week view with jobs booked, quotes out, waiting on a reply and revenue this month, a booked jobs chart, and a list of who needs attention today.">
-      <div class="mock-bar">
-        <span class="mock-mark">Dashboard</span>
-        <span class="mock-tabs"><i class="on">This week</i><i>Jobs</i><i>Quotes</i><i>Follow ups</i><i>Money</i></span>
-      </div>
-      <div class="mock-body">
-        <div class="mock-tiles">
-          <div class="mock-tile"><span class="mt-l">Jobs booked</span><span class="mt-n">14</span></div>
-          <div class="mock-tile"><span class="mt-l">Quotes out</span><span class="mt-n">9</span></div>
-          <div class="mock-tile"><span class="mt-l">Waiting on a reply</span><span class="mt-n">6</span></div>
-          <div class="mock-tile is-lit"><span class="mt-l">Revenue this month</span><span class="mt-n">$42k</span></div>
-        </div>
-        <div class="mock-cols">
-          <div class="mock-panel">
-            <span class="mp-l">Booked jobs, last 8 weeks</span>
-            <div class="mock-chart" aria-hidden="true">
-              <i style="height:38%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:79%"></i><i style="height:71%"></i><i class="on" style="height:92%"></i>
-            </div>
-          </div>
-          <div class="mock-panel">
-            <span class="mp-l">Needs you today</span>
-            <ul class="mock-list">
-              <li><b>4</b> need a quote</li>
-              <li><b>6</b> quotes to chase</li>
-              <li><b>9</b> due to book back in</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div class="mock">
+      <img src="/dashboard-example.png" width="1440" height="764" loading="lazy" decoding="async"
+           alt="The Dript dashboard: today's revenue, payments to be collected, jobs booked in the next 7 days, weekly revenue against target, ROAS, weekly and daily leads, and quote win rate.">
     </div>
-    <p class="note">An example, with example numbers. Yours is built around your jobs, your numbers and the tools you already use, so the screens are named after how you actually work.</p>
+    <p class="note">This is the dashboard we run Dript on, with example figures in place of live customer data. Yours is built around your jobs, your numbers and the tools you already use, so the screens are named after how you actually work.</p>
   </section>
 
   <section class="p-sec choose">
