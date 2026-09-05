@@ -60,7 +60,7 @@
   #s-about{order:2}
 
   /* the one main page: three options, nothing else to decide */
-  .picks{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+  .picks{display:flex;flex-direction:column;border-top:1px solid var(--ink);margin-top:24px}
   .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
   .pick:hover,.pick:focus-visible{background:var(--chosen-bg)}
   .pick .pk-k{grid-area:k;font-family:var(--mono);font-size:12px;line-height:26px;color:var(--ink-3);font-variant-numeric:tabular-nums}
@@ -295,8 +295,7 @@
 <main class="doc">
 
   <section class="step-card" id="s-pick">
-    <div class="step-k"><h2>What do you need?</h2></div>
-    <p class="step-sub">What fits you best? You can look at the other two after.</p>
+    <div class="step-k"><h2>What Fits You Best</h2></div>
     <div class="picks" role="group" aria-label="Choose a proposal">
       <button type="button" class="pick" data-offer="db" aria-pressed="false">
         <span class="pk-k">01</span>
