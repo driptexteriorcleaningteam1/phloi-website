@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proposal · Phloi</title>
-<meta name="description" content="Tell us what is holding the business back and see the proposal that fits.">
+<meta name="description" content="Pick what you need and see the proposal: what you get, how it works, and what it costs.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
@@ -52,9 +52,28 @@
   .btn:focus-visible,.fill:focus-visible,.opt:focus-visible,.bn:focus-visible,.tab:focus-visible,.pill:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
 
   /* document frame: ruled sections on one left edge */
-  .doc{max-width:840px;margin:0 auto;padding:0 24px 96px;display:block}
+  .doc{max-width:840px;margin:0 auto;padding:0 24px 96px;display:flex;flex-direction:column}
   .step-card{border-top:1px solid var(--line);padding:32px 0 40px}
   .step-card:first-child{border-top:0;padding-top:28px}
+  /* the chosen proposal reads first, the questions come after it */
+  #s3{order:1;border-top:0;padding-top:28px}
+  #s-about{order:2}
+
+  /* the one main page: three options, nothing else to decide */
+  .picks{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+  .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d ." ". p .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
+  .pick:hover,.pick:focus-visible{background:var(--chosen-bg)}
+  .pick .pk-k{grid-area:k;font-family:var(--mono);font-size:12px;line-height:26px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .pick .pk-t{grid-area:t;font-family:var(--display);font-weight:600;font-size:20px;line-height:26px;letter-spacing:-.02em}
+  .pick .pk-d{grid-area:d;color:var(--ink-2);font-size:14.5px;line-height:21px;max-width:60ch;margin-top:2px}
+  .pick .pk-p{grid-area:p;font-family:var(--mono);font-size:12px;line-height:20px;color:var(--accent-deep);margin-top:8px}
+  .pick .pk-arw{grid-area:a;font-size:18px;line-height:26px;color:var(--ink-3);text-align:right;transition:transform .15s ease,color .15s ease}
+  .pick:hover .pk-arw{color:var(--ink);transform:translateX(3px)}
+
+  .back-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .back-others{color:var(--ink-3);font-size:13px;line-height:20px}
+  .back-others .lnk{font:inherit;color:var(--ink-2);background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:0;cursor:pointer}
+  .back-others .lnk:hover{color:var(--ink);border-bottom-color:var(--ink)}
   .step-k{margin-bottom:4px}
   .step-k h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.015em}
   .step-sub{color:var(--ink-2);max-width:none;margin-bottom:24px}
@@ -197,8 +216,10 @@
     .step-card:first-child{padding-top:16px}
     .step-k h2{font-size:20px;line-height:26px}
     .step-sub{font-size:14px;line-height:22px;margin-bottom:18px}
-    .bn-groups{grid-template-columns:1fr;gap:18px}
-    .bn{min-height:48px}
+    .pick{grid-template-columns:26px 1fr 20px;padding:16px 2px}
+    .pick .pk-t{font-size:18px}
+    .pick .pk-d{font-size:14px;line-height:20px}
+    .back-row .btn{width:100%;height:44px}
     .about{gap:18px}
     .ab-row{grid-template-columns:1fr;gap:14px}
     .about input{height:44px;font-size:16px}
@@ -238,7 +259,7 @@
     @page{margin:16mm 18mm}
     :root{--paper:#fff;--card:#fff;--ink:#0f0f0d;--ink-2:#3d3b36;--ink-3:#6f6c64;--line:#bbb;--line-2:#ddd;--accent-deep:#3f5a08;--fill-bg:transparent;--chosen-bg:#f1f8e0}
     body{font-size:12px;line-height:18px}
-    .bar,#s1,#s-about,#s2,.tabs,.opt-pick,#s3 > .step-k,#s3 > .step-sub{display:none!important}
+    .bar,#s-pick,#s-about,.tabs,.back-row,.opt-pick,#s3 > .step-k,#s3 > .step-sub{display:none!important}
     .doc{max-width:none;padding:0}
     .step-card{border:0;padding:0;animation:none}
     .print-picks{display:block;margin-bottom:22px;padding:12px 16px;border:1px solid var(--line)}
@@ -264,42 +285,44 @@
 
 <main class="doc">
 
-  <section class="step-card" id="s1">
-    <div class="step-k"><h2>What is holding you back?</h2></div>
-    <p class="step-sub">Tick everything that applies. Worst one first.</p>
-    <div class="bn-groups" role="group" aria-label="Your bottlenecks. Tick everything that applies, worst first.">
-      <div class="bn-group">
-        <span class="bn-label">Marketing</span>
-        <div class="bns">
-          <button type="button" class="bn" data-bn="leads" aria-pressed="false">Not enough enquiries<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="wom" aria-pressed="false">Word of mouth is the only thing working<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="ads" aria-pressed="false">Ads run, but no jobs<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="leaky" aria-pressed="false">Leaky sales process<span class="rank"></span></button>
-        </div>
-      </div>
-      <div class="bn-group">
-        <span class="bn-label">AI &amp; automation</span>
-        <div class="bns">
-          <button type="button" class="bn" data-bn="quotes" aria-pressed="false">Quotes never get chased<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="admin" aria-pressed="false">Buried in admin<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="reports" aria-pressed="false">Paperwork after every job<span class="rank"></span></button>
-          <button type="button" class="bn" data-bn="numbers" aria-pressed="false">Numbers are not in one place<span class="rank"></span></button>
-        </div>
-      </div>
+  <section class="step-card" id="s-pick">
+    <div class="step-k"><h2>What do you need?</h2></div>
+    <p class="step-sub">Pick the one closest to your problem. You can look at the other two after.</p>
+    <div class="picks" role="group" aria-label="Choose a proposal">
+      <button type="button" class="pick" data-offer="db">
+        <span class="pk-k">01</span>
+        <span class="pk-t">Operations Dashboard</span>
+        <span class="pk-d">Jobs, quotes, crew, follow up and money on one screen, sitting on top of the tools you already use.</span>
+        <span class="pk-p">From $6,500 one off, then $450 a month</span>
+        <span class="pk-arw" aria-hidden="true">→</span>
+      </button>
+      <button type="button" class="pick" data-offer="ai">
+        <span class="pk-k">02</span>
+        <span class="pk-t">AI Automation</span>
+        <span class="pk-d">Every enquiry answered in seconds, every quote chased, the admin around each job written for you.</span>
+        <span class="pk-p">$4,800 one off, then $250 a month</span>
+        <span class="pk-arw" aria-hidden="true">→</span>
+      </button>
+      <button type="button" class="pick" data-offer="ms">
+        <span class="pk-k">03</span>
+        <span class="pk-t">Marketing + Sales</span>
+        <span class="pk-d">Ads aimed at people who actually buy, and the follow up that turns them into booked jobs.</span>
+        <span class="pk-p">$4,800 one off, then $250 a month</span>
+        <span class="pk-arw" aria-hidden="true">→</span>
+      </button>
     </div>
   </section>
 
-  <section class="step-card" id="s-about">
+  <section class="step-card" id="s-about" hidden>
     <div class="step-k"><h2>A bit about the business</h2></div>
     <p class="step-sub">Short answers are fine. This is what I read before the call.</p>
     <form class="about" id="proposal-form" name="phloi-proposal" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="phloi-proposal">
       <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
-      <input type="hidden" name="bottlenecks" id="h-bottlenecks">
+      <input type="hidden" name="proposal" id="h-proposal">
       <input type="hidden" name="wants" id="h-wants">
       <input type="hidden" name="turnover" id="h-turnover">
       <input type="hidden" name="target" id="h-target">
-      <input type="hidden" name="where-we-would-start" id="h-start">
       <input type="hidden" name="option-chosen" id="h-option">
       <div class="ab-row">
         <label class="ab-f"><span class="ab-l">Your name</span><input id="ab-name" name="name" type="text" autocomplete="name" placeholder="First name"></label>
@@ -308,7 +331,7 @@
       <div class="ab-f">
         <span class="ab-l">How do you want it built?</span>
         <div class="pills" data-group="solution" role="group" aria-label="How you want it built">
-          <button type="button" class="pill" data-v="Done for you (I build it)" aria-pressed="false">Done for you</button><button type="button" class="pill" data-v="Done next to you (I teach you to build it)" aria-pressed="false">Done next to you</button>
+          <button type="button" class="pill" data-v="Done for you (I build it)" aria-pressed="false">Done for you</button><button type="button" class="pill" data-v="Done with you (I teach you to build it)" aria-pressed="false">Done with you</button>
         </div>
       </div>
       <div class="ab-f">
@@ -335,29 +358,12 @@
     </form>
   </section>
 
-  <section class="step-card" id="s2" hidden>
-    <div class="step-k"><h2>What can be done about it</h2></div>
-    <p class="step-sub">Worst first. Nothing here replaces the tools you already use.</p>
-    <div class="fixes" id="fixes"></div>
-    <div class="rec" id="rec">
-      <div>
-        <div class="rec-l">Where we'd start</div>
-        <div class="rec-t" id="rec-t"></div>
-        <div class="rec-s" id="rec-s"></div>
-      </div>
-      <button class="btn" type="button" id="rec-go">See the proposal ↓</button>
-    </div>
-  </section>
-
   <section class="step-card" id="s3" hidden>
-    <div class="step-k"><h2>The proposal</h2></div>
-    <p class="step-sub">The one that fits is open. The others are a tap away.</p>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="false" data-target="p-ms">Marketing + Sales<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-ai">AI Automation<span class="also" hidden></span></button><button class="tab" role="tab" aria-selected="false" data-target="p-db">Operations Dashboard<span class="also" hidden></span></button>
+    <div class="back-row">
+      <button class="btn btn--ghost" type="button" id="back">← All three options</button>
+      <span class="back-others" id="back-others"></span>
     </div>
     <div class="print-picks" id="print-picks" hidden>
-      <h3>What is slowing you down, worst first</h3>
-      <ul id="print-picks-list"></ul>
       <div id="print-about" hidden>
         <h3>About the business</h3>
         <ul id="print-about-list"></ul>
@@ -397,14 +403,14 @@
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>Built alongside you, then the keys are yours.</li><li>You own the ad account and the settings.</li><li>We stay on call for fixes.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting and support</span></span></span>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">$250</span></span><span class="price-l">a month, hosting and support</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>We build it and run it: ads, follow up, pipeline.</li><li>You sign off anything new.</li><li>Your ad budget stays the figure you set.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, we run it</span></span></span>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, we run it</span></span></span>
   </button>
     </div>
     <p class="note">Ad spend is separate, paid from your own Meta account, and stays yours to raise, lower or pause.</p>
@@ -453,14 +459,14 @@
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>Built with you, then the keys are yours.</li><li>You change the wording, prices and chase schedule.</li><li>We fix it if a tool changes its connection.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting and changes</span></span></span>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">$250</span></span><span class="price-l">a month, hosting and changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>We build it and run it, and watch the replies.</li><li>You sign off anything new.</li><li>If something breaks you hear it from us, not a customer.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">[Fixed price]</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, we run it</span></span></span>
+    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, we run it</span></span></span>
   </button>
     </div>
     <p class="note">The written scope lists what goes in the first build. Anything added later is priced in writing first.</p>
@@ -516,7 +522,7 @@
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>Same build, then we run it.</li><li>You sign off anything new.</li><li>You open it and watch jobs land.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">[Monthly]</span></span><span class="price-l">a month, hosting plus us running it</span></span></span>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, hosting plus us running it</span></span></span>
   </button>
     </div>
     <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. Your data stays yours, exportable any time.</p>
@@ -537,72 +543,50 @@
 
 <script>
 (function(){
-  var BN = [{"key":"leads","label":"Not enough enquiries","fix":"Ads built from your real jobs and your area, aimed at people ready to book. Each enquiry is matched to whether it booked.","offers":{"ms":3}},{"key":"wom","label":"Word of mouth is the only thing working","fix":"A lead source you control, so referrals become the bonus, not the plan.","offers":{"ms":3}},{"key":"ads","label":"Ads run, but no jobs","fix":"Campaign and follow up fixed together. Every click gets answered and chased, and spend is matched to booked jobs.","offers":{"ms":3,"ai":1}},{"key":"leaky","label":"Leaky sales process","fix":"We trace one enquiry end to end and find where it drops. Usually the gap after the quote. That gets fixed first.","offers":{"ms":3,"ai":2}},{"key":"cold","label":"Enquiries go cold before I reply","fix":"A reply within seconds to every form, text and missed call, in your words with your prices.","offers":{"ai":3,"ms":2}},{"key":"quotes","label":"Quotes never get chased","fix":"Unanswered quotes chased on a schedule you set, so chasing stops being tomorrow's job.","offers":{"ai":3,"ms":2}},{"key":"admin","label":"Buried in admin","fix":"The replying, chasing and CRM tidying come off your plate. Names, numbers and stages stay right.","offers":{"ai":3,"db":1}},{"key":"rebook","label":"Past customers do not come back","fix":"A personal message to each past customer when they are due, asking if they want it booked in.","offers":{"ai":2,"db":1}},{"key":"reports","label":"Paperwork after every job","fix":"End of day summaries and before and after photo reports, written from the work actually done.","offers":{"db":3}},{"key":"numbers","label":"Numbers are not in one place","fix":"Jobs, quotes, crew, follow up and money on one screen, pulled from the tools you already use.","offers":{"db":3}}];
-  var OFFER_NAMES = {"ms":"Marketing + Sales","ai":"AI Automation","db":"Operations Dashboard"};
-  var picked = {}, order = [];
-  var s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
-  var fixes = document.getElementById('fixes'), recT = document.getElementById('rec-t'), recS = document.getElementById('rec-s');
-  var tabs = document.querySelectorAll('.tab'), props = document.querySelectorAll('.proposal');
+  var OFFER_NAMES = { ms:'Marketing + Sales', ai:'AI Automation', db:'Operations Dashboard' };
+  var ORDER = ['db','ai','ms'];
+  var chosen = '';
+  var pickSec = document.getElementById('s-pick'), s3 = document.getElementById('s3'), aboutSec = document.getElementById('s-about');
+  var others = document.getElementById('back-others');
+  var props = document.querySelectorAll('.proposal');
   var esc = function(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); };
 
-  function showOffer(key){
-    tabs.forEach(function(x){ x.setAttribute('aria-selected', String(x.dataset.target === 'p-' + key)); });
+  // One page, three options. Picking one routes to that proposal and nothing else.
+  function showOffer(key, scroll){
+    if (!OFFER_NAMES[key]) return;
+    chosen = key;
     props.forEach(function(p){ if (p.id === 'p-' + key) p.setAttribute('data-active',''); else p.removeAttribute('data-active'); });
+    pickSec.hidden = true; s3.hidden = false; aboutSec.hidden = false;
+    others.innerHTML = 'Or look at ' + ORDER.filter(function(k){ return k !== key; })
+      .map(function(k){ return '<button type="button" class="lnk" data-offer="' + k + '">' + esc(OFFER_NAMES[k]) + '</button>'; })
+      .join(' and ') + '.';
+    others.querySelectorAll('.lnk').forEach(function(b){ b.addEventListener('click', function(){ showOffer(b.dataset.offer, true); }); });
+    refreshAbout();
+    if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // tick order is the priority, so show each pick's rank on its own button
-  function paintRanks(){
-    document.querySelectorAll('.bn').forEach(function(b){
-      var i = order.indexOf(b.dataset.bn), r = b.querySelector('.rank');
-      if (r) r.textContent = i > -1 ? (i + 1) : '';
-    });
+  function showPicker(){
+    chosen = '';
+    props.forEach(function(p){ p.removeAttribute('data-active'); });
+    pickSec.hidden = false; s3.hidden = true; aboutSec.hidden = true;
+    refreshAbout();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function update(){
-    var keys = order.slice();
-    paintRanks();
-    if (!keys.length){ s2.hidden = true; s3.hidden = true; document.getElementById('print-picks').hidden = !hasAbout(); return; }
-    // 02: one row per pick
-    fixes.innerHTML = keys.map(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0];
-      return '<div class="fix"><div class="n">' + (i + 1) + '</div><div class="what">' + esc(b.label) + (i === 0 && keys.length > 1 ? '<span class="worst">Worst</span>' : '') + '</div><div class="how">' + esc(b.fix) + '</div></div>'; }).join('');
-    // recommendation: score offers by the picks
-    var score = { ms:0, ai:0, db:0 };
-    keys.forEach(function(k, i){ var b = BN.filter(function(x){ return x.key === k; })[0]; var w = i === 0 ? 2 : 1; Object.keys(b.offers).forEach(function(o){ score[o] += b.offers[o] * w; }); });
-    var ranked = Object.keys(score).sort(function(a, b){ return score[b] - score[a]; });
-    var top = ranked[0], second = ranked[1];
-    var alsoWorth = score[second] > 0 && score[second] >= score[top] * 0.6 ? second : null;
-    recT.textContent = OFFER_NAMES[top];
-    var first = BN.filter(function(x){ return x.key === keys[0]; })[0];
-    recS.textContent = (alsoWorth
-      ? 'Covers most of it. ' + OFFER_NAMES[alsoWorth] + ' picks up the rest. '
-      : 'Covers what you ticked. ')
-      + 'First: ' + first.label.toLowerCase() + '.';
-    tabs.forEach(function(tb){ var a = tb.querySelector('.also'); var k = tb.dataset.target.slice(2);
-      a.hidden = !(k === top || k === alsoWorth); a.textContent = k === top ? 'fits' : 'also'; });
-    // mark matching lines inside every proposal
-    document.querySelectorAll('.get li').forEach(function(li){ li.classList.toggle('is-match', (li.dataset.bn || '').split(/\s+/).some(function(k){ return keys.indexOf(k) > -1; })); });
-    // printed summary
-    var pl = document.getElementById('print-picks-list'); pl.innerHTML = keys.map(function(k){ return '<li>' + esc(BN.filter(function(x){ return x.key === k; })[0].label) + '</li>'; }).join('');
-    document.getElementById('print-picks').hidden = false;
-    s2.hidden = false; s3.hidden = false;
-    showOffer(top);
-  }
-
-  document.querySelectorAll('.bn').forEach(function(b){ b.addEventListener('click', function(){
-    var k = b.dataset.bn, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); picked[k] = on;
-    var i = order.indexOf(k); if (on && i < 0) order.push(k); if (!on && i > -1) order.splice(i, 1); update();
-  }); });
-  document.getElementById('rec-go').addEventListener('click', function(){ s3.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-  tabs.forEach(function(tb){ tb.addEventListener('click', function(){ showOffer(tb.dataset.target.slice(2)); }); });
+  document.querySelectorAll('.pick').forEach(function(b){
+    b.addEventListener('click', function(){ showOffer(b.dataset.offer, true); });
+  });
+  document.getElementById('back').addEventListener('click', showPicker);
 
   // Done with you / Done for you: exclusive per proposal, written onto the sign-off line.
   props.forEach(function(p){
-    var opts = p.querySelectorAll('.opt'), chosen = p.querySelector('[data-chosen]');
+    var opts = p.querySelectorAll('.opt'), signLine = p.querySelector('[data-chosen]');
     opts.forEach(function(o){ o.addEventListener('click', function(){
       var on = o.getAttribute('aria-pressed') !== 'true';
       opts.forEach(function(x){ x.setAttribute('aria-pressed', 'false'); x.querySelector('.opt-pick').textContent = x.querySelector('.opt-pick').dataset.off; });
       o.setAttribute('aria-pressed', String(on)); o.querySelector('.opt-pick').textContent = on ? o.querySelector('.opt-pick').dataset.on : o.querySelector('.opt-pick').dataset.off;
-      chosen.textContent = on ? o.querySelector('.opt-name').textContent : '';
+      signLine.textContent = on ? o.querySelector('.opt-name').textContent : '';
+      refreshAbout();
     }); });
   });
 
@@ -611,17 +595,22 @@
     document.querySelectorAll('.fill[data-fill="' + key + '"]').forEach(function(el){ el.textContent = val || fallback; el.classList.toggle('set', !!val); });
   }
   document.querySelectorAll('.fill').forEach(function(el){
+    el.dataset.original = el.textContent;
     el.addEventListener('focus', function(){ if (/^\[.*\]$/.test(el.textContent.trim())) { el.dataset.placeholder = el.textContent; el.textContent = ''; } });
-    el.addEventListener('blur', function(){ var v = el.textContent.trim(); if (!v) { el.textContent = el.dataset.placeholder || ''; el.classList.remove('set'); } else el.classList.add('set'); });
+    el.addEventListener('blur', function(){
+      var v = el.textContent.trim();
+      if (!v) { el.textContent = el.dataset.placeholder || el.dataset.original || ''; el.classList.toggle('set', !/^\[.*\]$/.test(el.textContent.trim())); }
+      else el.classList.add('set');
+    });
     el.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
     el.addEventListener('click', function(e){ e.stopPropagation(); });
   });
   var d = new Date(), m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   fillAll('date', d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear(), '[Date]');
 
-  // 02 About the business: answers, Send to Phoenix (prefilled email), copy fallback.
-  var about = { name: '', business: '', contact: '', solution: '', rev: '', target: '', goals: '', tried: '', success: '' };
-  var sendA = document.getElementById('ab-send'), outEl = document.getElementById('ab-out'), noteEl = document.getElementById('ab-note');
+  // About the business: answers submitted to Phoenix, with a copy fallback.
+  var about = { name: '', business: '', solution: '', rev: '', target: '', goals: '', tried: '', success: '' };
+  var outEl = document.getElementById('ab-out'), noteEl = document.getElementById('ab-note');
   function bindText(id, key){ var el = document.getElementById(id); if (!el) return; el.addEventListener('input', function(){ about[key] = el.value.trim(); refreshAbout(); }); }
   bindText('ab-name', 'name'); bindText('ab-business', 'business');
   bindText('ab-goals', 'goals'); bindText('ab-tried', 'tried'); bindText('ab-success', 'success');
@@ -633,15 +622,13 @@
       p.setAttribute('aria-pressed', String(on)); about[key] = on ? p.dataset.v : ''; refreshAbout();
     }); });
   });
-  function hasAbout(){ return Object.keys(about).some(function(k){ return about[k]; }); }
   function chosenOption(){ var el = document.querySelector('.proposal[data-active] [data-chosen]'); return el && el.textContent.trim() ? el.textContent.trim() : ''; }
-  function labelFor(k){ var b = BN.filter(function(x){ return x.key === k; })[0]; return b ? b.label : k; }
   function summaryText(){
     var L = [];
     L.push('Proposal answers from ' + (about.name || '[name]') + (about.business ? ', ' + about.business : ''));
     L.push('');
-    L.push('Slowing the business down (worst first):');
-    if (!order.length) L.push('- nothing ticked'); else order.forEach(function(k){ L.push('- ' + labelFor(k)); });
+    L.push('Looking at: ' + (OFFER_NAMES[chosen] || '[nothing picked]'));
+    if (chosenOption()) L.push('Option chosen: ' + chosenOption());
     L.push('');
     L.push('Wants: ' + (about.solution || '[not answered]'));
     L.push('Turnover a month: ' + (about.rev || '[not answered]'));
@@ -650,19 +637,16 @@
     L.push('Tried already: ' + (about.tried || '[not answered]'));
     L.push('Success in 90 days: ' + (about.success || '[not answered]'));
     L.push('');
-    if (order.length) L.push('Where we would start: ' + recT.textContent);
-    if (chosenOption()) L.push('Option chosen: ' + chosenOption());
     var dateEl = document.querySelector('.fill[data-fill="date"]');
-    L.push('Sent from the Phloi Proposal Pack' + (dateEl ? ', ' + dateEl.textContent : ''));
+    L.push('Sent from the Phloi proposal page' + (dateEl ? ', ' + dateEl.textContent : ''));
     return L.join('\n');
   }
   function refreshAbout(){
     var setH = function(id, v){ var el = document.getElementById(id); if (el) el.value = v; };
-    setH('h-bottlenecks', order.map(function(k){ return labelFor(k); }).join(' | '));
+    setH('h-proposal', OFFER_NAMES[chosen] || '');
     setH('h-wants', about.solution);
     setH('h-turnover', about.rev);
     setH('h-target', about.target);
-    setH('h-start', order.length ? recT.textContent : '');
     setH('h-option', chosenOption());
     if (outEl && !outEl.hidden) outEl.value = summaryText();
     var pl = document.getElementById('print-about-list'), pa = document.getElementById('print-about');
@@ -670,11 +654,11 @@
       var rows = [['Wants', about.solution], ['Turnover a month', about.rev], ['3 month target', about.target], ['Trying to get to', about.goals], ['Tried already', about.tried], ['Success in 90 days', about.success]].filter(function(r){ return r[1]; });
       pl.innerHTML = rows.map(function(r){ return '<li><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</li>'; }).join('');
       pa.hidden = !rows.length;
-      if (!order.length) document.getElementById('print-picks').hidden = !rows.length;
+      document.getElementById('print-picks').hidden = !rows.length;
     }
   }
   function resetAbout(){
-    document.querySelectorAll('.about input, .about textarea').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('.about input:not([type="hidden"]), .about textarea').forEach(function(el){ el.value = ''; });
     document.querySelectorAll('.pill').forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
     Object.keys(about).forEach(function(k){ about[k] = ''; });
     if (outEl) outEl.hidden = true;
@@ -697,7 +681,9 @@
 
   document.getElementById('print').addEventListener('click', function(){ window.print(); });
   document.getElementById('reset').addEventListener('click', function(){
-    picked = {}; order = []; document.querySelectorAll('.bn').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); }); update(); resetAbout(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); o.querySelector('.opt-pick').textContent = o.querySelector('.opt-pick').dataset.off; });
+    document.querySelectorAll('[data-chosen]').forEach(function(el){ el.textContent = ''; });
+    resetAbout(); showPicker();
   });
 })();
 </script>
