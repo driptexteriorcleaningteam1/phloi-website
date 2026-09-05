@@ -67,8 +67,18 @@
   .pick .pk-t{grid-area:t;font-family:var(--display);font-weight:600;font-size:20px;line-height:26px;letter-spacing:-.02em}
   .pick .pk-d{grid-area:d;color:var(--ink-2);font-size:14.5px;line-height:21px;max-width:60ch;margin-top:2px}
   .pick .pk-p{grid-area:p;font-family:var(--mono);font-size:12px;line-height:20px;color:var(--accent-deep);margin-top:8px}
-  .pick .pk-arw{grid-area:a;font-size:18px;line-height:26px;color:var(--ink-3);text-align:right;transition:transform .15s ease,color .15s ease}
-  .pick:hover .pk-arw{color:var(--ink);transform:translateX(3px)}
+  .pick .pk-tick{grid-area:a;justify-self:end;align-self:start;position:relative;margin-top:4px;width:18px;height:18px;border-radius:2px;border:1px solid var(--ink-3);background:var(--card)}
+  .pick:hover .pk-tick{border-color:var(--ink)}
+  .pick[aria-pressed="true"]{background:var(--chosen-bg)}
+  .pick[aria-pressed="true"] .pk-tick{background:var(--ink);border-color:var(--ink)}
+  .pick[aria-pressed="true"] .pk-tick::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:9px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+  /* the way forward, always visible under the three */
+  .next-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .next-row .btn{height:44px;padding:0 20px;font-size:15px}
+  .next-row .btn[disabled]{opacity:.35;cursor:not-allowed}
+  .next-row .btn[disabled]:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .next-note{color:var(--ink-3);font-size:13px;line-height:20px}
 
   .back-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
   .back-others{color:var(--ink-3);font-size:13px;line-height:20px}
@@ -289,27 +299,31 @@
     <div class="step-k"><h2>What do you need?</h2></div>
     <p class="step-sub">Pick the one closest to your problem. You can look at the other two after.</p>
     <div class="picks" role="group" aria-label="Choose a proposal">
-      <button type="button" class="pick" data-offer="db">
+      <button type="button" class="pick" data-offer="db" aria-pressed="false">
         <span class="pk-k">01</span>
         <span class="pk-t">Operations Dashboard</span>
         <span class="pk-d">Jobs, quotes, crew, follow up and money on one screen, sitting on top of the tools you already use.</span>
         <span class="pk-p">From $6,500 one off, then $450 a month</span>
-        <span class="pk-arw" aria-hidden="true">→</span>
+        <span class="pk-tick" aria-hidden="true"></span>
       </button>
-      <button type="button" class="pick" data-offer="ai">
+      <button type="button" class="pick" data-offer="ai" aria-pressed="false">
         <span class="pk-k">02</span>
         <span class="pk-t">AI Automation</span>
         <span class="pk-d">Every enquiry answered in seconds, every quote chased, the admin around each job written for you.</span>
         <span class="pk-p">$4,800 one off, then $250 a month</span>
-        <span class="pk-arw" aria-hidden="true">→</span>
+        <span class="pk-tick" aria-hidden="true"></span>
       </button>
-      <button type="button" class="pick" data-offer="ms">
+      <button type="button" class="pick" data-offer="ms" aria-pressed="false">
         <span class="pk-k">03</span>
         <span class="pk-t">Marketing + Sales</span>
         <span class="pk-d">Ads aimed at people who actually buy, and the follow up that turns them into booked jobs.</span>
         <span class="pk-p">$4,800 one off, then $250 a month</span>
-        <span class="pk-arw" aria-hidden="true">→</span>
+        <span class="pk-tick" aria-hidden="true"></span>
       </button>
+    </div>
+    <div class="next-row">
+      <button class="btn" type="button" id="go" disabled>See the proposal →</button>
+      <span class="next-note" id="next-note">Pick one above to keep going.</span>
     </div>
   </section>
 
@@ -561,6 +575,7 @@
       .map(function(k){ return '<button type="button" class="lnk" data-offer="' + k + '">' + esc(OFFER_NAMES[k]) + '</button>'; })
       .join(' and ') + '.';
     others.querySelectorAll('.lnk').forEach(function(b){ b.addEventListener('click', function(){ showOffer(b.dataset.offer, true); }); });
+    select(key);
     refreshAbout();
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -573,9 +588,18 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  document.querySelectorAll('.pick').forEach(function(b){
-    b.addEventListener('click', function(){ showOffer(b.dataset.offer, true); });
-  });
+  // The three options select. The button under them is the way forward.
+  var picks = document.querySelectorAll('.pick');
+  var goBtn = document.getElementById('go'), nextNote = document.getElementById('next-note');
+  var selected = '';
+  function select(key){
+    selected = OFFER_NAMES[key] ? key : '';
+    picks.forEach(function(p){ p.setAttribute('aria-pressed', String(p.dataset.offer === selected)); });
+    goBtn.disabled = !selected;
+    nextNote.textContent = selected ? 'Next: ' + OFFER_NAMES[selected] + '.' : 'Pick one above to keep going.';
+  }
+  picks.forEach(function(b){ b.addEventListener('click', function(){ select(b.dataset.offer); }); });
+  goBtn.addEventListener('click', function(){ if (selected) showOffer(selected, true); });
   document.getElementById('back').addEventListener('click', showPicker);
 
   // Done with you / Done for you: exclusive per proposal, written onto the sign-off line.
@@ -683,7 +707,7 @@
   document.getElementById('reset').addEventListener('click', function(){
     document.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); o.querySelector('.opt-pick').textContent = o.querySelector('.opt-pick').dataset.off; });
     document.querySelectorAll('[data-chosen]').forEach(function(el){ el.textContent = ''; });
-    resetAbout(); showPicker();
+    select(''); resetAbout(); showPicker();
   });
 })();
 </script>
