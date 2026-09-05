@@ -61,12 +61,11 @@
 
   /* the one main page: three options, nothing else to decide */
   .picks{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
-  .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d ." ". p .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
+  .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
   .pick:hover,.pick:focus-visible{background:var(--chosen-bg)}
   .pick .pk-k{grid-area:k;font-family:var(--mono);font-size:12px;line-height:26px;color:var(--ink-3);font-variant-numeric:tabular-nums}
   .pick .pk-t{grid-area:t;font-family:var(--display);font-weight:600;font-size:20px;line-height:26px;letter-spacing:-.02em}
   .pick .pk-d{grid-area:d;color:var(--ink-2);font-size:14.5px;line-height:21px;max-width:60ch;margin-top:2px}
-  .pick .pk-p{grid-area:p;font-family:var(--mono);font-size:12px;line-height:20px;color:var(--accent-deep);margin-top:8px}
   .pick .pk-tick{grid-area:a;justify-self:end;align-self:start;position:relative;margin-top:4px;width:18px;height:18px;border-radius:2px;border:1px solid var(--ink-3);background:var(--card)}
   .pick:hover .pk-tick{border-color:var(--ink)}
   .pick[aria-pressed="true"]{background:var(--chosen-bg)}
@@ -301,28 +300,25 @@
     <div class="picks" role="group" aria-label="Choose a proposal">
       <button type="button" class="pick" data-offer="db" aria-pressed="false">
         <span class="pk-k">01</span>
-        <span class="pk-t">Operations Dashboard</span>
+        <span class="pk-t">Your Custom Dashboard</span>
         <span class="pk-d">Jobs, quotes, crew, follow up and money on one screen, sitting on top of the tools you already use.</span>
-        <span class="pk-p">From $6,500 one off, then $450 a month</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
       <button type="button" class="pick" data-offer="ai" aria-pressed="false">
         <span class="pk-k">02</span>
         <span class="pk-t">AI Automation</span>
         <span class="pk-d">Every enquiry answered in seconds, every quote chased, the admin around each job written for you.</span>
-        <span class="pk-p">$4,800 one off, then $250 a month</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
       <button type="button" class="pick" data-offer="ms" aria-pressed="false">
         <span class="pk-k">03</span>
         <span class="pk-t">Marketing + Sales</span>
         <span class="pk-d">Ads aimed at people who actually buy, and the follow up that turns them into booked jobs.</span>
-        <span class="pk-p">$4,800 one off, then $250 a month</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
     </div>
     <div class="next-row">
-      <button class="btn" type="button" id="go" disabled>See the proposal →</button>
+      <button class="btn" type="button" id="go" disabled>Next →</button>
       <span class="next-note" id="next-note">Pick one above to keep going.</span>
     </div>
   </section>
@@ -502,7 +498,7 @@
       <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
-    <h2 class="p-title">Operations Dashboard</h2>
+    <h2 class="p-title">Your Custom Dashboard</h2>
     <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system I run Dript on.</p>
     <div class="na">
       <div><span class="na-l">Now</span><span class="na-t">The picture is split across job software, inbox, calendar and ad account. None of them talk.</span></div>
@@ -557,7 +553,7 @@
 
 <script>
 (function(){
-  var OFFER_NAMES = { ms:'Marketing + Sales', ai:'AI Automation', db:'Operations Dashboard' };
+  var OFFER_NAMES = { ms:'Marketing + Sales', ai:'AI Automation', db:'Your Custom Dashboard' };
   var ORDER = ['db','ai','ms'];
   var chosen = '';
   var pickSec = document.getElementById('s-pick'), s3 = document.getElementById('s3'), aboutSec = document.getElementById('s-about');
@@ -596,7 +592,7 @@
     selected = OFFER_NAMES[key] ? key : '';
     picks.forEach(function(p){ p.setAttribute('aria-pressed', String(p.dataset.offer === selected)); });
     goBtn.disabled = !selected;
-    nextNote.textContent = selected ? 'Next: ' + OFFER_NAMES[selected] + '.' : 'Pick one above to keep going.';
+    nextNote.textContent = selected ? 'Picked: ' + OFFER_NAMES[selected] + '.' : 'Pick one above to keep going.';
   }
   picks.forEach(function(b){ b.addEventListener('click', function(){ select(b.dataset.offer); }); });
   goBtn.addEventListener('click', function(){ if (selected) showOffer(selected, true); });
