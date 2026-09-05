@@ -6,17 +6,25 @@
 <title>Proposal · Phloi</title>
 <meta name="description" content="Pick what you need and see the proposal: what you get, how it works, and what it costs.">
 <meta name="robots" content="noindex">
+<meta property="og:title" content="Your Phloi proposal">
+<meta property="og:description" content="What you get, how it works and what it costs. Pick the option that fits and send it back.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phloi.com/proposal">
+<meta property="og:site_name" content="Phloi">
+<meta property="og:image" content="https://phloi.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://phloi.com/og-image.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="theme-color" content="#f5f2ea">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
-</head>
-<body>
 <style>
   :root{
-    --paper:#f5f2ea; --card:#fffdf7; --ink:#0f0f0d; --ink-2:#55514a; --ink-3:#7d7a70;
+    --paper:#f5f2ea; --card:#fffdf7; --ink:#0f0f0d; --ink-2:#55514a; --ink-3:#6a675e;
     --line:rgba(15,15,13,.22); --line-2:rgba(15,15,13,.1);
     --accent:#b9ff4a; --accent-deep:#4f6f0a; --fill-bg:rgba(185,255,74,.45); --chosen-bg:rgba(185,255,74,.16);
     --display:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -42,7 +50,7 @@
   /* toolbar */
   .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
   .bar-in{max-width:840px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px}
-  .wordmark{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.04em}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.04em;text-decoration:none;color:inherit}
   .wordmark b{color:var(--accent-deep)}
   .bar-fields{display:flex;gap:6px;margin-left:auto;align-items:center}
   .btn{font-family:var(--display);font-weight:600;font-size:13.5px;line-height:20px;height:36px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;white-space:nowrap}
@@ -52,20 +60,19 @@
   .btn:focus-visible,.fill:focus-visible,.opt:focus-visible,.bn:focus-visible,.tab:focus-visible,.pill:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
 
   /* document frame: ruled sections on one left edge */
-  .doc{max-width:840px;margin:0 auto;padding:0 24px 96px;display:flex;flex-direction:column}
+  .doc{max-width:840px;margin:0 auto;padding:0 24px 96px}
   .step-card{border-top:1px solid var(--line);padding:32px 0 40px}
   .step-card:first-child{border-top:0;padding-top:28px}
-  /* the chosen proposal reads first, the questions come after it */
-  #s3{order:1;border-top:0;padding-top:28px}
-  #s-about{order:2}
+  #s3{border-top:0;padding-top:28px}
 
   /* the one main page: three options, nothing else to decide */
   .picks{display:flex;flex-direction:column;border-top:1px solid var(--ink);margin-top:24px}
-  .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
+  .pick{display:grid;grid-template-columns:34px 1fr 28px;grid-template-areas:"k t a" ". d ." ". b .";gap:2px 12px;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 4px;cursor:pointer;transition:background .15s ease,padding .15s ease}
   .pick:hover,.pick:focus-visible{background:var(--chosen-bg)}
   .pick .pk-k{grid-area:k;font-family:var(--mono);font-size:12px;line-height:26px;color:var(--ink-3);font-variant-numeric:tabular-nums}
   .pick .pk-t{grid-area:t;font-family:var(--display);font-weight:600;font-size:20px;line-height:26px;letter-spacing:-.02em}
   .pick .pk-d{grid-area:d;color:var(--ink-2);font-size:14.5px;line-height:21px;max-width:60ch;margin-top:2px}
+  .pick .pk-b{grid-area:b;font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-deep);margin-top:8px}
   .pick .pk-tick{grid-area:a;justify-self:end;align-self:start;position:relative;margin-top:4px;width:18px;height:18px;border-radius:2px;border:1px solid var(--ink-3);background:var(--card)}
   .pick:hover .pk-tick{border-color:var(--ink)}
   .pick[aria-pressed="true"]{background:var(--chosen-bg)}
@@ -164,6 +171,7 @@
   .get li{padding-left:14px;position:relative;color:var(--ink-2)}
   .get li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent-deep)}
   .get b,.tl b{color:var(--ink);font-weight:600}
+  .p-tag a{border-bottom:1px solid var(--line-2)}
   .match{display:none}
   .get li.is-match .match{display:inline}
   /* how it works: a rail, because it really is a sequence */
@@ -204,7 +212,8 @@
   .note{color:var(--ink-2);font-size:13.5px;line-height:20px;margin-top:16px;max-width:70ch}
   .p-foot{margin-top:32px;padding-top:20px;border-top:1px solid var(--ink)}
   .go{max-width:70ch;margin-bottom:20px}
-  .sign{display:grid;grid-template-columns:1.2fr 1fr .8fr 1.4fr;gap:24px}
+  .sign{display:none;grid-template-columns:1.2fr 1fr .8fr 1.4fr;gap:24px}
+  .p-foot .btn{margin:0 0 4px}
   .sign > div{display:flex;flex-direction:column;gap:20px}
   .sign-line{display:block;height:22px;border-bottom:1px solid var(--ink);font-family:var(--display);font-weight:600}
   .sign-line.chosen:not(:empty){height:auto;min-height:22px;padding-bottom:4px}
@@ -273,7 +282,7 @@
     @page{margin:16mm 18mm}
     :root{--paper:#fff;--card:#fff;--ink:#0f0f0d;--ink-2:#3d3b36;--ink-3:#6f6c64;--line:#bbb;--line-2:#ddd;--accent-deep:#3f5a08;--fill-bg:transparent;--chosen-bg:#f1f8e0}
     body{font-size:12px;line-height:18px}
-    .bar,#s-pick,#s-about,.tabs,.back-row,.opt-pick,#s3 > .step-k,#s3 > .step-sub{display:none!important}
+    .bar,#s-pick,#s-about,.tabs,.back-row,.opt-pick,.p-foot .btn,#s3 > .step-k,#s3 > .step-sub{display:none!important}
     .doc{max-width:none;padding:0}
     .step-card{border:0;padding:0;animation:none}
     .print-picks{display:block;margin-bottom:22px;padding:12px 16px;border:1px solid var(--line)}
@@ -281,18 +290,21 @@
     .print-picks ul{padding-left:16px;color:var(--ink-2)}
     .fix,.opt,.rec,.p-foot,.print-picks,.get li,.tl li,.na,.chips,.mock,.preview{break-inside:avoid;page-break-inside:avoid}
     .p-head{break-after:avoid}
+    .sign{display:grid}
     .sign-line{height:26px}
     .opt,.opt-tick,.bn,.na-after,.mock{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     a{text-decoration:none}
   }
 </style>
+</head>
+<body>
 
 <div class="bar" role="toolbar" aria-label="Proposal controls">
   <div class="bar-in">
-    <span class="wordmark">Phloi<b>.</b></span>
+    <a class="wordmark" href="/" aria-label="Phloi home">Phloi<b>.</b></a>
     <div class="bar-fields">
       <button class="btn btn--ghost" id="reset" type="button">Start over</button>
-      <button class="btn" id="print" type="button">Save as PDF</button>
+      <button class="btn" id="print" type="button" hidden>Save as PDF</button>
     </div>
   </div>
 </div>
@@ -306,70 +318,28 @@
         <span class="pk-k">01</span>
         <span class="pk-t">Your Custom Dashboard</span>
         <span class="pk-d">Jobs, quotes, crew, follow up and money on one screen, sitting on top of the tools you already use.</span>
+        <span class="pk-b">Best if you cannot see your jobs, money and numbers in one place</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
       <button type="button" class="pick" data-offer="ai" aria-pressed="false">
         <span class="pk-k">02</span>
         <span class="pk-t">AI Automation</span>
-        <span class="pk-d">Every enquiry answered in seconds, every quote chased, the admin around each job written for you.</span>
+        <span class="pk-d">Every enquiry answered in seconds, every quote chased, past customers rebooked and your customer list kept clean. All in your words.</span>
+        <span class="pk-b">Best if enquiries and quotes go cold before you get to them</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
       <button type="button" class="pick" data-offer="ms" aria-pressed="false">
         <span class="pk-k">03</span>
         <span class="pk-t">Marketing + Sales</span>
-        <span class="pk-d">Ads aimed at people who actually buy, and the follow up that turns them into booked jobs.</span>
+        <span class="pk-d">Facebook and Instagram ads aimed at people who actually buy, and the follow up that turns them into booked jobs.</span>
+        <span class="pk-b">Best if you need more of the right enquiries coming in</span>
         <span class="pk-tick" aria-hidden="true"></span>
       </button>
     </div>
     <div class="next-row">
       <button class="btn" type="button" id="go" disabled>Next →</button>
-      <span class="next-note" id="next-note">Pick one above to keep going.</span>
+      <span class="next-note" id="next-note" aria-live="polite">Pick one above to see that proposal. Nothing is sent until you press Send at the bottom.</span>
     </div>
-  </section>
-
-  <section class="step-card" id="s-about" hidden>
-    <div class="step-k"><h2>A bit about the business</h2></div>
-    <p class="step-sub">Short answers are fine. This is what I read before the call.</p>
-    <form class="about" id="proposal-form" name="phloi-proposal" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="phloi-proposal">
-      <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
-      <input type="hidden" name="proposal" id="h-proposal">
-      <input type="hidden" name="wants" id="h-wants">
-      <input type="hidden" name="turnover" id="h-turnover">
-      <input type="hidden" name="target" id="h-target">
-      <input type="hidden" name="option-chosen" id="h-option">
-      <div class="ab-row">
-        <label class="ab-f"><span class="ab-l">Your name</span><input id="ab-name" name="name" type="text" autocomplete="name" placeholder="First name"></label>
-        <label class="ab-f"><span class="ab-l">Business</span><input id="ab-business" name="business" type="text" autocomplete="organization" placeholder="Business name"></label>
-      </div>
-      <div class="ab-f">
-        <span class="ab-l">How do you want it built?</span>
-        <div class="pills" data-group="solution" role="group" aria-label="How you want it built">
-          <button type="button" class="pill" data-v="Done for you (I build it)" aria-pressed="false">Done for you</button><button type="button" class="pill" data-v="Done with you (I teach you to build it)" aria-pressed="false">Done with you</button>
-        </div>
-      </div>
-      <div class="ab-f">
-        <span class="ab-l">Monthly turnover</span>
-        <div class="pills" data-group="rev" role="group" aria-label="Monthly turnover">
-          <button type="button" class="pill" data-v="Under $20k" aria-pressed="false">Under $20k</button><button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button>
-        </div>
-      </div>
-      <div class="ab-f">
-        <span class="ab-l">Where you want it in 3 months</span>
-        <div class="pills" data-group="target" role="group" aria-label="Three month target">
-          <button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button><button type="button" class="pill" data-v="Same money, less of me in it" aria-pressed="false">Same money, less of me</button>
-        </div>
-      </div>
-      <label class="ab-f"><span class="ab-l">What are you trying to get to?</span><textarea id="ab-goals" name="goals" rows="2" placeholder="A second truck. Weekends off. $40k months."></textarea></label>
-      <label class="ab-f"><span class="ab-l">Tried already, and what happened?</span><textarea id="ab-tried" name="tried" rows="2" placeholder="Facebook ads for three months. An agency. A CRM nobody uses."></textarea></label>
-      <label class="ab-f"><span class="ab-l">Success in 90 days looks like</span><textarea id="ab-success" name="success" rows="2" placeholder="20 booked jobs a month. Every quote answered same day."></textarea></label>
-      <div class="ab-send">
-        <button class="btn" id="ab-send" type="submit">Send to Phoenix</button>
-        <button class="btn btn--ghost" type="button" id="ab-copy">Copy answers</button>
-        <span class="ab-note" id="ab-note"></span>
-      </div>
-      <textarea id="ab-out" class="ab-out" readonly hidden aria-label="Your answers"></textarea>
-    </form>
   </section>
 
   <section class="step-card" id="s3" hidden>
@@ -387,24 +357,24 @@
 <article class="proposal" id="p-ms" data-offer="ms">
   <header class="p-head">
     <div class="p-meta">
-      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Tap and type your name" contenteditable="true" spellcheck="false">[Your name]</span>, <span class="fill" data-fill="business" data-hint="Tap and type your business" contenteditable="true" spellcheck="false">[Your business]</span></span>
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
     <h2 class="p-title">Marketing + Sales</h2>
-    <p class="p-tag">Ads that reach people who buy, and the follow up that books them.</p>
+    <p class="p-tag">Facebook and Instagram ads that reach people who buy, and the follow up that books them.</p>
     <div class="na">
       <div><span class="na-l">Now</span><span class="na-t">Quiet weeks, then flat out. Enquiries wait for a spare minute.</span></div>
-      <div class="na-after"><span class="na-l">After</span><span class="na-t">Ads aimed at buyers. Every enquiry answered and chased.</span></div>
+      <div class="na-after"><span class="na-l">After</span><span class="na-t">Ads aimed at buyers. Every ad lead answered and chased.</span></div>
     </div>
   </header>
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="leads wom ads"><b>Meta ads aimed at buyers</b> built from your real jobs and your area.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="leads wom ads"><b>Spend matched to booked jobs</b> not clicks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="cold ads leaky"><b>First reply in seconds</b> to every form, text and missed call.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes leaky"><b>Quotes chased automatically</b> so nothing goes cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>One morning screen</b> who needs a quote, a reply or a call back.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="leads wom ads"><b>Facebook and Instagram ads aimed at buyers:</b> built from your real jobs and your suburbs, with a form that asks what your quoting needs.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="leads wom ads"><b>Ad spend tracked against booked jobs, not clicks:</b> you see what each job cost to win, and we stop paying for what does not book.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="cold ads leaky"><b>Every ad lead answered in seconds:</b> by text and email, so the leads you paid for do not go cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes leaky"><b>Every ad lead followed up:</b> until it books or says no, with quotes chased automatically.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>A daily list of ad leads:</b> who needs a quote, a reply or a call back today.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">We trace one enquiry from ad to booked job and find the leak.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b><span class="d">In writing, ad budget separate. Nothing starts until you say yes.</span></li><li><span class="when">1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">You see every ad and message before a customer does.</span></li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">We trace one enquiry from ad to booked job and find the leak.</span></li><li><span class="when">A few days later</span><b>Written scope</b><span class="d">What goes in the first build, in writing, ad budget separate. Nothing starts until you say yes.</span></li><li><span class="when">Then 1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">You see every ad and message before a customer does.</span></li></ol>
       <h3 class="from-h">From you</h3>
       <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Access to your tools</span><span class="chip">Photos of real jobs</span><span class="chip">A look before it goes live</span></div>
     </section>
@@ -416,21 +386,22 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>Built alongside you, then the keys are yours.</li><li>You own the ad account and the settings.</li><li>We stay on call for fixes.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">$250</span></span><span class="price-l">a month, hosting and support</span></span></span>
+    <ul><li>Built alongside you, then the keys are yours.</li><li>You own the ad account and run the settings.</li><li>We host it, fix it when a tool changes its connection, and answer your questions. New work is quoted first.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$250</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it and run it: ads, follow up, pipeline.</li><li>You sign off anything new.</li><li>Your ad budget stays the figure you set.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, we run it</span></span></span>
+    <ul><li>We build it and run it: the ads, the follow up and the lead list.</li><li>Ads checked and budget moved toward what is booking. New ads made from your job photos as they come in.</li><li>Every lead and quote chase read by us. If something breaks you hear it from us, not a customer.</li><li>The ad account stays in your name. You sign off anything new, and your ad budget stays the figure you set.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$1,200</span><span class="price-l">a month all in: hosting, support and us running it</span></span></span>
   </button>
     </div>
-    <p class="note">Ad spend is separate, paid from your own Meta account, and stays yours to raise, lower or pause.</p>
+    <p class="note">Ad spend is separate. It is paid from your own Facebook ad account and stays yours to raise, lower or pause. The follow up here covers the leads the ads bring in. Want every enquiry from every channel answered, plus rebooking and your customer list kept clean? That is the AI Automation build, linked at the top of this page.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
+    <p class="go">Happy with it? Tap the option you want above, then fill in the short form below and hit Send to Phoenix. A yes is not a contract: nothing is owed and nothing starts until you have read the written scope. Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+    <a class="btn" href="#s-about">Send it to Phoenix ↓</a>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -443,11 +414,11 @@
 <article class="proposal" id="p-ai" data-offer="ai">
   <header class="p-head">
     <div class="p-meta">
-      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Tap and type your name" contenteditable="true" spellcheck="false">[Your name]</span>, <span class="fill" data-fill="business" data-hint="Tap and type your business" contenteditable="true" spellcheck="false">[Your business]</span></span>
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
     <h2 class="p-title">AI Automation</h2>
-    <p class="p-tag">Every enquiry answered in seconds. Every quote chased. Nothing forgotten.</p>
+    <p class="p-tag">Every enquiry answered in seconds. Every quote chased. Anything it is unsure of, sent to you.</p>
     <div class="na">
       <div><span class="na-l">Now</span><span class="na-t">You are on the tools. Enquiries wait until the evening, and some have booked someone else.</span></div>
       <div class="na-after"><span class="na-l">After</span><span class="na-t">Answered in seconds, chased on schedule, in your words.</span></div>
@@ -456,11 +427,11 @@
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="cold"><b>First reply in seconds</b> in your voice, with your prices and rules.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes"><b>Quotes chased automatically</b> on a schedule you set.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Past customers rebooked</b> with a personal message when they are due.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>CRM kept clean</b> names, numbers and stages, without you tidying.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Anything unsure comes to you</b> with the full thread attached.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="cold"><b>First reply in seconds:</b> to every form, text and missed call, in your voice, with your prices and rules.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="quotes"><b>Quotes chased automatically:</b> on a schedule you set, so nothing goes cold.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Past customers rebooked:</b> one personal message when they are due. Only people you have done work for, with an easy opt out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Your customer list kept clean:</b> names, numbers and where each job is up to, without you tidying.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Anything unsure comes to you:</b> with the full thread attached, so it never guesses.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">How you quote, price and follow up. We pick the piece bleeding worst.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed price</b><span class="d">Nothing goes near a customer until you have read it and said yes.</span></li><li><span class="when">1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">Usually the fast reply, working on real enquiries.</span></li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Call and audit</b><span class="d">How you quote, price and follow up. We pick the piece bleeding worst.</span></li><li><span class="when">A few days later</span><b>Written scope</b><span class="d">What goes in the first build, in writing. Nothing goes near a customer until you have read it and said yes.</span></li><li><span class="when">Then 1 to 2 weeks</span><b>Build, first piece live early</b><span class="d">Usually the fast reply, working on real enquiries.</span></li></ol>
       <h3 class="from-h">From you</h3>
       <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Your prices and rules</span><span class="chip">A few example messages</span><span class="chip">Review the first replies</span></div>
     </section>
@@ -472,21 +443,22 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>Built with you, then the keys are yours.</li><li>You change the wording, prices and chase schedule.</li><li>We fix it if a tool changes its connection.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthly" data-hint="e.g. $250" contenteditable="true" spellcheck="false">$250</span></span><span class="price-l">a month, hosting and changes</span></span></span>
+    <ul><li>Built with you, then the keys are yours.</li><li>You can change the wording, the prices and how often it follows up.</li><li>We host it, fix it when a tool changes its connection, and answer your questions. New work is quoted first.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$250</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>We build it and run it, and watch the replies.</li><li>You sign off anything new.</li><li>If something breaks you hear it from us, not a customer.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n"><span class="fill set" data-fill="price" data-hint="e.g. $4,800" contenteditable="true" spellcheck="false">$4,800</span></span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n"><span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, we run it</span></span></span>
+    <ul><li>We build it and run it, and read what it sends.</li><li>We tune the wording, prices and follow up timing as your jobs change.</li><li>If something breaks you hear it from us, not a customer.</li><li>You sign off anything new.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$1,200</span><span class="price-l">a month all in: hosting, support and us running it</span></span></span>
   </button>
     </div>
-    <p class="note">The written scope lists what goes in the first build. Anything added later is priced in writing first.</p>
+    <p class="note">It runs inside your own accounts: your customer list, your phone number, your inbox. The wording, prices and rules are yours. The written scope lists what goes in the first build, and anything added later is priced in writing first.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
+    <p class="go">Happy with it? Tap the option you want above, then fill in the short form below and hit Send to Phoenix. A yes is not a contract: nothing is owed and nothing starts until you have read the written scope. Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+    <a class="btn" href="#s-about">Send it to Phoenix ↓</a>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -499,11 +471,11 @@
 <article class="proposal" id="p-db" data-offer="db">
   <header class="p-head">
     <div class="p-meta">
-      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Client first name" contenteditable="true" spellcheck="false">[Client]</span>, <span class="fill" data-fill="business" data-hint="Business name" contenteditable="true" spellcheck="false">[Business name]</span></span>
+      <span class="eyebrow">Proposal for <span class="fill" data-fill="client" data-hint="Tap and type your name" contenteditable="true" spellcheck="false">[Your name]</span>, <span class="fill" data-fill="business" data-hint="Tap and type your business" contenteditable="true" spellcheck="false">[Your business]</span></span>
       <span class="eyebrow"><span class="fill" data-fill="date" data-hint="Date" contenteditable="true" spellcheck="false">[Date]</span></span>
     </div>
     <h2 class="p-title">Your Custom Dashboard</h2>
-    <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system I run Dript on.</p>
+    <p class="p-tag">Jobs, quotes, crew, follow up and money on one screen. The same system I run <a href="https://driptexteriorcleaning.com.au" target="_blank" rel="noopener">Dript</a> on.</p>
     <div class="na">
       <div><span class="na-l">Now</span><span class="na-t">The picture is split across job software, inbox, calendar and ad account. None of them talk.</span></div>
       <div class="na-after"><span class="na-l">After</span><span class="na-t">One screen, sitting on top of the tools you already use.</span></div>
@@ -512,11 +484,11 @@
   <div class="cols">
     <section class="p-sec">
       <h3>What you get</h3>
-      <ul class="get"><li data-bn="numbers"><b>Jobs and pipeline in one view</b> plus the daily list of who needs what.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Quoting with real margins</b> see the margin before it goes out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Crew view</b> their jobs and notes, nothing about the books.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="reports"><b>Reports that write themselves</b> end of day, and before and after photos.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Follow up that does not forget</b> replies, chases and rebooks.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Where your money comes from</b> ad spend beside the revenue it brought.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
+      <ul class="get"><li data-bn="numbers"><b>Jobs in one view:</b> from enquiry to paid, plus the daily list of who needs what.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Quoting with real margins:</b> you see the margin before the quote goes out.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="admin"><b>Crew view:</b> their jobs and notes, nothing about the books.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="reports"><b>Reports that write themselves:</b> end of day reports, and before and after photos.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="rebook"><b>Follow up in one view:</b> who has not been replied to, chased or rebooked, so nothing slips.<span class="match" aria-label="Matches what you picked">your pick</span></li><li data-bn="numbers"><b>Where your money comes from:</b> ad spend beside the revenue it brought in.<span class="match" aria-label="Matches what you picked">your pick</span></li></ul>
     </section>
     <section class="p-sec">
       <h3>How it works</h3>
-      <ol class="tl"><li><span class="when">This week</span><b>Working call and audit</b><span class="d">We map your day and where it leaks time or money.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed number</b><span class="d">In writing, before anyone starts.</span></li><li><span class="when">3 to 6 weeks</span><b>Build, live as it comes together</b><span class="d">You use parts of it well before the whole thing is finished.</span></li></ol>
+      <ol class="tl"><li><span class="when">This week</span><b>Working call and audit</b><span class="d">We map your day and where it leaks time or money. Phoenix can show you the live Dript screen while we do it.</span></li><li><span class="when">A few days later</span><b>Fixed scope, fixed number</b><span class="d">In writing, before anyone starts.</span></li><li><span class="when">Then 3 to 6 weeks</span><b>Build, live as it comes together</b><span class="d">You use parts of it well before the whole thing is finished.</span></li></ol>
       <h3 class="from-h">From you</h3>
       <div class="chips"><span class="chip">1 to 2 hours up front</span><span class="chip">Access to your tools</span><span class="chip">A yes on each piece</span></div>
     </section>
@@ -525,10 +497,10 @@
   <section class="p-sec preview">
     <h3>What it looks like</h3>
     <div class="mock">
-      <img src="/dashboard-example.png" width="1440" height="764" loading="lazy" decoding="async"
+      <img src="/dashboard-example.png" width="1440" height="764" decoding="async"
            alt="The Dript dashboard: today's revenue, payments to be collected, jobs booked in the next 7 days, weekly revenue against target, ROAS, weekly and daily leads, and quote win rate.">
     </div>
-    <p class="note">This is the dashboard we run Dript on, with example figures in place of live customer data. Yours is built around your jobs, your numbers and the tools you already use, so the screens are named after how you actually work.</p>
+    <p class="note">This is the dashboard we run our own exterior cleaning business, Dript, on every day, with example figures in place of live customer data. Yours is built around your jobs, your numbers and the tools you already use, so the screens are named after how you actually work.</p>
   </section>
 
   <section class="p-sec choose">
@@ -538,21 +510,22 @@
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>You are in every review, and we train your team.</li><li>You run it and change it yourself.</li><li>Hosting, support and changes are on us.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month, hosting and changes</span></span></span>
+    <ul><li>You are in every review, and we train your team.</li><li>You run it day to day. Settings, wording and targets are yours to change. Anything that needs code, we do.</li><li>Hosting, support and small changes are on us. Anything big is quoted first.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
       
   <button type="button" class="opt" data-opt="for" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
     <span class="opt-head"><span class="opt-name">Done for you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
-    <ul><li>Same build, then we run it.</li><li>You sign off anything new.</li><li>You open it and watch jobs land.</li></ul>
-    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450 + <span class="fill set" data-fill="monthlyDfy" data-hint="e.g. $1,200" contenteditable="true" spellcheck="false">$1,200</span></span><span class="price-l">a month, hosting plus us running it</span></span></span>
+    <ul><li>Same build, then we run it day to day: the daily list of who needs a quote, a reply or a call back gets actioned, reports checked and sent, your customer list kept clean.</li><li>You sign off anything new.</li><li>You open it and see where everything is.</li></ul>
+    <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$1,650</span><span class="price-l">a month all up: $450 hosting, support and small changes, plus $1,200 for us to run it</span></span></span>
   </button>
     </div>
-    <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. Your data stays yours, exportable any time.</p>
+    <p class="note">Most builds land between $6,500 and $15,000 depending on how many tools we connect. The exact figure is in the written scope before anything starts. Want the replies, chasing and rebooking done automatically as well? That is the AI Automation build. It plugs straight into this dashboard and is linked at the top of this page. Your data stays yours, exportable any time.</p>
   </section>
   <footer class="p-foot">
-    <p class="go">Reply yes or text Phoenix. Written scope and fixed price follow within a few days.</p>
+    <p class="go">Happy with it? Tap the option you want above, then fill in the short form below and hit Send to Phoenix. A yes is not a contract: nothing is owed and nothing starts until you have read the written scope and the exact figure. Prefer email? <a href="mailto:contact@phloi.com">contact@phloi.com</a></p>
+    <a class="btn" href="#s-about">Send it to Phoenix ↓</a>
     <div class="sign">
       <div><span class="sign-l">Yes from</span><span class="sign-line"></span></div>
       <div><span class="sign-l">Option</span><span class="sign-line chosen" data-chosen></span></div>
@@ -563,15 +536,58 @@
 </article>
   </section>
 
+  <section class="step-card" id="s-about" hidden>
+    <div class="step-k"><h2>A bit about the business</h2></div>
+    <p class="step-sub">Short answers are fine. Phoenix reads this before your first call. Turnover and target let him size the build and be straight with you about whether it will pay for itself. Your answers go to Phoenix and nowhere else.</p>
+    <form class="about" id="proposal-form" name="phloi-proposal" method="POST" action="/thanks?from=proposal" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="phloi-proposal">
+      <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+      <input type="hidden" name="proposal" id="h-proposal">
+      <input type="hidden" name="turnover" id="h-turnover">
+      <input type="hidden" name="target" id="h-target">
+      <input type="hidden" name="option-chosen" id="h-option">
+      <div class="ab-row">
+        <label class="ab-f"><span class="ab-l">Your name</span><input id="ab-name" name="name" type="text" required autocomplete="name" placeholder="First name"></label>
+        <label class="ab-f"><span class="ab-l">Business</span><input id="ab-business" name="business" type="text" required autocomplete="organization" placeholder="Business name"></label>
+      </div>
+      <div class="ab-row">
+        <label class="ab-f"><span class="ab-l">Email</span><input id="ab-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com"></label>
+        <label class="ab-f"><span class="ab-l">Best number to text</span><input id="ab-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx"></label>
+      </div>
+      <div class="ab-f">
+        <span class="ab-l">Monthly turnover</span>
+        <div class="pills" data-group="rev" role="group" aria-label="Monthly turnover">
+          <button type="button" class="pill" data-v="Under $20k" aria-pressed="false">Under $20k</button><button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button>
+        </div>
+      </div>
+      <div class="ab-f">
+        <span class="ab-l">Monthly turnover you want in 3 months</span>
+        <div class="pills" data-group="target" role="group" aria-label="Three month target">
+          <button type="button" class="pill" data-v="$20k to $50k" aria-pressed="false">$20k to $50k</button><button type="button" class="pill" data-v="$50k to $100k" aria-pressed="false">$50k to $100k</button><button type="button" class="pill" data-v="$100k to $250k" aria-pressed="false">$100k to $250k</button><button type="button" class="pill" data-v="$250k+" aria-pressed="false">$250k+</button><button type="button" class="pill" data-v="Same money, less of me in it" aria-pressed="false">Same money, less of me</button>
+        </div>
+      </div>
+      <label class="ab-f"><span class="ab-l">What are you trying to get to?</span><textarea id="ab-goals" name="goals" rows="2" placeholder="A second truck. Weekends off. $40k months."></textarea></label>
+      <label class="ab-f"><span class="ab-l">What have you tried already, and what happened?</span><textarea id="ab-tried" name="tried" rows="2" placeholder="Facebook ads for three months. An agency. A CRM nobody uses."></textarea></label>
+      <label class="ab-f"><span class="ab-l">Success in 90 days looks like</span><textarea id="ab-success" name="success" rows="2" placeholder="20 booked jobs a month. Every quote answered same day."></textarea></label>
+      <div class="ab-send">
+        <button class="btn" id="ab-send" type="submit">Send to Phoenix</button>
+        <button class="btn btn--ghost" type="button" id="ab-copy">Copy answers</button>
+        <span class="ab-note" id="ab-note" aria-live="polite"></span>
+      </div>
+      <textarea id="ab-out" class="ab-out" readonly hidden aria-label="Your answers"></textarea>
+    </form>
+  </section>
+
 </main>
 
 <script>
 (function(){
   var OFFER_NAMES = { ms:'Marketing + Sales', ai:'AI Automation', db:'Your Custom Dashboard' };
   var ORDER = ['db','ai','ms'];
+  var NOTE_DEFAULT = 'Pick one above to see that proposal. Nothing is sent until you press Send at the bottom.';
   var chosen = '';
   var pickSec = document.getElementById('s-pick'), s3 = document.getElementById('s3'), aboutSec = document.getElementById('s-about');
-  var others = document.getElementById('back-others');
+  var others = document.getElementById('back-others'), printBtn = document.getElementById('print');
   var props = document.querySelectorAll('.proposal');
   var esc = function(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); };
 
@@ -585,6 +601,8 @@
       .map(function(k){ return '<button type="button" class="lnk" data-offer="' + k + '">' + esc(OFFER_NAMES[k]) + '</button>'; })
       .join(' and ') + '.';
     others.querySelectorAll('.lnk').forEach(function(b){ b.addEventListener('click', function(){ showOffer(b.dataset.offer, true); }); });
+    if (printBtn) printBtn.hidden = false;
+    document.title = OFFER_NAMES[key] + ' proposal · Phloi';
     select(key);
     refreshAbout();
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -594,6 +612,8 @@
     chosen = '';
     props.forEach(function(p){ p.removeAttribute('data-active'); });
     pickSec.hidden = false; s3.hidden = true; aboutSec.hidden = true;
+    if (printBtn) printBtn.hidden = true;
+    document.title = 'Proposal · Phloi';
     refreshAbout();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -606,7 +626,7 @@
     selected = OFFER_NAMES[key] ? key : '';
     picks.forEach(function(p){ p.setAttribute('aria-pressed', String(p.dataset.offer === selected)); });
     goBtn.disabled = !selected;
-    nextNote.textContent = selected ? 'Picked: ' + OFFER_NAMES[selected] + '.' : 'Pick one above to keep going.';
+    nextNote.textContent = selected ? 'Picked: ' + OFFER_NAMES[selected] + '. Nothing is sent until you press Send at the bottom.' : NOTE_DEFAULT;
   }
   picks.forEach(function(b){ b.addEventListener('click', function(){ select(b.dataset.offer); }); });
   goBtn.addEventListener('click', function(){ if (selected) showOffer(selected, true); });
@@ -624,7 +644,7 @@
     }); });
   });
 
-  // Fills: one typed value fills every matching placeholder.
+  // Fills: the name, business and date in each proposal header. One value fills every copy.
   function fillAll(key, val, fallback){
     document.querySelectorAll('.fill[data-fill="' + key + '"]').forEach(function(el){ el.textContent = val || fallback; el.classList.toggle('set', !!val); });
   }
@@ -641,12 +661,24 @@
   });
   var d = new Date(), m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   fillAll('date', d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear(), '[Date]');
+  // Phoenix can send a link that already carries the name: /proposal?client=Sam&business=Acme%20Plumbing
+  var q = new URLSearchParams(location.search);
+  if (q.get('client')) fillAll('client', q.get('client'), '[Your name]');
+  if (q.get('business')) fillAll('business', q.get('business'), '[Your business]');
 
   // About the business: answers submitted to Phoenix, with a copy fallback.
-  var about = { name: '', business: '', solution: '', rev: '', target: '', goals: '', tried: '', success: '' };
+  var about = { name: '', business: '', email: '', phone: '', rev: '', target: '', goals: '', tried: '', success: '' };
   var outEl = document.getElementById('ab-out'), noteEl = document.getElementById('ab-note');
-  function bindText(id, key){ var el = document.getElementById(id); if (!el) return; el.addEventListener('input', function(){ about[key] = el.value.trim(); refreshAbout(); }); }
-  bindText('ab-name', 'name'); bindText('ab-business', 'business');
+  function bindText(id, key, fillKey, fallback){
+    var el = document.getElementById(id); if (!el) return;
+    el.addEventListener('input', function(){
+      about[key] = el.value.trim();
+      if (fillKey) fillAll(fillKey, about[key], fallback);   // what they type becomes the proposal header
+      refreshAbout();
+    });
+  }
+  bindText('ab-name', 'name', 'client', '[Your name]'); bindText('ab-business', 'business', 'business', '[Your business]');
+  bindText('ab-email', 'email'); bindText('ab-phone', 'phone');
   bindText('ab-goals', 'goals'); bindText('ab-tried', 'tried'); bindText('ab-success', 'success');
   document.querySelectorAll('.pills').forEach(function(g){
     var key = g.dataset.group, pills = g.querySelectorAll('.pill');
@@ -660,13 +692,14 @@
   function summaryText(){
     var L = [];
     L.push('Proposal answers from ' + (about.name || '[name]') + (about.business ? ', ' + about.business : ''));
+    L.push('Email: ' + (about.email || '[not answered]'));
+    L.push('Mobile: ' + (about.phone || '[not answered]'));
     L.push('');
     L.push('Looking at: ' + (OFFER_NAMES[chosen] || '[nothing picked]'));
     if (chosenOption()) L.push('Option chosen: ' + chosenOption());
     L.push('');
-    L.push('Wants: ' + (about.solution || '[not answered]'));
     L.push('Turnover a month: ' + (about.rev || '[not answered]'));
-    L.push('Where they want it in 3 months: ' + (about.target || '[not answered]'));
+    L.push('Turnover they want in 3 months: ' + (about.target || '[not answered]'));
     L.push('Trying to get to: ' + (about.goals || '[not answered]'));
     L.push('Tried already: ' + (about.tried || '[not answered]'));
     L.push('Success in 90 days: ' + (about.success || '[not answered]'));
@@ -678,14 +711,13 @@
   function refreshAbout(){
     var setH = function(id, v){ var el = document.getElementById(id); if (el) el.value = v; };
     setH('h-proposal', OFFER_NAMES[chosen] || '');
-    setH('h-wants', about.solution);
     setH('h-turnover', about.rev);
     setH('h-target', about.target);
     setH('h-option', chosenOption());
     if (outEl && !outEl.hidden) outEl.value = summaryText();
     var pl = document.getElementById('print-about-list'), pa = document.getElementById('print-about');
     if (pl && pa) {
-      var rows = [['Wants', about.solution], ['Turnover a month', about.rev], ['3 month target', about.target], ['Trying to get to', about.goals], ['Tried already', about.tried], ['Success in 90 days', about.success]].filter(function(r){ return r[1]; });
+      var rows = [['Turnover a month', about.rev], ['3 month target', about.target], ['Trying to get to', about.goals], ['Tried already', about.tried], ['Success in 90 days', about.success]].filter(function(r){ return r[1]; });
       pl.innerHTML = rows.map(function(r){ return '<li><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</li>'; }).join('');
       pa.hidden = !rows.length;
       document.getElementById('print-picks').hidden = !rows.length;
@@ -695,6 +727,7 @@
     document.querySelectorAll('.about input:not([type="hidden"]), .about textarea').forEach(function(el){ el.value = ''; });
     document.querySelectorAll('.pill').forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
     Object.keys(about).forEach(function(k){ about[k] = ''; });
+    fillAll('client', '', '[Your name]'); fillAll('business', '', '[Your business]');
     if (outEl) outEl.hidden = true;
     if (noteEl) noteEl.textContent = '';
     refreshAbout();
@@ -713,7 +746,7 @@
   });
   refreshAbout();
 
-  document.getElementById('print').addEventListener('click', function(){ window.print(); });
+  if (printBtn) printBtn.addEventListener('click', function(){ window.print(); });
   document.getElementById('reset').addEventListener('click', function(){
     document.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); o.querySelector('.opt-pick').textContent = o.querySelector('.opt-pick').dataset.off; });
     document.querySelectorAll('[data-chosen]').forEach(function(el){ el.textContent = ''; });

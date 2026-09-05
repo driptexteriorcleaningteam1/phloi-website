@@ -355,7 +355,8 @@
       <a class="wordmark" href="/#top" aria-label="Phloi home">Phloi<span class="tick">.</span></a>
       <div class="nav-menu" id="nav-menu">
         <a class="navlink" href="/#services">What we do</a>
-        <a class="navlink" href="/#approach">Why us</a>
+        <a class="navlink" href="/dashboard">Dashboard</a>
+        <a class="navlink" href="/#approach">Why it works</a>
         <a class="navlink" href="/#faq">FAQ</a>
         <a class="navlink" href="/newsletter">Newsletter</a>
         <a class="btn btn--accent nav-cta" href="/#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
@@ -371,11 +372,28 @@
   <section id="inquiry" class="band inquiry">
     <div class="wrap">
       <span class="eyebrow eyebrow--num"><b>→</b> Got it</span>
-      <h1 style="font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px;max-width:22ch">Sent. Phoenix will read it and reply himself.</h1>
-      <p class="sub">Keep an eye on your inbox, and check spam once just in case. If it's urgent, message @phoenixx_builds on Instagram or email <a href="mailto:contact@phloi.com" style="border-bottom:2px solid var(--accent)">contact@phloi.com</a>.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
-        <a class="btn btn--accent" href="/#services">See what we build <span class="arw" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">DM on Instagram <span class="arw" aria-hidden="true">↗</span></a>
+      <div data-from="home">
+        <h1 style="font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px;max-width:22ch">Sent. Phoenix reads every one and replies himself.</h1>
+        <p class="sub">What happens next: a reply from Phoenix, then a free half hour call to work out what to fix first, then a fixed scope and price in writing. Nothing to do until then. Check spam once just in case. If it's urgent, message @phoenixx_builds on Instagram or email <a href="mailto:contact@phloi.com" style="border-bottom:2px solid var(--accent)">contact@phloi.com</a>.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
+          <a class="btn btn--accent" href="/dashboard">See the dashboard we run Dript on <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="/newsletter">Get the free guide while you wait <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div data-from="dashboard" hidden>
+        <h1 style="font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px;max-width:22ch">Sent. Phoenix will reply with a couple of times for your call.</h1>
+        <p class="sub">On the free half hour call he maps what you run on now and what your dashboard would look like. After that you get the exact figure in writing before anything starts. Check spam once just in case. If it's urgent, message @phoenixx_builds on Instagram or email <a href="mailto:contact@phloi.com" style="border-bottom:2px solid var(--accent)">contact@phloi.com</a>.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
+          <a class="btn btn--accent" href="/newsletter">Get the free guide while you wait <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">DM on Instagram <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div data-from="proposal" hidden>
+        <h1 style="font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px;max-width:22ch">Sent. Phoenix will read your answers before the call.</h1>
+        <p class="sub">The option you tapped is noted. Phoenix replies to confirm the call, and the written scope follows within a few days of it. Nothing is owed until you have read that scope and said yes. If anything changes, email <a href="mailto:contact@phloi.com" style="border-bottom:2px solid var(--accent)">contact@phloi.com</a>.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
+          <a class="btn btn--ghost" href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">DM on Instagram <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -387,7 +405,7 @@
     <div class="foot-links">
       <a href="/#inquiry-form">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/dashboard">Your Custom Dashboard <span class="arw" aria-hidden="true">↗</span></a>
-      <a href="/newsletter">The Phloi Letter <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="/newsletter">Newsletter <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://linktr.ee/phoenixbuilds" target="_blank" rel="noopener">Links <span class="arw" aria-hidden="true">↗</span></a>
       <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span></a>
@@ -492,5 +510,9 @@
   })();
 </script>
 
+<script>
+  // Which form sent them here decides which message they read.
+  (function(){var f=new URLSearchParams(location.search).get('from')||'home';document.querySelectorAll('[data-from]').forEach(function(el){el.hidden=el.dataset.from!==f;});})();
+</script>
 </body>
 </html>

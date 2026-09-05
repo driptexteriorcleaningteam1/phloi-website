@@ -11,9 +11,18 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b9ff4a'/%3E%3Ctext x='16' y='23' font-family='Arial,Helvetica,sans-serif' font-size='21' font-weight='700' fill='%230f0f0d' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
 
 <!-- Open Graph / social preview -->
-<meta property="og:title" content="The Phloi Letter" />
-<meta property="og:description" content="Short, practical emails on AI, ads, and automation for service businesses. No fluff." />
-<meta property="og:type" content="website" />
+<link rel="canonical" href="https://phloi.com/newsletter">
+<meta property="og:title" content="The Phloi Letter">
+<meta property="og:description" content="Short, practical emails on AI, ads, and automation for service businesses. No fluff.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phloi.com/newsletter">
+<meta property="og:site_name" content="Phloi">
+<meta property="og:locale" content="en_AU">
+<meta property="og:image" content="https://phloi.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://phloi.com/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -192,7 +201,9 @@
       <a class="wordmark" href="/" aria-label="Phloi home">Phloi<span class="tick">.</span></a>
       <div class="nav-menu">
         <a class="navlink" href="/#services">What we do</a>
-        <a class="navlink" href="/#approach">Why us</a>
+        <a class="navlink" href="/dashboard">Dashboard</a>
+        <a class="navlink" href="/#approach">Why it works</a>
+        <a class="navlink" href="/#faq">FAQ</a>
         <a class="btn btn--accent nav-cta" href="/#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
       </div>
     </nav>
@@ -223,8 +234,8 @@
       <div class="form-card" id="signup">
         <div class="form-body">
           <span class="eyebrow form-kicker">Free guide + the letter</span>
-          <h3 class="form-title">Get <span class="under">The Dript Tech Stack</span>, free.</h3>
-          <p class="form-sub">Drop your details and I'll send you the guide right away, plus the Phloi Letter when the next one goes out.</p>
+          <h3 class="form-title">Get the free guide: <span class="under">the tools we run Dript on</span>.</h3>
+          <p class="form-sub">Dript is our own exterior cleaning business. Drop your details and the guide is yours straight away, plus the Phloi Letter when the next one goes out.</p>
 
           <!-- Submits to a Netlify Function that adds the subscriber to beehiiv -->
           <form id="newsletterForm" novalidate>
@@ -247,8 +258,9 @@
         <div class="form-success" id="formSuccess">
           <div class="tick" aria-hidden="true">✓</div>
           <h3 id="successTitle">You're in.</h3>
-          <p id="successMsg">Your guide is ready. Download it now below, and a copy is on its way to your inbox too.</p>
-          <a class="btn btn--accent" id="dlBtn" href="dript-tech-stack.pdf" download target="_blank" rel="noopener">Download The Dript Tech Stack <span class="arw" aria-hidden="true">↗</span></a>
+          <p id="successMsg">Your guide is ready. Download it below and keep the link. The Phloi Letter lands when the next one goes out.</p>
+          <a class="btn btn--accent" id="dlBtn" href="dript-tech-stack.pdf" download target="_blank" rel="noopener">Download the guide <span class="arw" aria-hidden="true">↗</span></a>
+          <p class="form-fine" style="margin-top:18px">Want this running in your business instead of reading about it? <a href="/#inquiry-form" style="border-bottom:2px solid var(--accent)">Get in touch</a> and Phoenix replies himself.</p>
         </div>
       </div>
 
@@ -263,6 +275,7 @@
     <div class="foot-links">
       <a href="/">Home <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/#inquiry-form">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="/dashboard">Your Custom Dashboard <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
       <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span></a>
     </div>

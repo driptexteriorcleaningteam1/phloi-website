@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <script>document.documentElement.className+=" js";</script>
 <meta charset="UTF-8">
@@ -30,7 +30,7 @@
     --card:#fffdf7;
     --ink:#0f0f0d;
     --ink-2:#55514a;
-    --ink-3:#8b887e;
+    --ink-3:#6a675e;
     --line:rgba(15,15,13,.14);
     --line-2:rgba(15,15,13,.07);
     --accent:#b9ff4a;
@@ -368,7 +368,7 @@
   .tile p{margin:0;color:var(--ink-2);font-size:.97rem;line-height:1.6}
   .tile .ix{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-3);display:block;margin-bottom:12px}
   .steps{counter-reset:s;display:grid;gap:2px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--line-2)}
-  .step{background:var(--card);padding:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.4vw,28px);align-items:start}
+  .step{background:var(--card);padding:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.4vw,28px);align-items:start;border-bottom:0;transition:none}
   .step b{font-family:var(--font-mono);font-size:.8rem;color:var(--accent-deep);padding-top:3px}
   .step h3{font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin:0 0 6px}
   .step p{margin:0;color:var(--ink-2);font-size:.97rem}
@@ -436,10 +436,10 @@
         },
         {
           "@type": "Question",
-          "name": "What if I already have a CRM?",
+          "name": "What if I already use a CRM (customer list software)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Good — we'll connect to it. The dashboard isn't a replacement for your CRM, it's the layer that makes your CRM, your job data and your numbers agree with each other."
+            "text": "Good — we'll connect to it. The dashboard doesn't replace it. It's the layer that makes your customer list, your job data and your numbers agree with each other."
           }
         },
         {
@@ -455,7 +455,7 @@
           "name": "What happens after it's built?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We host it, support it and keep it running. Integrations break when other companies change their APIs — that's covered. Small changes are included; anything big gets quoted first."
+            "text": "We host it, support it and keep it running. Connections to your other software break when those companies change things on their end — that's covered. Small changes are included; anything big gets quoted first."
           }
         },
         {
@@ -464,6 +464,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Then you're exactly who this is for. You won't be configuring anything or reading documentation. You get something you open and use, and we handle everything behind it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will you see my numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, while we build and look after it, the same way your accountant does. Your data is not shared, sold or pooled with anyone else's. Your team only ever sees their own jobs, never the books."
           }
         }
       ]
@@ -498,10 +506,10 @@
 
       <figure class="shot reveal">
         <div class="shot-frame">
-          <img src="/dashboard-example.png" width="1440" height="764" loading="lazy" decoding="async"
+          <img src="/dashboard-example.png" width="1440" height="764" fetchpriority="high" decoding="async"
                alt="The Dript dashboard: a week view with today's revenue, payments to be collected, jobs booked in the next 7 days, weekly revenue against target, ROAS, weekly and daily leads, and quote win rate, above an ask-your-numbers box.">
         </div>
-        <figcaption>The dashboard we run Dript on, with example figures in place of live customer data. Yours is built around your jobs and your numbers.</figcaption>
+        <figcaption>The dashboard we run our own exterior cleaning business, Dript, on every day. Example figures are shown in place of live customer data. Yours is built around your jobs and your numbers.</figcaption>
       </figure>
     </div>
   </section>
@@ -519,7 +527,7 @@
         <div class="tile reveal">
           <span class="ix">01</span>
           <h3>The numbers live in three places</h3>
-          <p>Your CRM says one thing, your accounting says another, and the real answer is somewhere in your head. So you guess, or you spend Sunday working it out.</p>
+          <p>Your lead list says one thing, your accounting says another, and the real answer is somewhere in your head. So you guess, or you spend Sunday working it out.</p>
         </div>
         <div class="tile reveal">
           <span class="ix">02</span>
@@ -545,12 +553,12 @@
         </div>
       </div>
       <div class="grid-2">
-        <div class="tile reveal"><h3>Jobs and pipeline</h3><p>Every job from enquiry to paid, in one view. What's booked, what's unscheduled, what's quietly stalled.</p></div>
-        <div class="tile reveal"><h3>Quoting</h3><p>Build a quote in a couple of minutes with your real pricing and margins baked in, so nothing goes out underpriced.</p></div>
+        <div class="tile reveal"><h3>Jobs, from enquiry to paid</h3><p>Every job in one view. What's booked, what's unscheduled, what's quietly stalled.</p></div>
+        <div class="tile reveal"><h3>Quoting</h3><p>Build a quote in a couple of minutes with your real pricing and margins baked in, so you see the margin before it goes out.</p></div>
         <div class="tile reveal"><h3>Crew</h3><p>Who's on what, what they've finished, what needs checking. Your team sees their own jobs without seeing your books.</p></div>
         <div class="tile reveal"><h3>Reports that write themselves</h3><p>End-of-day and client reports generated from the work that actually happened, not from you remembering it later.</p></div>
-        <div class="tile reveal"><h3>Follow-up that doesn't forget</h3><p>Enquiries answered fast, follow-ups chased on schedule, and your CRM kept clean without you tidying it.</p></div>
-        <div class="tile reveal"><h3>Where your money comes from</h3><p>Ad spend, lead source and channel revenue side by side, so you stop funding the campaigns that don't book jobs.</p></div>
+        <div class="tile reveal"><h3>Follow up in one view</h3><p>Who has not been replied to, chased or rebooked, so nothing slips. Want it done automatically? That is our AI Automation build, and it plugs straight in.</p></div>
+        <div class="tile reveal"><h3>Where your money comes from</h3><p>What you spend on ads, where each lead came from, and what each source earned you, side by side. So you stop paying for the ads that don't book jobs.</p></div>
       </div>
     </div>
   </section>
@@ -565,7 +573,7 @@
         </div>
       </div>
       <div class="proof reveal">
-        <p class="proof-quote">“This isn't a demo we built to sell you something. It's the dashboard we run Dript Exterior Cleaning on — jobs, quoting, crew, reporting and follow-up. We built it because we needed it, and we've been fixing it in the real world ever since.”</p>
+        <p class="proof-quote">“This isn't a demo we built to sell you something. It's the dashboard we run <a href="https://driptexteriorcleaning.com.au" target="_blank" rel="noopener" style="border-bottom:2px solid var(--accent)">Dript Exterior Cleaning</a> on — jobs, quoting, crew, reporting and follow-up. We built it because we needed it, and we've been fixing it in the real world ever since.”</p>
         <div class="proof-meta">
           <span class="proof-dot" aria-hidden="true">P</span>
           <span>Phoenix — Founder, Phloi &amp; Dript Exterior Cleaning</span>
@@ -584,10 +592,10 @@
         </div>
       </div>
       <div class="steps reveal">
-        <div class="step"><b>01</b><div><h3>A call</h3><p>We map what you actually do day to day, and where it's leaking time or money. Free, and useful even if you never hire us.</p></div></div>
-        <div class="step"><b>02</b><div><h3>A fixed scope and a fixed number</h3><p>You get exactly what's being built and what it costs, in writing, before anyone starts. No hourly drift.</p></div></div>
+        <div class="step"><b>01</b><div><h3>A call</h3><p>We map what you actually do day to day, and where it's leaking time or money. Phoenix can share his screen and show you the live Dript dashboard, real jobs and real numbers, not a demo. Free, and useful even if you never hire us.</p></div></div>
+        <div class="step"><b>02</b><div><h3>A fixed scope and a fixed number</h3><p>You get exactly what's being built and what it costs, in writing, before anyone starts, with Done with you and Done for you side by side. No hourly billing that keeps growing.</p></div></div>
         <div class="step"><b>03</b><div><h3>The build</h3><p>Usually three to six weeks. You see it working as it comes together, not at the end.</p></div></div>
-        <div class="step"><b>04</b><div><h3>Live, and looked after</h3><p>Hosting, support and changes handled. When a tool you rely on changes its API, that's our problem to fix, not yours.</p></div></div>
+        <div class="step"><b>04</b><div><h3>Live, and looked after</h3><p>Hosting, support and small changes handled. Anything big is quoted first. When a tool you rely on changes how it connects, that's our problem to fix, not yours.</p></div></div>
       </div>
     </div>
   </section>
@@ -606,11 +614,12 @@
         <!-- No figures on this page on purpose: pricing is talked through on the
              proposal page, then confirmed in writing. -->
         <p class="price-fig">Fixed price</p>
-        <p class="price-sub">in writing before anything starts, then a flat monthly for hosting, support and changes</p>
+        <p class="price-sub">in writing before anything starts, then a flat monthly fee for hosting, support and small changes. Want us to run it day to day as well? That is Done for you, with its own monthly, set out in your proposal.</p>
         <ul class="price-list">
           <li>Scoped and quoted before anything is built</li>
+          <li>Done with you (you run it) or Done for you (we run it), your call</li>
           <li>Connected to the tools you already use</li>
-          <li>Hosting, support and changes included monthly</li>
+          <li>Hosting, support and small changes included monthly. Bigger changes quoted first</li>
           <li>Your data stays yours, exportable at any time</li>
         </ul>
         <a class="btn btn--accent" href="#talk">Book a call <span aria-hidden="true">→</span></a>
@@ -634,8 +643,8 @@
           <div class="answer">No. That's the whole point. The dashboard sits on top of what you already run and pulls it together. If a tool is genuinely holding you back we'll say so, but we're not going to make you migrate for the sake of it.</div>
         </details>
         <details class="faq reveal">
-          <summary>What if I already have a CRM? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Good — we'll connect to it. The dashboard isn't a replacement for your CRM, it's the layer that makes your CRM, your job data and your numbers agree with each other.</div>
+          <summary>What if I already use a CRM (customer list software)? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Good — we'll connect to it. The dashboard doesn't replace it. It's the layer that makes your customer list, your job data and your numbers agree with each other.</div>
         </details>
         <details class="faq reveal">
           <summary>How long until it's actually live? <span class="plus" aria-hidden="true"></span></summary>
@@ -643,11 +652,15 @@
         </details>
         <details class="faq reveal">
           <summary>What happens after it's built? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">We host it, support it and keep it running. Integrations break when other companies change their APIs — that's covered. Small changes are included; anything big gets quoted first.</div>
+          <div class="answer">We host it, support it and keep it running. Connections to your other software break when those companies change things on their end — that's covered. Small changes are included; anything big gets quoted first.</div>
         </details>
         <details class="faq reveal">
           <summary>What if I'm not technical? <span class="plus" aria-hidden="true"></span></summary>
           <div class="answer">Then you're exactly who this is for. You won't be configuring anything or reading documentation. You get something you open and use, and we handle everything behind it.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>Will you see my numbers? <span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer">Yes, while we build and look after it, the same way your accountant does. Your data is not shared, sold or pooled with anyone else's. Your team only ever sees their own jobs, never the books.</div>
         </details>
       </div>
     </div>
@@ -659,19 +672,19 @@
       <div class="sec-head reveal">
         <div>
           <span class="eyebrow eyebrow--num"><b>07</b> — Let's talk</span>
-          <h2>Tell us how you run things now.</h2>
-          <p class="lp-lede">We'll show you what your dashboard would actually look like and what it'd cost. No pitch deck, no pressure. Prefer email? <a href="mailto:contact@phloi.com" style="text-decoration:underline">contact@phloi.com</a></p>
+          <h2>Book your free call.</h2>
+          <p class="lp-lede">Send this and Phoenix replies himself with a couple of times for a free half hour call. On the call we show you what your dashboard would look like and what it'd cost. No pitch deck, no pressure. Prefer email? <a href="mailto:contact@phloi.com" style="text-decoration:underline">contact@phloi.com</a></p>
         </div>
       </div>
-      <form action="/thanks" class="lp-form reveal" name="phloi-dashboard" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form action="/thanks?from=dashboard" class="lp-form reveal" name="phloi-dashboard" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="phloi-dashboard">
         <input type="hidden" name="enquiry-type" value="Your Custom Dashboard">
         <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
         <div><label for="d-name">Name *</label><input id="d-name" name="name" type="text" required autocomplete="name"></div>
         <div><label for="d-email">Email *</label><input id="d-email" name="email" type="email" required autocomplete="email"></div>
         <div><label for="d-business">Your business *</label><input id="d-business" name="business" type="text" required autocomplete="organization"></div>
-        <div><label for="d-tools">What do you run on now? *</label><textarea id="d-tools" name="message" required placeholder="The tools you use, and the part that's most painful right now."></textarea></div>
-        <div><button class="btn btn--accent" type="submit">Send it over <span aria-hidden="true">→</span></button></div>
+        <div><label for="d-tools">What software do you use now, and what's the most painful part? *</label><textarea id="d-tools" name="message" required placeholder="e.g. a job app, a spreadsheet for quotes, Xero, and nobody chases the quotes"></textarea></div>
+        <div><button class="btn btn--accent" type="submit">Send it and book the call <span aria-hidden="true">→</span></button></div>
       </form>
     </div>
   </section>
@@ -684,7 +697,7 @@
     <div class="foot-links">
       <a href="/">Home <span class="arw" aria-hidden="true">↗</span></a>
       <a href="#talk">Book a call <span class="arw" aria-hidden="true">↗</span></a>
-      <a href="/newsletter">The Phloi Letter <span class="arw" aria-hidden="true">↗</span></a>
+      <a href="/newsletter">Newsletter <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
       <a href="mailto:contact@phloi.com">Email <span class="arw" aria-hidden="true">↗</span></a>
     </div>
