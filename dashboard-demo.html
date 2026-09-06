@@ -144,6 +144,29 @@
 
   .foot{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3)}
 
+  /* pipeline strip */
+  .pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--r-s);padding:10px 14px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .stage .sk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .stage .sv{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stage .sm{font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .stage.now{border-color:var(--accent-deep);background:var(--accent-wash)}
+
+  /* mini stat row */
+  .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .mini .m{background:var(--card);border:1px solid var(--line);border-radius:var(--r-s);padding:11px 14px}
+  .mini .mk{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
+  .mini .mv{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+  .mini .mv small{font-family:var(--body);font-weight:400;font-size:11px;color:var(--ink-3);margin-left:5px}
+
+  /* crew */
+  .runrow td:first-child{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+  .score{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;border-radius:20px;padding:3px 9px;white-space:nowrap}
+  .score.hot{background:var(--accent);color:#10150f}
+  .score.warm{background:var(--accent-wash);color:var(--accent-deep)}
+  .score.cold{background:var(--line-2);color:var(--ink-3)}
+  @media(max-width:860px){.pipe{grid-template-columns:repeat(2,1fr)}.mini{grid-template-columns:1fr}}
+
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}
     .grid2{grid-template-columns:1fr}
@@ -173,6 +196,7 @@
     <button class="tab" role="tab" aria-selected="false" data-panel="jobs">Jobs</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="leads">Leads</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="money">Money</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="crew">Crew</button>
   </div>
 
   <div class="ask">
@@ -186,6 +210,7 @@
       <button class="chip" data-q="How many leads this week?">Leads this week</button>
       <button class="chip" data-q="What is our quote win rate?">Quote win rate</button>
       <button class="chip" data-q="Where do our best leads come from?">Best lead source</button>
+      <button class="chip" data-q="Who is on today?">Who is on today</button>
     </div>
     <div class="answer" id="answer" role="status"></div>
   </div>
@@ -198,6 +223,7 @@
       <div class="kpi"><span class="k">Leads this week</span><span class="v" id="kLeads">23</span><span class="s" id="kLeadsS"><b>All replied to in under a minute</b></span></div>
       <div class="kpi"><span class="k">Quote win rate</span><span class="v" id="kWin">46%</span><span class="s" id="kWinS">11 won of 24 decided</span></div>
     </div>
+    <div class="pipe" id="pipeStrip"></div>
     <div class="grid2">
       <div class="card">
         <h2>This week&rsquo;s revenue against target</h2>
@@ -221,15 +247,20 @@
     <div class="card">
       <h2>Jobs this week</h2>
       <table>
-        <thead><tr><th>Job</th><th>Crew</th><th class="num">Value</th><th class="num">Status</th></tr></thead>
+        <thead><tr><th>Job</th><th>Crew</th><th class="num">Value</th><th class="num">Margin</th><th class="num">Status</th></tr></thead>
         <tbody>
-          <tr><td>House + roof wash &middot; 14 Lancaster Rd, Ascot</td><td>Tom</td><td class="num">$2,570</td><td class="num"><span class="pill booked">Booked Tue</span></td></tr>
-          <tr><td>Driveway + gutters &middot; 8 Kedron St, Hamilton</td><td>Tom</td><td class="num">$890</td><td class="num"><span class="pill booked">Booked Wed</span></td></tr>
-          <tr><td>Full exterior &middot; 22 Windermere Rd, Clayfield</td><td>Jake</td><td class="num">$1,940</td><td class="num"><span class="pill done">Done Mon</span></td></tr>
-          <tr><td>Render soft wash &middot; 41 Beaumont St, Hendra</td><td>Unassigned</td><td class="num">$1,150</td><td class="num"><span class="pill chase">Quote quiet 6 days</span></td></tr>
-          <tr><td>Solar + roof &middot; 3 Oriel Rd, Ascot</td><td>Jake</td><td class="num">$1,480</td><td class="num"><span class="pill quoted">Quoted today</span></td></tr>
+          <tr><td>House + roof wash &middot; 14 Lancaster Rd, Ascot</td><td>Tom</td><td class="num">$2,570</td><td class="num">62%</td><td class="num"><span class="pill booked">Booked Tue</span></td></tr>
+          <tr><td>Driveway + gutters &middot; 8 Kedron St, Hamilton</td><td>Tom</td><td class="num">$890</td><td class="num">54%</td><td class="num"><span class="pill booked">Booked Wed</span></td></tr>
+          <tr><td>Full exterior &middot; 22 Windermere Rd, Clayfield</td><td>Jake</td><td class="num">$1,940</td><td class="num">59%</td><td class="num"><span class="pill done">Done Mon</span></td></tr>
+          <tr><td>Render soft wash &middot; 41 Beaumont St, Hendra</td><td>Unassigned</td><td class="num">$1,150</td><td class="num">57%</td><td class="num"><span class="pill chase">Quote quiet 6 days</span></td></tr>
+          <tr><td>Solar + roof &middot; 3 Oriel Rd, Ascot</td><td>Jake</td><td class="num">$1,480</td><td class="num">61%</td><td class="num"><span class="pill quoted">Quoted today</span></td></tr>
         </tbody>
       </table>
+      <div class="mini">
+        <div class="m"><span class="mk">Margin on the week</span><span class="mv" id="jMargin">58%</span></div>
+        <div class="m"><span class="mk">Avg job value</span><span class="mv" id="jAvg">$1,320</span></div>
+        <div class="m"><span class="mk">Job reports written for you</span><span class="mv" id="jReports">12<small>this week, none typed</small></span></div>
+      </div>
     </div>
   </div>
 
@@ -244,12 +275,18 @@
         <h2>Newest enquiries</h2>
         <table>
           <tbody>
-            <tr><td>Sarah M &middot; Ascot</td><td>Meta ad</td><td class="num"><span class="pill booked">Replied 42s</span></td></tr>
-            <tr><td>Dean R &middot; Hamilton</td><td>Google</td><td class="num"><span class="pill booked">Replied 38s</span></td></tr>
-            <tr><td>Priya K &middot; Clayfield</td><td>Word of mouth</td><td class="num"><span class="pill quoted">Quoting</span></td></tr>
+            <tr><td>Sarah M &middot; Ascot</td><td>Meta ad &middot; replied 42s</td><td class="num"><span class="score hot">Hot &middot; 8.6</span></td></tr>
+            <tr><td>Dean R &middot; Hamilton</td><td>Google &middot; replied 38s</td><td class="num"><span class="score hot">Hot &middot; 7.9</span></td></tr>
+            <tr><td>Priya K &middot; Clayfield</td><td>Word of mouth &middot; quoting</td><td class="num"><span class="score warm">Warm &middot; 6.1</span></td></tr>
+            <tr><td>Griffin B &middot; Wavell Heights</td><td>Meta ad &middot; replied 51s</td><td class="num"><span class="score cold">Cold &middot; 3.4</span></td></tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="mini">
+      <div class="m"><span class="mk">Return on ad spend</span><span class="mv" id="mRoas">4.1x</span></div>
+      <div class="m"><span class="mk">Cost per lead</span><span class="mv" id="mCpl">$19</span></div>
+      <div class="m"><span class="mk">Cost per booked job</span><span class="mv" id="mCpb">$86</span></div>
     </div>
   </div>
 
@@ -268,6 +305,37 @@
         <div class="rev" id="revBars2"></div>
       </div>
     </div>
+    <div class="mini">
+      <div class="m"><span class="mk">Collected this week</span><span class="mv" id="moCollected">$17,240</span></div>
+      <div class="m"><span class="mk">Sitting in open quotes</span><span class="mv" id="moOpen">$9,870</span></div>
+      <div class="m"><span class="mk">Avg days to get paid</span><span class="mv" id="moDays">4.2</span></div>
+    </div>
+  </div>
+
+  <!-- CREW -->
+  <div class="panel" id="p-crew">
+    <div class="grid2">
+      <div class="card">
+        <h2>Today&rsquo;s run</h2>
+        <table>
+          <tbody>
+            <tr class="runrow"><td>7:30</td><td>Jake &middot; Full exterior &middot; Clayfield</td><td class="num"><span class="pill done">Done</span></td></tr>
+            <tr class="runrow"><td>8:00</td><td>Tom &middot; House + roof &middot; Ascot</td><td class="num"><span class="pill booked">On site</span></td></tr>
+            <tr class="runrow"><td>11:30</td><td>Tom &middot; Driveway + gutters &middot; Hamilton</td><td class="num"><span class="pill quoted">Next</span></td></tr>
+            <tr class="runrow"><td>1:00</td><td>Jake &middot; Solar + roof &middot; Ascot</td><td class="num"><span class="pill quoted">Booked</span></td></tr>
+            <tr class="runrow"><td>2:30</td><td>Tom &middot; Quote visit &middot; Hendra</td><td class="num"><span class="pill quoted">Booked</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>The week by tech</h2>
+        <div class="bars" id="crewBars"></div>
+        <div class="mini" style="grid-template-columns:1fr 1fr">
+          <div class="m"><span class="mk">EOD reports</span><span class="mv" id="cEod">5<small>wrote themselves at 6pm</small></span></div>
+          <div class="m"><span class="mk">Photos filed</span><span class="mv" id="cPhotos">148<small>before and after, auto paired</small></span></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="foot">All figures are examples. The real dashboard reads live from your jobs, quotes and money.</div>
@@ -278,15 +346,22 @@
   "use strict";
   var look = new URLSearchParams(location.search).get("look");
   if (["midnight","ledger","steel"].indexOf(look) > -1) document.body.dataset.look = look;
+  var tb0 = new URLSearchParams(location.search).get("tab");
   var weeks = [
     { label:"Week · 25 to 31 Aug", booked:"$16,900", bookedS:"12 jobs on the calendar",
       out:"$9,240", outS:"6 invoices · oldest 12 days", leads:"19", win:"41%", winS:"9 won of 22 decided",
       rev:[14200,17800,15400,19100,16300,19850], src:[["Meta ads",9],["Google",4],["Word of mouth",4],["Door to door",2]],
-      inv:[["0831","12 days","$3,180"],["0834","8 days","$2,340"],["0835","6 days","$1,610"],["0837","4 days","$1,240"],["0838","2 days","$870"]] },
+      inv:[["0831","12 days","$3,180"],["0834","8 days","$2,340"],["0835","6 days","$1,610"],["0837","4 days","$1,240"],["0838","2 days","$870"]],
+      pipe:[["New",5,""],["Quoted",7,"$8,420"],["Booked",12,"$16,900"],["Done",8,"$10,410"]],
+      jm:"55%", javg:"$1,240", jrep:"10", roas:"3.6x", cpl:"$21", cpb:"$94",
+      collected:"$15,900", openq:"$8,420", days:"4.8", crew:[["Tom",10],["Jake",8]], eod:"5", photos:"131" },
     { label:"Week · 1 to 7 Sep", booked:"$18,450", bookedS:"14 jobs on the calendar",
       out:"$6,780", outS:"4 invoices · oldest 9 days", leads:"23", win:"46%", winS:"11 won of 24 decided",
       rev:[17800,15400,19100,16300,19850,21600], src:[["Meta ads",11],["Google",5],["Word of mouth",4],["Door to door",3]],
-      inv:[["0839","9 days","$2,340"],["0841","5 days","$1,890"],["0842","3 days","$1,450"],["0844","1 day","$1,100"]] }
+      inv:[["0839","9 days","$2,340"],["0841","5 days","$1,890"],["0842","3 days","$1,450"],["0844","1 day","$1,100"]],
+      pipe:[["New",6,""],["Quoted",8,"$9,870"],["Booked",14,"$18,450"],["Done",9,"$11,930"]],
+      jm:"58%", javg:"$1,320", jrep:"12", roas:"4.1x", cpl:"$19", cpb:"$86",
+      collected:"$17,240", openq:"$9,870", days:"4.2", crew:[["Tom",11],["Jake",9]], eod:"5", photos:"148" }
   ];
   var wi = 1;
   function $(id){ return document.getElementById(id); }
@@ -328,6 +403,19 @@
     bars($("revBars"), w.rev, wl); bars($("revBars2"), w.rev, wl);
     srcBars($("srcBars"), w.src);
     $("outTag").textContent = w.out + " total";
+    var ps = $("pipeStrip"); ps.innerHTML = "";
+    w.pipe.forEach(function(st, i){
+      var d = document.createElement("div"); d.className = "stage" + (i === 2 ? " now" : "");
+      d.innerHTML = "<span class='sk'>" + st[0] + "</span><span class='sv'>" + st[1] +
+        (st[2] ? " <span class='sm'>" + st[2] + "</span>" : "") + "</span>";
+      ps.appendChild(d);
+    });
+    $("jMargin").textContent = w.jm; $("jAvg").textContent = w.javg;
+    $("jReports").childNodes[0].textContent = w.jrep;
+    $("mRoas").textContent = w.roas; $("mCpl").textContent = w.cpl; $("mCpb").textContent = w.cpb;
+    $("moCollected").textContent = w.collected; $("moOpen").textContent = w.openq; $("moDays").textContent = w.days;
+    srcBars($("crewBars"), w.crew);
+    $("cEod").childNodes[0].textContent = w.eod; $("cPhotos").childNodes[0].textContent = w.photos;
     var tb = $("invRows"); tb.innerHTML = "";
     w.inv.forEach(function(r){
       var tr = document.createElement("tr");
@@ -359,6 +447,12 @@
       a = "<b>Quote win rate is " + w.win + "</b>, " + w.winS.toLowerCase() + ". The quiet quote at 41 Beaumont St is the one to chase first.";
     else if (s.indexOf("source") > -1 || s.indexOf("come") > -1 || s.indexOf("best") > -1)
       a = "<b>" + w.src[0][0] + " is the best source this week</b> with " + w.src[0][1] + " leads, then " + w.src[1][0].toLowerCase() + " with " + w.src[1][1] + ". Door to door brought " + w.src[3][1] + ".";
+    else if (s.indexOf("who") > -1 || s.indexOf("crew") > -1 || s.indexOf("today") > -1)
+      a = "<b>Tom has three stops today</b>: Ascot at 8, Hamilton at 11:30, then a quote visit in Hendra. Jake finished Clayfield this morning and is on Oriel Rd at 1.";
+    else if (s.indexOf("margin") > -1)
+      a = "<b>Margin is running at " + w.jm + " this week</b> on an average job of " + w.javg + ". The Ascot house and roof job is the best of the week at 62%.";
+    else if (s.indexOf("quote") > -1 && (s.indexOf("open") > -1 || s.indexOf("sitting") > -1 || s.indexOf("pipeline") > -1))
+      a = "<b>" + w.openq + " is sitting in open quotes.</b> One of them has gone quiet for 6 days and is queued for a chase.";
     else if (s.indexOf("revenue") > -1 || s.indexOf("target") > -1)
       a = "<b>$" + w.rev[5].toLocaleString() + " so far this week</b> against a $25,000 target, tracking " + (wi ? "86%" : "79%") + " with two working days left.";
     else
@@ -373,6 +467,7 @@
   });
 
   render();
+  if (tb0) { var tbtn = document.querySelector('.tab[data-panel="' + tb0 + '"]'); if (tbtn) tbtn.click(); }
 })();
 </script>
 </body>
