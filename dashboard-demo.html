@@ -7,7 +7,7 @@
 <title>Dashboard example</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
   /* Phloi dashboard demo. Interactive example with fake figures.
      Embedded in an iframe on /dashboard.html and screenshotted for the proposal page. */
@@ -19,7 +19,45 @@
     --display:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
     --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     --mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    --r:14px; --r-s:9px;
   }
+
+  /* ---- looks: same dashboard, different skin ---- */
+  body[data-look="midnight"]{
+    --bg:#101309; --card:#171b0e; --ink:#f0f2e6; --ink-2:#b9bda8; --ink-3:#838871;
+    --line:rgba(240,242,230,.15); --line-2:rgba(240,242,230,.07);
+    --accent:#b9ff4a; --accent-deep:#cdff7a; --accent-wash:rgba(185,255,74,.1);
+    --warn:#e8a04a;
+  }
+  body[data-look="ledger"]{
+    --bg:#fbfcfa; --card:#ffffff; --ink:#10150f; --ink-2:#4b5447; --ink-3:#78826f;
+    --line:#dee3da; --line-2:#eef1ec;
+    --accent:#4ac316; --accent-deep:#2d7a0d; --accent-wash:#eef8e8;
+    --warn:#a8480b;
+    --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --r:4px; --r-s:3px;
+  }
+  body[data-look="steel"]{
+    --bg:#f3f5f8; --card:#ffffff; --ink:#0f172a; --ink-2:#475569; --ink-3:#94a3b8;
+    --line:rgba(15,23,42,.12); --line-2:rgba(15,23,42,.05);
+    --accent:#2563eb; --accent-deep:#1d4ed8; --accent-wash:rgba(37,99,235,.08);
+    --warn:#b45309;
+    --display:"Inter",system-ui,sans-serif; --mono:"Inter",system-ui,sans-serif;
+    --r:10px; --r-s:8px;
+  }
+  body[data-look="steel"] .kpi .v,body[data-look="steel"] .ask .go{letter-spacing:-.02em}
+  body[data-look="steel"] .sample,body[data-look="steel"] th,body[data-look="steel"] .kpi .k{letter-spacing:.06em;font-weight:600;font-size:10px}
+  body[data-look="midnight"] .kpi.hot{background:var(--accent);border-color:var(--accent)}
+  body[data-look="midnight"] .kpi.hot .v{color:#101309}
+  body[data-look="midnight"] .kpi.hot .k,body[data-look="midnight"] .kpi.hot .s,body[data-look="midnight"] .kpi.hot .s b{color:rgba(16,19,9,.72)}
+  body[data-look="midnight"] .tab[aria-selected="true"]{background:var(--accent);color:#101309}
+  body[data-look="midnight"] .ask .go{color:#101309}
+  body[data-look="steel"] .kpi.hot .v,body[data-look="steel"] .ask .go{color:#fff}
+  body[data-look="steel"] .ask .go{background:var(--accent)}
+  body[data-look="steel"] .kpi.hot{background:var(--ink);border-color:var(--ink)}
+  body[data-look="steel"] .kpi.hot .v{color:#7ab3ff}
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -41,20 +79,20 @@
 
   /* tabs */
   .tabs{display:flex;gap:2px;margin:14px 0 16px;overflow-x:auto}
-  .tab{font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:var(--ink-2);padding:8px 14px;border-radius:9px;white-space:nowrap}
+  .tab{font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:var(--ink-2);padding:8px 14px;border-radius:var(--r-s);white-space:nowrap}
   .tab:hover{background:var(--line-2)}
   .tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
 
   /* ask bar */
-  .ask{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px}
+  .ask{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:16px}
   .ask .row{display:flex;gap:10px;align-items:center}
-  .ask input{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 13px;font:inherit;background:var(--bg);color:var(--ink);min-width:0}
-  .ask .go{background:var(--accent);color:var(--ink);font-family:var(--display);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:9px;white-space:nowrap}
+  .ask input{flex:1;border:1px solid var(--line);border-radius:var(--r-s);padding:9px 13px;font:inherit;background:var(--bg);color:var(--ink);min-width:0}
+  .ask .go{background:var(--accent);color:var(--ink);font-family:var(--display);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:var(--r-s);white-space:nowrap}
   .ask .go:hover{filter:brightness(1.04)}
   .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
   .chip{font-family:var(--mono);font-size:11px;color:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:5px 11px;background:var(--bg)}
   .chip:hover{border-color:var(--accent-deep);color:var(--accent-deep)}
-  .answer{display:none;margin-top:12px;padding:11px 14px;background:var(--accent-wash);border-left:3px solid var(--accent-deep);border-radius:0 9px 9px 0;font-size:13.5px;color:var(--ink)}
+  .answer{display:none;margin-top:12px;padding:11px 14px;background:var(--accent-wash);border-left:3px solid var(--accent-deep);border-radius:0 var(--r-s) var(--r-s) 0;font-size:13.5px;color:var(--ink)}
   .answer.on{display:block}
   .answer b{font-family:var(--display);letter-spacing:-.01em}
 
@@ -64,7 +102,7 @@
 
   /* KPI tiles */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px 14px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px 14px}
   .kpi.hot{background:var(--ink);border-color:var(--ink)}
   .kpi .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:8px}
   .kpi.hot .k{color:rgba(253,252,248,.55)}
@@ -76,7 +114,7 @@
   .kpi.hot .s b{color:var(--accent)}
 
   /* generic card + table */
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
   .card h2{font-family:var(--display);font-weight:600;font-size:14.5px;letter-spacing:-.015em;margin:0 0 12px}
   .grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
   table{width:100%;border-collapse:collapse;font-size:13px}
@@ -238,6 +276,8 @@
 <script>
 (function(){
   "use strict";
+  var look = new URLSearchParams(location.search).get("look");
+  if (["midnight","ledger","steel"].indexOf(look) > -1) document.body.dataset.look = look;
   var weeks = [
     { label:"Week · 25 to 31 Aug", booked:"$16,900", bookedS:"12 jobs on the calendar",
       out:"$9,240", outS:"6 invoices · oldest 12 days", leads:"19", win:"41%", winS:"9 won of 22 decided",

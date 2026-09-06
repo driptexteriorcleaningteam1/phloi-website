@@ -360,6 +360,12 @@
   .shot-frame{border:1px solid var(--line);border-radius:calc(var(--radius) - 4px);background:var(--card);padding:8px;box-shadow:0 34px 70px -34px rgba(15,15,13,.5);overflow:hidden}
   .shot-frame img{display:block;width:100%;height:auto;border-radius:calc(var(--radius) - 12px)}
   .shot-frame iframe{display:block;width:100%;height:clamp(600px,54vw,720px);border:0;border-radius:calc(var(--radius) - 12px);background:#fdfcf8}
+  .look-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+  .look-row .ll{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+  .look{font-family:var(--font-display);font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:var(--ink-2);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 15px;cursor:pointer}
+  .look:hover{border-color:var(--ink);color:var(--ink)}
+  .look[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .look:focus-visible{outline:2.5px solid var(--ink);outline-offset:2px}
   .shot figcaption{margin-top:14px;font-family:var(--font-mono);font-size:12px;line-height:1.6;letter-spacing:.02em;color:var(--ink-3);max-width:70ch}
   .hl{background:linear-gradient(transparent 62%,var(--accent) 62%);padding:0 .06em}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,18px)}
@@ -506,10 +512,17 @@
       </div>
 
       <figure class="shot reveal">
-        <div class="shot-frame">
-          <iframe src="/dashboard-demo.html" title="Interactive example of the Phloi operations dashboard: overview, jobs, leads and money tabs, with an ask-your-numbers box" loading="eager"></iframe>
+        <div class="look-row" role="group" aria-label="Dashboard looks">
+          <span class="ll">Same dashboard, your look</span>
+          <button class="look" aria-pressed="true" data-look="">Paper</button>
+          <button class="look" aria-pressed="false" data-look="midnight">Midnight</button>
+          <button class="look" aria-pressed="false" data-look="ledger">Ledger</button>
+          <button class="look" aria-pressed="false" data-look="steel">Steel</button>
         </div>
-        <figcaption>A working example of the dashboard we run our own exterior cleaning business, Dript, on every day. Click around, change the week, ask it a question. Example figures stand in for live customer data. Yours is built around your jobs and your numbers.</figcaption>
+        <div class="shot-frame">
+          <iframe id="demoFrame" src="/dashboard-demo.html" title="Interactive example of the Phloi operations dashboard: overview, jobs, leads and money tabs, with an ask-your-numbers box" loading="eager"></iframe>
+        </div>
+        <figcaption>A working example of the dashboard we run our own exterior cleaning business, Dript, on every day. Click around, change the week, ask it a question, try the four looks. Example figures stand in for live customer data. Yours is built around your jobs, your numbers and your look.</figcaption>
       </figure>
     </div>
   </section>
@@ -735,6 +748,18 @@
       items.forEach(function(el){ io.observe(el); });
       revealReady = true;
     }
+  })();
+</script>
+<script>
+  (function(){
+    var frame = document.getElementById('demoFrame');
+    document.querySelectorAll('.look').forEach(function(b){
+      b.addEventListener('click', function(){
+        document.querySelectorAll('.look').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+        b.setAttribute('aria-pressed','true');
+        frame.src = '/dashboard-demo.html' + (b.dataset.look ? '?look=' + b.dataset.look : '');
+      });
+    });
   })();
 </script>
 </body>
