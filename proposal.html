@@ -385,7 +385,7 @@
       
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
-    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <span class="opt-head"><span class="opt-name">Done alongside you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>Built alongside you, then the keys are yours.</li><li>You own the ad account and run the settings.</li><li>We host it, fix it when a tool changes its connection, and answer your questions. New work is quoted first.</li></ul>
     <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$250</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
@@ -442,7 +442,7 @@
       
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
-    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <span class="opt-head"><span class="opt-name">Done alongside you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>Built with you, then the keys are yours.</li><li>You can change the wording, the prices and how often it follows up.</li><li>We host it, fix it when a tool changes its connection, and answer your questions. New work is quoted first.</li></ul>
     <span class="opt-price"><span class="price-line"><span class="price-n">$4,800</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$250</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
@@ -509,7 +509,7 @@
       
   <button type="button" class="opt" data-opt="with" aria-pressed="false">
     <span class="opt-tick" aria-hidden="true"></span>
-    <span class="opt-head"><span class="opt-name">Done with you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
+    <span class="opt-head"><span class="opt-name">Done alongside you</span><span class="opt-pick" data-off="Tap to choose" data-on="Chosen">Tap to choose</span></span>
     <ul><li>You are in every review, and we train your team.</li><li>You run it day to day. Settings, wording and targets are yours to change. Anything that needs code, we do.</li><li>Hosting, support and small changes are on us. Anything big is quoted first.</li></ul>
     <span class="opt-price"><span class="price-line"><span class="price-n">From $6,500</span><span class="price-l">one off build</span></span><span class="price-line"><span class="price-n">$450</span><span class="price-l">a month, hosting, support and small changes</span></span></span>
   </button>
@@ -632,7 +632,7 @@
   goBtn.addEventListener('click', function(){ if (selected) showOffer(selected, true); });
   document.getElementById('back').addEventListener('click', showPicker);
 
-  // Done with you / Done for you: exclusive per proposal, written onto the sign-off line.
+  // Done alongside you / Done for you: exclusive per proposal, written onto the sign-off line.
   props.forEach(function(p){
     var opts = p.querySelectorAll('.opt'), signLine = p.querySelector('[data-chosen]');
     opts.forEach(function(o){ o.addEventListener('click', function(){
