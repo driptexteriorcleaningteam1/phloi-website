@@ -125,14 +125,6 @@
   .need-opt[aria-pressed="true"] .no-arw{color:var(--ink)}
 
 
-  /* ---------- Marquee: lime, was ink ---------- */
-  .marquee{background:var(--ink);color:var(--paper);overflow:hidden;padding:15px 0}
-  .marquee__track{display:flex;width:max-content;animation:slide 46s linear infinite}
-  .marquee__group{display:flex;align-items:center;gap:34px;padding-right:34px;flex:none}
-  .marquee__group span{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:34px;white-space:nowrap}
-  .marquee__group span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
-  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
   /* ---------- What I do: numbered rows, not ruled columns ---------- */
   .rows{margin-top:clamp(34px,4.4vw,56px);border-top:2px solid var(--ink)}
   .row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px clamp(20px,3.4vw,44px);padding:clamp(26px,3.6vw,42px) 0;border-bottom:1px solid var(--line);align-items:start}
@@ -250,7 +242,6 @@
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .marquee__track{animation:none}
     .js .reveal{opacity:1;transform:none;transition:none}
     .btn:hover,.way:hover{transform:none}
   }
