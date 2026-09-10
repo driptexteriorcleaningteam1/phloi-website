@@ -127,9 +127,10 @@
 
   /* ---------- Marquee: lime, was ink ---------- */
   .marquee{background:var(--ink);color:var(--paper);overflow:hidden;padding:15px 0}
-  .marquee__track{display:flex;gap:34px;width:max-content;animation:slide 46s linear infinite;align-items:center}
-  .marquee__track span{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:34px;white-space:nowrap}
-  .marquee__track span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+  .marquee__track{display:flex;width:max-content;animation:slide 46s linear infinite}
+  .marquee__group{display:flex;align-items:center;gap:34px;padding-right:34px;flex:none}
+  .marquee__group span{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:34px;white-space:nowrap}
+  .marquee__group span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
   @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* ---------- What I do: numbered rows, not ruled columns ---------- */
@@ -453,8 +454,8 @@
   <!-- AUDIENCE MARQUEE -->
   <div class="marquee" aria-label="Who I work with">
     <div class="marquee__track" aria-hidden="true">
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
+      <div class="marquee__group"><span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span></div>
+      <div class="marquee__group"><span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span></div>
     </div>
   </div>
 
@@ -594,7 +595,6 @@
     <p class="foot-mark reveal">Phloi<span class="tick">.</span></p>
     <div class="foot-links">
       <a href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">↗</span></a>
-      <a href="/dashboard">Your Custom Dashboard <span class="arw" aria-hidden="true">↗</span></a>
       <a href="/newsletter">Newsletter <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/phoenixx_builds/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
       <a href="https://linktr.ee/phoenixbuilds" target="_blank" rel="noopener">Links <span class="arw" aria-hidden="true">↗</span></a>
