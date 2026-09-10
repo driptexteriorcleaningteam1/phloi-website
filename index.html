@@ -21,320 +21,234 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <link rel="canonical" href="https://phloi.com/">
-<meta name="theme-color" content="#f5f2ea">
+<meta name="theme-color" content="#0f0f0d">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b9ff4a'/%3E%3Ctext x='50' y='73' font-size='66' font-family='Arial,Helvetica,sans-serif' font-weight='700' text-anchor='middle' fill='%230f0f0d'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    /* palette unchanged */
     --paper:#f5f2ea;
     --paper-2:#efe9db;
     --card:#fffdf7;
     --ink:#0f0f0d;
     --ink-2:#55514a;
     --ink-3:#6a675e;
-    --line:rgba(15,15,13,.14);
-    --line-2:rgba(15,15,13,.07);
+    --line:rgba(15,15,13,.16);
+    --line-2:rgba(15,15,13,.08);
     --accent:#b9ff4a;
     --accent-2:#c9ff72;
     --accent-deep:#4f6f0a;
-    --radius:18px;
-    --maxw:1220px;
-    --pad:clamp(20px,5vw,84px);
-    --font-display:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --on-dark:rgba(245,242,234,.72);
+    --on-dark-line:rgba(245,242,234,.22);
+    --maxw:1180px;
+    --pad:clamp(20px,5vw,72px);
+    --font-display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
     --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-    --font-mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   }
 
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--font-body);
-    font-size:17px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-    overflow-x:hidden;
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--font-body);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
-  img{max-width:100%}
+  img{max-width:100%;display:block}
+  p,ul,ol{margin:0}
+  h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.03em;line-height:1.02;text-wrap:balance}
   ::selection{background:var(--accent);color:var(--ink)}
   :focus-visible{outline:2.5px solid var(--ink);outline-offset:3px;border-radius:4px}
+  [hidden]{display:none!important}
 
   .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);width:100%}
+  .band{padding:clamp(60px,8.5vw,116px) 0}
 
-  /* ---------- Micro type ---------- */
-  .eyebrow{
-    font-family:var(--font-mono);
-    font-size:12px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--ink-2);
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(185,255,74,.28)}
-  .eyebrow--num{color:var(--ink)}
-  .eyebrow--num b{font-weight:700}
-
-  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4.5vw,58px)}
-  .sec-head h2{margin:14px 0 0;font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(2rem,5.2vw,3.6rem)}
-  .sec-head .lead-note{max-width:38ch;color:var(--ink-2);font-size:15.5px;margin:0}
-
-  mark.hl{
-    background:var(--accent);
-    color:var(--ink);
-    padding:.02em .18em;
-    border-radius:3px;
-    box-decoration-break:clone;
-    -webkit-box-decoration-break:clone;
-  }
-  .under{
-    background-image:linear-gradient(var(--accent),var(--accent));
-    background-repeat:no-repeat;
-    background-position:0 88%;
-    background-size:100% .32em;
-    padding:0 .02em;
-  }
+  /* ---------- Section labels: a lime bar, not a mono eyebrow ---------- */
+  .kicker{display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:14.5px;color:var(--ink-2);margin-bottom:16px}
+  .kicker::before{content:"";width:26px;height:9px;border-radius:2px;background:var(--accent);flex:none}
+  .kicker--dark{color:var(--on-dark)}
+  .sec-title{font-weight:800;font-size:clamp(2.05rem,5.2vw,3.5rem)}
+  .sec-intro{max-width:60ch;color:var(--ink-2);font-size:clamp(1.02rem,1.5vw,1.16rem);margin-top:20px}
+  .hl{background:var(--accent);color:var(--ink);padding:0 .1em;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
   /* ---------- Buttons ---------- */
   .btn{
     display:inline-flex;align-items:center;gap:.6em;
-    font-family:var(--font-display);
-    font-weight:600;font-size:15px;letter-spacing:-.01em;
-    padding:14px 22px;border-radius:100px;
-    border:1.5px solid var(--ink);
-    background:var(--ink);color:var(--paper);
-    cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
-    line-height:1;
+    font-family:var(--font-display);font-weight:700;font-size:15.5px;letter-spacing:-.01em;line-height:1;
+    padding:16px 26px;border-radius:100px;border:2px solid var(--ink);
+    background:var(--ink);color:var(--paper);cursor:pointer;
+    transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease;
   }
-  .btn .arw{transition:transform .25s ease}
+  .btn .arw{transition:transform .22s ease}
   .btn:hover{transform:translateY(-2px)}
-  .btn:hover .arw{transform:translate(3px,-3px)}
+  .btn:hover .arw{transform:translateX(3px)}
   .btn--accent{background:var(--accent);border-color:var(--accent);color:var(--ink)}
-  .btn--accent:hover{background:var(--accent-2);border-color:var(--accent-2);box-shadow:0 10px 26px -12px rgba(15,15,13,.45)}
-  .btn--ghost{background:transparent;color:var(--ink)}
-  .btn--ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn--accent:hover{background:var(--accent-2);border-color:var(--accent-2)}
+  .btn--onDark{background:transparent;border-color:var(--on-dark-line);color:var(--paper)}
+  .btn--onDark:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
 
   /* ---------- Header ---------- */
-  .site-header{position:sticky;top:0;z-index:60;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;border-bottom:1px solid transparent}
-  .site-header.scrolled{background:rgba(245,242,234,.82);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.4) inset}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
-  .wordmark{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:-.04em;display:inline-flex;align-items:center;gap:2px}
-  .wordmark .tick{color:var(--accent-deep)}
-  .nav-menu{display:flex;align-items:center;gap:6px}
-  .nav-menu a.navlink{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);padding:9px 12px;border-radius:8px;transition:color .18s ease,background .18s ease}
-  .nav-menu a.navlink:hover{color:var(--ink);background:var(--paper-2)}
-  .nav-cta{margin-left:8px;padding:11px 18px;font-size:13.5px}
-  .nav-toggle{display:none;flex-direction:column;gap:5px;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;align-items:center;justify-content:center}
-  .nav-toggle span{width:19px;height:2px;background:var(--ink);transition:transform .25s ease,opacity .2s ease}
+  .site-header{position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);border-bottom:1px solid var(--on-dark-line);transition:box-shadow .3s ease}
+  .site-header.scrolled{box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+  .wordmark{font-family:var(--font-display);font-weight:800;font-size:23px;letter-spacing:-.05em;display:inline-flex;align-items:center;gap:1px;color:var(--paper)}
+  .wordmark .tick{color:var(--accent)}
+  .nav-menu{display:flex;align-items:center;gap:4px}
+  .nav-menu a.navlink{font-weight:500;font-size:15px;color:var(--on-dark);padding:9px 13px;border-radius:100px;transition:color .18s ease,background .18s ease}
+  .nav-menu a.navlink:hover{color:var(--paper);background:rgba(245,242,234,.1)}
+  .nav-cta{margin-left:10px;padding:12px 20px;font-size:14.5px}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;width:44px;height:44px;border:1.5px solid var(--on-dark-line);border-radius:12px;background:transparent;cursor:pointer;align-items:center;justify-content:center}
+  .nav-toggle span{width:19px;height:2px;background:var(--paper);transition:transform .25s ease,opacity .2s ease}
 
-  /* ---------- Hero ---------- */
-  .hero{padding:clamp(48px,8vw,110px) 0 clamp(40px,6vw,80px)}
-  .hero .kicker{margin-bottom:clamp(26px,4vw,44px)}
-  .hero h1{
-    font-family:var(--font-display);font-weight:600;
-    letter-spacing:-.045em;line-height:.98;
-    font-size:clamp(2.9rem,8.4vw,7rem);
-    margin:0 0 clamp(22px,3vw,34px);max-width:16ch;
+  /* ---------- Hero: one dark stage, no form, the product on show ---------- */
+  .hero{background:var(--ink);color:var(--paper);padding:clamp(44px,7vw,86px) 0 0;overflow:hidden}
+  .hero h1{font-weight:800;font-size:clamp(2.5rem,6.6vw,5rem);line-height:.96;max-width:17ch;margin:0 0 clamp(20px,2.6vw,30px)}
+  .hero .lead{max-width:52ch;font-size:clamp(1.04rem,1.6vw,1.2rem);color:var(--on-dark);margin:0 0 clamp(26px,3.4vw,38px)}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:clamp(30px,4vw,44px)}
+
+  .need-lead{font-weight:600;font-size:15px;color:var(--on-dark);margin:0 0 12px}
+  .need-grid{display:flex;flex-wrap:wrap;gap:10px}
+  .need-opt{
+    display:inline-flex;align-items:center;gap:11px;
+    font:inherit;font-size:15.5px;font-weight:500;color:var(--paper);
+    background:transparent;border:1.5px solid var(--on-dark-line);border-radius:100px;
+    padding:12px 20px;cursor:pointer;text-align:left;
+    transition:background .18s ease,border-color .18s ease,color .18s ease;
   }
-  .hero .subline{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,2.6vw,1.85rem);letter-spacing:-.02em;line-height:1.15;margin:0 0 22px;max-width:26ch}
-  .hero .lead{max-width:56ch;font-size:clamp(1rem,1.6vw,1.18rem);color:var(--ink-2);margin:0 0 34px}
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .hero-meta{display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:clamp(40px,6vw,64px);padding-top:26px;border-top:1px solid var(--line)}
-  .hero-meta .mi{display:flex;flex-direction:column;gap:4px}
-  .hero-meta .mi .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-  .hero-meta .mi .v{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-.01em}
+  .need-opt:hover{border-color:var(--paper)}
+  .need-opt .no-arw{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--accent);line-height:1}
+  .need-opt[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+  .need-opt[aria-pressed="true"] .no-arw{color:var(--ink)}
 
-  /* ---------- Marquee ---------- */
-  .marquee{border-top:1px solid rgba(245,242,234,.18);border-bottom:1px solid var(--line);background:var(--ink);color:var(--paper);overflow:hidden;padding:16px 0}
-  .marquee__track{display:flex;width:max-content;animation:marquee 34s linear infinite;will-change:transform}
-  .marquee:hover .marquee__track{animation-play-state:paused}
-  .marquee__track span{font-family:var(--font-display);font-weight:500;font-size:clamp(1rem,2vw,1.35rem);letter-spacing:-.01em;padding:0 26px;display:inline-flex;align-items:center;gap:26px;white-space:nowrap}
-  .marquee__track span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
-  @keyframes marquee{to{transform:translateX(-50%)}}
+  .hero-shot{display:block;margin-top:clamp(34px,5vw,60px);border-radius:16px 16px 0 0;overflow:hidden;border:1px solid var(--on-dark-line);border-bottom:0;box-shadow:0 -10px 70px -30px rgba(185,255,74,.3)}
+  .hero-shot img{width:100%;height:auto}
+  .hero-note{padding:14px 0 clamp(26px,3.4vw,38px);font-size:13.5px;color:rgba(245,242,234,.5);max-width:70ch}
 
-  /* ---------- Section shell ---------- */
-  section[id],form.phloi{scroll-margin-top:88px}
-  .band{padding:clamp(64px,9vw,130px) 0}
-  .rule{height:1px;background:var(--line);border:0;margin:0}
+  /* ---------- Marquee: lime, was ink ---------- */
+  .marquee{background:var(--accent);color:var(--ink);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;padding:14px 0}
+  .marquee__track{display:flex;gap:34px;width:max-content;animation:slide 46s linear infinite;align-items:center}
+  .marquee__track span{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:34px;white-space:nowrap}
+  .marquee__track span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink);flex:none}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ---------- Cards ---------- */
-  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-  .card{
-    position:relative;display:flex;flex-direction:column;
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:26px 24px 22px;min-height:290px;
-    transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
-    overflow:hidden;
-  }
-  .card::before{content:"";position:absolute;left:0;right:0;top:0;height:0;background:var(--accent);transition:height .28s ease}
-  .card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -30px rgba(15,15,13,.5);border-color:transparent}
-  .card:hover::before{height:6px}
-  .card .c-top{display:flex;align-items:center;justify-content:space-between}
-  .card .c-num{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3)}
-  .card .c-arw{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease}
-  .card:hover .c-arw{background:var(--accent);border-color:var(--accent);color:var(--ink);transform:rotate(-45deg)}
-  .card h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;font-size:1.55rem;margin:34px 0 12px}
-  .card p{color:var(--ink-2);font-size:15px;margin:0 0 auto}
-  .card .tag{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep)}
-  .card .tag{flex-wrap:wrap;row-gap:6px}
-  .card .tag .chip{background:var(--paper-2);color:var(--ink-2);padding:5px 10px;border-radius:100px;white-space:nowrap}
-  .card h3 mark.hl{padding:.04em .16em;border-radius:4px}
-  .card .c-lede{font-family:var(--font-body);font-weight:600;font-size:15.5px;line-height:1.4;color:var(--ink);margin:0 0 12px}
+  /* ---------- What I do: numbered rows, not ruled columns ---------- */
+  .rows{margin-top:clamp(34px,4.4vw,56px);border-top:2px solid var(--ink)}
+  .row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px clamp(20px,3.4vw,44px);padding:clamp(26px,3.6vw,42px) 0;border-bottom:1px solid var(--line);align-items:start}
+  .row .n{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1;color:var(--ink);width:2.4ch;font-variant-numeric:tabular-nums}
+  .row h3{font-weight:700;font-size:clamp(1.35rem,2.3vw,1.85rem);margin-bottom:10px}
+  .row p{color:var(--ink-2);max-width:62ch;font-size:16.5px}
+  .row a{border-bottom:2px solid var(--accent)}
+  .row a:hover{background:var(--accent)}
 
-  /* ---------- Approach ---------- */
-  .approach-statement{font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.14;font-size:clamp(1.5rem,3.6vw,2.6rem);max-width:20ch;margin:0}
-  .approach-statement .under{background-size:100% .28em}
-  .points{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(40px,5vw,64px)}
-  .points--2{grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,34px)}
-  .point{border-top:1.5px solid var(--ink);padding-top:20px}
-  .point .p-mark{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--accent-deep);display:block;margin-bottom:14px}
-  .point h4{font-family:var(--font-display);font-weight:600;font-size:1.3rem;letter-spacing:-.02em;margin:0 0 10px}
-  .point p{color:var(--ink-2);font-size:15px;margin:0}
+  /* ---------- Two ways: contrast carries the meaning ---------- */
+  .ways{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,26px);margin-top:clamp(34px,4.4vw,56px)}
+  .way{border:2px solid var(--ink);border-radius:18px;padding:clamp(24px,3.2vw,38px);display:flex;flex-direction:column;background:var(--card);transition:transform .2s ease}
+  .way:hover{transform:translateY(-3px)}
+  .way--dark{background:var(--ink);color:var(--paper)}
+  .way h3{font-weight:800;font-size:clamp(1.5rem,2.7vw,2.15rem);margin-bottom:12px}
+  .way .lede{font-weight:600;font-size:17px;margin-bottom:12px}
+  .way p{color:var(--ink-2);font-size:16px}
+  .way--dark p{color:var(--on-dark)}
+  .way .tag{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .way--dark .tag{border-top-color:var(--on-dark-line);color:var(--on-dark)}
+  .way .chip{font-weight:600;color:var(--ink);background:var(--accent);border-radius:100px;padding:5px 13px;font-size:14px}
 
-  /* ---------- Founder ---------- */
-
-  /* ---------- Process ---------- */
-  .steps{border-top:1px solid var(--line)}
-  .step{display:grid;grid-template-columns:120px 1fr auto;gap:28px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);transition:background .2s ease,padding .2s ease}
-  .step:hover{background:var(--card)}
-  .step .s-num{font-family:var(--font-display);font-weight:600;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.04em;line-height:.9;color:var(--ink)}
-  .step:hover .s-num{color:var(--accent-deep)}
-  .step .s-body h4{font-family:var(--font-display);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.7rem);letter-spacing:-.02em;margin:0 0 8px}
-  .step .s-body p{margin:0;color:var(--ink-2);font-size:15.5px;max-width:52ch}
-  .step .s-mark{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+  /* ---------- Why it works: cards, not ruled columns ---------- */
+  .statement{font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.14;letter-spacing:-.03em;max-width:26ch;margin-top:clamp(20px,2.6vw,30px)}
+  .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);margin-top:clamp(34px,4.4vw,56px)}
+  .tri .t{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,30px)}
+  .tri .t::before{content:"";display:block;width:26px;height:9px;border-radius:2px;background:var(--accent);margin-bottom:16px}
+  .tri h4{font-weight:700;font-size:1.16rem;margin-bottom:9px}
+  .tri p{color:var(--ink-2);font-size:15.8px}
 
   /* ---------- FAQ ---------- */
-  .faq-list{border-top:1px solid var(--ink)}
+  .faq-list{margin-top:clamp(30px,4vw,48px);border-top:2px solid var(--ink)}
   details.faq{border-bottom:1px solid var(--line)}
-  details.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;font-family:var(--font-display);font-weight:600;font-size:clamp(1.1rem,2.2vw,1.45rem);letter-spacing:-.02em}
+  details.faq summary{
+    list-style:none;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:22px;
+    padding:22px 0;font-family:var(--font-display);font-weight:600;font-size:clamp(1.04rem,1.8vw,1.28rem);letter-spacing:-.02em;
+  }
   details.faq summary::-webkit-details-marker{display:none}
-  details.faq .plus{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;position:relative;transition:background .2s ease,border-color .2s ease}
-  details.faq .plus::before,details.faq .plus::after{content:"";position:absolute;background:var(--ink);border-radius:2px}
-  details.faq .plus::before{width:13px;height:2px}
-  details.faq .plus::after{width:2px;height:13px;transition:transform .25s ease}
-  details.faq[open] .plus{background:var(--accent);border-color:var(--accent)}
-  details.faq[open] .plus::after{transform:scaleY(0)}
-  details.faq .answer{padding:0 44px 26px 0;color:var(--ink-2);font-size:16px;max-width:70ch}
-  details.faq[open] summary{color:var(--ink)}
+  details.faq summary:hover{color:var(--accent-deep)}
+  .pm{position:relative;flex:none;width:24px;height:24px;margin-top:2px;border-radius:50%;transition:background .2s ease}
+  .pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--ink);border-radius:2px;transform:translate(-50%,-50%)}
+  .pm::before{width:13px;height:2.5px}
+  .pm::after{width:2.5px;height:13px;transition:opacity .2s ease,transform .2s ease}
+  details.faq[open] .pm{background:var(--accent)}
+  details.faq[open] .pm::after{opacity:0;transform:translate(-50%,-50%) rotate(90deg)}
+  details.faq .answer{padding:0 46px 26px 0;color:var(--ink-2);font-size:16.5px;max-width:74ch}
+  details.faq .answer b{color:var(--ink);font-weight:600}
 
-  /* ---------- Inquiry ---------- */
-  .inquiry{background:var(--paper-2)}
-  .inquiry-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(34px,5vw,72px);align-items:start}
-  .inquiry h1,.inquiry h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.2rem);margin:16px 0 18px}
-  .inquiry h1 .under,.inquiry h2 .under{background-size:100% .26em}
-  .inquiry .sub{color:var(--ink-2);font-size:16.5px;margin:0 0 26px;max-width:44ch}
-  .inquiry .alt{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2);border-top:1px solid var(--line);padding-top:22px;margin-top:6px}
-  .inquiry .alt a{border-bottom:2px solid var(--accent)}
-  .inquiry .alt a:hover{background:var(--accent)}
-  form.phloi{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3vw,34px)}
-  .field{margin-bottom:18px}
-  .field label{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:9px}
-  .field label .req{color:var(--accent-deep)}
+  /* ---------- Contact ---------- */
+  .contact{background:var(--paper-2);border-top:2px solid var(--ink)}
+  .contact .sec-title{max-width:16ch}
+  .form-card{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:clamp(24px,3.4vw,44px);margin-top:clamp(30px,4vw,48px)}
+  .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,24px)}
+  .field{display:flex;flex-direction:column;gap:9px;min-width:0}
+  .field--full{grid-column:1 / -1}
+  .field label{font-weight:600;font-size:15px;color:var(--ink)}
+  .field .req{color:var(--accent-deep)}
   .field input,.field textarea{
     width:100%;font-family:var(--font-body);font-size:16px;color:var(--ink);
-    background:var(--paper);border:1.5px solid var(--line);border-radius:12px;
-    padding:14px 15px;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+    background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;
+    transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
   }
+  .field textarea{min-height:118px;resize:vertical}
   .field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:var(--card);box-shadow:0 0 0 4px rgba(185,255,74,.4)}
-  .field textarea{min-height:130px;resize:vertical}
-  form.phloi .btn{width:100%;justify-content:center;margin-top:6px;padding:16px 22px;font-size:16px}
-
-  /* ---------- Final CTA ---------- */
-  .final .eyebrow{color:var(--ink-2)}
-  @media(min-width:981px){.inquiry h1{font-size:clamp(2.4rem,4.2vw,4rem)}}
-  .final h2{font-family:var(--font-display);font-weight:600;letter-spacing:-.04em;line-height:.98;font-size:clamp(2.2rem,6vw,4.2rem);margin:20px 0 30px;max-width:14ch}
-  .final .cta-row{display:flex;flex-wrap:wrap;gap:18px 34px;align-items:center}
-  .final .contacts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
-  .final .contacts a{display:inline-flex;align-items:center;gap:8px}
-  .final .contacts a:hover{color:var(--ink)}
-  .final .contacts a .arw{color:var(--accent-deep)}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:var(--card);box-shadow:0 0 0 4px rgba(185,255,74,.45)}
+  .f-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:clamp(20px,2.6vw,28px);padding-top:clamp(20px,2.6vw,28px);border-top:1px solid var(--line)}
+  .f-note{flex:1 1 300px;font-size:14.5px;color:var(--ink-2);margin:0}
+  #f-wants-note{grid-column:1 / -1;margin:0;font-weight:600;font-size:15px;color:var(--accent-deep)}
 
   /* ---------- Footer ---------- */
-  .site-footer{background:var(--ink);color:var(--paper);padding:clamp(56px,7vw,90px) 0 40px}
-  .foot-mark{font-family:var(--font-display);font-weight:700;letter-spacing:-.05em;line-height:.85;font-size:clamp(4.5rem,20vw,15rem);margin:0 0 clamp(30px,4vw,50px)}
+  .site-footer{background:var(--ink);color:var(--paper);padding:clamp(52px,6.5vw,84px) 0 38px}
+  .foot-mark{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.05em;margin:0 0 34px;line-height:1}
   .foot-mark .tick{color:var(--accent)}
-  .foot-links{display:flex;flex-wrap:wrap;gap:14px 30px;padding-top:30px;border-top:1px solid rgba(245,242,234,.18)}
-  .foot-links a{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#c8c4b9;display:inline-flex;align-items:center;gap:8px;transition:color .18s ease}
+  .foot-links{display:flex;flex-wrap:wrap;gap:14px 30px;padding-bottom:30px;border-bottom:1px solid var(--on-dark-line)}
+  .foot-links a{font-weight:500;font-size:15.5px;color:var(--on-dark);display:inline-flex;align-items:center;gap:7px}
   .foot-links a:hover{color:var(--accent)}
-  .foot-bottom{margin-top:40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;color:#8f8c82}
+  .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 30px;padding-top:24px;font-size:14px;color:rgba(245,242,234,.5)}
 
   /* ---------- Reveal ---------- */
-  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
   .js .reveal.in{opacity:1;transform:none}
 
   /* ---------- Responsive ---------- */
   @media(max-width:980px){
-    .inquiry-grid{grid-template-columns:1fr}
-    .cards{grid-template-columns:1fr 1fr}
-    .points{grid-template-columns:1fr}
-    .point{border-top-color:var(--line)}
+    .ways{grid-template-columns:1fr}
+    .tri{grid-template-columns:1fr}
+    .f-grid{grid-template-columns:1fr}
   }
   @media(max-width:880px){
     .nav-menu{
-      position:absolute;top:70px;left:0;right:0;
-      flex-direction:column;align-items:stretch;gap:4px;
-      background:var(--card);border-bottom:1px solid var(--line);
-      padding:14px var(--pad) 22px;
-      transform:translateY(-14px);opacity:0;pointer-events:none;transition:transform .28s ease,opacity .28s ease;
-      box-shadow:0 24px 40px -28px rgba(15,15,13,.5);
+      position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;
+      background:var(--ink);border-bottom:1px solid var(--on-dark-line);padding:12px var(--pad) 20px;
+      transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform .28s ease,opacity .28s ease;
     }
     body.nav-open .nav-menu{transform:none;opacity:1;pointer-events:auto}
-    .nav-menu a.navlink{font-size:14px;padding:13px 8px;border-bottom:1px solid var(--line-2)}
-    .nav-cta{margin:12px 0 0;justify-content:center;padding:14px 18px;font-size:15px}
+    .nav-menu a.navlink{font-size:16px;padding:13px 6px;border-radius:0;border-bottom:1px solid var(--on-dark-line)}
+    .nav-cta{margin:12px 0 0;justify-content:center;padding:15px 20px;font-size:16px}
     .nav-toggle{display:flex}
     body.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     body.nav-open .nav-toggle span:nth-child(2){opacity:0}
     body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-    .step{grid-template-columns:64px 1fr;gap:18px}
-    .step .s-mark{display:none}
+    .row{grid-template-columns:1fr;gap:4px}
+    .row .n{font-size:1.5rem;margin-bottom:4px}
   }
   @media(max-width:560px){
-    .cards{grid-template-columns:1fr}
-    .hero-actions .btn{flex:1 1 auto;justify-content:center}
-    .final .contacts{font-size:11.5px}
+    .hero-actions .btn{flex:1 1 100%;justify-content:center}
+    .need-opt{flex:1 1 100%}
+    details.faq .answer{padding-right:0}
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .marquee__track{animation:none}
     .js .reveal{opacity:1;transform:none;transition:none}
-    *{scroll-behavior:auto}
+    .btn:hover,.way:hover{transform:none}
   }
-  /* ---------- Interactive hero picker (focal) ---------- */
-  .hero--pick{padding:clamp(24px,3.5vw,52px) 0 clamp(48px,6vw,88px)}
-  .pick-lede{max-width:60ch}
-  .hero--pick .pick-q{max-width:15ch;font-size:clamp(2.5rem,6vw,5.2rem);line-height:1;margin:0 0 clamp(16px,2vw,22px)}
-  .pick-lede .eyebrow{margin-bottom:clamp(12px,1.8vw,20px)}
-  .pick-q{font-family:var(--font-display);font-weight:600;letter-spacing:-.045em;line-height:.96;font-size:clamp(3rem,9vw,7.4rem);margin:0 0 clamp(18px,2.4vw,26px);text-wrap:balance}
-  .pick-sub{max-width:52ch;font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--ink-2);margin:0 0 clamp(22px,3vw,36px);line-height:1.5}
-  .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,16px);max-width:920px}
-  .need-opt{display:flex;align-items:center;gap:16px;text-align:left;padding:clamp(20px,2.5vw,30px) clamp(20px,2.3vw,28px);border-radius:var(--radius);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;line-height:1.15;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
-  .need-opt .no-k{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--ink-3);flex:0 0 auto}
-  .need-opt .no-t{font-family:var(--font-display);font-weight:600;font-size:clamp(1.08rem,1.9vw,1.4rem);letter-spacing:-.02em;flex:1 1 auto}
-  .need-opt .no-arw{font-family:var(--font-mono);font-size:20px;color:var(--ink-3);flex:0 0 auto;transition:transform .25s ease,color .2s ease}
-  .need-opt:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:0 22px 44px -28px rgba(15,15,13,.55)}
-  .need-opt:hover .no-arw{transform:translate(3px,-3px);color:var(--ink)}
-  .need-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .need-opt[aria-pressed="true"] .no-k{color:var(--accent)}
-  .need-opt[aria-pressed="true"] .no-arw{color:var(--accent);transform:translate(3px,-3px)}
-  .need-opt[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
-  .site-footer :focus-visible{outline-color:var(--accent)}
-  /* Needs picker inside the inquiry column: stack the options. */
-  .inquiry .need-grid{grid-template-columns:1fr;max-width:none;margin-top:clamp(18px,2.4vw,26px)}
-  .inquiry .need-opt{padding:16px 18px}
-  .inquiry .need-opt .no-t{font-size:clamp(1rem,1.5vw,1.15rem)}
-  .pick-skip{margin-top:clamp(26px,4vw,44px);font-family:var(--font-mono);font-size:14px;letter-spacing:.02em;color:var(--ink-3)}
-  .pick-skip a{color:var(--ink);border-bottom:1.5px solid var(--accent);padding-bottom:1px}
-  .pick-skip a:hover{color:var(--accent-deep)}
-  .card.is-match{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,255,74,.35)}
-  @media(max-width:640px){.need-grid{grid-template-columns:1fr}.pick-q{font-size:clamp(2.6rem,12vw,3.6rem)}}
 </style>
 <script type="application/ld+json">
 {
@@ -482,35 +396,189 @@
 
 <main>
 
-  <!-- INQUIRY -->
-  <section id="inquiry" class="band inquiry">
+  <!-- HERO -->
+  <section class="hero">
     <div class="wrap">
-      <div class="inquiry-grid">
-        <div class="reveal">
-          <h1>Is your service business stuck? Let's find you <span class="under">more profit</span> and grow it</h1>
-          <p class="sub">From client acquisition to the AI that runs your business, my goal is to make you more profit. I run my own service business that uses the exact same systems.</p>
-          <p class="sub" style="margin-bottom:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)">Which sounds more like you? Tap one.</p>
+      <div class="reveal">
+        <h1>Is your service business stuck? Let's find you <span class="hl">more profit</span> and grow it</h1>
+        <p class="lead">From client acquisition to the AI that runs your business, my goal is to make you more profit. I run my own service business that uses the exact same systems.</p>
+        <div class="hero-actions">
+          <a class="btn btn--accent" href="#inquiry-form">Get in touch <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn--onDark" href="#services">See what I do <span class="arw" aria-hidden="true">↓</span></a>
+        </div>
+        <p class="need-lead">Which sounds more like you? Tap one and it goes in with your message.</p>
+        <div class="need-grid" role="group" aria-label="What's slowing your business down?">
+          <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
+            <span class="no-arw" aria-hidden="true">+</span><span class="no-t">Not enough leads or sales</span>
+          </button>
+          <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
+            <span class="no-arw" aria-hidden="true">+</span><span class="no-t">Buried in admin and follow ups</span>
+          </button>
+        </div>
+      </div>
 
-          <div class="need-grid" role="group" aria-label="What's slowing your business down?">
-            <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
-              <span class="no-k">01</span><span class="no-t">Not enough leads or sales</span><span class="no-arw" aria-hidden="true">+</span>
-            </button>
-            <button type="button" class="need-opt" data-need="admin" aria-pressed="false">
-              <span class="no-k">02</span><span class="no-t">Buried in admin and follow ups</span><span class="no-arw" aria-hidden="true">+</span>
-            </button>
+      <a class="hero-shot reveal" href="/dashboard" aria-label="See the dashboard, and click around a live example">
+        <img src="/dashboard-example.png" width="1440" height="764" fetchpriority="high" decoding="async"
+             alt="The operations dashboard on example data: money in this week, still to collect, jobs booked, quote win rate, revenue against target, and what needs a decision today.">
+      </a>
+      <p class="hero-note">The same system I run my own exterior cleaning business, Dript, on. Shown here on example data. <a href="/dashboard" style="color:var(--accent);border-bottom:1px solid rgba(185,255,74,.5)">Click around a live one</a>.</p>
+    </div>
+  </section>
+
+  <!-- AUDIENCE MARQUEE -->
+  <div class="marquee" aria-label="Who I work with">
+    <div class="marquee__track" aria-hidden="true">
+      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
+      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="band">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">What I do</span>
+        <h2 class="sec-title">How I can help</h2>
+      </div>
+
+      <div class="rows">
+        <div class="row reveal">
+          <span class="n">01</span>
+          <div>
+            <h3>Client Acquisition</h3>
+            <p>Your offer priced so it is worth replying to, then Facebook and Instagram ads built from photos of your real jobs and aimed at your suburbs. I write the ads and make the images. Then the sales process behind them, because sales is what closes a job and ads just decide how many chances you get at it.</p>
           </div>
         </div>
+        <div class="row reveal">
+          <span class="n">02</span>
+          <div>
+            <h3>AI</h3>
+            <p>Every enquiry, whether it is a form, a text or a missed call, gets a reply in seconds, written the way you would write it and using your prices. Quotes chased, job admin off your evenings, review asks and a daily read on your numbers. It does not close anything. It makes sure nothing slips while you are out on the tools.</p>
+          </div>
+        </div>
+        <div class="row reveal">
+          <span class="n">03</span>
+          <div>
+            <h3>Your Custom Dashboard</h3>
+            <p>A separate build, on top of either service. Jobs, quotes, crew, follow up and money on one screen, sitting over the tools you already use. The same system I run Dript on. <a href="/dashboard">See what is inside</a>.</p>
+          </div>
+        </div>
+      </div>
 
-        <form class="phloi reveal" id="inquiry-form" name="phloi-inquiry" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="phloi-inquiry">
-          <input type="hidden" name="need" id="f-need">
-          <input type="hidden" name="wants" id="f-wants">
-          <p hidden>
-            <label>Don't fill this out if you're human: <input name="bot-field"></label>
-          </p>
+      <div class="ways">
+        <a class="way reveal" href="#inquiry-form" data-wants="Done alongside you">
+          <h3>Done <span class="hl">alongside</span> you</h3>
+          <p class="lede">You run it. Nobody to wait on.</p>
+          <p>Whichever build you pick, I build it beside you, show you how every piece works, then the logins are yours. Change a price, a message or an ad yourself, the same day you decide to.</p>
+          <span class="tag">Best if <span class="chip">you want the keys</span></span>
+        </a>
 
-          <span class="eyebrow eyebrow--num" style="margin-bottom:20px;font-size:15px;font-weight:700"><b>→</b> Fill out this form</span>
+        <a class="way way--dark reveal" href="#inquiry-form" data-wants="Done for you">
+          <h3>Done <span class="hl">for</span> you</h3>
+          <p class="lede">I run it. You take the booked jobs.</p>
+          <p>Same build, then I run it month to month. I watch it, chase what goes quiet and tune what is not working, and you sign off anything new. Your evenings stay yours.</p>
+          <span class="tag">Best if <span class="chip">you never want to touch it</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
 
+  <!-- APPROACH -->
+  <section id="approach" class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Why it works</span>
+        <h2 class="sec-title">Built around you,<br>not the software.</h2>
+        <p class="statement">Off-the-shelf tools make you bend your business to fit them. I do it the <span class="hl">other way round</span>, built around how your business actually works, plugged into what you already use.</p>
+      </div>
+
+      <div class="tri">
+        <div class="t reveal">
+          <h4>Plugged into what you already use</h4>
+          <p>I shape the setup around how you already work, not the other way round. Your process stays yours. It just runs smoother.</p>
+        </div>
+        <div class="t reveal">
+          <h4>Everything talks to each other</h4>
+          <p>Your marketing, sales, AI and follow-ups wired together, so nothing falls through the cracks and you're not copying data between tabs.</p>
+        </div>
+        <div class="t reveal">
+          <h4>Grows with you</h4>
+          <p>What I build holds up when you get busier. More leads and more jobs shouldn't mean more chaos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Straight answers</span>
+        <h2 class="sec-title">Questions,<br>answered honestly.</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq reveal">
+          <summary>What do you actually do? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Two things. <b>Client Acquisition</b> brings the work in and closes it: your offer priced so it is worth replying to, ads built from your real work, and the sales process behind them. <b>AI</b> keeps the back end and fulfilment tight: follow ups that fire whether or not you remember, quotes chased until they are answered, job admin off your evenings, and a daily read on your numbers. Take one or take both. Most people take both, because more enquiries coming in is exactly what makes work start slipping out the back.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What are the two ways of working? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer"><b>Done alongside you</b> is a single day where I teach you to build it. Your hands on the keyboard, mine off it, and I stay on it with you for the thirty days after. <b>Done for you</b> is where I build the same machine and then run it, month to month, and you do not touch it. Same build either way. The only difference is whose hands are on it and who runs it afterwards.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>Which one should I pick? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">If you want control and a fixed one off cost, done alongside you. If you would rather buy the outcome than learn the tools, done for you. If you are torn, tell me which hurts more: not enough work coming in, or work slipping while you are out on the tools. That usually answers it in about a minute, and I will tell you on the call if I think you are picking the wrong one.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>Do you only work with trades? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Mostly trades and home services, because that is what I run myself and what the systems were built on. The same setup works for any business where the job starts with an enquiry and ends with a booking, so I do take on cleaners, health and beauty, consultants and professional services when the fit is right. Different industries, same problem: good leads going quiet because nobody got back to them fast enough.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>Do I have to change the software I already use? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">No. It gets built around what you have got: your phone number, your inbox, your calendar, your job management software. If something you are using is genuinely holding you back I will tell you, but you will not be relearning your own business on new tools. You do not need to be technical either way.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>Will the AI sound like a robot? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Not the way I set it up. It replies in your words, with your prices and your rules, not a generic chatbot script. It is worth being clear about what it does and does not do: it handles the repetitive part, answering fast, chasing quotes that go quiet, asking for reviews and keeping the admin moving. <b>It does not close jobs. Sales does that, and that part stays yours.</b> Anything it is unsure about comes straight to you with the full conversation attached.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What if the AI gets something wrong? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">It can only quote the prices and rules you gave it. Anything it has not been told, it says you will come back to them and sends you the thread. Every message it sends is written out in plain English before it goes live, so you know exactly what it says to your customers and why, and you can change how it responds whenever you like.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>How fast does this happen? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Done alongside you is one day, and if ads are part of it they are spending real money by lunch. Dates are limited because it is one client per day and I run my own business around them. Done for you starts with a twenty minute call and an audit, then a written scope and price within forty eight hours, and the build follows from there.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What does it cost? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Done alongside you is one payment, agreed in writing before anything starts, with thirty days of support included. Done for you is quoted after a call and an audit, because what it costs to run depends on your services, your margins and how much work you can take, and quoting that blind would be guessing with your money. Ad spend and your own AI subscription are separate, paid by you directly, and never pass through me. Ask me for whichever document fits and the full numbers are in it.</div>
+        </details>
+        <details class="faq reveal">
+          <summary>What if it doesn't work? <span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer">Nobody can promise you a number from ads or AI, and anyone who does is guessing with your money. What I can promise: you see the whole thing running on a real business, mine, before you pay a cent. The scope and price are in writing before anything starts. Everything is in your name, so nothing is rented from me and nothing breaks if you walk.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="inquiry" class="band contact">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Get in touch</span>
+        <h2 class="sec-title">Tell me what is slowing you down.</h2>
+      </div>
+
+      <form class="form-card reveal" id="inquiry-form" name="phloi-inquiry" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="phloi-inquiry">
+        <input type="hidden" name="need" id="f-need">
+        <input type="hidden" name="wants" id="f-wants">
+        <p hidden>
+          <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </p>
+
+        <div class="f-grid">
           <div class="field">
             <label for="f-name">Name <span class="req">*</span></label>
             <input id="f-name" type="text" name="name" required placeholder="First name's fine" autocomplete="given-name">
@@ -527,149 +595,18 @@
             <label for="f-instagram">Instagram handle <span class="req">*</span></label>
             <input id="f-instagram" type="text" name="instagram" required placeholder="yourprofile" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off">
           </div>
-          <div class="field">
+          <div class="field field--full">
             <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
             <textarea id="f-message" name="message" required placeholder="e.g. We get enquiries but half go quiet before we even quote"></textarea>
           </div>
-          <p class="alt" id="f-wants-note" hidden style="border:0;padding-top:0;margin:0 0 14px"></p>
+          <p id="f-wants-note" hidden></p>
+        </div>
+
+        <div class="f-foot">
+          <p class="f-note">I read every one and reply myself. Then a free call where you see exactly what you would get and what it costs, then a fixed scope and price in writing.</p>
           <button class="btn btn--accent" type="submit">Submit <span class="arw" aria-hidden="true">→</span></button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- AUDIENCE MARQUEE -->
-  <div class="marquee" aria-label="Who I work with">
-    <div class="marquee__track" aria-hidden="true">
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
-      <span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span>
-    </div>
-  </div>
-
-  <!-- 01 SERVICES -->
-  <section id="services" class="band">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow eyebrow--num"><b>01</b> · What I do</span>
-          <h2>How I can help</h2>
         </div>
-      </div>
-
-      <div class="points" style="margin-top:0;margin-bottom:clamp(30px,4vw,48px)">
-        <div class="point reveal"><span class="p-mark">A</span><h4>Client Acquisition</h4><p>Your offer priced so it is worth replying to, then Facebook and Instagram ads built from photos of your real jobs and aimed at your suburbs. I write the ads and make the images. Then the sales process behind them, because sales is what closes a job and ads just decide how many chances you get at it.</p></div>
-        <div class="point reveal"><span class="p-mark">B</span><h4>AI</h4><p>Every enquiry, whether it is a form, a text or a missed call, gets a reply in seconds, written the way you would write it and using your prices. Quotes chased, job admin off your evenings, review asks and a daily read on your numbers. It does not close anything. It makes sure nothing slips while you are out on the tools.</p></div>
-        <div class="point reveal"><span class="p-mark">C</span><h4>Your Custom Dashboard</h4><p>A separate build, on top of either service. Jobs, quotes, crew, follow up and money on one screen, sitting over the tools you already use. The same system I run Dript on. <a href="/dashboard" style="border-bottom:2px solid var(--accent)">See what is inside</a>.</p></div>
-      </div>
-
-      <div class="cards">
-        <a class="card reveal" href="#inquiry-form" data-wants="Done alongside you">
-          <div class="c-top"><span class="c-num">01</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Done <mark class="hl">alongside</mark> you</h3>
-          <p class="c-lede">You run it. Nobody to wait on.</p>
-          <p>Whichever build you pick, I build it beside you, show you how every piece works, then the logins are yours. Change a price, a message or an ad yourself, the same day you decide to.</p>
-          <span class="tag">Best if <span class="chip">you want the keys</span></span>
-        </a>
-
-        <a class="card reveal" href="#inquiry-form" data-wants="Done for you">
-          <div class="c-top"><span class="c-num">02</span><span class="c-arw" aria-hidden="true">↗</span></div>
-          <h3>Done <mark class="hl">for</mark> you</h3>
-          <p class="c-lede">I run it. You take the booked jobs.</p>
-          <p>Same build, then I run it month to month. I watch it, chase what goes quiet and tune what is not working, and you sign off anything new. Your evenings stay yours.</p>
-          <span class="tag">Best if <span class="chip">you never want to touch it</span></span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <!-- 02 APPROACH -->
-  <section id="approach" class="band">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow eyebrow--num"><b>02</b> · Why it works</span>
-          <h2>Built around you,<br>not the software.</h2>
-        </div>
-      </div>
-
-      <p class="approach-statement reveal">Off-the-shelf tools make you bend your business to fit them. I do it the <span class="under">other way round</span>, built around how your business actually works, plugged into what you already use.</p>
-
-      <div class="points">
-        <div class="point reveal">
-          <span class="p-mark">A</span>
-          <h4>Plugged into what you already use</h4>
-          <p>I shape the setup around how you already work, not the other way round. Your process stays yours. It just runs smoother.</p>
-        </div>
-        <div class="point reveal">
-          <span class="p-mark">B</span>
-          <h4>Everything talks to each other</h4>
-          <p>Your marketing, sales, AI and follow-ups wired together, so nothing falls through the cracks and you're not copying data between tabs.</p>
-        </div>
-        <div class="point reveal">
-          <span class="p-mark">C</span>
-          <h4>Grows with you</h4>
-          <p>What I build holds up when you get busier. More leads and more jobs shouldn't mean more chaos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <!-- 03 FAQ -->
-  <section id="faq" class="band">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow eyebrow--num"><b>03</b> · Straight answers</span>
-          <h2>Questions,<br>answered honestly.</h2>
-        </div>
-      </div>
-
-      <div class="faq-list">
-        <details class="faq reveal">
-          <summary>What do you actually do? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Two things. <b>Client Acquisition</b> brings the work in and closes it: your offer priced so it is worth replying to, ads built from your real work, and the sales process behind them. <b>AI</b> keeps the back end and fulfilment tight: follow ups that fire whether or not you remember, quotes chased until they are answered, job admin off your evenings, and a daily read on your numbers. Take one or take both. Most people take both, because more enquiries coming in is exactly what makes work start slipping out the back.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>What are the two ways of working? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer"><b>Done alongside you</b> is a single day where I teach you to build it. Your hands on the keyboard, mine off it, and I stay on it with you for the thirty days after. <b>Done for you</b> is where I build the same machine and then run it, month to month, and you do not touch it. Same build either way. The only difference is whose hands are on it and who runs it afterwards.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>Which one should I pick? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">If you want control and a fixed one off cost, done alongside you. If you would rather buy the outcome than learn the tools, done for you. If you are torn, tell me which hurts more: not enough work coming in, or work slipping while you are out on the tools. That usually answers it in about a minute, and I will tell you on the call if I think you are picking the wrong one.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>Do you only work with trades? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Mostly trades and home services, because that is what I run myself and what the systems were built on. The same setup works for any business where the job starts with an enquiry and ends with a booking, so I do take on cleaners, health and beauty, consultants and professional services when the fit is right. Different industries, same problem: good leads going quiet because nobody got back to them fast enough.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>Do I have to change the software I already use? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">No. It gets built around what you have got: your phone number, your inbox, your calendar, your job management software. If something you are using is genuinely holding you back I will tell you, but you will not be relearning your own business on new tools. You do not need to be technical either way.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>Will the AI sound like a robot? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Not the way I set it up. It replies in your words, with your prices and your rules, not a generic chatbot script. It is worth being clear about what it does and does not do: it handles the repetitive part, answering fast, chasing quotes that go quiet, asking for reviews and keeping the admin moving. <b>It does not close jobs. Sales does that, and that part stays yours.</b> Anything it is unsure about comes straight to you with the full conversation attached.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>What if the AI gets something wrong? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">It can only quote the prices and rules you gave it. Anything it has not been told, it says you will come back to them and sends you the thread. Every message it sends is written out in plain English before it goes live, so you know exactly what it says to your customers and why, and you can change how it responds whenever you like.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>How fast does this happen? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Done alongside you is one day, and if ads are part of it they are spending real money by lunch. Dates are limited because it is one client per day and I run my own business around them. Done for you starts with a twenty minute call and an audit, then a written scope and price within forty eight hours, and the build follows from there.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>What does it cost? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Done alongside you is one payment, agreed in writing before anything starts, with thirty days of support included. Done for you is quoted after a call and an audit, because what it costs to run depends on your services, your margins and how much work you can take, and quoting that blind would be guessing with your money. Ad spend and your own AI subscription are separate, paid by you directly, and never pass through me. Ask me for whichever document fits and the full numbers are in it.</div>
-        </details>
-        <details class="faq reveal">
-          <summary>What if it doesn't work? <span class="plus" aria-hidden="true"></span></summary>
-          <div class="answer">Nobody can promise you a number from ads or AI, and anyone who does is guessing with your money. What I can promise: you see the whole thing running on a real business, mine, before you pay a cent. The scope and price are in writing before anything starts. Everything is in your name, so nothing is rented from me and nothing breaks if you walk.</div>
-        </details>
-      </div>
+      </form>
     </div>
   </section>
 
@@ -696,15 +633,13 @@
 <script>
   (function(){
     // Fail-safe: .reveal starts at opacity:0, so if anything below throws before
-    // the observer is attached the whole page would render blank. This reveals
-    // everything unless the observer confirms it took over.
+    // the observer is attached the whole page would render blank.
     var revealReady = false;
     setTimeout(function(){
       if (revealReady) return;
       document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
     }, 1200);
 
-    // Copyright year
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
@@ -730,7 +665,6 @@
       });
     }
 
-    // Sticky header background on scroll
     var header = document.querySelector('.site-header');
     var onScroll = function(){
       if (window.scrollY > 12) header.classList.add('scrolled');
@@ -761,25 +695,22 @@
 </script>
 
 <script>
-  /* First screen picker: send the pick with the message, never overwrite their words. */
+  /* Hero picker: send the pick with the message, never overwrite their words. */
   (function(){
     var LABEL={leads:'Not enough leads or sales',admin:'Buried in admin and follow ups'};
     var HINT={leads:'e.g. Quiet weeks, then flat out. Not enough of the right enquiries.',admin:'e.g. We get enquiries but half go quiet before we even quote'};
     var opts=document.querySelectorAll('.need-opt');
     if(!opts.length)return;
-    var need=document.getElementById('f-need'),msg=document.getElementById('f-message'),form=document.getElementById('inquiry-form');
-    function pick(key){
-      opts.forEach(function(o){var on=o.dataset.need===key;o.setAttribute('aria-pressed',on?'true':'false');var a=o.querySelector('.no-arw');if(a)a.textContent=on?'\u2713':'+';});
+    var need=document.getElementById('f-need'),msg=document.getElementById('f-message');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      var key=o.dataset.need;
+      opts.forEach(function(x){var on=x.dataset.need===key;x.setAttribute('aria-pressed',on?'true':'false');var a=x.querySelector('.no-arw');if(a)a.textContent=on?'\u2713':'+';});
       if(need)need.value=LABEL[key]||'';
       if(msg&&!msg.value&&HINT[key])msg.placeholder=HINT[key];
-      if(window.matchMedia('(max-width:980px)').matches&&form){
-        form.scrollIntoView({behavior:'smooth',block:'start'});
-        setTimeout(function(){var n=document.getElementById('f-name');if(n)n.focus({preventScroll:true});},450);
-      }
-    }
-    opts.forEach(function(o){o.addEventListener('click',function(){pick(o.dataset.need);});});
-    // Done alongside you / Done for you cards: carry the choice into the form
-    document.querySelectorAll('.card[data-wants]').forEach(function(c){
+    });});
+
+    /* The two option cards carry their choice into the form. */
+    document.querySelectorAll('.way[data-wants]').forEach(function(c){
       c.addEventListener('click',function(){
         var w=c.dataset.wants,h=document.getElementById('f-wants'),n=document.getElementById('f-wants-note');
         if(h)h.value=w;
@@ -789,5 +720,6 @@
     });
   })();
 </script>
+
 </body>
 </html>
