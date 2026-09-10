@@ -151,6 +151,7 @@
   .way p{color:var(--ink-2);font-size:16px}
   .way .tag{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
   .way .chip{font-weight:600;color:var(--ink);background:var(--accent);border-radius:100px;padding:5px 13px;font-size:14px}
+  .way .price-at{font-weight:600;color:var(--ink);border:1.5px solid var(--line);border-radius:100px;padding:4px 12px;font-size:14px;margin-left:auto}
 
   /* ---------- Why it works: cards, not ruled columns ---------- */
   .statement{font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.14;letter-spacing:-.03em;max-width:26ch;margin-top:clamp(20px,2.6vw,30px)}
@@ -159,6 +160,11 @@
   .tri .t::before{content:"";display:block;width:26px;height:9px;border-radius:2px;background:var(--accent);margin-bottom:16px}
   .tri h4{font-weight:700;font-size:1.16rem;margin-bottom:9px}
   .tri p{color:var(--ink-2);font-size:15.8px}
+
+  /* Social proof slots. The section stays hidden until real quotes replace the brackets. */
+  .t-photo{border:1.5px dashed var(--line);border-radius:12px;padding:22px 14px;margin-bottom:16px;font-size:13px;line-height:1.5;color:var(--ink-3);text-align:center}
+  .tri p.t-result{margin-top:14px;padding-top:14px;border-top:1px solid var(--line-2);font-size:14.5px}
+  .tri p.t-meta{margin-top:14px;font-size:13.5px;color:var(--ink-3);line-height:1.55}
 
   /* ---------- FAQ ---------- */
   .faq-list{margin-top:clamp(30px,4vw,48px);border-top:2px solid var(--ink)}
@@ -185,6 +191,7 @@
   .field--full{grid-column:1 / -1}
   .field label{font-weight:600;font-size:15px;color:var(--ink)}
   .field .req{color:var(--accent-deep)}
+  .field .opt{color:var(--ink-3);font-weight:500}
   .field input,.field textarea{
     width:100%;font-family:var(--font-body);font-size:16px;color:var(--ink);
     background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;
@@ -398,8 +405,13 @@
   <section class="hero">
     <div class="wrap">
       <div class="reveal">
-        <h1>Is your service business stuck? Let's find you <span class="under">more profit</span> and grow it</h1>
-        <p class="lead">From client acquisition to the AI that runs your business, my goal is to make you more profit. I run my own service business that uses the exact same systems, so I know what works.</p>
+        <h1>I run my own cleaning business, and I build what keeps <span class="under">yours booked</span></h1>
+        <p class="lead">Mine is Dript, exterior cleaning. Yours might be roofing, plumbing or lawns: same missed calls, same quotes going cold. I build the ads, the sales process behind them, and the AI that answers every enquiry and chases every quote.</p>
+
+        <div class="hero-actions">
+          <a class="btn" href="/dashboard">See it running on my business first <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+
         <p class="need-lead">Which sounds more like you?</p>
         <div class="need-grid" role="group" aria-label="What's slowing your business down?">
           <button type="button" class="need-opt" data-need="leads" aria-pressed="false">
@@ -433,8 +445,8 @@
             <input id="f-business" type="text" name="business" required placeholder="e.g. Dript Exterior Cleaning">
           </div>
           <div class="field">
-            <label for="f-instagram">Instagram handle <span class="req">*</span></label>
-            <input id="f-instagram" type="text" name="instagram" required placeholder="yourprofile" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off">
+            <label for="f-instagram">Instagram handle <span class="opt">optional</span></label>
+            <input id="f-instagram" type="text" name="instagram" placeholder="yourprofile" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off">
           </div>
           <div class="field field--full">
             <label for="f-message">What's slowing your business down? <span class="req">*</span></label>
@@ -451,13 +463,33 @@
     </div>
   </section>
 
-  <!-- AUDIENCE MARQUEE -->
-  <div class="marquee" aria-label="Who I work with">
-    <div class="marquee__track" aria-hidden="true">
-      <div class="marquee__group"><span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span></div>
-      <div class="marquee__group"><span>Trades</span><span>Home Services</span><span>Cleaning &amp; Exterior</span><span>Health &amp; Beauty</span><span>Coaches</span><span>Consultants</span><span>Agencies &amp; Studios</span><span>Professional Services</span><span>Appointment-Based</span></div>
+  <!-- WHO I WORK WITH -->
+  <section id="who-for" class="band" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Who I work with</span>
+        <h2 class="sec-title">Different trades,<br>the same leak.</h2>
+        <p class="sec-intro">One of these three is my own trade, and the other two lose work the same way. The same thing costs all of them jobs: an enquiry that sat there too long.</p>
+      </div>
+
+      <div class="tri">
+        <div class="t reveal">
+          <h4>Trades</h4>
+          <p>The phone rings while your hands are full, it goes to voicemail, and by the time you ring back after knock off the customer has already booked whoever picked up.</p>
+        </div>
+        <div class="t reveal">
+          <h4>Home Services</h4>
+          <p>The quote goes out and then it just sits there, because chasing it feels like begging, and the job goes to the one who followed up twice.</p>
+        </div>
+        <div class="t reveal">
+          <h4>Cleaning and Exterior</h4>
+          <p>These jobs get won before anyone has walked the property, by whoever replied first with a price, and I know that because it is the trade I am in myself with Dript.</p>
+        </div>
+      </div>
+
+      <p class="sec-intro reveal">If your work starts with an enquiry and ends with a booking, the same build fits, trade or not.</p>
     </div>
-  </div>
+  </section>
 
   <!-- SERVICES -->
   <section id="services" class="band">
@@ -491,21 +523,64 @@
         </div>
       </div>
 
+      <p class="sec-intro reveal">Same build either way. The only difference is whose hands are on it afterwards.</p>
+
       <div class="ways">
         <a class="way reveal" href="#inquiry-form" data-wants="Done alongside you">
           <h3>Done <span class="hl">alongside</span> you</h3>
           <p class="lede">You run it. Nobody to wait on.</p>
-          <p>Whichever build you pick, I build it beside you, show you how every piece works, then the logins are yours. Change a price, a message or an ad yourself, the same day you decide to.</p>
-          <span class="tag">Best if <span class="chip">you want the keys</span></span>
+          <p>One day, your hands on the keyboard and mine off it. I show you how every piece works, then the logins are yours. Change a price, a message or an ad yourself, the day you decide to.</p>
+          <span class="tag">Best if <span class="chip">you want the keys</span> <span class="price-at">starts at $2,500</span></span>
         </a>
 
         <a class="way reveal" href="#inquiry-form" data-wants="Done for you">
           <h3>Done <span class="hl">for</span> you</h3>
           <p class="lede">I run it. You take the booked jobs.</p>
-          <p>Same build, then I run it month to month. I watch it, chase what goes quiet and tune what is not working, and you sign off anything new. Your evenings stay yours.</p>
-          <span class="tag">Best if <span class="chip">you never want to touch it</span></span>
+          <p>The same build, then I run it month to month. I watch it, chase what goes quiet and fix what is not working. You sign off anything new. Nothing lands in your evenings.</p>
+          <span class="tag">Best if <span class="chip">you never want to touch it</span> <span class="price-at">monthly retainer</span></span>
         </a>
       </div>
+
+      <p class="sec-intro reveal">Done alongside you starts at $2,500, one payment, with thirty days of support after it. Done for you is a monthly retainer, quoted after a twenty minute call and an audit, because what it takes to run depends on your services, your margins and how much work you can take. Ad spend and your own AI subscription are separate, paid by you directly, and they never pass through me.</p>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF. Hidden on purpose: it stays out of the live page until real testimonials
+       replace every bracketed slot. To publish it, delete the word hidden from the section tag
+       below. Do not fill a slot with anything you cannot attribute to a real client. -->
+  <section id="proof" class="band" style="padding-top:0" hidden>
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">In their words</span>
+        <h2 class="sec-title">What changed once<br>it was running.</h2>
+        <p class="sec-intro">These are owners' own words, not mine. I would rather you read what actually changed in how the business runs than a number nobody can back up.</p>
+      </div>
+
+      <div class="tri">
+        <div class="t reveal">
+          <div class="t-photo">[Photo: him or his van on a real job, not a stock headshot]</div>
+          <h4>[SLOT, EMPTY. His six word headline, from his own quote about enquiries answered fast]</h4>
+          <p>[His quote, two or three sentences, in his words, not tidied up. Ask him this: what used to happen to a message that came in while you were up a ladder, and what happens to that same message now.]</p>
+          <p class="t-result">[The one specific thing that changed. How long an enquiry waits for a reply now, or the job he won because he answered first. One thing, not a list.]</p>
+          <p class="t-meta">[Business name, spelled the way he spells it, used with his written permission] &nbsp;·&nbsp; [Trade and suburb, his words]</p>
+        </div>
+        <div class="t reveal">
+          <div class="t-photo">[Photo: a real job of his, before and after, or mid job]</div>
+          <h4>[SLOT, EMPTY. His six word headline, from his own quote about quotes that stopped going quiet]</h4>
+          <p>[His quote about follow up, two or three sentences. Ask him this: what used to happen to a quote when nobody replied to it, and what happens to that same quote now.]</p>
+          <p class="t-result">[The one specific thing that changed. The job he had written off and got back, or what the chasing used to cost him before it ran on its own.]</p>
+          <p class="t-meta">[Business name, used with his written permission] &nbsp;·&nbsp; [Trade and suburb, his words]</p>
+        </div>
+        <div class="t reveal">
+          <div class="t-photo">[Photo: him on the tools or with the family, his pick]</div>
+          <h4>[SLOT, EMPTY. His six word headline, from his own quote about admin off his evenings]</h4>
+          <p>[His quote about the paperwork, two or three sentences. Ask him this: what were you doing at the kitchen table at nine at night before, and what are you doing at nine now.]</p>
+          <p class="t-result">[The one specific thing that changed. The job that no longer gets typed up twice, or the night of the week he got back.]</p>
+          <p class="t-meta">[Business name, used with his written permission] &nbsp;·&nbsp; [Trade and suburb, his words]</p>
+        </div>
+      </div>
+
+      <p class="sec-intro reveal">Nothing goes in a slot until it is real. A specific before and after beats any adjective, so push past "great to work with" and get the thing that changed, and get his okay in writing before his business name goes on the page.</p>
     </div>
   </section>
 
