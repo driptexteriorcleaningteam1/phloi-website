@@ -10,3 +10,7 @@
 
 # Interactive proposal page (form phloi-proposal -> /thanks)
 /proposal              /proposal.html          200
+
+# Policies
+/privacy              /privacy.html           200
+/terms                /terms.html             200
