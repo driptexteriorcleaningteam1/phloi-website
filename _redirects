@@ -1,3 +1,6 @@
+# Each client's private page lives on the Phloi Dashboard site and shows here, so clients only ever see phloi.com
+/c/*                 https://phloi-dashboard.netlify.app/c/:splat   200!
+
 # Old PDF path -> new name, so any existing links keep working
 /phloi-stack.pdf       /dript-tech-stack.pdf   301!
 
@@ -10,9 +13,6 @@
 
 # Interactive proposal page (form phloi-proposal -> /thanks)
 /proposal              /proposal.html          200
-
-# Launch Day onboarding for sitdown clients (form phloi-onboarding -> /thanks)
-/onboarding           /onboarding.html        200
 
 # Policies
 /privacy              /privacy.html           200
