@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Launch Day Onboarding · Phloi</title>
+<meta name="description" content="Everything I need from you before your Launch Day, in one place.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Before we sit down">
+<meta property="og:description" content="Everything I need from you before your Launch Day, in one place.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phloi.com/onboarding">
+<meta property="og:site_name" content="Phloi">
+<meta property="og:image" content="https://phloi.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://phloi.com/og-image.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#f5f2ea">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#f5f2ea; --card:#fffdf7; --ink:#0f0f0d; --ink-2:#55514a; --ink-3:#6a675e;
+    --line:rgba(15,15,13,.22); --line-2:rgba(15,15,13,.1);
+    --accent:#b9ff4a; --accent-deep:#4f6f0a; --fill-bg:rgba(185,255,74,.45); --chosen-bg:rgba(185,255,74,.16);
+    --display:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    --r:4px; --ctl:40px;
+    color-scheme:light;
+  }
+  /* One look everywhere, the cream palette on every device and theme setting, same as the proposal. */
+  :root[data-theme="dark"]{color-scheme:light}
+  *{box-sizing:border-box}
+  button,.btn,.pill{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:24px;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  h1,h2{font-family:var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  p{margin:0}
+  [hidden]{display:none!important}
+  fieldset{border:0;margin:0;padding:0;min-width:0}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--ink-2)}
+
+  /* toolbar */
+  .bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:760px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px;min-height:57px}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.04em;text-decoration:none;color:inherit}
+  .wordmark b{color:var(--accent-deep)}
+  .bar .eyebrow{margin-left:auto}
+  .btn{font-family:var(--display);font-weight:600;font-size:13.5px;line-height:20px;height:40px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;white-space:nowrap}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#0f0f0d}
+  .btn:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+
+  /* document frame */
+  .doc{max-width:760px;margin:0 auto;padding:0 24px 96px}
+  .p-head{border-bottom:1px solid var(--ink);padding:36px 0 26px}
+  .p-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .p-title{font-size:44px;line-height:46px;font-weight:600;letter-spacing:-.03em;margin-bottom:14px}
+  .p-tag{font-family:var(--display);font-weight:500;font-size:18px;line-height:26px;max-width:54ch}
+
+  .step-card{border-top:1px solid var(--line);padding:32px 0 36px}
+  form > .step-card:first-of-type{border-top:0}
+  .step-k{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .step-k .num{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.08em;color:var(--accent-deep)}
+  .step-k h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.015em}
+  .step-sub{color:var(--ink-2);max-width:60ch;margin-bottom:22px}
+  .step-k + .fields{margin-top:18px}
+
+  /* fields */
+  .fields,.cond{display:flex;flex-direction:column;gap:20px}
+  .ab-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ab-row.r3{grid-template-columns:repeat(3,1fr)}
+  .ab-row.r4{grid-template-columns:repeat(4,1fr);align-items:end}
+  .ab-f{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .ab-l{font-weight:600;font-size:15px;line-height:22px;color:var(--ink)}
+  .ab-h{font-size:13.5px;line-height:20px;color:var(--ink-3);margin-top:-4px}
+  .doc input[type="text"],.doc input[type="email"],.doc input[type="tel"],.doc input[type="date"],.doc textarea{font:inherit;font-size:15px;line-height:22px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;width:100%;height:var(--ctl);-webkit-appearance:none;appearance:none}
+  .doc input[type="date"]{min-width:0}
+  .doc textarea{height:auto;min-height:76px;resize:vertical}
+  .doc input::placeholder,.doc textarea::placeholder{color:var(--ink-3)}
+  .doc input:focus,.doc textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 2px var(--fill-bg)}
+  .money{position:relative}
+  .money::before{content:"$";position:absolute;left:12px;top:0;line-height:var(--ctl);color:var(--ink-3);pointer-events:none}
+  .money input{padding-left:24px!important}
+
+  /* choices: real radios and checkboxes under the chip */
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{position:relative;display:inline-flex}
+  .pill input{position:absolute;left:0;top:0;width:1px;height:1px;margin:0;opacity:0}
+  .pill span{display:inline-flex;align-items:center;min-height:var(--ctl);padding:8px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);font-size:14px;line-height:20px;cursor:pointer;user-select:none;-webkit-user-select:none}
+  .pill:hover span{border-color:var(--ink)}
+  .pill input:checked + span{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .pill input:focus-visible + span{outline:2px solid var(--accent-deep);outline-offset:2px}
+
+  .send{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--ink);padding-top:24px}
+  .send .btn{align-self:flex-start;height:44px;font-size:15px;padding:0 22px}
+  .fine{font-size:13px;line-height:20px;color:var(--ink-3)}
+  .fine a{text-decoration:underline;text-underline-offset:3px}
+
+  @media (prefers-reduced-motion:no-preference){.cond:not([hidden]){animation:in .18s ease}}
+  @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  @media (max-width:640px){
+    .bar{position:static}
+    .bar-in{padding:8px 16px;min-height:49px}
+    .doc{padding:0 16px 56px}
+    .p-head{padding:24px 0 20px}
+    .p-title{font-size:34px;line-height:38px}
+    .p-tag{font-size:16px;line-height:24px}
+    .step-card{padding:24px 0 28px}
+    .step-k h2{font-size:20px;line-height:26px}
+    .step-sub{font-size:14px;line-height:22px;margin-bottom:18px}
+    .fields,.cond{gap:18px}
+    .ab-row,.ab-row.r3{grid-template-columns:1fr;gap:14px}
+    .ab-row.r4{grid-template-columns:1fr 1fr;gap:14px}
+    .doc input[type="text"],.doc input[type="email"],.doc input[type="tel"],.doc input[type="date"]{height:44px;font-size:16px}
+    .money::before{line-height:44px}
+    .doc textarea{font-size:16px;min-height:88px}
+    .pill span{min-height:44px}
+    .send .btn{align-self:stretch;height:48px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a class="wordmark" href="/" aria-label="Phloi home">Phloi<b>.</b></a>
+    <span class="eyebrow">Launch Day onboarding</span>
+  </div>
+</div>
+
+<main class="doc">
+  <header class="p-head">
+    <div class="p-meta">
+      <span class="eyebrow">Done alongside you</span>
+      <span class="eyebrow">About 15 minutes</span>
+    </div>
+    <h1 class="p-title">Before we sit down.</h1>
+    <p class="p-tag">Everything I need from you before your Launch Day, in one place. Short answers are fine, and your best guess beats a blank. Anything you do not have yet, bring on the day.</p>
+  </header>
+
+  <form id="onboard" name="phloi-onboarding" method="POST" action="/thanks?from=onboarding" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="phloi-onboarding">
+    <p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num">01</span><h2>You and the business</h2></div>
+      <div class="fields">
+        <div class="ab-row">
+          <label class="ab-f"><span class="ab-l">Your name</span><input name="name" type="text" required autocomplete="name" placeholder="First and last name"></label>
+          <label class="ab-f"><span class="ab-l">Trading name</span><input name="business" type="text" required autocomplete="organization" placeholder="The name customers know you by"></label>
+        </div>
+        <div class="ab-row">
+          <label class="ab-f"><span class="ab-l">Email</span><input name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com"></label>
+          <label class="ab-f"><span class="ab-l">Best number to text</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx"></label>
+        </div>
+        <div class="ab-row">
+          <label class="ab-f"><span class="ab-l">ABN</span><input name="abn" type="text" inputmode="numeric" autocomplete="off" placeholder="11 digits"></label>
+          <label class="ab-f"><span class="ab-l">Website</span><input name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com.au"></label>
+        </div>
+        <label class="ab-f"><span class="ab-l">What work do you do?</span><textarea name="what-you-do" rows="2" placeholder="Soft washing and roof cleans, mostly homes, some strata."></textarea></label>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num">02</span><h2>The day</h2></div>
+      <div class="fields">
+        <div class="ab-f" role="radiogroup" aria-labelledby="l-service">
+          <span class="ab-l" id="l-service">What are we building?</span>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="service" value="Client Acquisition" required><span>Client Acquisition</span></label>
+            <label class="pill"><input type="radio" name="service" value="AI"><span>AI</span></label>
+            <label class="pill"><input type="radio" name="service" value="Both"><span>Both</span></label>
+          </div>
+        </div>
+        <div class="ab-row">
+          <label class="ab-f"><span class="ab-l">Launch Day, if it is set</span><input name="launch-day" type="date"></label>
+          <div class="ab-f" role="radiogroup" aria-labelledby="l-where">
+            <span class="ab-l" id="l-where">In person or over a call?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="in-person-or-call" value="In person"><span>In person</span></label>
+              <label class="pill"><input type="radio" name="in-person-or-call" value="Over a call"><span>Over a call</span></label>
+              <label class="pill"><input type="radio" name="in-person-or-call" value="Either"><span>Either</span></label>
+            </div>
+          </div>
+        </div>
+        <fieldset class="cond" data-show="in-person-or-call=In person">
+          <label class="ab-f"><span class="ab-l">Where do we sit down?</span><input name="address" type="text" autocomplete="street-address" placeholder="Street, suburb"></label>
+        </fieldset>
+        <label class="ab-f"><span class="ab-l">Who sits with me on the day?</span><span class="ab-h">Someone who can say yes to spending money and to how the business runs.</span><input name="who-sits-with-me" type="text" placeholder="Name, and their role if it is not you"></label>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num">03</span><h2>Your accounts</h2></div>
+      <p class="step-sub">I will never ask you for a password.</p>
+      <div class="fields">
+        <div class="ab-f" role="radiogroup" aria-labelledby="l-page">
+          <span class="ab-l" id="l-page">Are you an admin with full control of your Facebook Page?</span>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="facebook-page-admin" value="Yes"><span>Yes</span></label>
+            <label class="pill"><input type="radio" name="facebook-page-admin" value="No"><span>No</span></label>
+            <label class="pill"><input type="radio" name="facebook-page-admin" value="Not sure"><span>Not sure</span></label>
+            <label class="pill"><input type="radio" name="facebook-page-admin" value="No Page yet"><span>No Page yet</span></label>
+          </div>
+        </div>
+        <fieldset class="cond" data-show="facebook-page-admin=No|Not sure">
+          <label class="ab-f"><span class="ab-l">Who holds it now?</span><input name="facebook-page-held-by" type="text" placeholder="An old agency, a past staff member, a family member"></label>
+        </fieldset>
+        <fieldset class="cond" data-show="facebook-page-admin=Yes|No|Not sure">
+          <label class="ab-f"><span class="ab-l">Link to your Facebook Page</span><input name="facebook-page-link" type="text" inputmode="url" placeholder="facebook.com/yourbusiness"></label>
+        </fieldset>
+
+        <fieldset class="cond" data-svc="ca">
+          <div class="ab-f" role="radiogroup" aria-labelledby="l-verify">
+            <span class="ab-l" id="l-verify">Has Meta asked you to verify your business?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="meta-verification" value="Done"><span>Done</span></label>
+              <label class="pill"><input type="radio" name="meta-verification" value="Started"><span>Started</span></label>
+              <label class="pill"><input type="radio" name="meta-verification" value="Not asked"><span>Not asked</span></label>
+              <label class="pill"><input type="radio" name="meta-verification" value="Not sure"><span>Not sure</span></label>
+            </div>
+          </div>
+          <div class="ab-f" role="radiogroup" aria-labelledby="l-domain">
+            <span class="ab-l" id="l-domain">Who holds your website and domain login?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="domain-login" value="Me"><span>Me</span></label>
+              <label class="pill"><input type="radio" name="domain-login" value="My web person"><span>My web person</span></label>
+              <label class="pill"><input type="radio" name="domain-login" value="Not sure"><span>Not sure</span></label>
+              <label class="pill"><input type="radio" name="domain-login" value="No website"><span>No website</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="cond" data-svc="ai">
+          <div class="ab-row">
+            <label class="ab-f"><span class="ab-l">The number enquiries come to</span><input name="enquiry-number" type="tel" inputmode="tel" placeholder="04xx xxx xxx"></label>
+            <label class="ab-f"><span class="ab-l">Who is it with?</span><input name="number-provider" type="text" placeholder="Telstra, Optus, Vodafone"></label>
+          </div>
+          <div class="ab-f" role="radiogroup" aria-labelledby="l-numname">
+            <span class="ab-l" id="l-numname">Whose name is that number in?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="number-in-whose-name" value="The business"><span>The business</span></label>
+              <label class="pill"><input type="radio" name="number-in-whose-name" value="Mine personally"><span>Mine personally</span></label>
+              <label class="pill"><input type="radio" name="number-in-whose-name" value="Not sure"><span>Not sure</span></label>
+            </div>
+          </div>
+          <div class="ab-f" role="radiogroup" aria-labelledby="l-answer">
+            <span class="ab-l" id="l-answer">Does anyone answer enquiries for you now?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="someone-answers-for-you" value="No, just us"><span>No, just us</span></label>
+              <label class="pill"><input type="radio" name="someone-answers-for-you" value="Yes"><span>Yes</span></label>
+            </div>
+          </div>
+          <fieldset class="cond" data-show="someone-answers-for-you=Yes">
+            <label class="ab-f"><span class="ab-l">Who?</span><input name="answered-by" type="text" placeholder="An answering service, an agency, a VA"></label>
+          </fieldset>
+        </fieldset>
+
+        <div class="ab-f" role="group" aria-labelledby="l-soft">
+          <span class="ab-l" id="l-soft">What do you run quotes and jobs in?</span>
+          <input type="hidden" name="job-software" id="h-software">
+          <div class="pills">
+            <label class="pill"><input type="checkbox" data-soft value="ServiceM8"><span>ServiceM8</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="Tradify"><span>Tradify</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="Fergus"><span>Fergus</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="Jobber"><span>Jobber</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="simPRO"><span>simPRO</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="GoHighLevel"><span>GoHighLevel</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="A spreadsheet"><span>A spreadsheet</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="Pen and paper"><span>Pen and paper</span></label>
+            <label class="pill"><input type="checkbox" data-soft value="Other"><span>Other</span></label>
+          </div>
+        </div>
+        <fieldset class="cond" data-show="job-software=Other">
+          <label class="ab-f"><span class="ab-l">What else?</span><input name="job-software-other" type="text" placeholder="The name of it"></label>
+        </fieldset>
+
+        <div class="ab-f" role="radiogroup" aria-labelledby="l-past">
+          <span class="ab-l" id="l-past">Do you have a list of past customers?</span>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="past-customer-list" value="Yes, I can export it"><span>Yes, I can export it</span></label>
+            <label class="pill"><input type="radio" name="past-customer-list" value="Yes, in my phone or my head"><span>Yes, in my phone or my head</span></label>
+            <label class="pill"><input type="radio" name="past-customer-list" value="No"><span>No</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num">04</span><h2>Your numbers from a normal month</h2></div>
+      <p class="step-sub">Your best guess is fine. It is what we measure your first 30 days against.</p>
+      <div class="fields">
+        <div class="ab-row r4">
+          <label class="ab-f"><span class="ab-l">Enquiries</span><input name="enquiries-a-month" type="text" inputmode="decimal"></label>
+          <label class="ab-f"><span class="ab-l">Quotes sent</span><input name="quotes-a-month" type="text" inputmode="decimal"></label>
+          <label class="ab-f"><span class="ab-l">Jobs booked</span><input name="jobs-a-month" type="text" inputmode="decimal"></label>
+          <label class="ab-f"><span class="ab-l">Average job</span><span class="money"><input name="average-job" type="text" inputmode="decimal" aria-label="Average job in dollars"></span></label>
+        </div>
+        <div class="ab-row r4">
+          <label class="ab-f"><span class="ab-l">Ad spend</span><span class="money"><input name="ad-spend-a-month" type="text" inputmode="decimal" aria-label="Ad spend a month in dollars"></span></label>
+          <label class="ab-f"><span class="ab-l">Google reviews</span><input name="google-reviews" type="text" inputmode="decimal"></label>
+          <label class="ab-f"><span class="ab-l">Google rating</span><input name="google-rating" type="text" inputmode="decimal"></label>
+          <label class="ab-f"><span class="ab-l">Room for more jobs a week</span><input name="room-for-more-jobs-a-week" type="text" inputmode="decimal"></label>
+        </div>
+        <div class="ab-f" role="radiogroup" aria-labelledby="l-reply">
+          <span class="ab-l" id="l-reply">How fast do you usually reply to a new enquiry?</span>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="reply-speed" value="Under 5 minutes"><span>Under 5 minutes</span></label>
+            <label class="pill"><input type="radio" name="reply-speed" value="Within the hour"><span>Within the hour</span></label>
+            <label class="pill"><input type="radio" name="reply-speed" value="Same day"><span>Same day</span></label>
+            <label class="pill"><input type="radio" name="reply-speed" value="Next day or later"><span>Next day or later</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card" data-svc="ca">
+      <div class="step-k"><span class="num" data-num>05</span><h2>Where you want the work</h2></div>
+      <fieldset class="fields" data-svc="ca">
+        <label class="ab-f"><span class="ab-l">Suburbs you want</span><textarea name="suburbs-wanted" rows="2" placeholder="The ones you would happily drive to every day"></textarea></label>
+        <div class="ab-row">
+          <label class="ab-f"><span class="ab-l">Fringe suburbs, for the right job</span><textarea name="suburbs-fringe" rows="2"></textarea></label>
+          <label class="ab-f"><span class="ab-l">Suburbs you never want to see again</span><textarea name="suburbs-never" rows="2"></textarea></label>
+        </div>
+        <div class="ab-f" role="radiogroup" aria-labelledby="l-budget">
+          <span class="ab-l" id="l-budget">Monthly ad budget to start</span>
+          <span class="ab-h">This goes straight to Meta on your own card.</span>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="ad-budget" value="Under $1,000"><span>Under $1,000</span></label>
+            <label class="pill"><input type="radio" name="ad-budget" value="$1,000 to $1,500"><span>$1,000 to $1,500</span></label>
+            <label class="pill"><input type="radio" name="ad-budget" value="$1,500 to $3,000"><span>$1,500 to $3,000</span></label>
+            <label class="pill"><input type="radio" name="ad-budget" value="Over $3,000"><span>Over $3,000</span></label>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num" data-num>06</span><h2>Where you stand</h2></div>
+      <div class="fields">
+        <label class="ab-f"><span class="ab-l">Link to your Google Business Profile</span><input name="google-profile" type="text" inputmode="url" placeholder="The share link from Google Maps"></label>
+        <label class="ab-f"><span class="ab-l">Three competitors you come up against</span><textarea name="competitors" rows="2" placeholder="Names or websites"></textarea></label>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-k"><span class="num" data-num>07</span><h2>Your prices and your work</h2></div>
+      <div class="fields">
+        <label class="ab-f"><span class="ab-l">Your prices, however they exist today</span><textarea name="prices" rows="3" placeholder="A rough list is fine. I write it up properly on the day."></textarea></label>
+        <label class="ab-f"><span class="ab-l">Link to a shared folder</span><span class="ab-h" data-folder-hint>Photos of your work, your logo, your price list and a few messages you have sent customers. Google Drive, Dropbox or iCloud.</span><input name="shared-folder" type="text" inputmode="url" placeholder="drive.google.com/..."></label>
+        <label class="ab-f"><span class="ab-l">What would make day 30 a win?</span><textarea name="day-30-win" rows="2" placeholder="Every enquiry answered same day. 20 booked jobs a month."></textarea></label>
+        <label class="ab-f"><span class="ab-l">Anything I should know before the day?</span><textarea name="anything-else" rows="2"></textarea></label>
+      </div>
+    </section>
+
+    <div class="send">
+      <button class="btn" type="submit">Send to Phoenix</button>
+      <p class="fine">Sending this shares your answers with me and nobody else. See my <a href="/privacy">Privacy Policy</a>.</p>
+    </div>
+  </form>
+</main>
+
+<script>
+(function(){
+  var form = document.getElementById('onboard');
+  if (!form) return;
+  var KEY = 'phloi-onboarding-v1';
+  var SVC = { ca:'Client Acquisition', ai:'AI', both:'Both' };
+  var soft = document.getElementById('h-software');
+  var softBoxes = form.querySelectorAll('[data-soft]');
+  var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
+
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || 'null') || {}; } catch (e) { return {}; } }
+  function store(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+  function clear(){ try { localStorage.removeItem(KEY); } catch (e) {} }
+
+  function syncSoft(){
+    var on = []; each(softBoxes, function(b){ if (b.checked) on.push(b.value); });
+    soft.value = on.join(', ');
+  }
+  function val(name){
+    var el = form.elements[name];
+    return el ? String(el.value || '') : '';
+  }
+
+  // Only the questions for what they bought, and follow ups only when the answer calls for them.
+  function setOn(el, on){
+    el.hidden = !on;
+    if (el.tagName === 'FIELDSET') el.disabled = !on;
+  }
+  function refresh(){
+    var svc = val('service');
+    var ca = !svc || svc === SVC.ca || svc === SVC.both;
+    var ai = !svc || svc === SVC.ai || svc === SVC.both;
+    each(form.querySelectorAll('[data-svc]'), function(el){ setOn(el, el.getAttribute('data-svc') === 'ca' ? ca : ai); });
+    each(form.querySelectorAll('[data-show]'), function(el){
+      var p = el.getAttribute('data-show').split('=');
+      var want = p[1].split('|'), have = val(p[0]).split(', ');
+      setOn(el, have.some(function(v){ return want.indexOf(v) >= 0; }));
+    });
+    var n = 0;
+    each(form.querySelectorAll('.step-card'), function(sec){
+      if (sec.hidden) return;
+      n++;
+      var num = sec.querySelector('.num');
+      if (num) num.textContent = (n < 10 ? '0' : '') + n;
+    });
+  }
+
+  function save(){
+    var d = {};
+    each(form.elements, function(el){
+      if (!el.name || el.name === 'form-name' || el.name === 'bot-field') return;
+      if (el.type === 'radio') { if (el.checked) d[el.name] = el.value; return; }
+      d[el.name] = el.value;
+    });
+    store(d);
+  }
+  function fill(d){
+    each(form.elements, function(el){
+      if (!el.name || !(el.name in d)) return;
+      if (el.type === 'radio') el.checked = el.value === d[el.name];
+      else el.value = d[el.name];
+    });
+    var picked = String(d['job-software'] || '').split(', ');
+    each(softBoxes, function(b){ b.checked = picked.indexOf(b.value) >= 0; });
+    syncSoft();
+  }
+
+  // A link like /onboarding?svc=both&name=Sam&business=H2O fills those in. A saved draft wins over the link.
+  var q = new URLSearchParams(location.search), seed = {};
+  if (q.get('name')) seed.name = q.get('name');
+  if (q.get('business')) seed.business = q.get('business');
+  if (q.get('email')) seed.email = q.get('email');
+  if (SVC[(q.get('svc') || '').toLowerCase()]) seed.service = SVC[q.get('svc').toLowerCase()];
+  if (/^\d{4}-\d{2}-\d{2}$/.test(q.get('date') || '')) seed['launch-day'] = q.get('date');
+  var draft = load();
+  Object.keys(draft).forEach(function(k){ if (draft[k] !== '' || !(k in seed)) seed[k] = draft[k]; });
+  fill(seed);
+  refresh();
+
+  form.addEventListener('change', function(e){
+    if (e.target.hasAttribute('data-soft')) syncSoft();
+    refresh(); save();
+  });
+  form.addEventListener('input', save);
+  form.addEventListener('submit', function(){ syncSoft(); clear(); });
+})();
+</script>
+</body>
+</html>

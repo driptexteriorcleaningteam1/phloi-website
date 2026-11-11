@@ -11,6 +11,9 @@
 # Interactive proposal page (form phloi-proposal -> /thanks)
 /proposal              /proposal.html          200
 
+# Launch Day onboarding for sitdown clients (form phloi-onboarding -> /thanks)
+/onboarding           /onboarding.html        200
+
 # Policies
 /privacy              /privacy.html           200
 /terms                /terms.html             200
