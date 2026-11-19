@@ -761,6 +761,19 @@
 <script>
   (function(){
     var frame = document.getElementById('demoFrame');
+    // On a phone the example was a 580px box holding about 1,400px of dashboard: a scroll inside a scroll, with cards
+    // cut in half at its edge. Up to 700px wide the frame is as tall as what it holds, measured again when a tab or
+    // look changes what is inside.
+    var fit = function(){
+      if (!window.matchMedia('(max-width:700px)').matches) { frame.style.height = ''; return; }
+      try { var d = frame.contentDocument; if (d && d.documentElement) frame.style.height = Math.max(580, d.documentElement.scrollHeight) + 'px'; } catch (e) { /* not ours to measure */ }
+    };
+    frame.addEventListener('load', function(){
+      fit();
+      try { new frame.contentWindow.ResizeObserver(fit).observe(frame.contentDocument.body); } catch (e) { setTimeout(fit, 600); }
+    });
+    window.addEventListener('resize', fit);
+    if (frame.contentDocument && frame.contentDocument.readyState === 'complete') fit();
     document.querySelectorAll('.look').forEach(function(b){
       b.addEventListener('click', function(){
         document.querySelectorAll('.look').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
